@@ -12,8 +12,8 @@ import LoginForm from "./components/Auth/LoginForm";
 import SignupForm from "./components/Auth/SignupForm";
 import LogoutForm from "./components/Auth/LogoutForm";
 import Main from "./components/Main/Main";
-
 import "./styles/index.css";
+
 
 const httpLink = createHttpLink({
   uri: "http://localhost:3001/graphql"
