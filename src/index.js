@@ -38,10 +38,9 @@ const Index = () => {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <div>
-          <Route exact path="/" component={NotLoggedIn} />
-          <Route path="/login" component={NotLoggedIn} />
-          <Route path="/signup" component={NotLoggedIn} />
-          <Route path="/logout" component={NotLoggedIn} />
+          <Route 
+            path="/(login|signup|logout|)" 
+            component={NotLoggedIn} />
           <Route path="/main" component={LoggedIn} />
         </div>
       </BrowserRouter>

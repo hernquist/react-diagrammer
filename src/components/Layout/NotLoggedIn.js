@@ -5,7 +5,7 @@ import SignupForm from "../Auth/SignupForm";
 import LogoutForm from "../Auth/LogoutForm";
 import Polling from "../Polling/Polling";
 import RightDashoard from "../RightDashboard/RightDashboard";
-import "../../styles/NotLoggedIn.css";
+import "../../styles/Layout.css";
 
 class NotLoggedIn extends Component {
     render() {

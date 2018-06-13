@@ -3,7 +3,9 @@ import Header from "../Header/Header";
 import LeftDashboard from "../LeftDashboard/LeftDashboard";
 import Polling from "../Polling/Polling";
 import RightDashoard from "../RightDashboard/RightDashboard";
-import "../../styles/LoggedIn.css";
+import "../../styles/Layout.css";
+import DiagramMain from "../Diagram/DiagramMain";
+
 
 class LoggedIn extends Component {
   render() {
@@ -17,7 +19,7 @@ class LoggedIn extends Component {
           <LeftDashboard />
         </div>
         <div className="diagram">
-          <Polling />
+          <DiagramMain />
         </div>
         <div className="right-dashboard">
           <RightDashoard />
