@@ -13,7 +13,7 @@ class NotLoggedIn extends Component {
         const renderAuth = url === "/logout" ? 
             <LogoutForm /> 
             : url === "/signup" ? 
-            <SignupForm /> : <LoginForm />
+            <SignupForm {...this.props} /> : <LoginForm />
             
         return (
             <div className="main">
