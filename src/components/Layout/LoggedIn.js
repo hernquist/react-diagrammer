@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import Header from "../Header/Header";
-import LoginForm from "../Auth/LoginForm";
+import LeftDashboard from "../LeftDashboard/LeftDashboard";
 import Polling from "../Polling/Polling";
+import RightDashoard from "../RightDashboard/RightDashboard";
 import "../../styles/LoggedIn.css";
 
 class LoggedIn extends Component {
   render() {
+
     return (
       <div className="main">
         <div className="header">
           <Header />
         </div>
         <div className="left-dashboard">
-          <LoginForm />
+          <LeftDashboard />
         </div>
         <div className="diagram">
           <Polling />
