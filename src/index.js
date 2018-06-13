@@ -7,11 +7,8 @@ import { ApolloLink, concat } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-import App from "./components/App";
-import LoginForm from "./components/Auth/LoginForm";
-import SignupForm from "./components/Auth/SignupForm";
-import LogoutForm from "./components/Auth/LogoutForm";
-import Main from "./components/Main/Main";
+import NotLoggedIn from "./components/Layout/NotLoggedIn";
+import LoggedIn from "./components/Layout/LoggedIn";
 import "./styles/index.css";
 
 
@@ -40,12 +37,11 @@ const Index = () => {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <div className="body">
-          <Route path="/" component={App} />
-          <Route path="/login" component={LoginForm} />
-          <Route path="/signup" component={SignupForm} />
-          <Route path="/logout" component={LogoutForm} />
-          <Route path="/main" component={Main} />
+        <div>
+          <Route 
+            path="/(login|signup|logout|)" 
+            component={NotLoggedIn} />
+          <Route path="/main" component={LoggedIn} />
         </div>
       </BrowserRouter>
     </ApolloProvider>

@@ -1,0 +1,31 @@
+import React, { Component } from "react";
+import Header from "../Header/Header";
+import LeftDashboard from "../LeftDashboard/LeftDashboard";
+import RightDashoard from "../RightDashboard/RightDashboard";
+import DiagramMain from "../Diagram/DiagramMain";
+import "../../styles/Layout.css";
+
+
+class LoggedIn extends Component {
+  render() {
+
+    return (
+      <div className="main">
+        <div className="header">
+          <Header />
+        </div>
+        <div className="left-dashboard">
+          <LeftDashboard />
+        </div>
+        <div className="diagram">
+          <DiagramMain />
+        </div>
+        <div className="right-dashboard">
+          <RightDashoard />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default LoggedIn;
