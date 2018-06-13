@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class LoginForm extends Component {
+class Polling extends Component {
     render() {
         return (
             <div>
-                LoginForm
+                Polling
             </div>
         );
     }
 }
 
-export default LoginForm;
+export default Polling;
