@@ -41,7 +41,7 @@ const Index = () => {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <div className="body">
-          <Route path="/" component={App} />
+          <Route path="/" component={LoginForm} />
           <Route path="/login" component={LoginForm} />
           <Route path="/signup" component={SignupForm} />
           <Route path="/logout" component={LogoutForm} />
