@@ -1,7 +1,5 @@
 .main {
     display: grid;
-    margin: 0;
-    padding: 0;
     height: 100vh;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: 75px 1fr;
