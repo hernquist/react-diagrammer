@@ -11,9 +11,9 @@ class NotLoggedIn extends Component {
     render() {
         const {url} = this.props.match;
         const renderAuth = url === "/logout" ? 
-            <LogoutForm /> 
+            <LogoutForm {...this.props}/> 
             : url === "/signup" ? 
-            <SignupForm {...this.props} /> : <LoginForm />
+            <SignupForm {...this.props} /> : <LoginForm {...this.props}/>
             
         return (
             <div className="main">

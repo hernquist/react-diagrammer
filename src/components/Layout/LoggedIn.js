@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import Header from "../Header/Header";
 import LeftDashboard from "../LeftDashboard/LeftDashboard";
-import Polling from "../Polling/Polling";
 import RightDashoard from "../RightDashboard/RightDashboard";
-import "../../styles/Layout.css";
 import DiagramMain from "../Diagram/DiagramMain";
+import "../../styles/Layout.css";
 
 
 class LoggedIn extends Component {

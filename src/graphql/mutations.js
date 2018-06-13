@@ -2,11 +2,7 @@ import gql from "graphql-tag";
 
 const SIGNUP = gql`
   mutation Signup($email: String!, $name: String!, $password: String!) {
-    signup(email: $email, name: $name, password: $password) {
-      _id
-      email
-      name
-    }
+    signup(email: $email, name: $name, password: $password)
   }
 `;
 const LOGIN = gql`
@@ -15,4 +11,4 @@ const LOGIN = gql`
   }
 `;
 
-export {SIGNUP, LOGIN}
+export { SIGNUP, LOGIN }
