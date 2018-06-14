@@ -7,11 +7,9 @@ class LogoutForm extends Component {
     }
 
     logout = async () => {
-        // await this.props.client.resetStore();
         await this.props.client.cache.reset();
         localStorage.removeItem("token");
-        console.log("logged out")
-        // this.props.history.push("/login");
+        this.props.history.push("/login");
 
     }
 
