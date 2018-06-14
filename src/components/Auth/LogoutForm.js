@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import { withApollo, graphql } from "react-apollo";
 
 class LogoutForm extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     logout = async () => {
+        // await this.props.client.resetStore();
+        await this.props.client.cache.reset();
         localStorage.removeItem("token");
-        await this.props.client.resetStore();
-        this.props.history.push("/login");
+        console.log("logged out")
+        // this.props.history.push("/login");
+
     }
 
     render() {
