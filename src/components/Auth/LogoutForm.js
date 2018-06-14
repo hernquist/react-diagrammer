@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { withApollo, graphql } from "react-apollo";
 
 class LogoutForm extends Component {
-    logout = () => {
+    logout = async () => {
         localStorage.removeItem("token");
+        await this.props.client.resetStore();
         this.props.history.push("/login");
     }
 
@@ -19,4 +21,4 @@ class LogoutForm extends Component {
     }
 }
 
-export default LogoutForm;
+export default withApollo(LogoutForm);
