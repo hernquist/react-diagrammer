@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import Header from "../Header/Header";
+import HeaderContainer from "../Header/HeaderContainer";
 import LeftDashboard from "../LeftDashboard/LeftDashboard";
 import RightDashoard from "../RightDashboard/RightDashboard";
 import DiagramMain from "../Diagram/DiagramMain";
 import "../../styles/Layout.css";
+import MainTest from "../Diagram/MainTest";
 
 
 class LoggedIn extends Component {
@@ -12,13 +13,14 @@ class LoggedIn extends Component {
     return (
       <div className="main">
         <div className="header">
-          <Header />
+          <HeaderContainer />
         </div>
         <div className="left-dashboard">
           <LeftDashboard />
         </div>
         <div className="diagram">
-          <DiagramMain />
+          <DiagramMain {...this.props} />
+          <MainTest {...this.props}/>
         </div>
         <div className="right-dashboard">
           <RightDashoard />
@@ -27,5 +29,6 @@ class LoggedIn extends Component {
     );
   }
 }
-
+  
 export default LoggedIn;
+  

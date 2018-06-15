@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from "../Header/Header";
+import HeaderContainer from "../Header/HeaderContainer";
 import LoginForm from "../Auth/LoginForm";
 import SignupForm from "../Auth/SignupForm";
 import LogoutForm from "../Auth/LogoutForm";
@@ -9,16 +9,17 @@ import "../../styles/Layout.css";
 
 class NotLoggedIn extends Component {
     render() {
-        const {url} = this.props.match;
+        const { props } = this;
+        const { url } = props.match;
         const renderAuth = url === "/logout" ? 
-            <LogoutForm {...this.props}/> 
+            <LogoutForm {...props}/> 
             : url === "/signup" ? 
-            <SignupForm {...this.props} /> : <LoginForm {...this.props}/>
+            <SignupForm {...props} /> : <LoginForm {...props}/>
             
         return (
             <div className="main">
                 <div className="header">
-                    <Header />
+                    <HeaderContainer {...props} />
                 </div>
                 <div className="left-dashboard">
                     {renderAuth}

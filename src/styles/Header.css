@@ -1,0 +1,54 @@
+.header-container {
+    display: grid;
+    /* width: 100%; */
+    grid-template-columns: auto 1fr;
+    grid-auto-flow: column;
+    grid-gap: 20px;
+    /* justify-content: space-between; */
+    /* justify-content: start; */
+    /* align-content: center; */
+    align-items: center;
+    margin: 10px;
+    font: 'Tajawal';
+}
+
+.app-name {
+    font-size: 40px;
+    color: black;
+    margin-top: 10px;
+    /* align-self: center; */
+}
+
+.user-name {
+    margin-top: 8px;
+    font-size: 28px;
+}
+
+.nav {
+    /* justify-self: end; */
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 10px;
+}
+
+.button {
+    display: grid;
+    margin: 5px;
+    width: 100px;
+    height: 26px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding-top: 6px;
+    background: #BADA55;
+    border: 2px solid black;
+    border-radius: 4px;
+    box-shadow: 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+a {
+    display: grid;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}

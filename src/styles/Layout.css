@@ -19,7 +19,7 @@
 .header {
     display: grid;
     grid-area: nb;
-    justify-content: center;
+    /* justify-content: center; */
     background: cornflowerblue;
     align-content: center;
 }
@@ -50,7 +50,7 @@
             "ld td td";
     }
     .right-dashboard {
-        display: none
+        display: none;
     }
 }
 
