@@ -17,7 +17,7 @@ class NotLoggedIn extends Component {
             <SignupForm {...props} /> : <LoginForm {...props}/>
             
         return (
-            <div className="main">
+            <div className="logged-out">
                 <div className="header">
                     <HeaderContainer {...props} />
                 </div>
