@@ -15,13 +15,32 @@ class LeftDashboard extends Component {
             "logged-in": "HIDE"
         }
         return <div className="left-dashboard-container">
+            <div className="dashboard-button">
+              <div className="button-content">CREATE</div>
+              <div className="button-content">NEW</div>
+              <div className="button-content">COMPONENT</div>
+            </div>
+
+            <div className="dashboard-button">
+              <div className="button-content">ADD</div>
+              <div className="button-content">EXISTING</div>
+              <div className="button-content">COMPONENT</div>
+            </div>
+
+            <div className="dashboard-button">
+              <div className="button-content">START</div>
+              <div className="button-content">NEW</div>
+              <div className="button-content">PROJECT</div>
+            </div>
+
+            <div className="dashboard-button">
+              <div className="button-content">SWITCH</div>
+              <div className="button-content">PROJECT</div>
+            </div>
+
             <div className="dashboard-button" onClick={this.handleSwitch}>
-                <div className="button-content">
-                    {content[layout]}
-                </div>
-                <div className="button-content">
-                    DASHBOARD
-                </div>
+              <div className="button-content">{content[layout]}</div>
+              <div className="button-content">DASHBOARD</div>
             </div>
           </div>;
     }
