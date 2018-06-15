@@ -31,6 +31,7 @@ class LoggedIn extends Component {
           <LeftDashboard 
             switchLayout={this.switchLayout} 
             layout={layout}
+            {...this.props}
           />
         </div>
         <div className="diagram">

@@ -8,6 +8,8 @@ class LeftDashboard extends Component {
             this.props.switchLayout("full-screen");
     }
 
+    createNewProject = () => this.props.history.push('/main/new-project');
+
     render() {
         const { layout } = this.props;
         const content = {
@@ -15,6 +17,13 @@ class LeftDashboard extends Component {
             "logged-in": "HIDE"
         }
         return <div className="left-dashboard-container">
+            <div className="dashboard-button" 
+              onClick={this.createNewProject}>
+              <div className="button-content">START</div>
+              <div className="button-content">NEW</div>
+              <div className="button-content">PROJECT</div>
+            </div>
+
             <div className="dashboard-button">
               <div className="button-content">CREATE</div>
               <div className="button-content">NEW</div>
@@ -25,12 +34,6 @@ class LeftDashboard extends Component {
               <div className="button-content">ADD</div>
               <div className="button-content">EXISTING</div>
               <div className="button-content">COMPONENT</div>
-            </div>
-
-            <div className="dashboard-button">
-              <div className="button-content">START</div>
-              <div className="button-content">NEW</div>
-              <div className="button-content">PROJECT</div>
             </div>
 
             <div className="dashboard-button">
