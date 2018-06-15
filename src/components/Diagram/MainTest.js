@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import auth from "../Auth/auth";
+import auth from "../HOC/auth";
 
 class MainTest extends Component {
     render() {

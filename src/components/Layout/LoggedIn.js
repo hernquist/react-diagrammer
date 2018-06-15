@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from "../Header/Header";
+import HeaderContainer from "../Header/HeaderContainer";
 import LeftDashboard from "../LeftDashboard/LeftDashboard";
 import RightDashoard from "../RightDashboard/RightDashboard";
 import DiagramMain from "../Diagram/DiagramMain";
@@ -13,7 +13,7 @@ class LoggedIn extends Component {
     return (
       <div className="main">
         <div className="header">
-          <Header />
+          <HeaderContainer />
         </div>
         <div className="left-dashboard">
           <LeftDashboard />

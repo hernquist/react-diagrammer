@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withApollo, graphql } from "react-apollo";
+import { withApollo } from "react-apollo";
 
 class LogoutForm extends Component {
     constructor(props) {

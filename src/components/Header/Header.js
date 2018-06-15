@@ -1,31 +1,28 @@
 import React, { Component } from 'react';
-import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
-import { GET_AUTH_USER } from "../../graphql/queries"
+import "../../styles/Header.css";
+
 
 class Header extends Component {
     render() {
-        return (
-            <div className="header-container">
-                <Query 
-                    query={GET_AUTH_USER}
-                    fetchPolicy="cache"
-                >
-                {({ loading, error, data }) => {
-                    if (loading) return "Loading...";
-                    if (error) return `Error! ${error.message}`;
-                    console.log("[Header]", data.getAuthUser);
-                    if (!data.getAuthUser) {
-                        return <div>NOT LOGGED IN</div>
-                    }
-                    return <div>
-                        <div> {data.getAuthUser.name} </div>
-                        <Link to="/logout">LOGOUT</Link>
-                    </div>;
-                }}
-                </Query>
-            </div>
-        )
+        const {user} = this.props;
+        const loggedIn = Object.keys(user).length !== 0;
+        return <div className="header-container">
+            <div className="app-name"> REACT DIAGRAMMER </div>
+            <div className="user-name"> {loggedIn && `Welcome back, ${user.name}`} </div>
+            {loggedIn ? <div className="nav">
+                <div className="button">
+                  <Link to="/logout">LOGOUT</Link>
+                </div>
+              </div> : <div className="nav">
+                <div className="button">
+                  <Link to="/signup">SIGN UP</Link>
+                </div>
+                <div className="button">
+                  <Link to="/login">LOGIN</Link>
+                </div>
+              </div>}
+          </div>;
     }
 }
 

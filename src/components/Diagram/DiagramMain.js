@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Query } from "react-apollo";
-import auth from "../Auth/auth"
+import auth from "../HOC/auth"
 import { GET_AUTH_USER } from '../../graphql/queries';
 
 class DiagramMain extends Component {

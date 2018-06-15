@@ -15,7 +15,8 @@ class LoginForm extends Component {
     onSubmit = async (event, Login) => {
         event.preventDefault();
         const { email, password } = this.state;
-        const { data } = await Login({ variables: { email, password } });
+        // const { data } = await Login({ variables: { email, password } });
+        await Login({ variables: { email, password } });
     };
 
     render() {
