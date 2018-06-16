@@ -1,14 +1,29 @@
 import gql from "graphql-tag";
 
 const GET_AUTH_USER = gql`
-    {
-        getAuthUser {
-        _id
-        name
-        email
-        password 
-        }
+  {
+    getAuthUser {
+    _id
+    name
+    email
+    password 
     }
+  }
 `;
 
-export { GET_AUTH_USER };
+const PROJECTS_BY_USER_ID = gql`
+query ProjectsByUserId($userId: String!) {
+  projectsByUserId(userId: $userId) {
+    _id
+    name
+    description
+    dateCreated
+    dateVisited
+  }
+}
+`;
+
+export { 
+  GET_AUTH_USER,
+  PROJECTS_BY_USER_ID
+};

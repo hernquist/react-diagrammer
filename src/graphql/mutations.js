@@ -11,4 +11,19 @@ const LOGIN = gql`
   }
 `;
 
-export { SIGNUP, LOGIN }
+const CREATE_PROJECT = gql`
+  mutation CreateProject($userId: String!, $name: String!, $description: String!){
+    createProject(userId: $userId, name: $name, description: $description) {
+      _id
+      userId
+      name
+      description
+    }
+  }
+`
+
+export { 
+  SIGNUP, 
+  LOGIN, 
+  CREATE_PROJECT 
+};
