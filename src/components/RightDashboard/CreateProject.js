@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import { CREATE_PROJECT } from '../../graphql/mutations';
-import { GET_AUTH_USER } from '../../graphql/queries';
+import '../../styles/CreateProject.css';
 
 
 class CreateProject extends Component {
@@ -14,49 +14,48 @@ class CreateProject extends Component {
     };
   }
 
-  onSubmit = async (event, CreateProject, user) => {
+  onSubmit = async (event, CreateProject) => {
     event.preventDefault();
-    const userId = user._id;
+    const userId = this.props.user._id;
     const { name, description } = this.state;
     await CreateProject({ variables: { name, description, userId } });
+    this.props.history.push('/main');
   };
   
   render() {
     const { name, description, errors } = this.state;
     return (
       <div>
-        <Query query={GET_AUTH_USER} fetchPolicy='cache'>
-          {({ loading, error, data }) => {
-            if (loading) return "Loading...";
-            if (error) return `Error! ${error.message}`
-            const user = data.getAuthUser;
-
-            return <div>
-              <h3>CreateProject</h3>
-              <Mutation mutation={CREATE_PROJECT}>
-                {CreateProject => <form onSubmit={e=>this.onSubmit(e, CreateProject, user)}>
-                  <div className="input-field">
-                    <label>Project Name</label>
-                    <input value={name} onChange={e => this.setState({
-                      name: e.target.value
-                    })} />
-                  </div>
-                  <div className="input-field">
-                    <label>Description</label>
-                    <input value={description} onChange={e => this.setState({
-                      description: e.target.value
-                    })} />
-                  </div>
-
-                  <div className="errors">
-                    {errors.map(error => <div key={error}>SIGNUP: {error}</div>)}
-                  </div>
-                  <button variant="raised">Submit</button>
-                </form>}
-              </Mutation>
+        <Mutation mutation={CREATE_PROJECT}>
+          {CreateProject => <div className="create-project-container">
+            <div className="form-title">
+              Create Project
             </div>
-          }}
-        </Query>
+            <form 
+              className="create-project-form" 
+              onSubmit={e=>this.onSubmit(e, CreateProject)}>
+              <div className="input-field">
+                <div>Name</div>
+                <input 
+                  className="input"
+                  value={name} 
+                  onChange={e => this.setState({ name: e.target.value})} 
+                />
+              </div>
+              <div className="input-field">
+                <label>Description</label>
+                <textarea value={description} onChange={e => this.setState({
+                  description: e.target.value
+                })} />
+              </div>
+
+              <div className="errors">
+                {errors.map(error => <div key={error}>SIGNUP: {error}</div>)}
+              </div>
+              <button className="button">Submit</button>
+            </form>
+          </div>}
+        </Mutation>
       </div>
     );
   }

@@ -18,9 +18,11 @@ const CREATE_PROJECT = gql`
       userId
       name
       description
+      dateCreated
+      dateVisited
     }
   }
-`
+`;
 
 export { 
   SIGNUP, 

@@ -55,9 +55,11 @@
 .right-dashboard {
     display: grid;
     grid-area: rd;
-    justify-content: center;
+    /*justify-content: center;*/
     background: orchid;
-    align-content: center;
+    /*align-content: center;*/
+    border: 2px solid grey;
+    border-radius: 1px;
 }
 
 .diagram {
