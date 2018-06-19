@@ -27,51 +27,56 @@ class LeftDashboard extends Component {
     };
     const { errors } = this.state;
     const userId = user._id;
-    console.log("[LeftDashboard] render");
 
-    return <Query 
+    const findLatest = projects => projects.reduce((prev, curr) => 
+      curr.dateVisited > prev.dateVisited ? curr : prev);
+
+    return ( 
+      <Query 
         query={PROJECTS_BY_USER_ID}
-        variables={{ userId }} >
-      {({ loading, error, data, refetch }) => {
-        if (loading) return "Loading...";
-        if (error) {
-          errors[0] = `Error! ${error.message}`
-          data = {};
-        };
-        refetch();
+        variables={{ userId }} 
+      >
+        {({ loading, error, data, refetch }) => {
+          if (loading) return "Loading...";
+          if (error) {
+            errors[0] = `Error! ${error.message}`
+            data = {};
+          };
+          refetch();
+          const projects = data.projectsByUserId;
 
-        return <div className="left-dashboard-container">
-          <div className="dashboard-button" 
-            onClick={this.createNewProject}>
-            <div className="button-content">START</div>
+          return <div className="left-dashboard-container">
 
-          <div className="dashboard-button">
-            <div className="button-content">SWITCH</div>
-            <div className="button-content">PROJECT</div>
-          </div>
+            <div className="dashboard-button">
+              <div className="button-content">SWITCH</div>
+              <div className="button-content">PROJECT</div>
+              <div className="button-content">{findLatest(projects).name}</div>
 
-            <div className="button-content">NEW</div>
-            <div className="button-content">PROJECT</div>
+            </div>
+            <div className="dashboard-button" 
+              onClick={this.createNewProject}>
+              <div className="button-content">START</div>
+              <div className="button-content">NEW</div>
+              <div className="button-content">PROJECT</div>
+            </div>
+            <div className="dashboard-button">
+              <div className="button-content">CREATE</div>
+              <div className="button-content">NEW</div>
+              <div className="button-content">COMPONENT</div>
+            </div>
+            <div className="dashboard-button">
+              <div className="button-content">ADD</div>
+              <div className="button-content">EXISTING</div>
+              <div className="button-content">COMPONENT</div>
+            </div>
+            <div className="dashboard-button" onClick={this.handleSwitch}>
+              <div className="button-content">{content[layout]}</div>
+              <div className="button-content">DASHBOARD</div>
+            </div>
           </div>
-          {data.projectsByUserId.length} 
-          <div className="dashboard-button">
-            <div className="button-content">CREATE</div>
-            <div className="button-content">NEW</div>
-            <div className="button-content">COMPONENT</div>
-          </div>
-
-          <div className="dashboard-button">
-            <div className="button-content">ADD</div>
-            <div className="button-content">EXISTING</div>
-            <div className="button-content">COMPONENT</div>
-          </div>
-          <div className="dashboard-button" onClick={this.handleSwitch}>
-            <div className="button-content">{content[layout]}</div>
-            <div className="button-content">DASHBOARD</div>
-          </div>
-        </div>
-      }}
-    </Query>
+        }}
+      </Query>
+    )
   }
 }
 
