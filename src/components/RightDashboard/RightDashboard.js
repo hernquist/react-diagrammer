@@ -4,7 +4,7 @@ import CreateProject from './CreateProject';
 
 class RightDashboard extends Component {
   render() {
-    const { user } = this.props;
+    const { user, refetchProjects } = this.props;
     console.log(user);
 
     return (
@@ -13,7 +13,9 @@ class RightDashboard extends Component {
           path="/main/new-project" 
           render={ renderProps => <CreateProject 
             {...renderProps} 
-            user={user}/> }
+            user={user}
+            refetchProjects={refetchProjects}
+          /> }
         />
       </div>
     );

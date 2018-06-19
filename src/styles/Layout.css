@@ -32,9 +32,7 @@
 .left-dashboard {
     display: grid;
     grid-area: ld;
-    /* justify-content: center; */
-    background: peru;
-    /* align-content: center; */
+    background: rgba(200, 100, 20, 1);
     border: 2px solid grey;
     border-radius: 1px; 
 
