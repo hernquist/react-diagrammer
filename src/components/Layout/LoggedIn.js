@@ -13,14 +13,14 @@ class LoggedIn extends Component {
     super(props);
     this.state = {
       layout: "logged-in",
-      currentProject: "",
+      currentProject: null,
       errors: []
     }
   }
 
   switchLayout = layout => this.setState({ layout });
   
-  setCurrentProject = currentProject => this.setCurrentProject({ currentProject}); 
+  setCurrentProject = currentProject => this.setCurrentProject({ currentProject }); 
 
   render() {
     const { layout, errors, currentProject } = this.state;
@@ -65,12 +65,13 @@ class LoggedIn extends Component {
                   </div>
                   <div className="left-dashboard">
                     <LeftDashboard 
+                      {...this.props}
                       switchLayout={this.switchLayout} 
+                      setCurrentProject={this.setCurrentProject} 
                       layout={layout}
                       user={user}
-                      projects={projects} 
+                      projects={projects}
                       currentProject={currentProject || findLatest(projects)}
-                      {...this.props}
                     />
                   </div>
                   <div className="diagram">
@@ -78,9 +79,9 @@ class LoggedIn extends Component {
                   </div>
                   <div className="right-dashboard" style={fullScreen}>
                     <RightDashoard 
-                      user={user}
-                      refetchProjects={refetch}
                       {...this.props}
+                      refetchProjects={refetch}
+                      user={user}
                     />
                   </div>
                 </div>
