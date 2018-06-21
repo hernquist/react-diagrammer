@@ -9,23 +9,25 @@
 }
 
 .logged-in {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: 75px 1fr;
-    grid-template-areas: 
-        "nb nb nb nb nb nb nb nb nb nb"
-        "ld td td td td td td td rd rd"
+  display: grid;
+  height: 100vh;
+  grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
+  /*grid-template-columns: repeat(10, 1fr);*/
+  grid-template-rows: 75px 1fr;
+  grid-template-areas: 
+    "nb nb nb nb nb nb nb nb nb nb"
+    "ld td td td td td td td rd rd"
 }
 
 .full-screen {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: 75px 1fr;
-    grid-template-areas: 
-        "nb nb nb nb nb nb nb nb nb nb"
-        "ld td td td td td td td td td"
+  display: grid;
+  height: 100vh;
+  grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
+  /*grid-template-columns: repeat(10, 1fr);*/
+  grid-template-rows: 75px 1fr;
+  grid-template-areas: 
+    "nb nb nb nb nb nb nb nb nb nb"
+    "ld td td td td td td td td td"
 }
 
 
@@ -70,7 +72,21 @@
 
 @media (max-width: 800px) {
     .logged-in {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: minmax(140px, 250px) repeat(2, 1fr);
+        grid-template-rows: 75px 1fr;
+        justify-content: stretch;
+        grid-template-areas: 
+            "nb nb nb"
+            "ld td td";
+    }
+    .right-dashboard {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .logged-out {
+        grid-template-columns: minmax(140px, 250px) repeat(2, 1fr);
         grid-template-rows: 75px 1fr;
         justify-content: stretch;
         grid-template-areas: 

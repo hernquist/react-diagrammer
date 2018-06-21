@@ -20,15 +20,22 @@ class LoggedIn extends Component {
 
   switchLayout = layout => this.setState({ layout });
   
-  setCurrentProject = currentProject => this.setCurrentProject({ currentProject }); 
+  setCurrentProject = currentProject => this.setState({ currentProject }); 
 
   render() {
     const { layout, errors, currentProject } = this.state;
     const fullScreen = {
       display: layout === "full-screen" && "none"
     }
-    const findLatest = projects => projects.reduce((prev, curr) =>
-      curr.dateVisited > prev.dateVisited ? curr : prev);
+
+    const findLatest = projects => {
+      if (!projects || projects.length < 1) {
+        return {name: "no projects"}
+      } else {
+        return projects.reduce((prev, curr) =>
+          curr.dateVisited > prev.dateVisited ? curr : prev);
+      }
+    }
 
     return (
       <Query query={GET_AUTH_USER}>
@@ -39,6 +46,7 @@ class LoggedIn extends Component {
             return <div>{errors[0]}</div>
           };
           const user = data.getAuthUser;
+          console.log('[Query GET_AUTH_USER]', user);
           const userId = user._id;
 
           return (
@@ -72,6 +80,7 @@ class LoggedIn extends Component {
                       user={user}
                       projects={projects}
                       currentProject={currentProject || findLatest(projects)}
+                      needsSetting={!currentProject}
                     />
                   </div>
                   <div className="diagram">
@@ -82,6 +91,9 @@ class LoggedIn extends Component {
                       {...this.props}
                       refetchProjects={refetch}
                       user={user}
+                      currentProject={currentProject || findLatest(projects)}
+                      projects={projects}
+                      setCurrentProject={this.setCurrentProject}
                     />
                   </div>
                 </div>

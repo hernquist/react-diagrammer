@@ -24,8 +24,40 @@ const CREATE_PROJECT = gql`
   }
 `;
 
+// just filler must do
+const DELETE_PROJECT = gql`
+  mutation DeleteProject($userId: String!, $name: String!, $description: String!){
+    deleteProject(userId: $userId, name: $name, description: $description) {
+      _id
+      userId
+      name
+      description
+      dateCreated
+      dateVisited
+    }
+  }
+`;
+
+const TOGGLE_COMPONENT_STYLE = gql`
+mutation ToggleComponentStyle($_id: String!) {
+  toggleComponentStyle(_id: $_id) {
+    _id
+    name
+    projectId
+    style
+    state
+    iteration
+    placement
+    props
+    callbacks
+    children
+  }
+}`
+
 export { 
   SIGNUP, 
   LOGIN, 
-  CREATE_PROJECT 
+  CREATE_PROJECT,
+  DELETE_PROJECT,
+  TOGGLE_COMPONENT_STYLE 
 };

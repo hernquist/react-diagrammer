@@ -19,6 +19,18 @@ query ProjectsByUserId($userId: String!) {
     description
     dateCreated
     dateVisited
+    components {
+      _id
+      name
+      iteration
+      projectId
+      style
+      placement
+      children
+      state
+      props
+      callbacks
+    }
   }
 }
 `;

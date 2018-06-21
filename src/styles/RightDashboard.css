@@ -1,4 +1,4 @@
-.left-dashboard-container {
+.right-dashboard-container {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto repeat(6, 1fr);
@@ -23,10 +23,7 @@
     font-size: 18px;
 }
 
-.button-content {
-}
-
-.current-project-title {
+.current-component-title {
     border-bottom: 1px solid black;
     display: grid;
     justify-items: center;
