@@ -13,7 +13,7 @@
   height: 100vh;
   grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
   /*grid-template-columns: repeat(10, 1fr);*/
-  grid-template-rows: 75px 1fr;
+  grid-template-rows: 60px 1fr;
   grid-template-areas: 
     "nb nb nb nb nb nb nb nb nb nb"
     "ld td td td td td td td rd rd"
@@ -24,7 +24,7 @@
   height: 100vh;
   grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
   /*grid-template-columns: repeat(10, 1fr);*/
-  grid-template-rows: 75px 1fr;
+  grid-template-rows: 60px 1fr;
   grid-template-areas: 
     "nb nb nb nb nb nb nb nb nb nb"
     "ld td td td td td td td td td"
@@ -55,9 +55,7 @@
 .right-dashboard {
     display: grid;
     grid-area: rd;
-    /*justify-content: center;*/
     background: orchid;
-    /*align-content: center;*/
     border: 2px solid grey;
     border-radius: 1px;
 }
@@ -65,9 +63,9 @@
 .diagram {
     display: grid;
     grid-area: td;
-    justify-content: center;
     background: lime;
-    align-content: center;
+    border: 2px solid grey;
+    border-radius: 1px;
 }
 
 @media (max-width: 800px) {

@@ -84,7 +84,10 @@ class LoggedIn extends Component {
                     />
                   </div>
                   <div className="diagram">
-                    <DiagramMain {...this.props} />
+                    <DiagramMain 
+                      {...this.props}
+                      currentProject={currentProject} 
+                    />
                   </div>
                   <div className="right-dashboard" style={fullScreen}>
                     <RightDashoard 
