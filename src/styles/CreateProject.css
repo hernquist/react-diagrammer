@@ -1,0 +1,39 @@
+.create-project-container {
+  display: grid;
+  background: yellow;
+  /*grid-column: stretch;*/
+  grid-template-rows: auto 1fr;
+  justify-items: stretch;
+  padding: 0px;
+  margin: 0px
+}
+
+.form-title {
+  font-size: 32px;
+  margin: 10px 5px 0 5px;
+}
+
+.create-project-form {
+  display: grid;
+  /*grid-template-columns: minmax(100%, 100%) 1fr;*/
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr 1fr auto 1fr;
+  justify-items: stretch;
+  grid-gap: 10px
+}
+
+.input-field {
+  font-size: 28px;
+  margin: 0 8px 0 8px;
+  display: grid;
+  grid-template-rows: auto auto;
+  align-items: center;
+}
+
+.input {
+  /*margin-top: 0px;*/
+  height: 28px;
+
+
+}
+

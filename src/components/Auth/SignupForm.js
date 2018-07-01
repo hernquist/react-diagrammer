@@ -27,7 +27,7 @@ class SignupForm extends Component {
             mutation={SIGNUP}
             onCompleted={result => {
                 result.signup && localStorage.setItem("token", result.signup);
-                this.props.history.push("/main");
+                this.props.history.push("/main/new-project");
             }}
         >
           {Signup => <form onSubmit={e => this.onSubmit(e, Signup)} >

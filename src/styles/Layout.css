@@ -9,32 +9,32 @@
 }
 
 .logged-in {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: 75px 1fr;
-    grid-template-areas: 
-        "nb nb nb nb nb nb nb nb nb nb"
-        "ld td td td td td td td rd rd"
+  display: grid;
+  height: 100vh;
+  grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
+  /*grid-template-columns: repeat(10, 1fr);*/
+  grid-template-rows: 60px 1fr;
+  grid-template-areas: 
+    "nb nb nb nb nb nb nb nb nb nb"
+    "ld td td td td td td td rd rd"
 }
 
 .full-screen {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: 75px 1fr;
-    grid-template-areas: 
-        "nb nb nb nb nb nb nb nb nb nb"
-        "ld td td td td td td td td td"
+  display: grid;
+  height: 100vh;
+  grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
+  /*grid-template-columns: repeat(10, 1fr);*/
+  grid-template-rows: 60px 1fr;
+  grid-template-areas: 
+    "nb nb nb nb nb nb nb nb nb nb"
+    "ld td td td td td td td td td"
 }
 
 
 .left-dashboard {
     display: grid;
     grid-area: ld;
-    /* justify-content: center; */
-    background: peru;
-    /* align-content: center; */
+    background: rgba(200, 100, 20, 1);
     border: 2px solid grey;
     border-radius: 1px; 
 
@@ -55,22 +55,36 @@
 .right-dashboard {
     display: grid;
     grid-area: rd;
-    justify-content: center;
     background: orchid;
-    align-content: center;
+    border: 2px solid grey;
+    border-radius: 1px;
 }
 
 .diagram {
     display: grid;
     grid-area: td;
-    justify-content: center;
     background: lime;
-    align-content: center;
+    border: 2px solid grey;
+    border-radius: 1px;
 }
 
 @media (max-width: 800px) {
     .logged-in {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: minmax(140px, 250px) repeat(2, 1fr);
+        grid-template-rows: 75px 1fr;
+        justify-content: stretch;
+        grid-template-areas: 
+            "nb nb nb"
+            "ld td td";
+    }
+    .right-dashboard {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .logged-out {
+        grid-template-columns: minmax(140px, 250px) repeat(2, 1fr);
         grid-template-rows: 75px 1fr;
         justify-content: stretch;
         grid-template-areas: 
