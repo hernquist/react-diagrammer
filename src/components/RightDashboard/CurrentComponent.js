@@ -29,6 +29,9 @@ class CurrentComponent extends Component {
     console.log(currentProject);
     console.log(currentProject.components)
     const { components } = currentProject;
+    if (!components) {
+      return <div>No Components</div>
+    }
 
     const currentComponent = components
       .filter(c => c.name === name)

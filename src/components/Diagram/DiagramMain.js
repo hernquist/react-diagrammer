@@ -29,14 +29,20 @@ const TreeRow = ({ row }) => {
 class DiagramMain extends Component {
   render() {
     const { currentProject } = this.props;
-    const components = currentProject ? currentProject.components : [];
-    console.log('[DiagramMain]', components); 
+    console.log ('[DiagramMain] currentProject', currentProject);
+    if (currentProject === null || currentProject) {
+      var components = [];
+    } else {
+      var { components } = currentProject
+    }
+    
+    console.log('[DiagramMain] components', components); 
     const tree = [...Array(8)].map(_ => []);
     const root = components.filter(component => component.placement === 'root');
     tree[0] = root;
      
-    console.log('[DiagramMain]', tree); 
-    console.log('[DiagramMain]', tree[0][0]);
+    console.log('[DiagramMain] tree', tree); 
+    console.log('[DiagramMain] tree[0][0]', tree[0][0]);
 
     return (
       <div className="diagram-main-container">
