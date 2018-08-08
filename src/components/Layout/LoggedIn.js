@@ -67,39 +67,41 @@ class LoggedIn extends Component {
                 refetch();
                 const projects = data.projectsByUserId;
 
-                return <div className={layout}>
-                  <div className="header">
-                    <HeaderContainer />
+                return (
+                  <div className={layout}>
+                    <div className="header">
+                      <HeaderContainer />
+                    </div>
+                    <div className="left-dashboard">
+                      <LeftDashboard 
+                        {...this.props}
+                        switchLayout={this.switchLayout} 
+                        setCurrentProject={this.setCurrentProject} 
+                        layout={layout}
+                        user={user}
+                        projects={projects}
+                        currentProject={currentProject || findLatest(projects)}
+                        needsSetting={!currentProject}
+                      />
+                    </div>
+                    <div className="diagram">
+                      <DiagramMain 
+                        {...this.props}
+                        currentProject={currentProject} 
+                      />
+                    </div>
+                    <div className="right-dashboard" style={fullScreen}>
+                      <RightDashoard 
+                        {...this.props}
+                        refetchProject={refetch}
+                        user={user}
+                        currentProject={currentProject || findLatest(projects)}
+                        projects={projects}
+                        setCurrentProject={this.setCurrentProject}
+                      />
+                    </div>
                   </div>
-                  <div className="left-dashboard">
-                    <LeftDashboard 
-                      {...this.props}
-                      switchLayout={this.switchLayout} 
-                      setCurrentProject={this.setCurrentProject} 
-                      layout={layout}
-                      user={user}
-                      projects={projects}
-                      currentProject={currentProject || findLatest(projects)}
-                      needsSetting={!currentProject}
-                    />
-                  </div>
-                  <div className="diagram">
-                    <DiagramMain 
-                      {...this.props}
-                      currentProject={currentProject} 
-                    />
-                  </div>
-                  <div className="right-dashboard" style={fullScreen}>
-                    <RightDashoard 
-                      {...this.props}
-                      refetchProjects={refetch}
-                      user={user}
-                      currentProject={currentProject || findLatest(projects)}
-                      projects={projects}
-                      setCurrentProject={this.setCurrentProject}
-                    />
-                  </div>
-                </div>
+                )
               }}
             </Query>
           )

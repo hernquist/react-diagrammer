@@ -1,24 +1,19 @@
 import React, {Component} from 'react';
 import { Mutation } from 'react-apollo';
 import { TOGGLE_COMPONENT_STYLE } from '../../graphql/mutations';
+import { PROJECTS_BY_USER_ID } from '../../graphql/queries';
 import '../../styles/RightDashboard.css';
 
 
 class CurrentComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      style: props.currentProject.style,
-      executeToggleStyle: false
-    }
   }
 
-  onLeavingToggleButton = async ({ _id }, mutation) => {
-    if (this.state.executeToggleStyle) {
-      const { data } = await mutation({ variables: { _id } });
-      console.log("[mutation executed]", data.toggleComponentStyle);
-    } 
-    this.setState({executeToggleStyle: false});
+  updateStyle = async ({ _id }, mutation) => {
+    const { data } = await mutation({ variables: { _id } });
+    this.props.refetchProject();
+    console.log("[mutation executed]", data);
   } 
 
   render() {
@@ -59,21 +54,30 @@ class CurrentComponent extends Component {
           <div className="button-content">CALLBACKS</div>
         </div>
 
-        <Mutation mutation={TOGGLE_COMPONENT_STYLE}>
+        <Mutation 
+          mutation={TOGGLE_COMPONENT_STYLE}
+          // update={(cache, { data: { toggleComponentStyle } }) => {
+            // const { projects } = cache.readQuery({ query: PROJECTS_BY_USER_ID, data: { userId: this.props.user._id} });
+            // const { components} = projects;
+            // cache.writeQuery({
+              // query: PROJECTS_BY_USER_ID,
+              // data: { projects: { components: components.concat([toggleComponentStyle]) } }
+            // });
+          // }}
+          refetchQueries={ PROJECTS_BY_USER_ID }
+        >
           {ToggleComponentStyle => (
             <div 
               className="dashboard-button hideable component-type"
-              onClick={ () => this.setState({
-                executeToggleStyle: !this.state.executeToggleStyle
-                })}
-              onMouseLeave={ () => this.onLeavingToggleButton(currentComponent, ToggleComponentStyle) }
+              onClick={ () => this.updateStyle(currentComponent, ToggleComponentStyle) }
             >
               <div className="button-content">TOGGLE</div>
               <div className="button-content">COMPONENT</div>
               <div className="button-content">TYPE</div>
             </div>
           )}
-        </Mutation>  
+        </Mutation>
+
         <div className="dashboard-button hideable edit-name">
           <div className="button-content">EDIT</div>
           <div className="button-content">NAME</div>

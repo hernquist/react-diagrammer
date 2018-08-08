@@ -4,24 +4,29 @@ import auth from "../HOC/auth"
 import { GET_AUTH_USER } from '../../graphql/queries';
 import '../../styles/DiagramMain.css'
 
-const DisplayComponent = ({ component }) => (
-  <div 
-    className='component-container'
-    key={component._id}
-    style={component.style === 'container' ? 
-      {'border': '1px double green'} :
-      {'border': '1px double blue'} }
-  >
-    <div className='component-name'>{component.name}</div>
-    <div className='component-state'>{`STATE: ${component.state.length}`}</div> 
-    <div className='component-props'>{`PROPS: ${component.props.length}`}</div> 
-  </div>
-)
+const DisplayComponent = ({ component }) => {
+  const stateOutput = component.style === 'container' ?
+    'n/a' : component.state.length;
+  
+  return (
+    <div 
+      className='component-container'
+      style={component.style === 'container' ? 
+        {'border': '3px solid red'} :
+        {'border': '3px solid blue'} }
+    >
+      <div className='component-name'>{component.name}</div>
+      <div className='component-state'>{`STATE: ${stateOutput}`}
+      </div> 
+      <div className='component-props'>{`PROPS: ${component.props.length}`}</div>
+    </div>
+  )
+}
 
 const TreeRow = ({ row }) => {
   return (
     <div className='row'>
-      {row.map(component => <DisplayComponent component={component}/> )}
+      {row.map(component => <DisplayComponent component={component} key={component._id}/> )}
     </div> 
   )
 }
@@ -29,20 +34,14 @@ const TreeRow = ({ row }) => {
 class DiagramMain extends Component {
   render() {
     const { currentProject } = this.props;
-    console.log ('[DiagramMain] currentProject', currentProject);
-    if (currentProject === null || currentProject) {
-      var components = [];
-    } else {
-      var { components } = currentProject
-    }
+    if (!currentProject || !currentProject.components) {return null}
+    const { components } = currentProject
     
-    console.log('[DiagramMain] components', components); 
     const tree = [...Array(8)].map(_ => []);
     const root = components.filter(component => component.placement === 'root');
     tree[0] = root;
      
     console.log('[DiagramMain] tree', tree); 
-    console.log('[DiagramMain] tree[0][0]', tree[0][0]);
 
     return (
       <div className="diagram-main-container">

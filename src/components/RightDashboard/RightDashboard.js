@@ -8,7 +8,7 @@ class RightDashboard extends Component {
   render() {
     const { 
       user, 
-      refetchProjects, 
+      refetchProject, 
       currentProject, 
       setCurrentProject, 
       projects = [],
@@ -22,7 +22,7 @@ class RightDashboard extends Component {
           render={ renderProps => <CreateProject 
             {...renderProps} 
             user={user}
-            refetchProjects={refetchProjects}
+            refetchProject={refetchProject}
             setCurrentProject={setCurrentProject}
           /> }
         />
@@ -42,6 +42,7 @@ class RightDashboard extends Component {
             {...renderProps}
             user={user}
             currentProject={currentProject}
+            refetchProject={refetchProject}
           />}
         />
       </div>

@@ -26,7 +26,7 @@ class LeftDashboard extends Component {
       this.props.switchLayout("logged-in") : 
       this.props.switchLayout("full-screen");
 
-  updateCss = () => {
+  updateCSS = () => {
     const buttons = document.querySelectorAll(".hideable");
     buttons.forEach(button => button.style.display = 
       this.state.selector ? "none" : "grid");
@@ -37,12 +37,12 @@ class LeftDashboard extends Component {
 
   activateSelector = async() => {
     await this.setState({ selector: true });
-    this.updateCss();
+    this.updateCSS();
   }
 
   deActivateSelector = async () => {
     await this.setState({ selector: false});
-    this.updateCss();
+    this.updateCSS();
   }
 
   render() {
