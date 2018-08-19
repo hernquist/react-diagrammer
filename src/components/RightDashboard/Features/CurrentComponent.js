@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { Mutation } from 'react-apollo';
-import { TOGGLE_COMPONENT_STYLE } from '../../graphql/mutations';
-import { PROJECTS_BY_USER_ID } from '../../graphql/queries';
-import '../../styles/RightDashboard.css';
+import { TOGGLE_COMPONENT_STYLE } from '../../../graphql/mutations';
+import { PROJECTS_BY_USER_ID } from '../../../graphql/queries';
+import '../../../styles/RightDashboard.css';
 
 
 class CurrentComponent extends Component {
@@ -12,12 +12,13 @@ class CurrentComponent extends Component {
 
   updateStyle = async ({ _id }, mutation) => {
     const { data } = await mutation({ variables: { _id } });
-    this.props.refetchProject();
+    // this.props.refetchProject();
     console.log("[mutation executed]", data);
+    this.props.updateComponent(data.toggleComponentStyle);
   } 
 
   render() {
-    const { currentProject, history } = this.props;
+    const { currentProject, history, updateComponent } = this.props;
     const [name, index] = history.location.pathname.split("/").slice(-2);
     // const [name, index] = pathname;
     console.log(name, Number(index));

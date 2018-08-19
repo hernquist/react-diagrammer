@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import { CREATE_PROJECT } from '../../graphql/mutations';
-import '../../styles/CreateProject.css';
+import { CREATE_PROJECT } from '../../../graphql/mutations';
+import '../../../styles/CreateProject.css';
 
 
 class CreateProject extends Component {
