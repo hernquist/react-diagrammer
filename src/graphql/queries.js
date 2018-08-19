@@ -28,7 +28,10 @@ query ProjectsByUserId($userId: String!) {
       placement
       children
       state
-      props
+      props {
+        name
+        proptype
+      }
       callbacks
     }
   }

@@ -57,6 +57,7 @@ class LoggedIn extends Component {
           const user = data.getAuthUser;
           console.log('[Query GET_AUTH_USER]', user);
           const userId = user._id;
+          console.log('[Query GET_AUTH_USER] userId', userId);
 
           return (
             <Query 
@@ -75,6 +76,7 @@ class LoggedIn extends Component {
                 // a new project, but it caused a hiccup on the screen
                 // refetch();
                 const projects = data.projectsByUserId;
+                console.log(projects)
 
                 return (
                   <div className={layout}>

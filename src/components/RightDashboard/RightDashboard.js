@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import CreateProject from './Features/CreateProject';
 import DeleteProject from './Features/DeleteProject';
 import CurrentComponent from './Features/CurrentComponent';
+import UpdateComponentProps from './Features/UpdateComponentProps';
 import EditComponentName from './Features/EditComponentName';
 
 class RightDashboard extends Component {
@@ -53,6 +54,16 @@ class RightDashboard extends Component {
               currentProject={currentProject}
               refetchProject={refetchProject}
               updateComponent={updateComponent}
+            />
+          }
+        />
+        <Route
+          path="/main/component/:component/:id/update-props"
+          render={renderProps =>
+            <UpdateComponentProps
+              {...renderProps}
+              updateComponent={updateComponent}
+              currentProject={currentProject}
             />
           }
         />

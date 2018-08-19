@@ -25,12 +25,12 @@ class CurrentComponent extends Component {
     if (!components) {
       return <div>No Components</div>
     }
-
+    
     const currentComponent = components
-      .filter(c => c.name === name)
-      .filter(c => c.iteration === Number(index))[0]
+    .filter(c => c.name === name)
+    .filter(c => c.iteration === Number(index))[0]
     console.log(currentComponent);  
-
+    
     return (
       <div className="right-dashboard-container">
         <div className="current-component-title">
@@ -42,7 +42,10 @@ class CurrentComponent extends Component {
           <div className="button-content">UPDATE</div>
           <div className="button-content">STATE</div>
         </div>
-        <div className="dashboard-button hideable update-props">
+        <div 
+          className="dashboard-button hideable update-props"
+          onClick={() => this.props.history.push(this.props.match.url + '/update-props')}
+        >
           <div className="button-content">UPDATE</div>
           <div className="button-content">INCOMING</div>
           <div className="button-content">PROPS</div>
