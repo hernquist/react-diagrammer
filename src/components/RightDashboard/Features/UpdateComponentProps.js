@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import { EDIT_COMPONENT_NAME } from '../../../graphql/mutations';
+import { ADD_PROP } from '../../../graphql/mutations';
 
 class UpdateComponentProps extends Component {
-  state = {
-    name: ""
+  initialState = {
+    name: "",
+    proptype: 'string',
+    showAddProp: false
   }
 
-  handleInput = e => this.setState({ name: e.target.value });
+  state = this.initialState
 
-  updateName = async ({ _id }, mutation) => {
-    const { data } = await mutation({ variables: { _id, name: this.state.name } });
-    this.props.updateComponent(data.editComponentName);
-    const parts = this.props.history.location.pathname.split("/");
-    parts[3] = data.editComponentName.name;
-    this.props.history.push(parts.join("/"));
+  handleChange = (e, key) => this.setState({ [key]: e.target.value });
+
+  displayAddProp = () => this.setState({ showAddProp: true })
+
+  discardProp = () => {
+    this.setState({ ...this.initialState});
   }
 
-  leave = () => this.props.history.push(this.props.history.location.pathname.split("/").slice(0, 5).join("/"))
+  saveProp = async (currentComponent, addProp) => {
+    const componentId = currentComponent._id;
+    const prop = { 
+      componentId, 
+      name: this.state.name,
+      proptype: this.state.proptype
+    }
+    const { data } = await addProp({ variables: { prop } });
+    const props = data.addProp.props.map(prop => ({ ...prop, componentId }));
+    const updatedComponent = Object.assign({}, currentComponent, { props })
+    this.props.updateComponent(updatedComponent)
+    this.discardProp();
+  } 
 
   render() {
     const { currentProject, history } = this.props;
@@ -26,34 +40,67 @@ class UpdateComponentProps extends Component {
     const index = pieces[4];
 
     const { components } = currentProject;
-    if (!components) {
-      return <div>No Components</div>
-    }
+    if (!components) return <div>No Components</div>
 
     const currentComponent = components
       .filter(c => c.name === name)
-      .filter(c => c.iteration === Number(index))[0]
+      .filter(c => c.iteration === Number(index))[0];
+    const { showAddProp, proptype } = this.state;
 
-    return (
-      <Mutation
-        mutation={EDIT_COMPONENT_NAME}
-      >
-        {EditComponentName => (
-          <div>
-            Edit name
-            <input onChange={this.handleInput} value={this.state.name}>
-            </input>
+      return (
+        <div>
+          <h3>Existing props</h3>
+          <ol>
+            {currentComponent.props.map((prop, index) => 
+              (<li key={prop.name + index}>{`${prop.name}: ${prop.proptype}`}</li>)
+            )}
+          </ol>
+          {!showAddProp && <button onClick={this.displayAddProp}>ADD PROP</button>}
+          {showAddProp &&
+            <Mutation mutation={ADD_PROP}>
+              {AddProp => (
+                <div>
+                  <label> 
+                    Prop NAME 
+                    <input onChange={(e) => this.handleChange(e, 'name')} value={this.state.name}/>
+                  </label>
+                  <label> 
+                    PROPTYPE 
+                    <select value={proptype} onChange={(e) => this.handleChange(e, 'proptype')}>
+                      <option value="boolean">boolean</option>
+                      <option value="number">number</option>
+                      <option value="string">string</option>
+                      <option value="array">array</option>
+                      <option value="object">object</option>
+                    </select>
+                  </label>
+                  <button onClick={() => this.saveProp(currentComponent, AddProp)}>ADD PROP</button>  
+                  <button onClick={this.discardProp}>DISCARD PROP</button>  
+                </div>
+              )}
+            </Mutation>
+          }
+        </div>
+      );
 
-            Do you want to update this component's name?
-            <button onClick={() => { this.updateName(currentComponent, EditComponentName) }}>YES</button>
-            <button onClick={this.leave}
-            >
-              NO
-            </button>
-          </div>
-        )}
-      </Mutation>
-    );
+      // <Mutation
+      //   mutation={EDIT_COMPONENT_NAME}
+      // >
+      //   {EditComponentName => (
+      //     <div>
+      //       Edit name
+      //       <input onChange={this.handleChange} value={this.state.name}>
+      //       </input>
+
+      //       Do you want to update this component's name?
+      //       <button onClick={() => { this.updateName(currentComponent, EditComponentName) }}>YES</button>
+      //       <button onClick={this.leave}
+      //       >
+      //         NO
+      //       </button>
+      //     </div>
+      //   )}
+      // </Mutation>
   }
 }
 

@@ -40,42 +40,55 @@ const DELETE_PROJECT = gql`
 `;
 
 const TOGGLE_COMPONENT_STYLE = gql`
-mutation ToggleComponentStyle($_id: String!) {
-  toggleComponentStyle(_id: $_id) {
-    _id
-    name
-    projectId
-    style
-    state
-    iteration
-    placement
-    props {
+  mutation ToggleComponentStyle($_id: String!) {
+    toggleComponentStyle(_id: $_id) {
+      _id
       name
-      proptype
+      projectId
+      style
+      state
+      iteration
+      placement
+      props {
+        name
+        proptype
+      }
+      callbacks
+      children
     }
-    callbacks
-    children
   }
-}`
+`;
 
 const EDIT_COMPONENT_NAME = gql`
-mutation EditComponentName($_id: String!, $name: String!) {
-  editComponentName(_id: $_id, name: $name) {
-    _id
-    name
-    projectId
-    style
-    state
-    iteration
-    placement
-    props {
+  mutation EditComponentName($_id: String!, $name: String!) {
+    editComponentName(_id: $_id, name: $name) {
+      _id
       name
-      proptype
+      projectId
+      style
+      state
+      iteration
+      placement
+      props {
+        name
+        proptype
+      }
+      callbacks
+      children
     }
-    callbacks
-    children
   }
-}
+`;
+
+const ADD_PROP = gql`
+  mutation AddProp($prop: InputProp) {
+    addProp(prop: $prop) {
+      _id
+      props {
+        name
+        proptype
+      }
+    }
+  }
 `
 
 export { 
@@ -85,4 +98,5 @@ export {
   DELETE_PROJECT,
   TOGGLE_COMPONENT_STYLE,
   EDIT_COMPONENT_NAME,
+  ADD_PROP,
 };
