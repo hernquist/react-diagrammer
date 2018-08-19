@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProjectList from './ProjectList';
+import ProjectList from './Features/ProjectList';
 import { Link } from 'react-router-dom';
 import '../../styles/LeftDashboard.css';
 

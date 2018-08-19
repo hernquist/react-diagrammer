@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import { Mutation } from 'react-apollo';
 import { TOGGLE_COMPONENT_STYLE } from '../../../graphql/mutations';
-import { PROJECTS_BY_USER_ID } from '../../../graphql/queries';
 import '../../../styles/RightDashboard.css';
-
 
 class CurrentComponent extends Component {
   constructor(props) {
@@ -12,18 +10,17 @@ class CurrentComponent extends Component {
 
   updateStyle = async ({ _id }, mutation) => {
     const { data } = await mutation({ variables: { _id } });
-    // this.props.refetchProject();
-    console.log("[mutation executed]", data);
     this.props.updateComponent(data.toggleComponentStyle);
   } 
 
   render() {
-    const { currentProject, history, updateComponent } = this.props;
-    const [name, index] = history.location.pathname.split("/").slice(-2);
-    // const [name, index] = pathname;
-    console.log(name, Number(index));
+    const { currentProject, history } = this.props;
+    const pieces = history.location.pathname.split("/");
+    const name = pieces[3];
+    const index = pieces[4];
+    console.log(name, index);
     console.log(currentProject);
-    console.log(currentProject.components)
+    
     const { components } = currentProject;
     if (!components) {
       return <div>No Components</div>
@@ -80,7 +77,10 @@ class CurrentComponent extends Component {
           )}
         </Mutation>
 
-        <div className="dashboard-button hideable edit-name">
+        <div 
+          className="dashboard-button hideable edit-name"
+          onClick={() => this.props.history.push(this.props.match.url + '/edit-name')}
+        >
           <div className="button-content">EDIT</div>
           <div className="button-content">NAME</div>
         </div>

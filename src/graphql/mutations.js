@@ -55,10 +55,28 @@ mutation ToggleComponentStyle($_id: String!) {
   }
 }`
 
+const EDIT_COMPONENT_NAME = gql`
+mutation EditComponentName($_id: String!, $name: String!) {
+  editComponentName(_id: $_id, name: $name) {
+    _id
+    name
+    projectId
+    style
+    state
+    iteration
+    placement
+    props
+    callbacks
+    children
+  }
+}
+`
+
 export { 
   SIGNUP, 
   LOGIN, 
   CREATE_PROJECT,
   DELETE_PROJECT,
-  TOGGLE_COMPONENT_STYLE 
+  TOGGLE_COMPONENT_STYLE,
+  EDIT_COMPONENT_NAME,
 };
