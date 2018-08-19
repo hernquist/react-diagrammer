@@ -21,7 +21,7 @@ class CreateProject extends Component {
     const { data } = await CreateProject({ variables: { name, description, userId } });
     console.log(data.createProject);
     this.props.setCurrentProject(data.createProject);
-    // this.props.refetchProjects();
+    // this.props.refetchProject();
     this.props.history.push('/main/component/index/0');
   };
   

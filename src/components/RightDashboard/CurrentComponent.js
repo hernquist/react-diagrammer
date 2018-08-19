@@ -64,7 +64,8 @@ class CurrentComponent extends Component {
               // data: { projects: { components: components.concat([toggleComponentStyle]) } }
             // });
           // }}
-          refetchQueries={ PROJECTS_BY_USER_ID }
+
+          // refetchQueries={ PROJECTS_BY_USER_ID }
         >
           {ToggleComponentStyle => (
             <div 

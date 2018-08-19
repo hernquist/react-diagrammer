@@ -98,6 +98,7 @@ class LoggedIn extends Component {
                         currentProject={currentProject || findLatest(projects)}
                         projects={projects}
                         setCurrentProject={this.setCurrentProject}
+                        
                       />
                     </div>
                   </div>
