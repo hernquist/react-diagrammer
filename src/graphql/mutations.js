@@ -5,6 +5,7 @@ const SIGNUP = gql`
     signup(email: $email, name: $name, password: $password)
   }
 `;
+
 const LOGIN = gql`
   mutation Login($email: String, $password: String) {
     login(email: $email, password: $password)

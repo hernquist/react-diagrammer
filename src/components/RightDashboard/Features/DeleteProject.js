@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
-import { DELETE_PROJECT } from '../../graphql/mutations';
+import { DELETE_PROJECT } from '../../../graphql/mutations';
 // import '../../styles/DeleteProject.css';
 
 

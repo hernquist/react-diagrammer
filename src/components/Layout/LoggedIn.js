@@ -20,7 +20,16 @@ class LoggedIn extends Component {
 
   switchLayout = layout => this.setState({ layout });
   
-  setCurrentProject = currentProject => this.setState({ currentProject }); 
+  setCurrentProject = currentProject => this.setState({ currentProject });
+  
+  updateComponent = updated => {
+    console.log('from logged in:', updated);
+    let project = this.state.currentProject;
+    let components = this.state.currentProject.components;
+    const updatedComponents = components.map(component => component._id === updated._id ? updated : component)
+    let newProject = Object.assign({}, project, { components: updatedComponents});
+    this.setState({ currentProject: newProject })
+  }
 
   render() {
     const { layout, errors, currentProject } = this.state;
@@ -64,42 +73,45 @@ class LoggedIn extends Component {
                 // I also tried passing refetch down to RightDashboard and 
                 // then createProject, calling it upon submission of creating
                 // a new project, but it caused a hiccup on the screen
-                refetch();
+                // refetch();
                 const projects = data.projectsByUserId;
 
-                return <div className={layout}>
-                  <div className="header">
-                    <HeaderContainer />
+                return (
+                  <div className={layout}>
+                    <div className="header">
+                      <HeaderContainer />
+                    </div>
+                    <div className="left-dashboard">
+                      <LeftDashboard 
+                        {...this.props}
+                        switchLayout={this.switchLayout} 
+                        setCurrentProject={this.setCurrentProject} 
+                        layout={layout}
+                        user={user}
+                        projects={projects}
+                        currentProject={currentProject || findLatest(projects)}
+                        needsSetting={!currentProject}
+                      />
+                    </div>
+                    <div className="diagram">
+                      <DiagramMain 
+                        {...this.props}
+                        currentProject={currentProject} 
+                      />
+                    </div>
+                    <div className="right-dashboard" style={fullScreen}>
+                      <RightDashoard 
+                        {...this.props}
+                        refetchProject={refetch}
+                        user={user}
+                        currentProject={currentProject || findLatest(projects)}
+                        projects={projects}
+                        setCurrentProject={this.setCurrentProject}
+                        updateComponent={this.updateComponent}
+                      />
+                    </div>
                   </div>
-                  <div className="left-dashboard">
-                    <LeftDashboard 
-                      {...this.props}
-                      switchLayout={this.switchLayout} 
-                      setCurrentProject={this.setCurrentProject} 
-                      layout={layout}
-                      user={user}
-                      projects={projects}
-                      currentProject={currentProject || findLatest(projects)}
-                      needsSetting={!currentProject}
-                    />
-                  </div>
-                  <div className="diagram">
-                    <DiagramMain 
-                      {...this.props}
-                      currentProject={currentProject} 
-                    />
-                  </div>
-                  <div className="right-dashboard" style={fullScreen}>
-                    <RightDashoard 
-                      {...this.props}
-                      refetchProjects={refetch}
-                      user={user}
-                      currentProject={currentProject || findLatest(projects)}
-                      projects={projects}
-                      setCurrentProject={this.setCurrentProject}
-                    />
-                  </div>
-                </div>
+                )
               }}
             </Query>
           )

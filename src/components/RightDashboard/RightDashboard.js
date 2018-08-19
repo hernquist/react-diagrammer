@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import CreateProject from './CreateProject';
-import DeleteProject from './DeleteProject';
-import CurrentComponent from './CurrentComponent';
+import CreateProject from './Features/CreateProject';
+import DeleteProject from './Features/DeleteProject';
+import CurrentComponent from './Features/CurrentComponent';
 
 class RightDashboard extends Component {
   render() {
     const { 
       user, 
-      refetchProjects, 
+      refetchProject, 
       currentProject, 
       setCurrentProject, 
       projects = [],
-      component = "default"
+      component = "default",
+      updateComponent,
     } = this.props;
 
     return (
@@ -22,7 +23,7 @@ class RightDashboard extends Component {
           render={ renderProps => <CreateProject 
             {...renderProps} 
             user={user}
-            refetchProjects={refetchProjects}
+            refetchProject={refetchProject}
             setCurrentProject={setCurrentProject}
           /> }
         />
@@ -41,7 +42,10 @@ class RightDashboard extends Component {
           render={renderProps => <CurrentComponent
             {...renderProps}
             user={user}
+            setCurrentProject={setCurrentProject}
             currentProject={currentProject}
+            refetchProject={refetchProject}
+            updateComponent={updateComponent}
           />}
         />
       </div>

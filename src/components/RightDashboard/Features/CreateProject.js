@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import { CREATE_PROJECT } from '../../graphql/mutations';
-import '../../styles/CreateProject.css';
+import { CREATE_PROJECT } from '../../../graphql/mutations';
+import '../../../styles/CreateProject.css';
 
 
 class CreateProject extends Component {
@@ -21,7 +21,7 @@ class CreateProject extends Component {
     const { data } = await CreateProject({ variables: { name, description, userId } });
     console.log(data.createProject);
     this.props.setCurrentProject(data.createProject);
-    // this.props.refetchProjects();
+    // this.props.refetchProject();
     this.props.history.push('/main/component/index/0');
   };
   
