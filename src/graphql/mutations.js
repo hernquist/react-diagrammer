@@ -49,7 +49,10 @@ mutation ToggleComponentStyle($_id: String!) {
     state
     iteration
     placement
-    props
+    props {
+      name
+      proptype
+    }
     callbacks
     children
   }
@@ -65,7 +68,10 @@ mutation EditComponentName($_id: String!, $name: String!) {
     state
     iteration
     placement
-    props
+    props {
+      name
+      proptype
+    }
     callbacks
     children
   }

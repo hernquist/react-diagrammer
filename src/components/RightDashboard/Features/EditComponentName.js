@@ -12,7 +12,7 @@ class EditComponentName extends Component {
   updateName = async ({ _id }, mutation) => {
     const { data } = await mutation({ variables: { _id, name: this.state.name } });
     this.props.updateComponent(data.editComponentName);
-    const parts = this.props.history.location.pathname.split("/");
+    const parts = this.props.history.location.pathname.split("/").slice(0, 5);
     parts[3] = data.editComponentName.name;
     this.props.history.push(parts.join("/"));
   }
