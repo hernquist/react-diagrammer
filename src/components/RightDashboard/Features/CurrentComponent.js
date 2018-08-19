@@ -18,8 +18,6 @@ class CurrentComponent extends Component {
     const pieces = history.location.pathname.split("/");
     const name = pieces[3];
     const index = pieces[4];
-    console.log(name, index);
-    console.log(currentProject);
     
     const { components } = currentProject;
     if (!components) {
@@ -29,7 +27,6 @@ class CurrentComponent extends Component {
     const currentComponent = components
     .filter(c => c.name === name)
     .filter(c => c.iteration === Number(index))[0]
-    console.log(currentComponent);  
     
     return (
       <div className="right-dashboard-container">

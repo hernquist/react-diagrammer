@@ -23,7 +23,6 @@ class HeaderContainer extends Component {
                         errors[0] = `Error! ${error.message}`
                         data = {};
                     };
-                    // console.log("[Header]", data.getAuthUser);
                     if (!data.getAuthUser) {
                         return <Header 
                             user={data}
