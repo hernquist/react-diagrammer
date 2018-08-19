@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import { Mutation } from 'react-apollo';
 import { TOGGLE_COMPONENT_STYLE } from '../../../graphql/mutations';
-import { PROJECTS_BY_USER_ID } from '../../../graphql/queries';
 import '../../../styles/RightDashboard.css';
-
 
 class CurrentComponent extends Component {
   constructor(props) {
@@ -12,28 +10,24 @@ class CurrentComponent extends Component {
 
   updateStyle = async ({ _id }, mutation) => {
     const { data } = await mutation({ variables: { _id } });
-    // this.props.refetchProject();
-    console.log("[mutation executed]", data);
     this.props.updateComponent(data.toggleComponentStyle);
   } 
 
   render() {
-    const { currentProject, history, updateComponent } = this.props;
-    const [name, index] = history.location.pathname.split("/").slice(-2);
-    // const [name, index] = pathname;
-    console.log(name, Number(index));
-    console.log(currentProject);
-    console.log(currentProject.components)
+    const { currentProject, history } = this.props;
+    const pieces = history.location.pathname.split("/");
+    const name = pieces[3];
+    const index = pieces[4];
+    
     const { components } = currentProject;
     if (!components) {
       return <div>No Components</div>
     }
-
+    
     const currentComponent = components
-      .filter(c => c.name === name)
-      .filter(c => c.iteration === Number(index))[0]
-    console.log(currentComponent);  
-
+    .filter(c => c.name === name)
+    .filter(c => c.iteration === Number(index))[0]
+    
     return (
       <div className="right-dashboard-container">
         <div className="current-component-title">
@@ -45,7 +39,10 @@ class CurrentComponent extends Component {
           <div className="button-content">UPDATE</div>
           <div className="button-content">STATE</div>
         </div>
-        <div className="dashboard-button hideable update-props">
+        <div 
+          className="dashboard-button hideable update-props"
+          onClick={() => this.props.history.push(this.props.match.url + '/update-props')}
+        >
           <div className="button-content">UPDATE</div>
           <div className="button-content">INCOMING</div>
           <div className="button-content">PROPS</div>
@@ -80,7 +77,10 @@ class CurrentComponent extends Component {
           )}
         </Mutation>
 
-        <div className="dashboard-button hideable edit-name">
+        <div 
+          className="dashboard-button hideable edit-name"
+          onClick={() => this.props.history.push(this.props.match.url + '/edit-name')}
+        >
           <div className="button-content">EDIT</div>
           <div className="button-content">NAME</div>
         </div>

@@ -23,7 +23,6 @@ class LoggedIn extends Component {
   setCurrentProject = currentProject => this.setState({ currentProject });
   
   updateComponent = updated => {
-    console.log('from logged in:', updated);
     let project = this.state.currentProject;
     let components = this.state.currentProject.components;
     const updatedComponents = components.map(component => component._id === updated._id ? updated : component)
@@ -55,7 +54,6 @@ class LoggedIn extends Component {
             return <div>{errors[0]}</div>
           };
           const user = data.getAuthUser;
-          console.log('[Query GET_AUTH_USER]', user);
           const userId = user._id;
 
           return (
