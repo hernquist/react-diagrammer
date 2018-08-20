@@ -35,9 +35,7 @@ class EditComponentName extends Component {
       .filter(c => c.iteration === Number(index))[0]
 
     return (
-      <Mutation
-        mutation={EDIT_COMPONENT_NAME}
-      >
+      <Mutation mutation={EDIT_COMPONENT_NAME}>
         {EditComponentName => (
           <div>
             Edit name
@@ -51,7 +49,6 @@ class EditComponentName extends Component {
               NO
             </button>
           </div>
-
         )} 
       </Mutation>
     );

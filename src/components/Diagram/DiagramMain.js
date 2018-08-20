@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Query } from "react-apollo";
 import auth from "../HOC/auth"
-import { GET_AUTH_USER } from '../../graphql/queries';
 import '../../styles/DiagramMain.css'
 
 const DisplayComponent = ({ component }) => {
