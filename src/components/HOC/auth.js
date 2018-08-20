@@ -7,7 +7,6 @@ export default WrappedComponent => {
     
     componentWillUpdate(nextProps) {
       if (!nextProps.data.loading && !nextProps.data.getAuthUser) {
-        console.log(nextProps.data.getAuthUser)
         this.props.history.push("/login");
       }
     }
