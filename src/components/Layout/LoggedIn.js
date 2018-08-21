@@ -23,11 +23,11 @@ class LoggedIn extends Component {
   setCurrentProject = currentProject => this.setState({ currentProject });
   
   updateComponent = updated => {
-    let project = this.state.currentProject;
-    let components = this.state.currentProject.components;
+    const project = this.state.currentProject;
+    const components = this.state.currentProject.components;
     const updatedComponents = components.map(component => component._id === updated._id ? updated : component)
-    let newProject = Object.assign({}, project, { components: updatedComponents});
-    this.setState({ currentProject: newProject })
+    const currentProject = Object.assign({}, project, { components: updatedComponents});
+    this.setState({ currentProject })
   }
 
   render() {

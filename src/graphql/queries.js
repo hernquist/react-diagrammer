@@ -29,6 +29,7 @@ query ProjectsByUserId($userId: String!) {
       children
       state
       props {
+        _id
         name
         proptype
       }

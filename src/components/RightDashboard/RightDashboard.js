@@ -14,7 +14,6 @@ class RightDashboard extends Component {
       currentProject, 
       setCurrentProject, 
       projects = [],
-      component = "default",
       updateComponent,
     } = this.props;
 
