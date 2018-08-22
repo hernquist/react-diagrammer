@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import { DELETE_PROP, EDIT_PROP } from '../../../../graphql/mutations';
+import { 
+  DELETE_PROP, 
+  EDIT_PROP,
+  DELETE_STATE,
+  EDIT_STATE
+} from '../../../../graphql/mutations';
 
 class EditField extends Component {
   constructor(props) {
@@ -12,24 +17,42 @@ class EditField extends Component {
     this.setState({ field: {...this.state.field, [key]: e.target.value} });
   }
 
-  updateField = async (_id, editProp) => {
-    const { name, proptype, statetype } = this.state.field;
+  updateWithProps = (id, currentComponent, data) => {
+    const props = currentComponent.props.map(prop => id === prop._id ? data.editProp : prop);
+    return Object.assign({}, currentComponent, { props });
+  }
 
-    const { data } = await editProp({ variables: { _id, name, proptype } });
-    const { currentComponent } = this.props;
-    console.log('dataEdit', data.editProp);
-    const props = currentComponent.props.map(prop => _id === prop._id ? data.editProp : prop);
-    const updatedComponent = Object.assign({}, currentComponent, { props });
+  updateWithState = (id, currentComponent, data) => {
+    const state = currentComponent.state.map(s => id === s._id ? data.editState : s);
+    return Object.assign({}, currentComponent, { state });
+  }
+
+  updateField = async (_id, mutation) => {
+    const { name, proptype, statetype } = this.state.field;
+    const { type, currentComponent } = this.props;
+    console.log (name, proptype, statetype);
+    const { data } = type === 'state' ? 
+      await mutation({ variables: { _id, name, statetype }})
+      : await mutation({ variables: { _id, name, proptype } });
+    const updatedComponent = type === 'state' ? 
+      await this.updateWithState(_id, currentComponent, data) 
+      : await this.updateWithProps(_id, currentComponent, data)
+    
     this.props.updateComponent(updatedComponent);
     this.props.reset();
   }
 
-  deleteField = async (_id, deleteProp) => {
-    const { data } = await deleteProp({ variables: { _id } });
-    if (data.deleteProp) {
-      const { currentComponent } = this.props;
-      const props = currentComponent.props.filter(prop => _id !== prop._id);
-      const updatedComponent = Object.assign({}, currentComponent, { props });
+  deleteField = async (_id, mutation) => {
+    const { data } = await mutation({ variables: { _id } });
+    if (data.deleteProp || data.deleteState) {
+      const { currentComponent, type } = this.props;
+      if (type === 'state') {
+        const state = currentComponent.state.filter(s => _id !== s._id);
+        var updatedComponent = Object.assign({}, currentComponent, { state });
+      } else if (type === 'props') {
+        const props = currentComponent.props.filter(prop => _id !== prop._id);
+        var updatedComponent = Object.assign({}, currentComponent, { props });
+      }
       this.props.updateComponent(updatedComponent);
       this.props.reset();
     } else {
@@ -41,13 +64,15 @@ class EditField extends Component {
     const { field } = this.state;
     const { type } = this.props;
     const { _id } = field;
-    const fieldtype = type === 'state' ? 'statetype' : 'proptype'; 
+    const fieldtype = type === 'state' ? 'statetype' : 'proptype';
+    const EDIT = type === 'state' ? EDIT_STATE : EDIT_PROP; 
+    const DELETE = type === 'state' ? DELETE_STATE : DELETE_PROP; 
 
     return (
-      <Mutation mutation={EDIT_PROP}>
-        {EditProp => (
-          <Mutation mutation={DELETE_PROP}>
-            {DeleteProp => (
+      <Mutation mutation={EDIT}>
+        {Edit => (
+          <Mutation mutation={DELETE}>
+            {Delete => (
               <div style={{ padding: "20px 4px 0 4px"}}>
                 {`${field.name}: ${field[fieldtype]}`}
                 <input onChange={e => this.handleChange(e, 'name')} value={field.name}/>
@@ -61,8 +86,8 @@ class EditField extends Component {
                   <option value="array">array</option>
                   <option value="object">object</option>
                 </select>
-                <button onClick={() => this.updateField(_id, EditProp)}>UPDATE {type}</button>
-                <button onClick={() => this.deleteField(_id, DeleteProp)}>DELETE {type}</button>
+                <button onClick={() => this.updateField(_id, Edit)}>UPDATE {type}</button>
+                <button onClick={() => this.deleteField(_id, Delete)}>DELETE {type}</button>
               </div>
             )}  
           </Mutation>

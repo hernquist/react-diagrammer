@@ -27,7 +27,12 @@ query ProjectsByUserId($userId: String!) {
       style
       placement
       children
-      state
+      state {
+        _id
+        name
+        statetype
+        componentId
+      }
       props {
         _id
         name

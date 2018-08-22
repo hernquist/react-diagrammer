@@ -11,11 +11,12 @@ class DisplayFields extends Component {
     } = this.props;
     
     const fields = type === "state" ? currentComponent.state : currentComponent.props;
-    const fieldtype = type === 'state' ? 'statetype' : 'proptype'; 
+    const fieldtype = type === 'state' ? 'statetype' : 'proptype';
+    const header = type === 'state' ? 'state fields' : 'props'; 
 
     return (
       <div>
-        <h3>Existing props</h3>
+        <h3>Existing { header }</h3>
 
         {fields.map((field, index) => (
           <div 

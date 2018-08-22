@@ -95,35 +95,36 @@ const EDIT_PROP = gql`
   }
 `;
 
-// const ADD_PROP = gql`
-//   mutation AddProp($prop: InputProp) {
-//     addProp(prop: $prop) {
-//       _id
-//       props {
-//         _id
-//         name
-//         proptype
-//       }
-//     }
-//   }
-// `;
+const ADD_STATE = gql`
+  mutation AddState($state: InputState) {
+    addState(state: $state) {
+      _id
+      state{
+        _id
+        componentId
+        name
+        statetype
+      }
+    }
+  }
+`;
 
-// const DELETE_PROP = gql`
-//   mutation DeleteProp($_id: String!) {
-//     deleteProp(_id: $_id)
-//   }
-// `;
+const DELETE_STATE = gql`
+  mutation DeleteState($_id: String!) {
+    deleteState(_id: $_id)
+  }
+`;
 
-// const EDIT_PROP = gql`
-//   mutation EditProp($_id: String, $name: String, $proptype: PropType) {
-//     editProp(_id: $_id, name: $name, proptype: $proptype) {
-//       _id
-//       name
-//       proptype
-//       componentId
-//     }
-//   }
-// `;
+const EDIT_STATE = gql`
+  mutation EditState($_id: String, $name: String, $statetype: StateType) {
+    editState(_id: $_id, name: $name, statetype: $statetype) {
+      _id
+      name
+      statetype
+      componentId
+    }
+  }
+`;
 
 export { 
   SIGNUP, 
@@ -133,5 +134,8 @@ export {
   EDIT_COMPONENT_NAME,
   ADD_PROP,
   DELETE_PROP,
-  EDIT_PROP
+  EDIT_PROP,
+  ADD_STATE,
+  DELETE_STATE,
+  EDIT_STATE
 };

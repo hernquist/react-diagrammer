@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import { ADD_PROP } from '../../../graphql/mutations';
+import { ADD_PROP, ADD_STATE } from '../../../graphql/mutations';
 import DisplayFields from './Workings/DisplayFields';
 import EditField from './Workings/EditField';
 
@@ -19,9 +19,7 @@ class UpdateComponentWorkings extends Component {
 
   displayAddField = () => this.setState({ showAddField: true });
 
-  discardField = () => {
-    this.setState({ ...this.initialState});
-  }
+  discardField = () => this.setState({ ...this.initialState});
 
   mutationProp = async (currentComponent, mutation) => {
     const componentId = currentComponent._id;
@@ -43,7 +41,6 @@ class UpdateComponentWorkings extends Component {
       statetype: this.state.value2
     };
     const { data } = await mutation({ variables: { state } });
-    // make sure addState is compaarable to addProp
     const stateObjects = data.addState.state.map(stateItem => ({ ...stateItem, componentId }));
     return Object.assign({}, currentComponent, { state: stateObjects });
   }
@@ -87,6 +84,8 @@ class UpdateComponentWorkings extends Component {
       onHover
     } = this.state;
 
+    const MUTATION = type === 'state' ? ADD_STATE : ADD_PROP; 
+
     return (
       <div>
         <DisplayFields 
@@ -100,8 +99,8 @@ class UpdateComponentWorkings extends Component {
 
         {!showAddField && <button onClick={this.displayAddField}>ADD A NEW {type}</button>}
         {showAddField &&
-          <Mutation mutation={ADD_PROP}>
-            {AddProp => (
+          <Mutation mutation={MUTATION}>
+            {AddField => (
               <div>
                 <label> 
                   {type} NAME 
@@ -117,7 +116,7 @@ class UpdateComponentWorkings extends Component {
                     <option value="object">object</option>
                   </select>
                 </label>
-                <button onClick={() => this.saveField(currentComponent, AddProp)}>ADD {type}</button>  
+                <button onClick={() => this.saveField(currentComponent, AddField)}>ADD {type}</button>  
                 <button onClick={this.discardField}>DISCARD {type}</button>  
               </div>
             )}
