@@ -95,6 +95,36 @@ const EDIT_PROP = gql`
   }
 `;
 
+// const ADD_PROP = gql`
+//   mutation AddProp($prop: InputProp) {
+//     addProp(prop: $prop) {
+//       _id
+//       props {
+//         _id
+//         name
+//         proptype
+//       }
+//     }
+//   }
+// `;
+
+// const DELETE_PROP = gql`
+//   mutation DeleteProp($_id: String!) {
+//     deleteProp(_id: $_id)
+//   }
+// `;
+
+// const EDIT_PROP = gql`
+//   mutation EditProp($_id: String, $name: String, $proptype: PropType) {
+//     editProp(_id: $_id, name: $name, proptype: $proptype) {
+//       _id
+//       name
+//       proptype
+//       componentId
+//     }
+//   }
+// `;
+
 export { 
   SIGNUP, 
   LOGIN, 

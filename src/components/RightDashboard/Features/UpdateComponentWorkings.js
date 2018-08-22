@@ -24,34 +24,35 @@ class UpdateComponentWorkings extends Component {
   }
 
   mutationProp = async (currentComponent, mutation) => {
+    const componentId = currentComponent._id;
     const prop = {
       componentId,
       name: this.state.value1,
       proptype: this.state.value2
     };
-    const componentId = currentComponent._id;
     const { data } = await mutation({ variables: { prop } });
     const props = data.addProp.props.map(prop => ({ ...prop, componentId }));
     return Object.assign({}, currentComponent, { props });
   }
 
   mutationState = async (currentComponent, mutation) => {
+    const componentId = currentComponent._id;
     const state = {
       componentId,
       name: this.state.value1,
       statetype: this.state.value2
     };
-    const componentId = currentComponent._id;
     const { data } = await mutation({ variables: { state } });
     // make sure addState is compaarable to addProp
     const stateObjects = data.addState.state.map(stateItem => ({ ...stateItem, componentId }));
     return Object.assign({}, currentComponent, { state: stateObjects });
   }
 
-  saveField = (currentComponent, mutation) => {
+  saveField = async (currentComponent, mutation) => {
     const updatedComponent = this.props.type === 'state' ? 
-      this.mutationState(currentComponent, mutation) : 
-      this.mutationProp(currentComponent, mutation);
+      await this.mutationState(currentComponent, mutation) : 
+      await this.mutationProp(currentComponent, mutation);
+    console.log(updatedComponent);
     this.props.updateComponent(updatedComponent)
     this.discardField();
   }

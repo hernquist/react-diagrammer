@@ -13,7 +13,7 @@ class EditField extends Component {
   }
 
   updateField = async (_id, editProp) => {
-    const { name, proptype, statetype } = this.state;
+    const { name, proptype, statetype } = this.state.field;
 
     const { data } = await editProp({ variables: { _id, name, proptype } });
     const { currentComponent } = this.props;
@@ -52,8 +52,9 @@ class EditField extends Component {
                 {`${field.name}: ${field[fieldtype]}`}
                 <input onChange={e => this.handleChange(e, 'name')} value={field.name}/>
                 <select 
-                  onChange={e => this.handleChange(e, field[fieldtype])} 
-                  value={field[fieldtype]}>
+                  onChange={e => this.handleChange(e, fieldtype)} 
+                  value={field[fieldtype]}
+                >
                   <option value="boolean">boolean</option>
                   <option value="number">number</option>
                   <option value="string">string</option>
