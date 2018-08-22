@@ -32,12 +32,19 @@ const TOGGLE_COMPONENT_STYLE = gql`
       name
       projectId
       style
-      state
+      state {
+        _id
+        name
+        statetype
+        componentId
+      }
       iteration
       placement
       props {
+        _id
         name
         proptype
+        componentId
       }
       callbacks
       children
@@ -52,12 +59,19 @@ const EDIT_COMPONENT_NAME = gql`
       name
       projectId
       style
-      state
+      state {
+        _id
+        name
+        statetype
+        componentId
+      }
       iteration
       placement
       props {
+        _id
         name
         proptype
+        componentId
       }
       callbacks
       children
@@ -95,6 +109,37 @@ const EDIT_PROP = gql`
   }
 `;
 
+const ADD_STATE = gql`
+  mutation AddState($state: InputState) {
+    addState(state: $state) {
+      _id
+      state{
+        _id
+        componentId
+        name
+        statetype
+      }
+    }
+  }
+`;
+
+const DELETE_STATE = gql`
+  mutation DeleteState($_id: String!) {
+    deleteState(_id: $_id)
+  }
+`;
+
+const EDIT_STATE = gql`
+  mutation EditState($_id: String, $name: String, $statetype: StateType) {
+    editState(_id: $_id, name: $name, statetype: $statetype) {
+      _id
+      name
+      statetype
+      componentId
+    }
+  }
+`;
+
 export { 
   SIGNUP, 
   LOGIN, 
@@ -103,5 +148,8 @@ export {
   EDIT_COMPONENT_NAME,
   ADD_PROP,
   DELETE_PROP,
-  EDIT_PROP
+  EDIT_PROP,
+  ADD_STATE,
+  DELETE_STATE,
+  EDIT_STATE
 };
