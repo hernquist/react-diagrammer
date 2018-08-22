@@ -32,12 +32,19 @@ const TOGGLE_COMPONENT_STYLE = gql`
       name
       projectId
       style
-      state
+      state {
+        _id
+        name
+        statetype
+        componentId
+      }
       iteration
       placement
       props {
+        _id
         name
         proptype
+        componentId
       }
       callbacks
       children
@@ -52,12 +59,19 @@ const EDIT_COMPONENT_NAME = gql`
       name
       projectId
       style
-      state
+      state {
+        _id
+        name
+        statetype
+        componentId
+      }
       iteration
       placement
       props {
+        _id
         name
         proptype
+        componentId
       }
       callbacks
       children
