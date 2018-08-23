@@ -86,8 +86,18 @@ class EditField extends Component {
                   <option value="array">array</option>
                   <option value="object">object</option>
                 </select>
-                <button onClick={() => this.updateField(_id, Edit)}>UPDATE {type}</button>
-                <button onClick={() => this.deleteField(_id, Delete)}>DELETE {type}</button>
+                <button
+                  className="dashboard-button"
+                  onClick={() => this.updateField(_id, Edit)}
+                >
+                  UPDATE {type}
+                </button>
+                <button
+                  className="dashboard-button"
+                  onClick={() => this.deleteField(_id, Delete)}
+                >
+                  DELETE {type}
+                </button>
               </div>
             )}  
           </Mutation>

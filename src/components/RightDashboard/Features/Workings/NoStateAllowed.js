@@ -5,7 +5,12 @@ class NoStateAllowed extends Component {
     return (
       <div>
         NO STATE ALLOWED
-        <button onClick={this.props.exit}>DONE</button>
+        <button
+          className="dashboard-button"
+          onClick={this.props.exit}
+        >
+          DONE
+        </button>
       </div>
     );
   }

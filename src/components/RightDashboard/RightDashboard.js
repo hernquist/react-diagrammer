@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import CreateProject from './Features/CreateProject';
 import DeleteProject from './Features/DeleteProject';
 import CurrentComponent from './Features/CurrentComponent';
-import UpdateComponentProps from './Features/UpdateComponentProps';
 import UpdateComponentWorkings from './Features/UpdateComponentWorkings';
 import EditComponentName from './Features/EditComponentName';
 

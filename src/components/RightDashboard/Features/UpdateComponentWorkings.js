@@ -82,7 +82,12 @@ class UpdateComponentWorkings extends Component {
             value1={value1}
             value2={value2}
           /> : 
-          <button onClick={this.displayAddField}>ADD A NEW {type}</button>
+          <button 
+            className="dashboard-button"
+            onClick={this.displayAddField}
+          >
+            ADD A NEW {type}
+          </button>
         }
         
         {highlighted && (
@@ -95,8 +100,12 @@ class UpdateComponentWorkings extends Component {
             type={type}
           />
         )} 
-
-        <button onClick={this.exitComponent}>DONE</button>
+        <button
+          className="dashboard-button"
+          onClick={this.exitComponent}
+        >
+          DONE
+        </button>
 
       </div>
     );

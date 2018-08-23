@@ -59,8 +59,18 @@ class AddField extends Component {
                 <option value="object">object</option>
               </select>
             </label>
-            <button onClick={() => this.saveField(currentComponent, AddField)}>ADD {type}</button>
-            <button onClick={discardField}>DISCARD {type}</button>
+            <button
+              className="dashboard-button" 
+              onClick={() => this.saveField(currentComponent, AddField)}
+            >
+              ADD {type}
+            </button>
+            <button 
+              className="dashboard-button"
+              onClick={discardField}
+            >
+              DISCARD {type}
+            </button>
           </div>
         )}
       </Mutation>
