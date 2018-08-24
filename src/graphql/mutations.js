@@ -140,6 +140,61 @@ const EDIT_STATE = gql`
   }
 `;
 
+const ADD_CALLBACK = gql`
+  mutation AddCallback($callback: InputCallback) {
+    addCallback (callback: $callback) {
+      _id
+      componentId
+      name
+      setState {
+        stateField
+        stateChange
+      }
+      functionArgs {
+        name
+        typeName
+      }
+      description
+    }
+  }
+`;
+
+const DELETE_CALLBACK = gql`
+  mutation DeleteCallback ($_id: String!) {
+    deleteCallback(_id: $_id)
+  }
+`;
+
+const EDIT_CALLBACK = gql`
+  mutation EditCallback(
+    $_id: String!,
+    $name: String,
+    $functionArgs: [InputArgument], 
+    $setState: [InputSetStateParams],
+    $description: String
+  ) {
+    editCallback(
+      _id: $_id,
+      name: $name,
+      functionArgs: $functionArgs,
+      setState: $setState,
+      description: $description
+    ) {
+      _id
+      name
+      description
+      setState{
+        stateField
+        stateChange
+      }
+      functionArgs {
+        name
+        typeName
+      }
+    }
+  }
+`;
+
 export { 
   SIGNUP, 
   LOGIN, 
@@ -151,5 +206,8 @@ export {
   EDIT_PROP,
   ADD_STATE,
   DELETE_STATE,
-  EDIT_STATE
+  EDIT_STATE,
+  ADD_CALLBACK,
+  DELETE_CALLBACK,
+  EDIT_CALLBACK
 };

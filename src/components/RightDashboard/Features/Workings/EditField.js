@@ -30,7 +30,6 @@ class EditField extends Component {
   updateField = async (_id, mutation) => {
     const { name, proptype, statetype } = this.state.field;
     const { type, currentComponent } = this.props;
-    console.log (name, proptype, statetype);
     const { data } = type === 'state' ? 
       await mutation({ variables: { _id, name, statetype }})
       : await mutation({ variables: { _id, name, proptype } });

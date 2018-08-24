@@ -44,7 +44,48 @@ query ProjectsByUserId($userId: String!) {
 }
 `;
 
+const FETCH_STATE = gql`
+  query StateByComponentId($id: String!) {
+    stateByComponentId(componentId: $id){
+      _id
+      name
+      statetype
+    }
+  }
+`
+
+const FETCH_PROPS = gql`
+  query PropsByComponentId($id: String!) {
+    propsByComponentId(componentId: $id){
+      _id
+      name
+      proptype
+    }
+  }
+`;
+
+const FETCH_CALLBACKS = gql`
+  query CallbacksByComponentId($id: String!) {
+    callbacksByComponentId(componentId: $id){
+      _id
+      name
+      setState{
+        stateField
+        stateChange
+      }
+      functionArgs{
+        name
+        typeName
+      }
+      description
+    }
+  }
+`;
+
 export { 
   GET_AUTH_USER,
-  PROJECTS_BY_USER_ID
+  PROJECTS_BY_USER_ID,
+  FETCH_STATE,
+  FETCH_PROPS,
+  FETCH_CALLBACKS
 };
