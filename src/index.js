@@ -11,7 +11,6 @@ import NotLoggedIn from "./components/Layout/NotLoggedIn";
 import LoggedIn from "./components/Layout/LoggedIn";
 import "./styles/index.css";
 
-
 const httpLink = createHttpLink({
   uri: "http://localhost:3001/graphql"
 });
