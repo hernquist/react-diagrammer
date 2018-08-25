@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import auth from "../HOC/auth"
 import '../../styles/DiagramMain.css'
+import ShowUnassigned from './ShowUnassigned';
+import helper from '../../Helper/helper';
 
 const DisplayComponent = ({ component }) => {
   const stateOutput = component.style === 'presentational' ?
@@ -35,14 +37,20 @@ class DiagramMain extends Component {
     const { components } = currentProject
     
     const tree = [...Array(8)].map(_ => []);
-    const root = components.filter(component => component.placement === 'root');
-    tree[0] = root;
+
+    const childs = helper.child(components);
+    console.log(childs);
+    // const unassigned = components.filter(component => component.placement === 'unassigned');
+    tree[0] = helper.root(components);
      
     console.log('[DiagramMain] tree', tree); 
 
     return (
-      <div className="diagram-main-container">
-        {tree.map((row, i) => <TreeRow row={row} key={i}/> )}
+      <div>
+        <ShowUnassigned unassigned={helper.unassigned(components)}/>
+        <div className="diagram-main-container">
+          {tree.map((row, i) => <TreeRow row={row} key={i}/> )}
+        </div>
       </div>
     )
   }
