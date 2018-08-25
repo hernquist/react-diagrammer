@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import { Mutation } from 'react-apollo';
 import { TOGGLE_COMPONENT_STYLE } from '../../../graphql/mutations';
+import helper from '../../../Helper/helper';
 import '../../../styles/RightDashboard.css';
 
 class CurrentComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   updateStyle = async ({ _id }, mutation) => {
     const { data } = await mutation({ variables: { _id } });
     this.props.updateComponent(data.toggleComponentStyle);
@@ -24,9 +21,7 @@ class CurrentComponent extends Component {
       return <div>No Components</div>
     }
     
-    const currentComponent = components
-    .filter(c => c.name === name)
-    .filter(c => c.iteration === Number(index))[0]
+    const currentComponent = helper.currComp(components, name, index);
     
     return (
       <div className="right-dashboard-container">
@@ -54,20 +49,7 @@ class CurrentComponent extends Component {
           <div className="button-content">UPDATE</div>
           <div className="button-content">CALLBACKS</div>
         </div>
-
-        <Mutation 
-          mutation={TOGGLE_COMPONENT_STYLE}
-          // update={(cache, { data: { toggleComponentStyle } }) => {
-            // const { projects } = cache.readQuery({ query: PROJECTS_BY_USER_ID, data: { userId: this.props.user._id} });
-            // const { components} = projects;
-            // cache.writeQuery({
-              // query: PROJECTS_BY_USER_ID,
-              // data: { projects: { components: components.concat([toggleComponentStyle]) } }
-            // });
-          // }}
-
-          // refetchQueries={ PROJECTS_BY_USER_ID }
-        >
+        <Mutation mutation={TOGGLE_COMPONENT_STYLE}>
           {ToggleComponentStyle => (
             <div 
               className="dashboard-button hideable component-type"
@@ -79,7 +61,6 @@ class CurrentComponent extends Component {
             </div>
           )}
         </Mutation>
-
         <div 
           className="dashboard-button hideable edit-name"
           onClick={() => this.props.history.push(this.props.match.url + '/edit-name')}

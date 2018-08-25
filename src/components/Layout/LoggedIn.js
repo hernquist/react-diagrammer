@@ -7,14 +7,14 @@ import { Query } from "react-apollo";
 import { GET_AUTH_USER, PROJECTS_BY_USER_ID } from "../../graphql/queries";
 import "../../styles/Layout.css";
 
-
 class LoggedIn extends Component {
   constructor(props){
     super(props);
     this.state = {
       layout: "logged-in",
       currentProject: null,
-      errors: []
+      errors: [],
+      parent: ""
     }
   }
 
@@ -37,10 +37,12 @@ class LoggedIn extends Component {
     const currentProject = Object.assign({}, project, { components: updatedComponents});
     console.log(currentProject);
     this.setState({ currentProject });
-  }  
+  }
+  
+  setParent = id => this.setState({ parent: id });
 
   render() {
-    const { layout, errors, currentProject } = this.state;
+    const { layout, errors, currentProject, parent } = this.state;
     const fullScreen = {
       display: layout === "full-screen" && "none"
     }
@@ -103,8 +105,9 @@ class LoggedIn extends Component {
                     <div className="diagram">
                       <DiagramMain 
                         {...this.props}
+                        parent={parent}
                         currentProject={currentProject} 
-                      />
+                        />
                     </div>
                     <div className="right-dashboard" style={fullScreen}>
                       <RightDashoard 
@@ -116,6 +119,7 @@ class LoggedIn extends Component {
                         setCurrentProject={this.setCurrentProject}
                         updateComponent={this.updateComponent}
                         addComponent={this.addComponent}
+                        setParent={this.setParent}
                       />
                     </div>
                   </div>
