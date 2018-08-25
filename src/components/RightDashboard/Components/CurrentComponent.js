@@ -5,10 +5,6 @@ import helper from '../../../Helper/helper';
 import '../../../styles/RightDashboard.css';
 
 class CurrentComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   updateStyle = async ({ _id }, mutation) => {
     const { data } = await mutation({ variables: { _id } });
     this.props.updateComponent(data.toggleComponentStyle);

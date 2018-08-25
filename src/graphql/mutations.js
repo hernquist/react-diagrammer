@@ -103,6 +103,12 @@ const TOGGLE_COMPONENT_STYLE = gql`
   }
 `;
 
+const ADD_CHILD = gql`
+  mutation AddChild($_id: String!, $childId: String!) {
+    addChild(_id: $_id, childId: $childId) 
+  }
+`;
+
 const EDIT_COMPONENT_NAME = gql`
   mutation EditComponentName($_id: String!, $name: String!) {
     editComponentName(_id: $_id, name: $name) {
@@ -252,6 +258,7 @@ export {
   CREATE_PROJECT,
   CREATE_COMPONENT,
   TOGGLE_COMPONENT_STYLE,
+  ADD_CHILD,
   EDIT_COMPONENT_NAME,
   ADD_PROP,
   DELETE_PROP,

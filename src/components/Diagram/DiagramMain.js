@@ -4,17 +4,18 @@ import '../../styles/DiagramMain.css'
 import ShowUnassigned from './ShowUnassigned';
 import helper from '../../Helper/helper';
 
-const DisplayComponent = ({ component }) => {
+const DisplayComponent = ({ component, parent }) => {
   const stateOutput = component.style === 'presentational' ?
     'n/a' : component.state.length;
-  
+  const border = component.style === 'container' ?
+    '3px solid red' : '3px solid blue';
+  const backgroundColor = parent === component._id ? 
+    'rgba(255, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.1)';
+  const styles = { border, backgroundColor };
+  // console.log(styles, parent, component);
+    
   return (
-    <div 
-      className='component-container'
-      style={component.style === 'container' ? 
-        {'border': '3px solid red'} :
-        {'border': '3px solid blue'} }
-    >
+    <div className='component-container' style={styles}>
       <div className='component-name'>{component.name}</div>
       <div className='component-state'>{`STATE: ${stateOutput}`}</div> 
       <div className='component-props'>{`PROPS: ${component.props.length}`}</div>
@@ -22,17 +23,19 @@ const DisplayComponent = ({ component }) => {
   )
 }
 
-const TreeRow = ({ row }) => {
+const TreeRow = ({ row, parent }) => {
   return (
     <div className='row'>
-      {row.map(component => <DisplayComponent component={component} key={component._id}/> )}
+      {row.map(component => (
+        <DisplayComponent component={component} key={component._id} parent={parent}/>) 
+      )}
     </div> 
   )
 }
 
 class DiagramMain extends Component {
   render() {
-    const { currentProject } = this.props;
+    const { currentProject, parent } = this.props;
     if (!currentProject || !currentProject.components) {return null}
     const { components } = currentProject
     const tree = [...Array(8)].map(_ => []);
@@ -45,7 +48,7 @@ class DiagramMain extends Component {
       <div>
         <ShowUnassigned unassigned={helper.unassigned(components)}/>
         <div className="diagram-main-container">
-          {tree.map((row, i) => <TreeRow row={row} key={i}/> )}
+          {tree.map((row, i) => <TreeRow row={row} key={i} parent={parent}/> )}
         </div>
       </div>
     )
