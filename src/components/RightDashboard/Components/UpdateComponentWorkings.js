@@ -71,7 +71,6 @@ class UpdateComponentWorkings extends Component {
           setHighlight={this.setHighlight}
           type={type}
         />
-
         {showAddField ? 
           <AddField 
             type={type}
@@ -89,7 +88,6 @@ class UpdateComponentWorkings extends Component {
             ADD A NEW {type}
           </button>
         }
-        
         {highlighted && (
           <EditField
             field={highlighted} 

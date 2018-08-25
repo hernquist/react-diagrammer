@@ -25,6 +25,57 @@ const CREATE_PROJECT = gql`
   }
 `;
 
+const CREATE_COMPONENT = gql`
+  mutation CreateComponent (
+    $name: String!,
+    $projectId: String!,
+    $iteration: Int!,
+    $style: ComponentType!
+    $placement: Placement!
+  ) {
+    createComponent (
+      name:$name, 
+      projectId: $projectId, 
+      iteration: $iteration, 
+      style: $style, 
+      placement: $placement
+    ) {
+      _id
+      name
+      projectId
+      iteration
+      style
+      placement
+      children
+      state {
+        _id
+        name
+        statetype
+        componentId
+      }
+      props {
+        _id
+        name
+        proptype
+        componentId
+      }
+      callbacks {
+        _id
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
+    }
+  }
+`;
+
 const TOGGLE_COMPONENT_STYLE = gql`
   mutation ToggleComponentStyle($_id: String!) {
     toggleComponentStyle(_id: $_id) {
@@ -199,6 +250,7 @@ export {
   SIGNUP, 
   LOGIN, 
   CREATE_PROJECT,
+  CREATE_COMPONENT,
   TOGGLE_COMPONENT_STYLE,
   EDIT_COMPONENT_NAME,
   ADD_PROP,

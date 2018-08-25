@@ -37,6 +37,7 @@ query ProjectsByUserId($userId: String!) {
         _id
         name
         proptype
+        componentId
       }
       callbacks {
         _id

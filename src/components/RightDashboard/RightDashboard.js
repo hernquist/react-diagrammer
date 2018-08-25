@@ -16,6 +16,7 @@ class RightDashboard extends Component {
       setCurrentProject, 
       projects = [],
       updateComponent,
+      addComponent
     } = this.props;
 
     return (
@@ -94,8 +95,8 @@ class RightDashboard extends Component {
           render={renderProps =>
             <CreateComponent
               {...renderProps}
-              updateComponent={updateComponent}
               currentProject={currentProject}
+              addComponent={addComponent}
             />
           }
         />
