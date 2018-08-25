@@ -39,10 +39,7 @@ class LoggedIn extends Component {
     this.setState({ currentProject });
   }
   
-  setParent = id => {
-    this.setState({ parent: id })
-    console.log(this.state.parent, id)
-  }
+  setParent = id => this.setState({ parent: id });
 
   render() {
     const { layout, errors, currentProject, parent } = this.state;

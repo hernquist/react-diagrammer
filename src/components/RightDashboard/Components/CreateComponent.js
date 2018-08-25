@@ -62,7 +62,7 @@ export default class CreateComponent extends Component {
   }
 
   render() {
-    const { style, placement, name } = this.state;
+    const { style, placement, name, highlighted } = this.state;
     const { history, currentProject, setParent } = this.props;
     const components = currentProject.components || [];
     const root = helper.root(components);
@@ -118,8 +118,9 @@ export default class CreateComponent extends Component {
                   )}
                   {placement === 'child' && (
                     <ChildComponents 
-                    childs={[...root, ...childs]} 
-                    handleParent={this.handleParent}
+                      childs={[...root, ...childs]} 
+                      handleParent={this.handleParent}
+                      highlighted={highlighted}
                     />
                   )}
                   {!doesRootExist && (

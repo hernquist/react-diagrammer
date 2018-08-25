@@ -41,12 +41,11 @@ class DiagramMain extends Component {
     const { components } = currentProject
     const branches = helper.childs(components);
     let root = helper.root(components);
-    console.log(root)
 
     let tree = branches.reduce((acc, _, i) => 
       [...acc, acc[i].reduce((a, c) => a.concat(c.children), [])
         .map(branch => helper.find(branches, branch))], [root])
-      .filter(row => row.length > 0);
+      .filter(branches => branches.length > 0);
 
     return (
       <div>
