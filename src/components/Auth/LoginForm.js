@@ -60,7 +60,9 @@ class LoginForm extends Component {
                       })} />
                     </div>
                     <div className="errors">
-                      {errors.map(error => <div key={error}>{error}</div>)}
+                      {errors
+                        .filter(error => error !== 'Error! GraphQL error: user not authenticated')
+                        .map(error => <div key={error}>{error}</div>)}
                     </div>
                     <button variant="raised">Submit</button>
                   </form>

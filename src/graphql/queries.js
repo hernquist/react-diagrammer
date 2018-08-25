@@ -38,7 +38,19 @@ query ProjectsByUserId($userId: String!) {
         name
         proptype
       }
-      callbacks
+      callbacks {
+        _id
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
     }
   }
 }
