@@ -30,7 +30,6 @@ class EditField extends Component {
   updateField = async (_id, mutation) => {
     const { name, proptype, statetype } = this.state.field;
     const { type, currentComponent } = this.props;
-    console.log (name, proptype, statetype);
     const { data } = type === 'state' ? 
       await mutation({ variables: { _id, name, statetype }})
       : await mutation({ variables: { _id, name, proptype } });
@@ -86,8 +85,18 @@ class EditField extends Component {
                   <option value="array">array</option>
                   <option value="object">object</option>
                 </select>
-                <button onClick={() => this.updateField(_id, Edit)}>UPDATE {type}</button>
-                <button onClick={() => this.deleteField(_id, Delete)}>DELETE {type}</button>
+                <button
+                  className="dashboard-button"
+                  onClick={() => this.updateField(_id, Edit)}
+                >
+                  UPDATE {type}
+                </button>
+                <button
+                  className="dashboard-button"
+                  onClick={() => this.deleteField(_id, Delete)}
+                >
+                  DELETE {type}
+                </button>
               </div>
             )}  
           </Mutation>

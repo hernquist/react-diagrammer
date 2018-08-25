@@ -81,11 +81,13 @@ class LeftDashboard extends Component {
             <div className="button-content">PROJECT</div>
           </div>
         </Link>
-        <div className="dashboard-button hideable">
-          <div className="button-content">CREATE</div>
-          <div className="button-content">NEW</div>
-          <div className="button-content">COMPONENT</div>
-        </div>
+        <Link to='/main/component/new'>
+          <div className="dashboard-button hideable">
+            <div className="button-content">CREATE</div>
+            <div className="button-content">NEW</div>
+            <div className="button-content">COMPONENT</div>
+          </div>
+        </Link>
         <div className="dashboard-button hideable">
           <div className="button-content">ADD</div>
           <div className="button-content">EXISTING</div>

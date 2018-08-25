@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import CreateProject from './Features/CreateProject';
-import DeleteProject from './Features/DeleteProject';
-import CurrentComponent from './Features/CurrentComponent';
-import UpdateComponentProps from './Features/UpdateComponentProps';
-import UpdateComponentWorkings from './Features/UpdateComponentWorkings';
-import EditComponentName from './Features/EditComponentName';
+import CreateProject from './Projects/CreateProject';
+import DeleteProject from './Projects/DeleteProject';
+import CurrentComponent from './Components/CurrentComponent';
+import UpdateComponentWorkings from './Components/UpdateComponentWorkings';
+import EditComponentName from './Components/EditComponentName';
+import CreateComponent from './Components/CreateComponent';
 
 class RightDashboard extends Component {
   render() {
@@ -16,6 +16,7 @@ class RightDashboard extends Component {
       setCurrentProject, 
       projects = [],
       updateComponent,
+      addComponent
     } = this.props;
 
     return (
@@ -89,7 +90,16 @@ class RightDashboard extends Component {
             />
           }
         />
-        
+        <Route
+          path="/main/component/new"
+          render={renderProps =>
+            <CreateComponent
+              {...renderProps}
+              currentProject={currentProject}
+              addComponent={addComponent}
+            />
+          }
+        />
       </div>
     );
   }

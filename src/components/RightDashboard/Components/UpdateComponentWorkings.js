@@ -71,7 +71,6 @@ class UpdateComponentWorkings extends Component {
           setHighlight={this.setHighlight}
           type={type}
         />
-
         {showAddField ? 
           <AddField 
             type={type}
@@ -82,9 +81,13 @@ class UpdateComponentWorkings extends Component {
             value1={value1}
             value2={value2}
           /> : 
-          <button onClick={this.displayAddField}>ADD A NEW {type}</button>
+          <button 
+            className="dashboard-button"
+            onClick={this.displayAddField}
+          >
+            ADD A NEW {type}
+          </button>
         }
-        
         {highlighted && (
           <EditField
             field={highlighted} 
@@ -95,8 +98,12 @@ class UpdateComponentWorkings extends Component {
             type={type}
           />
         )} 
-
-        <button onClick={this.exitComponent}>DONE</button>
+        <button
+          className="dashboard-button"
+          onClick={this.exitComponent}
+        >
+          DONE
+        </button>
 
       </div>
     );

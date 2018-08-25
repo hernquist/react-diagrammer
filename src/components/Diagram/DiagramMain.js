@@ -3,7 +3,7 @@ import auth from "../HOC/auth"
 import '../../styles/DiagramMain.css'
 
 const DisplayComponent = ({ component }) => {
-  const stateOutput = component.style === 'container' ?
+  const stateOutput = component.style === 'presentational' ?
     'n/a' : component.state.length;
   
   return (
@@ -14,8 +14,7 @@ const DisplayComponent = ({ component }) => {
         {'border': '3px solid blue'} }
     >
       <div className='component-name'>{component.name}</div>
-      <div className='component-state'>{`STATE: ${stateOutput}`}
-      </div> 
+      <div className='component-state'>{`STATE: ${stateOutput}`}</div> 
       <div className='component-props'>{`PROPS: ${component.props.length}`}</div>
     </div>
   )

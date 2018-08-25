@@ -30,6 +30,15 @@ class LoggedIn extends Component {
     this.setState({ currentProject })
   }
 
+  addComponent = updated => {
+    const project = this.state.currentProject;
+    const components = project.components || [];
+    const updatedComponents = [...components, updated];
+    const currentProject = Object.assign({}, project, { components: updatedComponents});
+    console.log(currentProject);
+    this.setState({ currentProject });
+  }  
+
   render() {
     const { layout, errors, currentProject } = this.state;
     const fullScreen = {
@@ -106,6 +115,7 @@ class LoggedIn extends Component {
                         projects={projects}
                         setCurrentProject={this.setCurrentProject}
                         updateComponent={this.updateComponent}
+                        addComponent={this.addComponent}
                       />
                     </div>
                   </div>

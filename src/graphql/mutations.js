@@ -25,6 +25,57 @@ const CREATE_PROJECT = gql`
   }
 `;
 
+const CREATE_COMPONENT = gql`
+  mutation CreateComponent (
+    $name: String!,
+    $projectId: String!,
+    $iteration: Int!,
+    $style: ComponentType!
+    $placement: Placement!
+  ) {
+    createComponent (
+      name:$name, 
+      projectId: $projectId, 
+      iteration: $iteration, 
+      style: $style, 
+      placement: $placement
+    ) {
+      _id
+      name
+      projectId
+      iteration
+      style
+      placement
+      children
+      state {
+        _id
+        name
+        statetype
+        componentId
+      }
+      props {
+        _id
+        name
+        proptype
+        componentId
+      }
+      callbacks {
+        _id
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
+    }
+  }
+`;
+
 const TOGGLE_COMPONENT_STYLE = gql`
   mutation ToggleComponentStyle($_id: String!) {
     toggleComponentStyle(_id: $_id) {
@@ -140,10 +191,66 @@ const EDIT_STATE = gql`
   }
 `;
 
+const ADD_CALLBACK = gql`
+  mutation AddCallback($callback: InputCallback) {
+    addCallback (callback: $callback) {
+      _id
+      componentId
+      name
+      setState {
+        stateField
+        stateChange
+      }
+      functionArgs {
+        name
+        typeName
+      }
+      description
+    }
+  }
+`;
+
+const DELETE_CALLBACK = gql`
+  mutation DeleteCallback ($_id: String!) {
+    deleteCallback(_id: $_id)
+  }
+`;
+
+const EDIT_CALLBACK = gql`
+  mutation EditCallback(
+    $_id: String!,
+    $name: String,
+    $functionArgs: [InputArgument], 
+    $setState: [InputSetStateParams],
+    $description: String
+  ) {
+    editCallback(
+      _id: $_id,
+      name: $name,
+      functionArgs: $functionArgs,
+      setState: $setState,
+      description: $description
+    ) {
+      _id
+      name
+      description
+      setState{
+        stateField
+        stateChange
+      }
+      functionArgs {
+        name
+        typeName
+      }
+    }
+  }
+`;
+
 export { 
   SIGNUP, 
   LOGIN, 
   CREATE_PROJECT,
+  CREATE_COMPONENT,
   TOGGLE_COMPONENT_STYLE,
   EDIT_COMPONENT_NAME,
   ADD_PROP,
@@ -151,5 +258,8 @@ export {
   EDIT_PROP,
   ADD_STATE,
   DELETE_STATE,
-  EDIT_STATE
+  EDIT_STATE,
+  ADD_CALLBACK,
+  DELETE_CALLBACK,
+  EDIT_CALLBACK
 };
