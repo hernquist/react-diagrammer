@@ -35,12 +35,8 @@ class DiagramMain extends Component {
     const { currentProject } = this.props;
     if (!currentProject || !currentProject.components) {return null}
     const { components } = currentProject
-    
     const tree = [...Array(8)].map(_ => []);
-
-    const childs = helper.child(components);
-    console.log(childs);
-    // const unassigned = components.filter(component => component.placement === 'unassigned');
+    const childs = helper.childs(components);
     tree[0] = helper.root(components);
      
     console.log('[DiagramMain] tree', tree); 

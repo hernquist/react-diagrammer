@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
 import { CREATE_COMPONENT } from '../../../graphql/mutations';
+import ChildComponents from './Workings/ChildComponents';
 import helper from '../../../Helper/helper';
 
 export default class CreateComponent extends Component {
@@ -42,14 +43,11 @@ export default class CreateComponent extends Component {
     const { history, currentProject } = this.props;
     const components = currentProject.components || [];
     const root = helper.root(components);
+    const childs = helper.childs(components);
     const doesRootExist = root.length === 1;
 
-    console.log(root, doesRootExist) 
-
     return (
-      <Mutation
-        mutation={CREATE_COMPONENT}
-      >
+      <Mutation mutation={CREATE_COMPONENT}>
         {CreateComponent => (
           <div>
             <label>
@@ -93,6 +91,7 @@ export default class CreateComponent extends Component {
                   CHILD 
                 </div>
               )}
+              {placement === 'child' && <ChildComponents childs={[...root, ...childs]}/>}
               {!doesRootExist && (
                 <div
                   onClick={() => this.handleRoot('root')}
@@ -115,10 +114,7 @@ export default class CreateComponent extends Component {
               CANCEL 
             </button>
           </div>
-
-
         )}
-        
       </Mutation>
     )
   }
