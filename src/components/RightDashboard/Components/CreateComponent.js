@@ -35,18 +35,10 @@ export default class CreateComponent extends Component {
     this.setState({ placement: 'child'});
   }
 
-  saveComponent = async (mutation, addChild) => {
-    const projectId = this.props.currentProject._id;
-    const { name, placement, style } = this.state;
-    const component = { projectId, name, placement, style, iteration: 0 };
-    const { data } = await mutation({ variables:  component  });
-    this.props.addComponent(data.createComponent);
-
+  addChild = async (childId, mutation) => {
     const components = this.props.currentProject.components || [];
-    const childId = data.createComponent._id;
-    const parentComponent = helper.find(components, this.state.highlighted)[0];
-    const success = await addChild({ variables: {_id: parentComponent._id, childId},  })
-    // console.log('parentComponent', parentComponent);
+    const parentComponent = helper.find(components, this.state.highlighted);
+    const success = await mutation({ variables: { _id: parentComponent._id, childId } })
     if (success.data.addChild) {
       const children = [...parentComponent.children, childId];
       const updatedParent = Object.assign({}, parentComponent, { children })
@@ -55,6 +47,17 @@ export default class CreateComponent extends Component {
     } else {
       console.log('failure')
     }
+  }
+
+  saveComponent = async (mutation, addChild) => {
+    const projectId = this.props.currentProject._id;
+    const { name, placement, style } = this.state;
+    const component = { projectId, name, placement, style, iteration: 0 };
+    const { data } = await mutation({ variables:  component  });
+    this.props.addComponent(data.createComponent);
+
+    if (data.createComponent.placement === 'child') this.addChild(data.createComponent._id, addChild);
+
     this.props.history.push('/main/component/0');
   }
 

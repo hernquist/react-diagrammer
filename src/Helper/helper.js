@@ -5,7 +5,10 @@ const helper = {
   currComp: (components, name, index) => components
     .filter(c => c.name === name)
     .filter(c => c.iteration === Number(index))[0],
-  find: (components, id) => components.filter(c => c._id === id)
+  find: (components, id) => {
+    let c = components.filter(c => c._id === id)
+    return c[0]
+  }
 }
 
 export default helper;
