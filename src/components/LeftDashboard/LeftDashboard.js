@@ -52,11 +52,11 @@ class LeftDashboard extends Component {
       "logged-in": "HIDE"
     };
     const { errors, selector } = this.state;
-
+    
     return ( 
       <div 
-        className="left-dashboard-container"
-        onMouseLeave={this.deActivateSelector} 
+      className="left-dashboard-container"
+      onMouseLeave={this.deActivateSelector} 
       >
         <div className="current-project-title">
           <div>PROJECT</div>
@@ -65,10 +65,11 @@ class LeftDashboard extends Component {
         <div 
           className="dashboard-button selector"
           onClick={selector ? this.deActivateSelector : this.activateSelector}
-        >
+          >
           <div className="button-content">{selector ? `DONE` : `SWITCH`}</div>
           <div className="button-content">{selector ? null : `PROJECT`}</div>
         </div>
+          {selector && <ProjectList projects={projects} setCurrentProject={setCurrentProject}/>}
         <Link to='/main/new-project'>
           <div className="dashboard-button hideable">
             <div className="button-content">NEW</div>
@@ -97,7 +98,6 @@ class LeftDashboard extends Component {
           <div className="button-content">{content[layout]}</div>
           <div className="button-content">DASHBOARD</div>
         </div>
-        {selector && <ProjectList projects={projects} setCurrentProject={setCurrentProject}/>}
       </div>
     )
   }

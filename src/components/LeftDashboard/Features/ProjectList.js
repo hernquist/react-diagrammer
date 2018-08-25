@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../../styles/ProjectList.css';
 
-
 const ProjectList = ({projects, setCurrentProject}) => {
   return ( 
     <div className="project-list selector">
