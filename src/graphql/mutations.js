@@ -25,6 +25,12 @@ const CREATE_PROJECT = gql`
   }
 `;
 
+const DELETE_PROJECT = gql`
+  mutation DeleteProject($_id: String!) {
+    deleteProject(_id: $_id)
+  }
+`;
+
 const CREATE_COMPONENT = gql`
   mutation CreateComponent (
     $name: String!,
@@ -256,6 +262,7 @@ export {
   SIGNUP, 
   LOGIN, 
   CREATE_PROJECT,
+  DELETE_PROJECT,
   CREATE_COMPONENT,
   TOGGLE_COMPONENT_STYLE,
   ADD_CHILD,
