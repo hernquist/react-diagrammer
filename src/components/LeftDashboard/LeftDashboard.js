@@ -14,12 +14,6 @@ class LeftDashboard extends Component {
 
   componentDidMount() {
     this.props.needsSetting && this.props.setCurrentProject(this.props.currentProject);
-    
-    // // 'components' will need to be part of a graphql/apollo query
-    // const components = false;
-    // if (!components && this.props.location.pathname !== '/main/component/index/0') {
-    //   this.props.history.push('/main/component/index/0');
-    // }
   }
 
   handleSwitch = () => this.props.layout === "full-screen" ?
@@ -38,6 +32,7 @@ class LeftDashboard extends Component {
   activateSelector = async() => {
     await this.setState({ selector: true });
     this.updateCSS();
+    this.props.refetch();
   }
 
   deActivateSelector = async () => {

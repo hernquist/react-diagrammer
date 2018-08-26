@@ -100,6 +100,7 @@ class LoggedIn extends Component {
                         projects={projects}
                         currentProject={currentProject || findLatest(projects)}
                         needsSetting={!currentProject}
+                        refetch={refetch}
                       />
                     </div>
                     <div className="diagram">

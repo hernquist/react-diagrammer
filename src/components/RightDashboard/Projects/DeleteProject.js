@@ -14,13 +14,17 @@ class DeleteProject extends Component {
   }
 
   removeProject = async mutation => {
-    const { _id } = this.props.currentProject;
+    const { currentProject, setCurrentProject, history, refetchProject } = this.props;
+    const { _id } = currentProject;
     const { data } = await mutation({ variables: { _id } });
     if (data.deleteProject) {
       console.log("Delete project working!");
+      // await setCurrentProject({});
+      await refetchProject();
     } else {
       console.log("Delete project not working!");
     }
+    await history.push('/');
   }
 
   render() {

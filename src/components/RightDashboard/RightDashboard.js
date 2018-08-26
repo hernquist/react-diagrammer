@@ -42,6 +42,7 @@ class RightDashboard extends Component {
               currentProject={currentProject}
               setCurrentProject={setCurrentProject}
               projects={projects}
+              refetchProject={refetchProject}
             />
           }
         />
