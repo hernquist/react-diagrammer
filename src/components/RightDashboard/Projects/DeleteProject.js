@@ -4,22 +4,15 @@ import { Mutation } from 'react-apollo';
 import { DELETE_PROJECT } from '../../../graphql/mutations';
 // import '../../styles/DeleteProject.css';
 
-
 class DeleteProject extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      errors: [],
-    };
-  }
+  state = { errors: [] };
 
   removeProject = async mutation => {
-    const { currentProject, setCurrentProject, history, refetchProject } = this.props;
+    const { currentProject, history, refetchProject } = this.props;
     const { _id } = currentProject;
     const { data } = await mutation({ variables: { _id } });
     if (data.deleteProject) {
       console.log("Delete project working!");
-      // await setCurrentProject({});
       await refetchProject();
     } else {
       console.log("Delete project not working!");

@@ -84,11 +84,13 @@ class LeftDashboard extends Component {
             <div className="button-content">COMPONENT</div>
           </div>
         </Link>
-        <div className="dashboard-button hideable">
-          <div className="button-content">ADD</div>
-          <div className="button-content">EXISTING</div>
-          <div className="button-content">COMPONENT</div>
-        </div>
+        <Link to='/main/component/add-existing'>
+          <div className="dashboard-button hideable">
+            <div className="button-content">ADD</div>
+            <div className="button-content">EXISTING</div>
+            <div className="button-content">COMPONENT</div>
+          </div>
+        </Link>
         <div className="dashboard-button hideable" onClick={this.handleSwitch}>
           <div className="button-content">{content[layout]}</div>
           <div className="button-content">DASHBOARD</div>

@@ -36,7 +36,7 @@ const CREATE_COMPONENT = gql`
     $name: String!,
     $projectId: String!,
     $iteration: Int!,
-    $style: ComponentType!
+    $style: ComponentType!,
     $placement: Placement!
   ) {
     createComponent (
@@ -45,6 +45,59 @@ const CREATE_COMPONENT = gql`
       iteration: $iteration, 
       style: $style, 
       placement: $placement
+    ) {
+      _id
+      name
+      projectId
+      iteration
+      style
+      placement
+      children
+      state {
+        _id
+        name
+        statetype
+        componentId
+      }
+      props {
+        _id
+        name
+        proptype
+        componentId
+      }
+      callbacks {
+        _id
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
+    }
+  }
+`;
+
+const COPY_COMPONENT = gql`
+  mutation CopyComponent (
+    $name: String!,
+    $projectId: String!,
+    $iteration: Int!,
+    $style: ComponentType!,
+    $placement: Placement!,
+    $children: [String]
+  ) {
+    copyComponent (
+      name:$name, 
+      projectId: $projectId, 
+      iteration: $iteration, 
+      style: $style, 
+      placement: $placement,
+      children:$children
     ) {
       _id
       name
@@ -103,7 +156,19 @@ const TOGGLE_COMPONENT_STYLE = gql`
         proptype
         componentId
       }
-      callbacks
+      callbacks {
+        _id
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
       children
     }
   }
@@ -136,7 +201,19 @@ const EDIT_COMPONENT_NAME = gql`
         proptype
         componentId
       }
-      callbacks
+      callbacks {
+        _id
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
       children
     }
   }
@@ -176,7 +253,7 @@ const ADD_STATE = gql`
   mutation AddState($state: InputState) {
     addState(state: $state) {
       _id
-      state{
+      state {
         _id
         componentId
         name
@@ -264,6 +341,7 @@ export {
   CREATE_PROJECT,
   DELETE_PROJECT,
   CREATE_COMPONENT,
+  COPY_COMPONENT,
   TOGGLE_COMPONENT_STYLE,
   ADD_CHILD,
   EDIT_COMPONENT_NAME,

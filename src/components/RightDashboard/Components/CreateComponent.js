@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
 import { CREATE_COMPONENT, ADD_CHILD } from '../../../graphql/mutations';
-import ChildComponents from './Workings/ChildComponents';
+import ComponentList from './Workings/ComponentList';
 import helper from '../../../Helper/helper';
 
 export default class CreateComponent extends Component {
@@ -58,7 +58,7 @@ export default class CreateComponent extends Component {
 
     if (data.createComponent.placement === 'child') this.addChild(data.createComponent._id, addChild);
 
-    this.props.history.push('/main/component/0');
+    this.props.history.push(`/main/component/${name}/0`);
   }
 
   render() {
@@ -117,10 +117,11 @@ export default class CreateComponent extends Component {
                     </div>
                   )}
                   {placement === 'child' && (
-                    <ChildComponents 
+                    <ComponentList 
                       childs={[...root, ...childs]} 
-                      handleParent={this.handleParent}
+                      chooseComponent={this.handleParent}
                       highlighted={highlighted}
+                      text="Choose a parent?"
                     />
                   )}
                   {!doesRootExist && (
