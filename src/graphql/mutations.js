@@ -32,41 +32,31 @@ const DELETE_PROJECT = gql`
 `;
 
 const CREATE_COMPONENT = gql`
-  mutation CreateComponent (
-    $name: String!,
-    $projectId: String!,
-    $iteration: Int!,
-    $style: ComponentType!,
-    $placement: Placement!
-  ) {
-    createComponent (
-      name:$name, 
-      projectId: $projectId, 
-      iteration: $iteration, 
-      style: $style, 
-      placement: $placement
-    ) {
+  mutation CreateComponent ($name: String!, $projectId: String!, $style: ComponentType!, $placement: Placement!) {
+    createComponent(name: $name, projectId: $projectId, style: $style, placement: $placement) {
       _id
-      name
       projectId
+      cloneId
+      name
       iteration
       style
       placement
       children
       state {
         _id
+        componentId
         name
         statetype
-        componentId
       }
       props {
         _id
+        componentId
         name
         proptype
-        componentId
       }
       callbacks {
         _id
+        componentId
         name
         functionArgs {
           name
