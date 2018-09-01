@@ -37,9 +37,7 @@ export default class AddExistingComponent extends Component {
 
   handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
-  handleRoot = () => {
-    console.log("Are you sure you want this to be a root?")
-  }
+  handleRoot = () => console.log("Are you sure you want this to be a root?");
 
   handleUnassigned = () => {
     this.setState({ placement: 'unassigned' });
