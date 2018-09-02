@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import { COPY_COMPONENT, ADD_CHILD } from '../../../graphql/mutations';
 import ComponentList from './Workings/ComponentList';
 import helper from '../../../Helper/helper';
+import KeepChildren from './Workings/KeepChildren';
 
 export default class AddExistingComponent extends Component {
   constructor(props) {
@@ -59,7 +60,6 @@ export default class AddExistingComponent extends Component {
     if (success.data.addChild) {
       const children = [...parentComponent.children, childId];
       const updatedParent = Object.assign({}, parentComponent, { children })
-      console.log('updatedParent:', updatedParent);
       this.props.updateComponent(updatedParent);
     } else {
       console.log('failure')
@@ -86,12 +86,15 @@ export default class AddExistingComponent extends Component {
     console.log('data', data)
     
     if (data.copyComponent.placement === 'child') this.addChild(data.copyComponent._id, addChild);
+    this.props.setParent('');
     const { name } = data.copyComponent;
     this.props.history.push(`/main/component/${name}/0`);
   }
 
+  handleKeepChildren = value => this.setState({ keepChildren: value })
+
   render() {
-    const { style, placement, name, highlighted, keepChildren } = this.state;
+    const { placement, highlighted, keepChildren, copiedComponent } = this.state;
     const { history, currentProject, setParent } = this.props;
     const components = currentProject.components || [];
     const root = helper.root(components);
@@ -143,24 +146,14 @@ export default class AddExistingComponent extends Component {
                     </label>
                     <hr/>
 
-                    {/* {placement === 'child' &&  */}
-                      <div>
-                        Keep the component children?
-                        {keepChildren ? `YES` : `NO`}
-                        <div 
-                          className="dashboard-button"
-                          onClick={()=>this.setState({ keepChildren: true })}
-                        >
-                          YES
-                        </div>
-                        <div
-                          className="dashboard-button"
-                          onClick={() => this.setState({ keepChildren: false })}
-                        >
-                          NO
-                        </div>
-                      </div>
-                    {/* } */}
+                    {placement === 'child' && 
+                      <KeepChildren 
+                        haschildren={!!copiedComponent.children.length}
+                        keepChildren={keepChildren}
+                        setKeepChildren={this.handleKeepChildren}
+                      />
+                    }
+                    
                     <hr/>
 
                     <button

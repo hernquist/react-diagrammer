@@ -56,7 +56,7 @@ export default class CreateComponent extends Component {
     this.props.addComponent(data.createComponent);
 
     if (data.createComponent.placement === 'child') this.addChild(data.createComponent._id, addChild);
-
+    this.props.setParent('')
     this.props.history.push(`/main/component/${name}/0`);
   }
 
