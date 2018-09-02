@@ -14,12 +14,6 @@ class LeftDashboard extends Component {
 
   componentDidMount() {
     this.props.needsSetting && this.props.setCurrentProject(this.props.currentProject);
-    
-    // // 'components' will need to be part of a graphql/apollo query
-    // const components = false;
-    // if (!components && this.props.location.pathname !== '/main/component/index/0') {
-    //   this.props.history.push('/main/component/index/0');
-    // }
   }
 
   handleSwitch = () => this.props.layout === "full-screen" ?
@@ -38,6 +32,7 @@ class LeftDashboard extends Component {
   activateSelector = async() => {
     await this.setState({ selector: true });
     this.updateCSS();
+    this.props.refetch();
   }
 
   deActivateSelector = async () => {
@@ -89,11 +84,13 @@ class LeftDashboard extends Component {
             <div className="button-content">COMPONENT</div>
           </div>
         </Link>
-        <div className="dashboard-button hideable">
-          <div className="button-content">ADD</div>
-          <div className="button-content">EXISTING</div>
-          <div className="button-content">COMPONENT</div>
-        </div>
+        <Link to='/main/component/add-existing'>
+          <div className="dashboard-button hideable">
+            <div className="button-content">ADD</div>
+            <div className="button-content">EXISTING</div>
+            <div className="button-content">COMPONENT</div>
+          </div>
+        </Link>
         <div className="dashboard-button hideable" onClick={this.handleSwitch}>
           <div className="button-content">{content[layout]}</div>
           <div className="button-content">DASHBOARD</div>

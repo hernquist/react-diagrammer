@@ -25,32 +25,68 @@ const CREATE_PROJECT = gql`
   }
 `;
 
+const DELETE_PROJECT = gql`
+  mutation DeleteProject($_id: String!) {
+    deleteProject(_id: $_id)
+  }
+`;
+
 const CREATE_COMPONENT = gql`
-  mutation CreateComponent (
-    $name: String!,
-    $projectId: String!,
-    $iteration: Int!,
-    $style: ComponentType!
-    $placement: Placement!
-  ) {
-    createComponent (
-      name:$name, 
-      projectId: $projectId, 
-      iteration: $iteration, 
-      style: $style, 
-      placement: $placement
-    ) {
+  mutation CreateComponent ($name: String!, $projectId: String!, $style: ComponentType!, $placement: Placement!) {
+    createComponent(name: $name, projectId: $projectId, style: $style, placement: $placement) {
       _id
-      name
       projectId
+      cloneId
+      name
       iteration
       style
       placement
       children
       state {
         _id
+        componentId
         name
         statetype
+      }
+      props {
+        _id
+        componentId
+        name
+        proptype
+      }
+      callbacks {
+        _id
+        componentId
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
+    }
+  }
+`;
+
+const COPY_COMPONENT = gql`
+  mutation CopyComponent($name: String!, $projectId: String!, $cloneId: String! $iteration: Int!, $style: ComponentType!, $placement: Placement!, $children: [String]) {
+    copyComponent(name: $name, projectId: $projectId, cloneId: $cloneId, style: $style, iteration: $iteration, placement: $placement, children: $children) {
+      _id
+      projectId
+      cloneId
+      name
+      iteration
+      style
+      placement
+      children
+      state {
+        _id
+        statetype
+        name
         componentId
       }
       props {
@@ -97,7 +133,19 @@ const TOGGLE_COMPONENT_STYLE = gql`
         proptype
         componentId
       }
-      callbacks
+      callbacks {
+        _id
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
       children
     }
   }
@@ -105,7 +153,36 @@ const TOGGLE_COMPONENT_STYLE = gql`
 
 const ADD_CHILD = gql`
   mutation AddChild($_id: String!, $childId: String!) {
-    addChild(_id: $_id, childId: $childId) 
+    addChild(_id: $_id, childId: $childId)
+  }
+`;
+
+const COPY_CHILDREN = gql`
+  mutation CopyChildren($childrenData: [InputChildrenData]){
+    copyChildren(childrenData: $childrenData) {
+      _id
+      cloneId
+      projectId
+      iteration
+      name
+      placement
+      style
+      state {
+        statetype
+        name
+      }
+      props {
+        name
+        proptype
+      }
+      callbacks {
+        name
+        functionArgs {
+          name
+          typeName
+        }
+      }
+    }
   }
 `;
 
@@ -130,7 +207,19 @@ const EDIT_COMPONENT_NAME = gql`
         proptype
         componentId
       }
-      callbacks
+      callbacks {
+        _id
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
       children
     }
   }
@@ -170,7 +259,7 @@ const ADD_STATE = gql`
   mutation AddState($state: InputState) {
     addState(state: $state) {
       _id
-      state{
+      state {
         _id
         componentId
         name
@@ -256,7 +345,10 @@ export {
   SIGNUP, 
   LOGIN, 
   CREATE_PROJECT,
+  DELETE_PROJECT,
   CREATE_COMPONENT,
+  COPY_COMPONENT,
+  COPY_CHILDREN,
   TOGGLE_COMPONENT_STYLE,
   ADD_CHILD,
   EDIT_COMPONENT_NAME,

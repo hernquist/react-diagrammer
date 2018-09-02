@@ -6,6 +6,7 @@ import CurrentComponent from './Components/CurrentComponent';
 import UpdateComponentWorkings from './Components/UpdateComponentWorkings';
 import EditComponentName from './Components/EditComponentName';
 import CreateComponent from './Components/CreateComponent';
+import AddExistingComponent from './Components/AddExistingComponent';
 
 class RightDashboard extends Component {
   render() {
@@ -40,8 +41,8 @@ class RightDashboard extends Component {
               {...renderProps}
               user={user}
               currentProject={currentProject}
-              setCurrentProject={setCurrentProject}
               projects={projects}
+              refetchProject={refetchProject}
             />
           }
         />
@@ -95,6 +96,18 @@ class RightDashboard extends Component {
           path="/main/component/new"
           render={renderProps =>
             <CreateComponent
+              {...renderProps}
+              currentProject={currentProject}
+              updateComponent={updateComponent}
+              addComponent={addComponent}
+              setParent={setParent}
+            />
+          }
+        />
+        <Route
+          path="/main/component/add-existing"
+          render={renderProps =>
+            <AddExistingComponent
               {...renderProps}
               currentProject={currentProject}
               updateComponent={updateComponent}

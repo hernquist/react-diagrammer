@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
 import { CREATE_COMPONENT, ADD_CHILD } from '../../../graphql/mutations';
-import ChildComponents from './Workings/ChildComponents';
+import ComponentList from './Workings/ComponentList';
 import helper from '../../../Helper/helper';
 
 export default class CreateComponent extends Component {
@@ -23,9 +23,8 @@ export default class CreateComponent extends Component {
 
   handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
-  handleRoot = () => {
-    console.log("Are you sure you want this to be a root?")
-  }
+  handleRoot = () => console.log("Are you sure you want this to be a root?")
+  
 
   handleUnassigned = () => {
     this.setState({ placement: 'unassigned' });
@@ -52,13 +51,13 @@ export default class CreateComponent extends Component {
   saveComponent = async (mutation, addChild) => {
     const projectId = this.props.currentProject._id;
     const { name, placement, style } = this.state;
-    const component = { projectId, name, placement, style, iteration: 0 };
+    const component = { projectId, name, placement, style };
     const { data } = await mutation({ variables:  component  });
     this.props.addComponent(data.createComponent);
 
     if (data.createComponent.placement === 'child') this.addChild(data.createComponent._id, addChild);
-
-    this.props.history.push('/main/component/0');
+    this.props.setParent('')
+    this.props.history.push(`/main/component/${name}/0`);
   }
 
   render() {
@@ -117,10 +116,11 @@ export default class CreateComponent extends Component {
                     </div>
                   )}
                   {placement === 'child' && (
-                    <ChildComponents 
+                    <ComponentList 
                       childs={[...root, ...childs]} 
-                      handleParent={this.handleParent}
+                      chooseComponent={this.handleParent}
                       highlighted={highlighted}
+                      text="Choose a parent?"
                     />
                   )}
                   {!doesRootExist && (
