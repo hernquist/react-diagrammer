@@ -7,7 +7,6 @@ import helper from '../../../Helper/helper';
 export default class AddExistingComponent extends Component {
   constructor(props) {
     super(props);
-    const newProject = !props.currentProject.components;
     this.state = {
       highlighted: '',
       placement: '',
@@ -69,17 +68,23 @@ export default class AddExistingComponent extends Component {
   
   saveComponent = async (mutation, addChild) => {
     const { placement, keepChildren, copiedComponent } = this.state;
+    
     console.log('keepChildren', keepChildren);
+    
     const { cloneId } = copiedComponent
     const iteration = this.findIteration(cloneId)
     const component = keepChildren ? 
       Object.assign({}, copiedComponent, { placement }, { cloneId }, { iteration })
       : Object.assign({}, copiedComponent, { placement }, { cloneId }, { iteration }, { children: [] });
     delete component._id;
+    
     console.log('component', component);
+
     const { data } = await mutation({ variables:  component });
     this.props.addComponent(data.copyComponent);
+    
     console.log('data', data)
+    
     if (data.copyComponent.placement === 'child') this.addChild(data.copyComponent._id, addChild);
     const { name } = data.copyComponent;
     this.props.history.push(`/main/component/${name}/0`);
@@ -112,10 +117,10 @@ export default class AddExistingComponent extends Component {
                       </div>
                       {doesRootExist && (
                         <div 
-                        onClick={() => this.handleChild('child')}
-                        style={{ 
-                          backgroundColor: placement === 'child' && 'rgba(0, 0, 0, 0.3)',
-                        }}
+                          onClick={() => this.handleChild('child')}
+                          style={{ 
+                            backgroundColor: placement === 'child' && 'rgba(0, 0, 0, 0.3)',
+                          }}
                         >
                           CHILD 
                         </div>
@@ -138,22 +143,24 @@ export default class AddExistingComponent extends Component {
                     </label>
                     <hr/>
 
-                    <div>
-                      Keep the component children?
-                      {keepChildren ? `YES` : `NO`}
-                      <div 
-                        className="dashboard-button"
-                        onClick={()=>this.setState({ keepChildren: true })}
-                      >
-                        YES
+                    {/* {placement === 'child' &&  */}
+                      <div>
+                        Keep the component children?
+                        {keepChildren ? `YES` : `NO`}
+                        <div 
+                          className="dashboard-button"
+                          onClick={()=>this.setState({ keepChildren: true })}
+                        >
+                          YES
+                        </div>
+                        <div
+                          className="dashboard-button"
+                          onClick={() => this.setState({ keepChildren: false })}
+                        >
+                          NO
+                        </div>
                       </div>
-                      <div
-                        className="dashboard-button"
-                        onClick={() => this.setState({ keepChildren: false })}
-                      >
-                        NO
-                      </div>
-                    </div>
+                    {/* } */}
                     <hr/>
 
                     <button
