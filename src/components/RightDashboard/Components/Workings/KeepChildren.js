@@ -1,29 +1,27 @@
 import React from 'react'
 
-export default ({ keepChildren, setKeepChildren, hasChildren }) => {
-  return (
+const KeepChildren = ({ hasChildren, display, keepChildren, setKeepChildren }) => {
+  console.log(hasChildren, keepChildren, setKeepChildren);
+  if (!display) return null
+  if (hasChildren) return (
     <div>
-    {hasChildren ? 
-      <div>
-        <div>
-          Keep the component children?
-          {keepChildren ? `YES` : `NO`}
-          <div
-            className="dashboard-button"
-            onClick={() => setKeepChildren(true)}
-          >
-            YES
-          </div>
-          <div
-            className="dashboard-button"
-            onClick={() => setKeepChildren(false)}
-          >
-            NO
-          </div>
-        </div>
-      </div> 
-     : <div> No children </div>
-    }
-     </div>
+      Keep the component children?
+      {keepChildren ? `YES` : `NO`}
+      <div
+        className="dashboard-button"
+        onClick={() => setKeepChildren(true)}
+      >
+        YES
+      </div>
+      <div
+        className="dashboard-button"
+        onClick={() => setKeepChildren(false)}
+      >
+        NO
+      </div>
+    </div> 
   )
+  return <div>No children</div>
 }
+
+export default KeepChildren

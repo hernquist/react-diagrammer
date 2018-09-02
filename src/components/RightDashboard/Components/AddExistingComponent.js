@@ -107,7 +107,7 @@ export default class AddExistingComponent extends Component {
           <Mutation mutation={COPY_COMPONENT}>
             {CopyComponent => (
               <div>
-                {Object.keys(this.state.copiedComponent).length > 0 ?
+                {Object.keys(copiedComponent).length > 0 ?
                   <div>
                     <label>
                       Placement
@@ -146,14 +146,12 @@ export default class AddExistingComponent extends Component {
                     </label>
                     <hr/>
 
-                    {placement === 'child' && 
-                      <KeepChildren 
-                        haschildren={!!copiedComponent.children.length}
-                        keepChildren={keepChildren}
-                        setKeepChildren={this.handleKeepChildren}
-                      />
-                    }
-                    
+                    <KeepChildren 
+                      hasChildren={copiedComponent.children.length > 0}
+                      keepChildren={keepChildren}
+                      display={placement === 'child'}
+                      setKeepChildren={this.handleKeepChildren}
+                    />
                     <hr/>
 
                     <button
