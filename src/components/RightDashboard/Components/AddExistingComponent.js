@@ -70,7 +70,7 @@ export default class AddExistingComponent extends Component {
   saveComponent = async (mutation, addChild) => {
     const { placement, keepChildren, copiedComponent } = this.state;
     console.log('keepChildren', keepChildren);
-    const cloneId = copiedComponent._id
+    const { cloneId } = copiedComponent
     const iteration = this.findIteration(cloneId)
     const component = keepChildren ? 
       Object.assign({}, copiedComponent, { placement }, { cloneId }, { iteration })
