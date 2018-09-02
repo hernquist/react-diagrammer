@@ -49,9 +49,9 @@ class DiagramMain extends Component {
     const { currentProject, parent, history } = this.props;
     if (!currentProject || !currentProject.components) {return null}
     const { components } = currentProject
-    const branches = helper.childs(components);
+    let branches = helper.childs(components);
     let root = helper.root(components);
-
+    console.log('branches', branches)
     let tree = branches.reduce((acc, _, i) => 
       [...acc, acc[i].reduce((a, c) => a.concat(c.children), [])
         .map(branch => helper.find(branches, branch))], [root])

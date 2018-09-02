@@ -157,6 +157,35 @@ const ADD_CHILD = gql`
   }
 `;
 
+const COPY_CHILDREN = gql`
+  mutation CopyChildren($childrenData: [InputChildrenData]){
+    copyChildren(childrenData: $childrenData) {
+      _id
+      cloneId
+      projectId
+      iteration
+      name
+      placement
+      style
+      state {
+        statetype
+        name
+      }
+      props {
+        name
+        proptype
+      }
+      callbacks {
+        name
+        functionArgs {
+          name
+          typeName
+        }
+      }
+    }
+  }
+`;
+
 const EDIT_COMPONENT_NAME = gql`
   mutation EditComponentName($_id: String!, $name: String!) {
     editComponentName(_id: $_id, name: $name) {
@@ -319,6 +348,7 @@ export {
   DELETE_PROJECT,
   CREATE_COMPONENT,
   COPY_COMPONENT,
+  COPY_CHILDREN,
   TOGGLE_COMPONENT_STYLE,
   ADD_CHILD,
   EDIT_COMPONENT_NAME,

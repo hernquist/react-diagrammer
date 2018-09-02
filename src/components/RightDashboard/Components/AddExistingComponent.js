@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
-import { COPY_COMPONENT, ADD_CHILD } from '../../../graphql/mutations';
+import { COPY_COMPONENT, ADD_CHILD, COPY_CHILDREN } from '../../../graphql/mutations';
 import ComponentList from './Workings/ComponentList';
 import helper from '../../../Helper/helper';
 import KeepChildren from './Workings/KeepChildren';
@@ -66,22 +66,43 @@ export default class AddExistingComponent extends Component {
     }
   }
   
-  saveComponent = async (mutation, addChild) => {
+  saveComponent = async (mutation, addChild, copyChildren) => {
     const { placement, keepChildren, copiedComponent } = this.state;
     
     console.log('keepChildren', keepChildren);
+
+    const childrenData = copiedComponent.children.map(child => ({ 
+      _id: child,
+      iteration: this.findIteration(child)
+    }))
+    console.log(childrenData)
+
+    const result = await copyChildren({ variables: { childrenData } }) 
+    console.log("copyChildren", result)
     
     const { cloneId } = copiedComponent
     const iteration = this.findIteration(cloneId)
-    const component = keepChildren ? 
-      Object.assign({}, copiedComponent, { placement }, { cloneId }, { iteration })
-      : Object.assign({}, copiedComponent, { placement }, { cloneId }, { iteration }, { children: [] });
+    
+    const children = keepChildren ? result.data.copyChildren.map(child => child._id) : [];
+    console.log(children)
+    const component = Object.assign(
+      {}, 
+      copiedComponent, 
+      { placement }, 
+      { cloneId }, 
+      { iteration }, 
+      { children }
+    )
     delete component._id;
     
     console.log('component', component);
-
-    const { data } = await mutation({ variables:  component });
+    
+    const { data } = await mutation({ variables: component });
     this.props.addComponent(data.copyComponent);
+    // TODO: this Object.assign to cover up a glitch in the backend...
+    result.data.copyChildren.forEach( component => 
+      this.props.addComponent(Object.assign({}, component, { children: [] }))
+    );
     
     console.log('data', data);
     
@@ -102,92 +123,96 @@ export default class AddExistingComponent extends Component {
     const doesRootExist = root.length === 1;
 
     return (
-      <Mutation mutation={ADD_CHILD}>
-        {AddChild => (
-          <Mutation mutation={COPY_COMPONENT}>
-            {CopyComponent => (
-              <div>
-                {Object.keys(copiedComponent).length > 0 ?
+      <Mutation mutation={COPY_CHILDREN}>
+            {CopyChildren => (
+          <Mutation mutation={ADD_CHILD}>
+            {AddChild => (
+              <Mutation mutation={COPY_COMPONENT}>
+                {CopyComponent => (
                   <div>
-                    <label>
-                      Placement
-                      {/* 'end' placement was removed, 'end' is a 'child' with no children */}
-                      <div
-                        onClick={() => this.handleUnassigned('unassigned')}
-                        style={{ backgroundColor: placement === 'unassigned' && 'rgba(0, 0, 0, 0.3)' }}
-                        >
-                        UNASSIGNED
-                      </div>
-                      {doesRootExist && (
-                        <div 
-                          onClick={() => this.handleChild('child')}
-                          style={{ 
-                            backgroundColor: placement === 'child' && 'rgba(0, 0, 0, 0.3)',
-                          }}
-                        >
-                          CHILD 
-                        </div>
-                      )}
-                      {placement === 'child' && (
-                        <ComponentList 
-                          childs={[...root, ...childs]} 
-                          chooseComponent={this.chooseParent}
-                          highlighted={highlighted}
+                    {Object.keys(copiedComponent).length > 0 ?
+                      <div>
+                        <label>
+                          Placement
+                          {/* 'end' placement was removed, 'end' is a 'child' with no children */}
+                          <div
+                            onClick={() => this.handleUnassigned('unassigned')}
+                            style={{ backgroundColor: placement === 'unassigned' && 'rgba(0, 0, 0, 0.3)' }}
+                            >
+                            UNASSIGNED
+                          </div>
+                          {doesRootExist && (
+                            <div 
+                              onClick={() => this.handleChild('child')}
+                              style={{ 
+                                backgroundColor: placement === 'child' && 'rgba(0, 0, 0, 0.3)',
+                              }}
+                            >
+                              CHILD 
+                            </div>
+                          )}
+                          {placement === 'child' && (
+                            <ComponentList 
+                              childs={[...root, ...childs]} 
+                              chooseComponent={this.chooseParent}
+                              highlighted={highlighted}
+                            />
+                          )}
+                          {!doesRootExist && (
+                            <div
+                            onClick={() => this.handleRoot('root')}
+                            style={{ backgroundColor: placement === 'root' && 'rgba(0, 0, 0, 0.3)' }}
+                            >
+                              ROOT
+                            </div>
+                          )}
+                        </label>
+                        <hr/>
+
+                        <KeepChildren 
+                          hasChildren={copiedComponent.children.length > 0}
+                          keepChildren={keepChildren}
+                          display={placement === 'child'}
+                          setKeepChildren={this.handleKeepChildren}
                         />
-                      )}
-                      {!doesRootExist && (
-                        <div
-                        onClick={() => this.handleRoot('root')}
-                        style={{ backgroundColor: placement === 'root' && 'rgba(0, 0, 0, 0.3)' }}
+                        <hr/>
+
+                        <button
+                          className="dashboard-button"
+                          onClick={() => this.saveComponent(CopyComponent, AddChild, CopyChildren)}
                         >
-                          ROOT
-                        </div>
-                      )}
-                    </label>
-                    <hr/>
-
-                    <KeepChildren 
-                      hasChildren={copiedComponent.children.length > 0}
-                      keepChildren={keepChildren}
-                      display={placement === 'child'}
-                      setKeepChildren={this.handleKeepChildren}
-                    />
-                    <hr/>
-
-                    <button
-                      className="dashboard-button"
-                      onClick={() => this.saveComponent(CopyComponent, AddChild)}
-                    >
-                      DONE
-                    </button>
-                    <button
-                      className="dashboard-button"
-                      onClick={() => {
-                        setParent('');
-                        history.push('/main')
-                      }}
-                      >
-                      CANCEL 
-                    </button>
+                          DONE
+                        </button>
+                        <button
+                          className="dashboard-button"
+                          onClick={() => {
+                            setParent('');
+                            history.push('/main')
+                          }}
+                          >
+                          CANCEL 
+                        </button>
+                      </div>
+                    :
+                    <div>
+                      <ComponentList
+                        childs={[...root, ...childs]}
+                        chooseComponent={this.chooseComponent}
+                        highlighted={highlighted}
+                        text="Which component?"
+                      />
+                      <button onClick={this.setCopiedComponent}>
+                        CONTINUE
+                      </button>
+                    </div>
+                    }
                   </div>
-                :
-                <div>
-                  <ComponentList
-                    childs={[...root, ...childs]}
-                    chooseComponent={this.chooseComponent}
-                    highlighted={highlighted}
-                    text="Which component?"
-                  />
-                  <button onClick={this.setCopiedComponent}>
-                    CONTINUE
-                  </button>
-                </div>
-                }
-              </div>
+                )}
+              </Mutation>
             )}
           </Mutation>
         )}
-      </Mutation>
+      </Mutation>  
     )
   }
 }
