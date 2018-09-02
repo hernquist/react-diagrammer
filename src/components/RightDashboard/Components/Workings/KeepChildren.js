@@ -1,7 +1,6 @@
 import React from 'react'
 
 const KeepChildren = ({ hasChildren, display, keepChildren, setKeepChildren }) => {
-  console.log(hasChildren, keepChildren, setKeepChildren);
   if (!display) return null
   if (hasChildren) return (
     <div>

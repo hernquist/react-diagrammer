@@ -83,7 +83,7 @@ export default class AddExistingComponent extends Component {
     const { data } = await mutation({ variables:  component });
     this.props.addComponent(data.copyComponent);
     
-    console.log('data', data)
+    console.log('data', data);
     
     if (data.copyComponent.placement === 'child') this.addChild(data.copyComponent._id, addChild);
     this.props.setParent('');
