@@ -24,7 +24,6 @@ export default class CreateComponent extends Component {
   handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
   handleRoot = () => console.log("Are you sure you want this to be a root?")
-  
 
   handleUnassigned = () => {
     this.setState({ placement: 'unassigned' });
@@ -115,14 +114,13 @@ export default class CreateComponent extends Component {
                       CHILD 
                     </div>
                   )}
-                  {placement === 'child' && (
-                    <ComponentList 
-                      childs={[...root, ...childs]} 
-                      chooseComponent={this.handleParent}
-                      highlighted={highlighted}
-                      text="Choose a parent?"
-                    />
-                  )}
+                  <ComponentList 
+                    childs={[...root, ...childs]} 
+                    chooseComponent={this.handleParent}
+                    highlighted={highlighted}
+                    display={placement === 'child'}
+                    text="Choose a parent?"
+                  />
                   {!doesRootExist && (
                     <div
                     onClick={() => this.handleRoot('root')}
