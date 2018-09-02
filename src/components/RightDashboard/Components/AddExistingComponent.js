@@ -47,6 +47,12 @@ export default class AddExistingComponent extends Component {
     this.setState({ placement: 'child'});
   }
 
+  findIteration = id => {
+    const components = this.props.currentProject.components;
+    const matched = components.filter(component => component.cloneId === id)
+    return matched.length
+  }
+
   addChild = async (childId, mutation) => {
     const components = this.props.currentProject.components || [];
     const parentComponent = helper.find(components, this.state.highlighted);
@@ -62,15 +68,15 @@ export default class AddExistingComponent extends Component {
   }
   
   saveComponent = async (mutation, addChild) => {
-    const { placement, keepChildren } = this.state;
+    const { placement, keepChildren, copiedComponent } = this.state;
     console.log('keepChildren', keepChildren);
+    const cloneId = copiedComponent._id
+    const iteration = this.findIteration(cloneId)
     const component = keepChildren ? 
-      Object.assign({}, this.state.copiedComponent, { placement })
-      : Object.assign({}, this.state.copiedComponent, { placement }, { children: [] });
+      Object.assign({}, copiedComponent, { placement }, { cloneId }, { iteration })
+      : Object.assign({}, copiedComponent, { placement }, { cloneId }, { iteration }, { children: [] });
     delete component._id;
-
     console.log('component', component);
-
     const { data } = await mutation({ variables:  component });
     this.props.addComponent(data.copyComponent);
     console.log('data', data)

@@ -153,7 +153,7 @@ const TOGGLE_COMPONENT_STYLE = gql`
 
 const ADD_CHILD = gql`
   mutation AddChild($_id: String!, $childId: String!) {
-    addChild(_id: $_id, childId: $childId) 
+    addChild(_id: $_id, childId: $childId)
   }
 `;
 
