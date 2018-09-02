@@ -62,7 +62,7 @@ export default class CreateComponent extends Component {
 
   render() {
     const { style, placement, name, highlighted } = this.state;
-    const { history, currentProject, setParent } = this.props;
+    const { history, currentProject } = this.props;
     const components = currentProject.components || [];
     const root = helper.root(components);
     const childs = helper.childs(components);

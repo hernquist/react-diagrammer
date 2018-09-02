@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 export default class ComponentList extends Component {
   render() {
-    const { childs, chooseComponent, highlighted, text } = this.props;
+    const { childs, chooseComponent, highlighted, text, display } = this.props;
+    if (!display) return null;
     return (
       <div>
         <div style={{borderBottom: '1px solid black'}}>{text}</div>
