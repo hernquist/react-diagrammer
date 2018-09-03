@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
 import { COPY_COMPONENT, ADD_CHILD, COPY_CHILDREN } from '../../../graphql/mutations';
-import ComponentList from './Workings/ComponentList';
+import ComponentList from './StateAndProps/ComponentList';
 import helper from '../../../Helper/helper';
-import KeepChildren from './Workings/KeepChildren';
+import KeepChildren from './Children/KeepChildren';
 
 export default class AddExistingComponent extends Component {
   state = {
@@ -145,7 +145,7 @@ export default class AddExistingComponent extends Component {
                             setParent('');
                             history.push('/main')
                           }}
-                          >
+                        >
                           CANCEL 
                         </button>
                       </div>

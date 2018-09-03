@@ -4,6 +4,7 @@ import CreateProject from './Projects/CreateProject';
 import DeleteProject from './Projects/DeleteProject';
 import CurrentComponent from './Components/CurrentComponent';
 import UpdateComponentWorkings from './Components/UpdateComponentWorkings';
+import UpdateCallbackWorkings from './Components/UpdateCallbackWorkings';
 import EditComponentName from './Components/EditComponentName';
 import CreateComponent from './Components/CreateComponent';
 import AddExistingComponent from './Components/AddExistingComponent';
@@ -79,6 +80,16 @@ class RightDashboard extends Component {
               updateComponent={updateComponent}
               currentProject={currentProject}
               type="prop"
+            />
+          }
+        />
+        <Route
+          path="/main/component/:component/:id/update-callbacks"
+          render={renderProps =>
+            <UpdateCallbackWorkings
+              {...renderProps}
+              updateComponent={updateComponent}
+              currentProject={currentProject}
             />
           }
         />

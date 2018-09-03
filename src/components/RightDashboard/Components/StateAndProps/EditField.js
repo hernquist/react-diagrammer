@@ -45,12 +45,13 @@ class EditField extends Component {
     const { data } = await mutation({ variables: { _id } });
     if (data.deleteProp || data.deleteState) {
       const { currentComponent, type } = this.props;
+      let updatedComponent;
       if (type === 'state') {
         const state = currentComponent.state.filter(s => _id !== s._id);
-        var updatedComponent = Object.assign({}, currentComponent, { state });
+        updatedComponent = Object.assign({}, currentComponent, { state });
       } else if (type === 'props') {
         const props = currentComponent.props.filter(prop => _id !== prop._id);
-        var updatedComponent = Object.assign({}, currentComponent, { props });
+        updatedComponent = Object.assign({}, currentComponent, { props });
       }
       this.props.updateComponent(updatedComponent);
       this.props.reset();

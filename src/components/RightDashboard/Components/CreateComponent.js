@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
 import { CREATE_COMPONENT, ADD_CHILD } from '../../../graphql/mutations';
-import ComponentList from './Workings/ComponentList';
+import ComponentList from './StateAndProps/ComponentList';
 import helper from '../../../Helper/helper';
 
 export default class CreateComponent extends Component {
