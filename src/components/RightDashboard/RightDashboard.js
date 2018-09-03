@@ -26,7 +26,7 @@ class RightDashboard extends Component {
       <div>
         <Route 
           path="/main/new-project" 
-          render={ renderProps => 
+          render={renderProps => 
             <CreateProject 
               {...renderProps} 
               user={user}

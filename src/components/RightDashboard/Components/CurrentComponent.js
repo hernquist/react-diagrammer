@@ -48,7 +48,6 @@ class CurrentComponent extends Component {
         <div 
           className="dashboard-button hideable update-callbacks"
           onClick={() => this.props.history.push(this.props.match.url + '/update-callbacks')}
-        
         >
           <div className="button-content">UPDATE</div>
           <div className="button-content">CALLBACKS</div>

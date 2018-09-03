@@ -7,7 +7,7 @@ export default class UpdateCallbackWorkings extends Component {
     onHover: true
   }
   render() {
-    const { currentProject, history, updateComponent, type } = this.props;
+    const { currentProject, history, updateComponent } = this.props;
     const { components } = currentProject;
     if (!components) return <div>No Components</div>
 
@@ -26,7 +26,9 @@ export default class UpdateCallbackWorkings extends Component {
       <div>
         <DisplayCallbacks 
           currentComponent={currentComponent}
-          
+          editCallback={this.editCallback}
+          resetHighlight={this.resetHighlight}
+          setHighlight={this.setHighlight}
         />
 
       </div>
