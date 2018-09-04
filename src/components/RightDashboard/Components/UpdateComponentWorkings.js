@@ -38,6 +38,7 @@ class UpdateComponentWorkings extends Component {
 
   render() {
     const { currentProject, history, updateComponent, type } = this.props;
+    
     const { components } = currentProject;
     if (!components) return <div>No Components</div>
 
@@ -54,6 +55,7 @@ class UpdateComponentWorkings extends Component {
       highlighted,
       onHover
     } = this.state;
+
 
     if (currentComponent.style === 'presentational' && type === "state") return (
       <NoStateAllowed exit={this.exitComponent}/>
@@ -102,6 +104,7 @@ class UpdateComponentWorkings extends Component {
         >
           DONE
         </button>
+
       </div>
     );
   }
