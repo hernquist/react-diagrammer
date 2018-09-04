@@ -7,7 +7,7 @@ export default class UpdateCallbackWorkings extends Component {
     name: "",
     description: "",
     functionArgs: [],
-    argName: "test",
+    argName: "",
     typeName: "",
     setState: [],
     stateField: "",
@@ -22,6 +22,16 @@ export default class UpdateCallbackWorkings extends Component {
   handleChange = (e, key) => {
     console.log(e, key);
     this.setState({ [key]: e.target.value });
+  }
+
+  addElement = key => {
+    const { argName, typeName, stateField, stateChange } = this.state;
+    key === 'functionArgs' && this.setState({
+      [key]: [...this.state.functionArgs, {argName, typeName}], 
+      argName: "",
+      typeName: ""
+    })
+    key === 'setState'
   }
 
   // displayAddField = () => this.setState({ showAddField: true });
@@ -79,6 +89,7 @@ export default class UpdateCallbackWorkings extends Component {
 
         <CallbackForm
           handleChange={this.handleChange}
+          addElement={this.addElement}
           name={name}
           description={description} 
           functionArgs={functionArgs}
