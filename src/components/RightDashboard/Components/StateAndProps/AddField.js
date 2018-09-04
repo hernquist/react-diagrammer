@@ -51,7 +51,7 @@ class AddField extends Component {
             </label>
             <label>
               {type === 'state' ? "STATE TYPE" : "PROPTYPE"}
-              <select value={value2} onChange={(e) => handleChange(e, 'value2')}>
+              <select value={value2} onChange={e => handleChange(e, 'value2')}>
                 <option value="boolean">boolean</option>
                 <option value="number">number</option>
                 <option value="string">string</option>

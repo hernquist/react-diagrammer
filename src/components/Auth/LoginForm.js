@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import { LOGIN } from '../../graphql/mutations';
 import { GET_AUTH_USER } from '../../graphql/queries';
-import LoggedIn from '../Layout/LoggedIn'; 
 
 class LoginForm extends Component {
   constructor(props) {

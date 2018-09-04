@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
 import { CREATE_COMPONENT, ADD_CHILD } from '../../../graphql/mutations';
-import ComponentList from './Workings/ComponentList';
+import ComponentList from './StateAndProps/ComponentList';
 import helper from '../../../Helper/helper';
 
 export default class CreateComponent extends Component {
@@ -24,7 +24,6 @@ export default class CreateComponent extends Component {
   handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
   handleRoot = () => console.log("Are you sure you want this to be a root?")
-  
 
   handleUnassigned = () => {
     this.setState({ placement: 'unassigned' });
@@ -62,7 +61,7 @@ export default class CreateComponent extends Component {
 
   render() {
     const { style, placement, name, highlighted } = this.state;
-    const { history, currentProject, setParent } = this.props;
+    const { history, currentProject } = this.props;
     const components = currentProject.components || [];
     const root = helper.root(components);
     const childs = helper.childs(components);
@@ -115,14 +114,13 @@ export default class CreateComponent extends Component {
                       CHILD 
                     </div>
                   )}
-                  {placement === 'child' && (
-                    <ComponentList 
-                      childs={[...root, ...childs]} 
-                      chooseComponent={this.handleParent}
-                      highlighted={highlighted}
-                      text="Choose a parent?"
-                    />
-                  )}
+                  <ComponentList 
+                    childs={[...root, ...childs]} 
+                    chooseComponent={this.handleParent}
+                    highlighted={highlighted}
+                    display={placement === 'child'}
+                    text="Choose a parent?"
+                  />
                   {!doesRootExist && (
                     <div
                     onClick={() => this.handleRoot('root')}

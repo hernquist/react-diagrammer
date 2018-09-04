@@ -119,6 +119,7 @@ const TOGGLE_COMPONENT_STYLE = gql`
       name
       projectId
       style
+      cloneId
       state {
         _id
         name

@@ -4,13 +4,7 @@ import { Link } from 'react-router-dom';
 import '../../styles/LeftDashboard.css';
 
 class LeftDashboard extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      errors: [],
-      selector: false
-    }
-  }
+  state = { selector: false };
 
   componentDidMount() {
     this.props.needsSetting && this.props.setCurrentProject(this.props.currentProject);
@@ -41,12 +35,12 @@ class LeftDashboard extends Component {
   }
 
   render() {
-    const { layout, user, projects, currentProject, setCurrentProject } = this.props;
+    const { layout, projects, currentProject, setCurrentProject } = this.props;
     const content = {
       "full-screen": "SHOW",
       "logged-in": "HIDE"
     };
-    const { errors, selector } = this.state;
+    const { selector } = this.state;
     
     return ( 
       <div 

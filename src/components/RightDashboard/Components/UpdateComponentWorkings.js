@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import DisplayFields from './Workings/DisplayFields';
-import EditField from './Workings/EditField';
-import AddField from './Workings/AddField';
-import NoStateAllowed from './Workings/NoStateAllowed';
+import DisplayFields from './StateAndProps/DisplayFields';
+import EditField from './StateAndProps/EditField';
+import AddField from './StateAndProps/AddField';
+import NoStateAllowed from './StateAndProps/NoStateAllowed';
 
 class UpdateComponentWorkings extends Component {
   initialState = {

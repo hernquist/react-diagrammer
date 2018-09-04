@@ -18,9 +18,10 @@ const KeepChildren = ({ hasChildren, display, keepChildren, setKeepChildren }) =
       >
         NO
       </div>
+      <hr/>
     </div> 
   )
-  return <div>No children</div>
+  return <div>No children<hr/></div>
 }
 
 export default KeepChildren
