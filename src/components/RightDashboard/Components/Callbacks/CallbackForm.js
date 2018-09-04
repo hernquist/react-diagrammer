@@ -33,6 +33,10 @@ export default class CallbackForm extends Component {
           </label>
         </div>
 
+        {functionArgs.map((arg, i) => 
+          <div key={arg.argName+i}>{arg.argName} and {arg.typeName}</div>
+        )}
+
         <div>
           <label>
             Callback Argument
@@ -40,6 +44,8 @@ export default class CallbackForm extends Component {
           </label>
         </div>
         
+        {/* selector for types */}
+
         <div>
           <label>
             Argument Type 
@@ -55,6 +61,9 @@ export default class CallbackForm extends Component {
           <div className="button-content">ARGUMENT</div>
         </div>
         
+
+        {/* todo make a selector */}
+        
         <div>
           <label>
             State Field  
@@ -62,6 +71,7 @@ export default class CallbackForm extends Component {
           </label>
         </div>
         
+        {/* offer some sort of guidance */}
         <div>
           <label>
             State Change
@@ -76,8 +86,6 @@ export default class CallbackForm extends Component {
           <div className="button-content">SUBMIT</div>
           <div className="button-content">STATE</div>
           <div className="button-content">CHANGE</div>
-
-          
         </div>
 
 

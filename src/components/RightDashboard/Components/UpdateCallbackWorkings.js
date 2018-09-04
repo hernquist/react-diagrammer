@@ -25,13 +25,17 @@ export default class UpdateCallbackWorkings extends Component {
   }
 
   addElement = key => {
-    const { argName, typeName, stateField, stateChange } = this.state;
+    const { argName, typeName, functionArgs, stateField, stateChange, setState } = this.state;
     key === 'functionArgs' && this.setState({
-      [key]: [...this.state.functionArgs, {argName, typeName}], 
+      functionArgs: [...functionArgs, {argName, typeName}], 
       argName: "",
       typeName: ""
     })
-    key === 'setState'
+    key === 'setState' && this.setState({
+      setState: [...setState, { stateField, stateChange }],
+      stateField: "",
+      stateChange: ""
+    })
   }
 
   // displayAddField = () => this.setState({ showAddField: true });
