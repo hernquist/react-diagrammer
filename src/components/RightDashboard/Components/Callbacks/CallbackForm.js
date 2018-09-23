@@ -14,7 +14,11 @@ export default class CallbackForm extends Component {
       stateChange,
       // highlighted,
       // onHover,
-      handleChange
+      handleChange,
+
+      mutation,
+      callback,
+      currentComponent
     } = this.props;
 
     return (
@@ -61,7 +65,10 @@ export default class CallbackForm extends Component {
           <div className="button-content">ARGUMENT</div>
         </div>
         
-
+        {setState.map((field, i) =>
+          <div key={field.stateChange + i}>{field.stateField} and {field.stateChange}</div>
+        )}
+        
         {/* todo make a selector */}
         
         <div>
@@ -72,6 +79,7 @@ export default class CallbackForm extends Component {
         </div>
         
         {/* offer some sort of guidance */}
+
         <div>
           <label>
             State Change
@@ -86,6 +94,14 @@ export default class CallbackForm extends Component {
           <div className="button-content">SUBMIT</div>
           <div className="button-content">STATE</div>
           <div className="button-content">CHANGE</div>
+        </div>
+
+        <div
+          className="dashboard-button"
+          onClick={() => callback(currentComponent, mutation)}
+        >
+          <div className="button-content">SAVE</div>
+          <div className="button-content">CALLBACK</div>
         </div>
 
 

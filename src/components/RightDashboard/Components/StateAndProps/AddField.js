@@ -36,7 +36,6 @@ class AddField extends Component {
     this.props.discardField();
   }
 
-
   render() {
     const { type, currentComponent, value1, value2, handleChange, discardField } = this.props;
     const MUTATION = type === 'state' ? ADD_STATE : ADD_PROP;
