@@ -15,10 +15,10 @@ export default class CallbackForm extends Component {
       // highlighted,
       // onHover,
       handleChange,
-
       mutation,
       callback,
-      currentComponent
+      currentComponent, 
+      create
     } = this.props;
 
     return (
@@ -96,13 +96,15 @@ export default class CallbackForm extends Component {
           <div className="button-content">CHANGE</div>
         </div>
 
-        <div
-          className="dashboard-button"
-          onClick={() => callback(currentComponent, mutation)}
-        >
-          <div className="button-content">SAVE</div>
-          <div className="button-content">CALLBACK</div>
-        </div>
+        {create && 
+          <div
+            className="dashboard-button"
+            onClick={() => callback(currentComponent, mutation)}
+          >
+            <div className="button-content">SAVE</div>
+            <div className="button-content">CALLBACK</div>
+          </div>
+        }
       </div>
     )
   }

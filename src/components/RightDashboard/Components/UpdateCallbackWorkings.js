@@ -14,14 +14,14 @@ export default class UpdateCallbackWorkings extends Component {
     setState: [],
     stateField: "",
     stateChange: "",
-    // showAddField: false,
-    highlighted: { _id: null },
-    onHover: true,
-
-    renderForm: false
   }
 
-  state = this.initialState;
+  state = {
+    ...this.initialState, 
+    highlighted: { _id: null },
+    onHover: true,
+    renderForm: false
+  }
 
   handleChange = (e, key) => {
     console.log(e.target.value, key);
@@ -55,12 +55,7 @@ export default class UpdateCallbackWorkings extends Component {
     const { data } = await mutation({  variables: { callback }})
     const component = Object.assign({}, currentComponent, { callbacks: [...currentComponent.callbacks, data.addCallback] });
     this.props.updateComponent(component);
-    this.setState({ 
-      name: "",
-      description: "",
-      functionArgs: [],
-      setState: []
-    })
+    this.setState( this.initialState )
     this.toggleForm()
   }
 
@@ -133,7 +128,7 @@ export default class UpdateCallbackWorkings extends Component {
       onHover,
       renderForm
     } = this.state;
-    const { currentProject, history } = this.props;
+    const { currentProject, history, updateComponent } = this.props;
     const { components } = currentProject;
     if (!components) return <div>No Components</div>
 
@@ -155,7 +150,6 @@ export default class UpdateCallbackWorkings extends Component {
                 currentComponent={currentComponent}
                 callback={this.saveCallback}
                 mutation={AddCallback}
-
                 handleChange={this.handleChange}
                 addElement={this.addElement}
                 name={name}
@@ -166,11 +160,13 @@ export default class UpdateCallbackWorkings extends Component {
                 setState={setState}
                 stateField={stateField}
                 stateChange={stateChange}
+                create={true}
               />
             )}
           </Mutation> : 
           <DisplayCallbacks 
             currentComponent={currentComponent}
+            updateComponent={updateComponent}
             editCallback={this.editCallback}
             resetHighlight={this.resetHighlight}
             setHighlight={this.setHighlight}
