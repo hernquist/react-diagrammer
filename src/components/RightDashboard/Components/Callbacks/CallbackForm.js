@@ -38,7 +38,7 @@ export default class CallbackForm extends Component {
         </div>
 
         {functionArgs.map((arg, i) => 
-          <div key={arg.argName+i}>{arg.argName} and {arg.typeName}</div>
+          <div key={arg.argName+i}>{arg.name} and {arg.typeName}</div>
         )}
 
         <div>
@@ -103,8 +103,6 @@ export default class CallbackForm extends Component {
           <div className="button-content">SAVE</div>
           <div className="button-content">CALLBACK</div>
         </div>
-
-
       </div>
     )
   }
