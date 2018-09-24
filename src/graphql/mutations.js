@@ -328,6 +328,7 @@ const EDIT_CALLBACK = gql`
       setState: $setState
     ) {
       _id
+      componentId
       name
       description
       setState{
