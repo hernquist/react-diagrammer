@@ -56,7 +56,20 @@ export default class DisplayCallbacks extends Component {
   }
 
   editCallback =  async mutation => {
-    
+    const { name, description, functionArgs, setState } = this.state;
+    const { currentComponent } = this.props;
+    const componentId = currentComponent._id;
+    const callback = {
+      componentId,
+      name,
+      description,
+      functionArgs,
+      setState
+    }
+    const { data } = await mutation({ variables: { callback } })
+    const callbacks = currentComponent.callbacks.map(cb => componentId === cb._id ? data.addCallback : cb)
+    const component = Object.assign({}, currentComponent, { callbacks });
+    this.props.updateComponent(component);
   }
 
   render() {

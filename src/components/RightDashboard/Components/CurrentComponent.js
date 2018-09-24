@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Mutation } from 'react-apollo';
 import { TOGGLE_COMPONENT_STYLE } from '../../../graphql/mutations';
-import helper from '../../../Helper/helper';
+import helper from '../../../helpers/helper';
 import '../../../styles/RightDashboard.css';
 
 class CurrentComponent extends Component {

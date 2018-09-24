@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import auth from "../HOC/auth"
 import '../../styles/DiagramMain.css'
 import ShowUnassigned from './ShowUnassigned';
-import helper from '../../Helper/helper';
+import helper from '../../helpers/helper';
 
 const DisplayComponent = ({ component, parent, history }) => {
   const { name, iteration } = component;

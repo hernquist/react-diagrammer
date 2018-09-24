@@ -316,16 +316,16 @@ const EDIT_CALLBACK = gql`
   mutation EditCallback(
     $_id: String!,
     $name: String,
+    $description: String,
     $functionArgs: [InputArgument], 
-    $setState: [InputSetStateParams],
-    $description: String
+    $setState: [InputSetStateParams]
   ) {
     editCallback(
       _id: $_id,
       name: $name,
+      description: $description,
       functionArgs: $functionArgs,
-      setState: $setState,
-      description: $description
+      setState: $setState
     ) {
       _id
       name

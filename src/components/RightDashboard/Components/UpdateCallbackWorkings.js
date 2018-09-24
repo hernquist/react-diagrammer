@@ -63,40 +63,9 @@ export default class UpdateCallbackWorkings extends Component {
     this.setState({ renderForm: !this.state.renderForm })
   }
 
-  // saveField = async (currentComponent, mutation) => {
-  //   const updatedComponent = this.props.type === 'state' ?
-  //     await this.mutationState(currentComponent, mutation) :
-  //     await this.mutationProp(currentComponent, mutation);
-  //   console.log(updatedComponent);
-  //   this.props.updateComponent(updatedComponent)
-  //   this.props.discardField();
-  // }
-
-  // mutationState = async (currentComponent, mutation) => {
-  //   const componentId = currentComponent._id;
-  //   const state = {
-  //     componentId,
-  //     name: this.props.value1,
-  //     statetype: this.props.value2
-  //   };
-  //   const { data } = await mutation({ variables: { state } });
-  //   const stateObjects = data.addState.state.map(stateItem => ({ ...stateItem, componentId }));
-  //   return Object.assign({}, currentComponent, { state: stateObjects });
-  // }
-
-
-  // displayAddField = () => this.setState({ showAddField: true });
-
-  // discardField = () => this.setState({ ...this.initialState });
-
   editCallback = cb => {
     if (this.state.onHover) this.setState({ highlighted: cb });
   };
-
-  // exitComponent = () => {
-  //   const match = this.props.match.url.split("/").slice(0, 5).join("/");
-  //   this.props.history.push(match);
-  // }
 
   resetHighlight = () => {
     if (this.state.onHover) this.setState({ highlighted: { _id: null } });
