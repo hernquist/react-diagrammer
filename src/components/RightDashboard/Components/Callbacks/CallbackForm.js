@@ -18,7 +18,8 @@ export default class CallbackForm extends Component {
       mutation,
       callback,
       currentComponent, 
-      create
+      create,
+      deleteElement
     } = this.props;
 
     return (
@@ -37,8 +38,10 @@ export default class CallbackForm extends Component {
           </label>
         </div>
 
-        {functionArgs.map((arg, i) => 
-          <div key={arg.argName+i}>{arg.name} and {arg.typeName}</div>
+        {functionArgs.map((field, i) => 
+          <div key={i}>{field.name} and {field.typeName}
+            <span onClick={() => deleteElement(field, 'functionArgs')}> X </span>
+          </div>
         )}
 
         <div>
@@ -59,15 +62,20 @@ export default class CallbackForm extends Component {
 
         <div 
           className="dashboard-button" 
-          onClick={()=>addElement('functionArgs')}
+          onClick={() => addElement('functionArgs')}
         >
           <div className="button-content">SUBMIT</div>
           <div className="button-content">ARGUMENT</div>
         </div>
         
-        {setState.map((field, i) =>
-          <div key={field.stateChange + i}>{field.stateField} and {field.stateChange}</div>
-        )}
+        {setState.map((field, i) => {
+          console.log('field:', field);
+          return (
+            <div key={i}>{field.stateField} and {field.stateChange}
+              <span onClick={() => deleteElement(field, 'setState')}> X </span>
+            </div>
+          )
+        })}
         
         {/* todo make a selector */}
         

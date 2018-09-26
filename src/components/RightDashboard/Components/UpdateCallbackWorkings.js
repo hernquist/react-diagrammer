@@ -42,6 +42,12 @@ export default class UpdateCallbackWorkings extends Component {
     })
   }
 
+  deleteElement = (field, key) => {
+    const elements = this.state[key];
+    const updatedElements = elements.filter(element => element !== field)
+    this.setState({ [key]: updatedElements })
+  }
+
   saveCallback = async (currentComponent, mutation) => {
     const { name, description, functionArgs, setState } = this.state;
     const componentId = currentComponent._id;
@@ -63,7 +69,7 @@ export default class UpdateCallbackWorkings extends Component {
     this.setState({ renderForm: !this.state.renderForm })
   }
 
-  editCallback = cb => {
+  editCb = cb => {
     if (this.state.onHover) this.setState({ highlighted: cb });
   };
 
@@ -71,16 +77,13 @@ export default class UpdateCallbackWorkings extends Component {
     if (this.state.onHover) this.setState({ highlighted: { _id: null } });
   };
 
-  setHighlight = cb => {
-    cb._id === this.state.highlighted._id && this.state.onHover === false ? 
-    this.setState({
-      onHover: true,
-      highlighted: { _id: null }
-    }) :
-    this.setState({ 
-      onHover: false, 
-      highlighted: cb 
-    });
+  setHighlight = cb => cb._id === this.state.highlighted._id && this.state.onHover === false ? 
+    this.setState({ onHover: true, highlighted: { _id: null } }) :
+    this.setState({ onHover: false, highlighted: cb });
+  
+  resetUpdateCallbacks = () => {
+    this.setState({ onHover: true });
+    this.resetHighlight();
   }
 
   render() {
@@ -94,7 +97,6 @@ export default class UpdateCallbackWorkings extends Component {
       stateField,
       stateChange,
       highlighted,
-      onHover,
       renderForm
     } = this.state;
     const { currentProject, history, updateComponent } = this.props;
@@ -136,7 +138,8 @@ export default class UpdateCallbackWorkings extends Component {
           <DisplayCallbacks 
             currentComponent={currentComponent}
             updateComponent={updateComponent}
-            editCallback={this.editCallback}
+            editCb={this.editCb}
+            resetUpdateCallbacks={this.resetUpdateCallbacks}
             resetHighlight={this.resetHighlight}
             setHighlight={this.setHighlight}
             toggleForm={this.toggleForm}

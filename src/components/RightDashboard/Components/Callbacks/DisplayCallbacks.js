@@ -18,8 +18,6 @@ export default class DisplayCallbacks extends Component {
       functionArgs: prevState.functionArgs || props.highlighted.functionArgs,
       setState: prevState.setState || props.highlighted.setState,
       renderEditForm: prevState ? prevState.renderEditForm : false,
-      
-
     }
     return {...prevState, ...state };
   }
@@ -57,33 +55,36 @@ export default class DisplayCallbacks extends Component {
     this.setState({ renderEditForm: false })
   }
 
-  editCallback =  async mutation => {
+  editCallback = async mutation => {
     const { name, description } = this.state;
-    const { highlighted, currentComponent } = this.props;
+    const { highlighted, currentComponent, resetUpdateCallbacks, updateComponent } = this.props;
     const { _id } = highlighted;
-    console.log(_id, typeof _id)
     const setState = this.state.setState.map(field => ({
       stateField: field.stateField, 
       stateChange: field.stateChange
     }))
-    
-    console.log(setState)
+
     const functionArgs = this.state.functionArgs.map(field => ({ name: field.name, typeName: field.typeName }))
-    console.log(functionArgs)
 
     const { data } = await mutation({ variables: { _id, name, description, functionArgs, setState } })
-    console.log('data:', data);
     const callbacks = currentComponent.callbacks.map(cb => _id === cb._id ? data.editCallback : cb)
     const component = Object.assign({}, currentComponent, { callbacks });
     
-    this.props.updateComponent(component);
-    this.setState({ renderEditForm: false })
+    updateComponent(component);
+    resetUpdateCallbacks();
+    this.setState({ renderEditForm: false });
+  }
+
+  deleteElement = (field, key) => {
+    const elements = this.state[key];
+    const updatedElements = elements.filter(element => element !== field )
+    this.setState({ [key]: updatedElements })
   }
 
   render() {
     const { 
       currentComponent, 
-      editCallback, 
+      editCb, 
       resetHighlight, 
       setHighlight, 
       toggleForm,
@@ -94,7 +95,11 @@ export default class DisplayCallbacks extends Component {
       description, 
       functionArgs,
       setState,
-      renderEditForm
+      renderEditForm,
+      argName,
+      typeName,
+      stateChange,
+      stateField
     } = this.state;
     
     const { callbacks } = currentComponent;
@@ -102,8 +107,8 @@ export default class DisplayCallbacks extends Component {
     return (
       <Mutation mutation={EDIT_CALLBACK}>
         {EditCallback => (
-          // <Mutation mutation={DELETE_CALLBACK}>
-            // {DeleteCallback =>  (
+          <Mutation mutation={DELETE_CALLBACK}>
+            {DeleteCallback =>  (
               renderEditForm ? 
               <div>
                 <CallbackForm
@@ -113,6 +118,11 @@ export default class DisplayCallbacks extends Component {
                   setState={setState}
                   handleChange={this.handleChange}
                   addElement={this.addElement}
+                  argName={argName}
+                  typeName={typeName}
+                  stateField={stateField}
+                  stateChange={stateChange}
+                  deleteElement={this.deleteElement}
                 />
                 <div
                   className="dashboard-button hideable"
@@ -123,8 +133,7 @@ export default class DisplayCallbacks extends Component {
                 </div>
                 <div
                   className="dashboard-button hideable "
-                  // onClick={() => this.deleteCallback(DeleteCallback)}
-                  // onClick={() => this.deleteCallback()}
+                  onClick={() => this.deleteCallback(DeleteCallback)}
                 >
                   <div className="button-content">DELETE</div>
                   <div className="button-content">CALLBACK</div>
@@ -136,7 +145,7 @@ export default class DisplayCallbacks extends Component {
                   : 
                   ( <div>
                     <h3>Click a Callback To Edit</h3>
-                    {callbacks.map((callback, index) => (
+                    {callbacks.map(callback => (
                       <div
                         style={{ 
                           fontSize: "16px", 
@@ -144,7 +153,7 @@ export default class DisplayCallbacks extends Component {
                           backgroundColor: highlighted._id === callback._id && 'rgba(0, 0, 0, 0.3)'
                         }} 
                         key={callback._id}
-                        onMouseEnter={() => editCallback(callback)}
+                        onMouseEnter={() => editCb(callback)}
                         onMouseLeave={resetHighlight}
                         onClick={() => {
                           setHighlight(callback);
@@ -167,8 +176,8 @@ export default class DisplayCallbacks extends Component {
 
               </div>
             )}
-          {/* </Mutation> */}
-        {/* )} */}
+          </Mutation>
+        )}
       </Mutation>
     );
   }
