@@ -12,12 +12,17 @@ export default class DisplayCallbacks extends Component {
   }
   
   static getDerivedStateFromProps(props, prevState) {
-    const state = {
-      name: prevState.name || props.highlighted.name,
-      description: prevState.description || props.highlighted.description,
-      functionArgs: prevState.functionArgs || props.highlighted.functionArgs,
-      setState: prevState.setState || props.highlighted.setState,
-      renderEditForm: prevState ? prevState.renderEditForm : false,
+    let state;
+    if (prevState.name === undefined) {
+      state = {
+        name: props.highlighted.name,
+        description: props.highlighted.description,
+        functionArgs: props.highlighted.functionArgs,
+        setState: props.highlighted.setState,
+        renderEditForm: false
+      }
+    // } else {
+    //   state = {}
     }
     return {...prevState, ...state };
   }
@@ -48,11 +53,38 @@ export default class DisplayCallbacks extends Component {
     console.log(data);
     // TODO should be based on data variable
     const updatedCallbacks = this.props.currentComponent.callbacks.filter(callback => callback._id !== _id)
-    console.log(this.props.currentComponent)
     const component = Object.assign({}, this.props.currentComponent, { callbacks: updatedCallbacks });
-    console.log('updated component:', component)
     this.props.updateComponent(component);
     this.setState({ renderEditForm: false })
+  }
+
+  updateValidation = (mutation) => {
+    const {
+      createNotification
+    } = this.props;
+    const {
+      name
+    } = this.state;
+
+    let message, title, details;
+
+    switch (true) {
+      case name.length === 0:
+        message = 'emptyField';
+        details = 'Callback name';
+        break;
+      case name.length < 3:
+        message = 'minimumLength';
+        details = 'callback name';
+        break;
+
+      default:
+        message = false;
+        break;
+    };
+
+    message ? createNotification('warning', message, title, details)()
+      : this.editCallback(mutation)
   }
 
   editCallback = async mutation => {
@@ -128,7 +160,7 @@ export default class DisplayCallbacks extends Component {
                 />
                 <div
                   className="dashboard-button hideable"
-                  onClick={() => this.editCallback(EditCallback)}
+                  onClick={() => this.updateValidation(EditCallback)}
                 >
                   <div className="button-content">UPDATE</div>
                   <div className="button-content">CALLBACK</div>

@@ -16,6 +16,38 @@ export default class CallbackForm extends Component {
       : this.props.addElement(name);
   }
 
+  // updateValidation = () => {
+  //   const {
+  //     callback,
+  //     currentComponent, 
+  //     mutation,
+  //     name,
+  //     createNotification
+  //   } = this.props;
+
+  //   let message, title, details; 
+  //   console.log(name.length);
+    
+  //   switch (true) {
+  //     case name.length === 0:
+  //       message = 'emptyField';
+  //       details = 'Callback name';
+  //       break;
+  //     case name.length < 3:
+  //       console.log('less than three')
+  //       message = 'minimumLength';
+  //       details = 'callback name';
+  //       break;
+      
+  //     default:
+  //       message = false;
+  //       break;
+  //   };
+
+  //   message ? createNotification('warning', message, title, details)()
+  //   : callback(currentComponent, mutation)
+  // }
+
   render() {
     const {
       name,
@@ -23,18 +55,17 @@ export default class CallbackForm extends Component {
       functionArgs,
       argName,
       typeName,
-      addElement,
       setState,
       stateField,
       stateChange,
       // highlighted,
       // onHover,
       handleChange,
-      mutation,
-      callback,
-      currentComponent, 
       create,
-      deleteElement
+      deleteElement,
+      callback, 
+      currentComponent,
+      mutation
     } = this.props;
 
     return (
@@ -120,7 +151,7 @@ export default class CallbackForm extends Component {
         {create && 
           <div
             className="dashboard-button"
-            onClick={() => callback(currentComponent, mutation)}
+          onClick={callback(currentComponent, mutation)}
           >
             <div className="button-content">SAVE</div>
             <div className="button-content">CALLBACK</div>

@@ -55,10 +55,12 @@ export default class AddExistingComponent extends Component {
       iteration: this.findIteration(child)
     }));
 
-    const result = await copyChildren({ variables: { childrenData } }); 
+    const result = await copyChildren({ variables: { childrenData } });
+    console.log ('result', result, keepChildren); 
     
     const { cloneId } = copiedComponent;
     const iteration = this.findIteration(cloneId);
+    console.log('iteration', iteration)
 
     const children = keepChildren ? result.data.copyChildren.map(child => child._id) : [];
     
@@ -71,7 +73,12 @@ export default class AddExistingComponent extends Component {
       { children }
     )
     delete component._id;
+    delete component.callbacks;
+    delete component.props;
+    delete component.state;
+    console.log(component);
     const { data } = await mutation({ variables: component });
+    console.log('data', data);
     
     this.props.addComponent(data.copyComponent);
     // TODO: this Object.assign to cover up a glitch in the backend...

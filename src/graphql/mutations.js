@@ -74,7 +74,14 @@ const CREATE_COMPONENT = gql`
 
 const COPY_COMPONENT = gql`
   mutation CopyComponent($name: String!, $projectId: String!, $cloneId: String! $iteration: Int!, $style: ComponentType!, $placement: Placement!, $children: [String]) {
-    copyComponent(name: $name, projectId: $projectId, cloneId: $cloneId, style: $style, iteration: $iteration, placement: $placement, children: $children) {
+    copyComponent(
+      name: $name, 
+      projectId: $projectId, 
+      cloneId: $cloneId, 
+      style: $style, 
+      iteration: $iteration, 
+      placement: $placement, 
+      children: $children) {
       _id
       projectId
       cloneId
@@ -178,9 +185,14 @@ const COPY_CHILDREN = gql`
       }
       callbacks {
         name
+        description
         functionArgs {
           name
           typeName
+        }
+        setState {
+          stateField
+          stateChange
         }
       }
     }

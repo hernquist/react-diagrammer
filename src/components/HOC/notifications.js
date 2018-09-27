@@ -6,14 +6,14 @@ import messageBuilder from '../../helpers/notifications';
 
 export default WrappedComponent => {
   class Notifications extends Component {
-    createNotification = (type, iMessage, iTitle, details, iTime, iCallback) => () => {
+    createNotification = (type, _message, _title, details, _time, _cb) => () => {
       const { 
         message, 
         title, 
         time, 
         cb,
         priority 
-      } = messageBuilder(type, iMessage, iTitle, details, iTime, iCallback)
+      } = messageBuilder(type, _message, _title, details, _time, _cb)
       switch (type) {
         case 'info':
           NotificationManager.info(message, title, time, cb, priority);
