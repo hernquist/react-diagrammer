@@ -1,23 +1,21 @@
-import React, { Component } from "react";
-// import { NotificationContainer, NotificationManager } from 'react-notifications';
-import HeaderContainer from "../Header/HeaderContainer";
-import LeftDashboard from "../LeftDashboard/LeftDashboard";
-import RightDashoard from "../RightDashboard/RightDashboard";
-import DiagramMain from "../Diagram/DiagramMain";
-import { Query } from "react-apollo";
-import { GET_AUTH_USER, PROJECTS_BY_USER_ID } from "../../graphql/queries";
-// import 'react-notifications/lib/notifications.css';
+import React, { Component } from 'react';
+import HeaderContainer from '../Header/HeaderContainer';
+import LeftDashboard from '../LeftDashboard/LeftDashboard';
+import RightDashoard from '../RightDashboard/RightDashboard';
+import DiagramMain from '../Diagram/DiagramMain';
+import { Query } from 'react-apollo';
+import { GET_AUTH_USER, PROJECTS_BY_USER_ID } from '../../graphql/queries';
 import notifications from '../HOC/notifications'
-import "../../styles/Layout.css";
+import '../../styles/Layout.css';
 
 class LoggedIn extends Component {
   constructor(props){
     super(props);
     this.state = {
-      layout: "logged-in",
+      layout: 'logged-in',
       currentProject: null,
       errors: [],
-      parent: ""
+      parent: ''
     }
   }
 
@@ -43,25 +41,6 @@ class LoggedIn extends Component {
   }
   
   setParent = id => this.setState({ parent: id });
-
-  // createNotification = (type, message, details, time, callback) => () => {
-  //   switch (type) {
-  //     case 'info':
-  //       NotificationManager.info('Info message');
-  //       break;
-  //     case 'success':
-  //       NotificationManager.success('Success message', 'Title here');
-  //       break;
-  //     case 'warning':
-  //       NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
-  //       break;
-  //     case 'error':
-  //       NotificationManager.error('Error message', 'Click me!', 5000, () => {
-  //         alert('callback');
-  //       });
-  //       break;
-  //   };
-  // };
 
   render() {
     const { layout, errors, currentProject, parent } = this.state;

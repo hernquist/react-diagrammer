@@ -5,11 +5,15 @@ export default class CallbackForm extends Component {
     super(props);
   }
 
-  verification = () => {
-    console.log('in verification');
-    this.props.argName.length < 3 || this.props.typeName.length < 3 ? 
-    this.props.createNotification('error')()
-    : this.props.addElement('functionArgs');
+  validation = name => {
+    const mapping = {
+      functionArgs: ['callback arguments', 'argName', 'typeName'],
+      setState: ['setState', 'stateField', 'stateChange']
+    }
+    const [first, second] = [this.props[mapping[name][1]].length, this.props[mapping[name][2]].length]
+    const message = first === 0 || second === 0 ? 'emptyFields' : null;
+    message ? this.props.createNotification('warning', message, message, mapping[name][0])()
+      : this.props.addElement(name);
   }
 
   render() {
@@ -74,7 +78,7 @@ export default class CallbackForm extends Component {
         <div 
           className="dashboard-button" 
           // onClick={this.props.createNotification('warning')}
-          onClick={this.verification}
+          onClick={() => this.validation('functionArgs')}
         >
           <div className="button-content">SUBMIT</div>
           <div className="button-content">ARGUMENT</div>
@@ -106,7 +110,7 @@ export default class CallbackForm extends Component {
 
         <div 
           className="dashboard-button"
-          onClick={() => addElement('setState')}
+          onClick={() => this.validation('setState')}
         >
           <div className="button-content">SUBMIT</div>
           <div className="button-content">STATE</div>
