@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+// import { NotificationContainer, NotificationManager } from 'react-notifications';
 import HeaderContainer from "../Header/HeaderContainer";
 import LeftDashboard from "../LeftDashboard/LeftDashboard";
 import RightDashoard from "../RightDashboard/RightDashboard";
 import DiagramMain from "../Diagram/DiagramMain";
 import { Query } from "react-apollo";
 import { GET_AUTH_USER, PROJECTS_BY_USER_ID } from "../../graphql/queries";
-import 'react-notifications/lib/notifications.css';
+// import 'react-notifications/lib/notifications.css';
+import notifications from '../HOC/notifications'
 import "../../styles/Layout.css";
 
 class LoggedIn extends Component {
@@ -43,27 +44,28 @@ class LoggedIn extends Component {
   
   setParent = id => this.setState({ parent: id });
 
-  createNotification = (type, message, details, time, callback) => () => {
-    switch (type) {
-      case 'info':
-        NotificationManager.info('Info message');
-        break;
-      case 'success':
-        NotificationManager.success('Success message', 'Title here');
-        break;
-      case 'warning':
-        NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
-        break;
-      case 'error':
-        NotificationManager.error('Error message', 'Click me!', 5000, () => {
-          alert('callback');
-        });
-        break;
-    };
-  };
+  // createNotification = (type, message, details, time, callback) => () => {
+  //   switch (type) {
+  //     case 'info':
+  //       NotificationManager.info('Info message');
+  //       break;
+  //     case 'success':
+  //       NotificationManager.success('Success message', 'Title here');
+  //       break;
+  //     case 'warning':
+  //       NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+  //       break;
+  //     case 'error':
+  //       NotificationManager.error('Error message', 'Click me!', 5000, () => {
+  //         alert('callback');
+  //       });
+  //       break;
+  //   };
+  // };
 
   render() {
     const { layout, errors, currentProject, parent } = this.state;
+    const { createNotification } = this.props;
     const fullScreen = {
       display: layout === "full-screen" && "none"
     }
@@ -143,10 +145,10 @@ class LoggedIn extends Component {
                         updateComponent={this.updateComponent}
                         addComponent={this.addComponent}
                         setParent={this.setParent}
-                        createNotification={this.createNotification}
+                        createNotification={createNotification}
                       />
                     </div>
-                    <NotificationContainer />
+                    {/* <NotificationContainer /> */}
                   </div>
                 )
               }}
@@ -158,5 +160,5 @@ class LoggedIn extends Component {
   }
 }
   
-export default LoggedIn;
+export default notifications(LoggedIn);
   

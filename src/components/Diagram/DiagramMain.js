@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import auth from "../HOC/auth"
+import auth from '../HOC/auth'
 import '../../styles/DiagramMain.css'
 import ShowUnassigned from './ShowUnassigned';
 import helper from '../../helpers/helper';
@@ -14,7 +14,6 @@ const DisplayComponent = ({ component, parent, history }) => {
     'rgba(255, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.1)';
   const margin = '0 3px';
   const styles = { border, backgroundColor, margin };
-  // console.log(styles, parent, component);
     
   return (
     <div 

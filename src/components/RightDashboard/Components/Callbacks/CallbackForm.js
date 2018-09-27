@@ -8,7 +8,7 @@ export default class CallbackForm extends Component {
   verification = () => {
     console.log('in verification');
     this.props.argName.length < 3 || this.props.typeName.length < 3 ? 
-    this.props.createNotification('warning')()
+    this.props.createNotification('error')()
     : this.props.addElement('functionArgs');
   }
 

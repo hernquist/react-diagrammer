@@ -1,5 +1,5 @@
 export const messages = {
-  emptyfield: "please fill the empty fields"
+  emptyFields: "please fill the empty fields"
 }
 
   
