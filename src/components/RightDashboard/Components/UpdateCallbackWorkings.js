@@ -99,7 +99,7 @@ export default class UpdateCallbackWorkings extends Component {
       highlighted,
       renderForm
     } = this.state;
-    const { currentProject, history, updateComponent } = this.props;
+    const { currentProject, history, updateComponent, createNotification } = this.props;
     const { components } = currentProject;
     if (!components) return <div>No Components</div>
 
@@ -132,6 +132,7 @@ export default class UpdateCallbackWorkings extends Component {
                 stateField={stateField}
                 stateChange={stateChange}
                 create={true}
+                createNotification={createNotification}
               />
             )}
           </Mutation> : 
@@ -144,6 +145,7 @@ export default class UpdateCallbackWorkings extends Component {
             setHighlight={this.setHighlight}
             toggleForm={this.toggleForm}
             highlighted={highlighted}
+            createNotification={createNotification}
           />
         }
       </div>

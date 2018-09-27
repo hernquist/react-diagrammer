@@ -44,8 +44,12 @@ class UpdateComponentWorkings extends Component {
       highlighted,
       onHover
     } = this.state;
-    const { currentProject, history, updateComponent, type } = this.props;
-    
+    const { 
+      currentProject, 
+      history, 
+      updateComponent, 
+      type
+    } = this.props;
     const { components } = currentProject;
     if (!components) return <div>No Components</div>
 

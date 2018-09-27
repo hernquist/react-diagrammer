@@ -31,7 +31,6 @@ const client = new ApolloClient({
   cache
 });
 
-
 const Index = () => {
   return (
     <ApolloProvider client={client}>

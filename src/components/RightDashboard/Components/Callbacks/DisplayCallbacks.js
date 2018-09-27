@@ -88,7 +88,8 @@ export default class DisplayCallbacks extends Component {
       resetHighlight, 
       setHighlight, 
       toggleForm,
-      highlighted
+      highlighted,
+      createNotification
     } = this.props;
     const {
       name, 
@@ -123,6 +124,7 @@ export default class DisplayCallbacks extends Component {
                   stateField={stateField}
                   stateChange={stateChange}
                   deleteElement={this.deleteElement}
+                  createNotification={createNotification}
                 />
                 <div
                   className="dashboard-button hideable"

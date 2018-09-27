@@ -1,6 +1,17 @@
 import React, { Component } from 'react'
 
 export default class CallbackForm extends Component {
+  constructor (props) {
+    super(props);
+  }
+
+  verification = () => {
+    console.log('in verification');
+    this.props.argName.length < 3 || this.props.typeName.length < 3 ? 
+    this.props.createNotification('warning')()
+    : this.props.addElement('functionArgs');
+  }
+
   render() {
     const {
       name,
@@ -62,20 +73,18 @@ export default class CallbackForm extends Component {
 
         <div 
           className="dashboard-button" 
-          onClick={() => addElement('functionArgs')}
+          // onClick={this.props.createNotification('warning')}
+          onClick={this.verification}
         >
           <div className="button-content">SUBMIT</div>
           <div className="button-content">ARGUMENT</div>
         </div>
         
-        {setState.map((field, i) => {
-          console.log('field:', field);
-          return (
-            <div key={i}>{field.stateField} and {field.stateChange}
-              <span onClick={() => deleteElement(field, 'setState')}> X </span>
-            </div>
-          )
-        })}
+        {setState.map((field, i) => 
+          <div key={i}>{field.stateField} and {field.stateChange}
+            <span onClick={() => deleteElement(field, 'setState')}> X </span>
+          </div>
+        )}
         
         {/* todo make a selector */}
         
@@ -113,6 +122,7 @@ export default class CallbackForm extends Component {
             <div className="button-content">CALLBACK</div>
           </div>
         }
+       
       </div>
     )
   }
