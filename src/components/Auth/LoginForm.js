@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import { LOGIN } from '../../graphql/mutations';
 import { GET_AUTH_USER } from '../../graphql/queries';
+import '../../styles/Auth.css';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class LoginForm extends Component {
           }
           return (
             <div>
-              <h3>Login</h3>
+              <h2>Login</h2>
               <Mutation 
                 mutation={LOGIN}
                 onCompleted={result => {
@@ -63,7 +64,7 @@ class LoginForm extends Component {
                         .filter(error => error !== 'Error! GraphQL error: user not authenticated')
                         .map(error => <div key={error}>{error}</div>)}
                     </div>
-                    <button variant="raised">Submit</button>
+                    <button>Submit</button>
                   </form>
                 )}
               </Mutation>

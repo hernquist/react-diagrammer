@@ -12,7 +12,7 @@ class LogoutForm extends Component {
     const { history } = this.props; 
     return (
       <div>
-        <h3>Logout</h3>
+        <h2>Logout</h2>
         <p> Are you sure you want to logout? </p>
         <div>
           <button onClick={this.logout}>YES</button>

@@ -22,7 +22,7 @@ class SignupForm extends Component {
   render() {
     const { name, email, password, errors } = this.state;
     return <div>
-        <h3>Signup</h3>
+        <h2>Signup</h2>
         <Mutation 
             mutation={SIGNUP}
             onCompleted={result => {
