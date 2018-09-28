@@ -14,7 +14,7 @@
 
 .app-name {
     font-size: 40px;
-    color: black;
+    color: #21c2f8;
     margin-top: 10px;
     /* align-self: center; */
 }
@@ -22,6 +22,7 @@
 .user-name {
     margin-top: 8px;
     font-size: 28px;
+    color: #21c2f8;
 }
 
 .nav {
@@ -40,10 +41,10 @@
     align-content: center;
     align-items: center;
     padding-top: 6px;
-    background: #BADA55;
-    border: 2px solid black;
+    background: #21c2f8;
+    /* border: 2px solid black; */
     border-radius: 4px;
-    box-shadow: 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 a {
