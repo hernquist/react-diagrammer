@@ -84,10 +84,10 @@ export default class AddExistingComponent extends Component {
     
     delete component._id;
 
-
-    delete component.callbacks;
-    delete component.props;
-    delete component.state;
+    // not really necessary
+    // delete component.callbacks;
+    // delete component.props;
+    // delete component.state;
 
     console.log(component);
     const { data } = await mutation({ variables: component });
