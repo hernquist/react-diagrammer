@@ -29,13 +29,16 @@ export default WrappedComponent => {
             alert('alert');
           }, priority);
           break;
+        default:
+          console.log(type);
+          break;
       };
     }
 
     render() {
       return (
         <div>
-          <WrappedComponent createNotification={this.createNotification}/>
+          <WrappedComponent {...this.props} createNotification={this.createNotification}/>
           <NotificationContainer />
         </div>
       );
