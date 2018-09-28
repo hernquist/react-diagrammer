@@ -114,6 +114,7 @@ class RightDashboard extends Component {
               updateComponent={updateComponent}
               addComponent={addComponent}
               setParent={setParent}
+              createNotification={createNotification}
             />
           }
         />

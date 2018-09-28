@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
-import messageBuilder from '../../helpers/notifications';
+import messageBuilder from '../../helpers/messages';
 
 
 export default WrappedComponent => {
@@ -14,6 +14,7 @@ export default WrappedComponent => {
         cb,
         priority 
       } = messageBuilder(type, _message, _title, details, _time, _cb)
+      
       switch (type) {
         case 'info':
           NotificationManager.info(message, title, time, cb, priority);

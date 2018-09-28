@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 
 export default class CallbackForm extends Component {
-  constructor (props) {
-    super(props);
-  }
-
   validation = name => {
     const mapping = {
       functionArgs: ['callback arguments', 'argName', 'typeName'],
@@ -15,38 +11,6 @@ export default class CallbackForm extends Component {
     message ? this.props.createNotification('warning', message, message, mapping[name][0])()
       : this.props.addElement(name);
   }
-
-  // updateValidation = () => {
-  //   const {
-  //     callback,
-  //     currentComponent, 
-  //     mutation,
-  //     name,
-  //     createNotification
-  //   } = this.props;
-
-  //   let message, title, details; 
-  //   console.log(name.length);
-    
-  //   switch (true) {
-  //     case name.length === 0:
-  //       message = 'emptyField';
-  //       details = 'Callback name';
-  //       break;
-  //     case name.length < 3:
-  //       console.log('less than three')
-  //       message = 'minimumLength';
-  //       details = 'callback name';
-  //       break;
-      
-  //     default:
-  //       message = false;
-  //       break;
-  //   };
-
-  //   message ? createNotification('warning', message, title, details)()
-  //   : callback(currentComponent, mutation)
-  // }
 
   render() {
     const {
