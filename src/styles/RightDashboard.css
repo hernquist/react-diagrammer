@@ -5,7 +5,7 @@
     height: 100%;
 }
 
-.dashboard-button {
+/* .dashboard-button {
     display: grid;
     margin: 5px;
     justify-content: center;
@@ -21,7 +21,7 @@
     justify-self: center;
     align-self: center;
     font-size: 18px;
-}
+} */
 
 .current-component-title {
     border-bottom: 1px solid black;

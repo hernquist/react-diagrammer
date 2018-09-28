@@ -13,7 +13,7 @@
   height: 100vh;
   grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
   /*grid-template-columns: repeat(10, 1fr);*/
-  grid-template-rows: 50px 50px 1fr;
+  grid-template-rows: 48px 32px 1fr;
   grid-template-areas: 
     "nb nb nb nb nb nb nb nb nb nb"
     "ld ld ld ld ld ld ld ld ld ld"
@@ -25,20 +25,17 @@
   height: 100vh;
   grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
   /*grid-template-columns: repeat(10, 1fr);*/
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 48px 32px 1fr;
   grid-template-areas: 
     "nb nb nb nb nb nb nb nb nb nb"
     "ld ld ld ld ld ld ld ld ld ld"
     "td td td td td td td td td td"
-
 }
 
 .logged-out .left-dashboard {
     display: grid;
     grid-area: ld;
-    /* background: rgba(200, 100, 20, 1); */
     background: #bdc3c7;
-    /* border: 2px solid grey; */
     border-radius: 1px; 
 }
 
@@ -46,9 +43,7 @@
 .logged-in .left-dashboard {
     display: grid;
     grid-area: ld;
-    /* background: rgba(200, 100, 20, 1); */
     background: #2c3e50;
-    /* border: 2px solid grey; */
     border-radius: 1px; 
 
     /* grid-template-columns: auto;
