@@ -12,7 +12,6 @@
   display: grid;
   height: 100vh;
   grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
-  /*grid-template-columns: repeat(10, 1fr);*/
   grid-template-rows: 48px 32px 1fr;
   grid-template-areas: 
     "nb nb nb nb nb nb nb nb nb nb"
@@ -24,7 +23,6 @@
   display: grid;
   height: 100vh;
   grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
-  /*grid-template-columns: repeat(10, 1fr);*/
   grid-template-rows: 48px 32px 1fr;
   grid-template-areas: 
     "nb nb nb nb nb nb nb nb nb nb"

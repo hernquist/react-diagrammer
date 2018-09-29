@@ -127,7 +127,6 @@ class LoggedIn extends Component {
                         createNotification={createNotification}
                       />
                     </div>
-                    {/* <NotificationContainer /> */}
                   </div>
                 )
               }}
