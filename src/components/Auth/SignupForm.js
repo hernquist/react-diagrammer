@@ -4,65 +4,83 @@ import { SIGNUP } from '../../graphql/mutations';
 import { validateEmail } from '../../helpers/validations';
 
 class SignupForm extends Component {
-    constructor(props) {
-      super(props);
-        this.state = { 
-            errors: [],
-            email: '',
-            name: '',
-            password: '' 
+  initialState = {
+    errors: [],
+    email: '',
+    name: '',
+    password: ''
+  }
+  
+  state = this.initialState;
+
+  validation = (event, mutation) => {
+    event.preventDefault();
+    const { email, name, password } = this.state;
+    let message, title, details;
+
+    switch (false) {
+      case validateEmail(email):
+        message = 'invalidEmail';
+        title = 'signup';
+        break;
+      case name.length >= 6:
+        message = 'minLengthGeneric';
+        title = 'minimumLength';
+        details = {
+          number: 6,
+          name: 'username'
         };
+        break;
+      case password.length >= 8:
+        message = 'minLengthGeneric';
+        title = 'minimumLength';
+        details = {
+          number: 8,
+          name: 'password'
+        };
+        break;
+      default:
+        break;
     }
 
-    validation = (event, mutation) => {
-      event.preventDefault();
+    message ? this.props.createNotification('warning', message, title, details)()
+    : this.onSubmit(mutation)
+  }
+
+  onSubmit = async (mutation) => {
       const { email, name, password } = this.state;
-      let message, title, details;
+      await mutation({ variables: { email, name, password } });
+  };
 
-      switch (false) {
-        case validateEmail(email):
-          message = 'invalidEmail';
-          title = 'signup';
-          break;
-        case name.length >= 6:
-          message = 'minLengthGeneric';
-          title = 'minimumLength';
-          details = {
-            number: 6,
-            name: 'username'
-          };
-          break;
-        case password.length >= 8:
-          message = 'minLengthGeneric';
-          title = 'minimumLength';
-          details = {
-            number: 8,
-            name: 'password'
-          };
-          break;
-        default:
-          break;
+  handleSignup = signup => {
+    console.log(signup);
+    switch (signup) {
+      case '1':
+        this.props.createNotification('warning', 'nameTaken', 'nameTaken', {})();
+        break;
+      case '2':
+        this.props.createNotification('warning', 'emailTaken', 'emailTaken', {})();
+        break;
+      case '3':
+        this.props.createNotification('warning', 'nameTaken', 'nameTaken', {})();
+        this.props.createNotification('warning', 'emailTaken', 'emailTaken', {})();
+        break;
+      default:
+        signup && localStorage.setItem("token", signup);
+        this.props.history.push("/main/new-project");
+        break;
       }
-
-      message ? this.props.createNotification('warning', message, title, details)()
-      : this.onSubmit(event, mutation)
-    }
-
-    onSubmit = async (event, mutation) => {
-        const { email, name, password } = this.state;
-        await mutation({ variables: { email, name, password } });
-    };
+  // TODO is the right ux
+  this.setState(this.initialState);
+  }
 
   render() {
     const { name, email, password, errors } = this.state;
     return <div>
         <h2>Signup</h2>
         <Mutation 
-            mutation={SIGNUP}
-            onCompleted={result => {
-                result.signup && localStorage.setItem("token", result.signup);
-                this.props.history.push("/main/new-project");
-            }}
+          mutation={SIGNUP}
+          onCompleted={result => this.handleSignup(result.signup)}
         >
           {Signup => <form onSubmit={e => this.validation(e, Signup)} >
               <div className="input-field">
