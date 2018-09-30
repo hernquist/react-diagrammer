@@ -14,12 +14,14 @@ export default class UpdateCallbackWorkings extends Component {
     setState: [],
     stateField: "",
     stateChange: "",
-    // showAddField: false,
-    highlighted: null,
-    onHover: true,
   }
 
-  state = this.initialState;
+  state = {
+    ...this.initialState, 
+    highlighted: { _id: null },
+    onHover: true,
+    renderForm: false
+  }
 
   handleChange = (e, key) => {
     console.log(e.target.value, key);
@@ -40,6 +42,12 @@ export default class UpdateCallbackWorkings extends Component {
     })
   }
 
+  deleteElement = (field, key) => {
+    const elements = this.state[key];
+    const updatedElements = elements.filter(element => element !== field)
+    this.setState({ [key]: updatedElements })
+  }
+
   saveCallback = async (currentComponent, mutation) => {
     const { name, description, functionArgs, setState } = this.state;
     const componentId = currentComponent._id;
@@ -50,57 +58,33 @@ export default class UpdateCallbackWorkings extends Component {
       functionArgs,
       setState
     }
-
-    console.log('saveCallback:', callback);
-
     const { data } = await mutation({  variables: { callback }})
-
-    console.log('saveCallback data:', data);
     const component = Object.assign({}, currentComponent, { callbacks: [...currentComponent.callbacks, data.addCallback] });
     this.props.updateComponent(component);
-    // this.props.discardField()
+    this.setState( this.initialState )
+    this.toggleForm()
   }
 
-  // saveField = async (currentComponent, mutation) => {
-  //   const updatedComponent = this.props.type === 'state' ?
-  //     await this.mutationState(currentComponent, mutation) :
-  //     await this.mutationProp(currentComponent, mutation);
-  //   console.log(updatedComponent);
-  //   this.props.updateComponent(updatedComponent)
-  //   this.props.discardField();
-  // }
+  toggleForm = () => {
+    this.setState({ renderForm: !this.state.renderForm })
+  }
 
-  // mutationState = async (currentComponent, mutation) => {
-  //   const componentId = currentComponent._id;
-  //   const state = {
-  //     componentId,
-  //     name: this.props.value1,
-  //     statetype: this.props.value2
-  //   };
-  //   const { data } = await mutation({ variables: { state } });
-  //   const stateObjects = data.addState.state.map(stateItem => ({ ...stateItem, componentId }));
-  //   return Object.assign({}, currentComponent, { state: stateObjects });
-  // }
+  editCb = cb => {
+    if (this.state.onHover) this.setState({ highlighted: cb });
+  };
 
+  resetHighlight = () => {
+    if (this.state.onHover) this.setState({ highlighted: { _id: null } });
+  };
 
-  // displayAddField = () => this.setState({ showAddField: true });
-
-  // discardField = () => this.setState({ ...this.initialState });
-
-  // editField = field => {
-  //   if (this.state.onHover) this.setState({ highlighted: field });
-  // };
-
-  // exitComponent = () => {
-  //   const match = this.props.match.url.split("/").slice(0, 5).join("/");
-  //   this.props.history.push(match);
-  // }
-
-  // resetHighlight = () => {
-  //   if (this.state.onHover) this.setState({ highlighted: null });
-  // };
-
-  // setHighlight = () => this.setState({ onHover: false });
+  setHighlight = cb => cb._id === this.state.highlighted._id && this.state.onHover === false ? 
+    this.setState({ onHover: true, highlighted: { _id: null } }) :
+    this.setState({ onHover: false, highlighted: cb });
+  
+  resetUpdateCallbacks = () => {
+    this.setState({ onHover: true });
+    this.resetHighlight();
+  }
 
   render() {
     const { 
@@ -113,14 +97,13 @@ export default class UpdateCallbackWorkings extends Component {
       stateField,
       stateChange,
       highlighted,
-      onHover, 
+      renderForm
     } = this.state;
-    const { currentProject, history } = this.props;
+    const { currentProject, history, updateComponent, createNotification } = this.props;
     const { components } = currentProject;
     if (!components) return <div>No Components</div>
 
     console.log('ADD_CALLBACK', ADD_CALLBACK)
-
 
     const pieces = history.location.pathname.split("/");
     const pathname = pieces[3];
@@ -131,35 +114,40 @@ export default class UpdateCallbackWorkings extends Component {
 
     return (
       <div>
-
-        <DisplayCallbacks 
-          currentComponent={currentComponent}
-          editCallback={this.editCallback}
-          resetHighlight={this.resetHighlight}
-          setHighlight={this.setHighlight}
-        />
-
-        <Mutation mutation={ADD_CALLBACK}>
-          {AddCallback => (
-            <CallbackForm
-              currentComponent={currentComponent}
-              callback={this.saveCallback}
-              mutation={AddCallback}
-
-              handleChange={this.handleChange}
-              addElement={this.addElement}
-              name={name}
-              description={description} 
-              functionArgs={functionArgs}
-              argName={argName}
-              typeName={typeName}
-              setState={setState}
-              stateField={stateField}
-              stateChange={stateChange}
-            />
-          )}
-        </Mutation>
-
+        {renderForm ? 
+          <Mutation mutation={ADD_CALLBACK}>
+            {AddCallback => (
+              <CallbackForm
+                currentComponent={currentComponent}
+                callback={this.saveCallback}
+                mutation={AddCallback}
+                handleChange={this.handleChange}
+                addElement={this.addElement}
+                name={name}
+                description={description} 
+                functionArgs={functionArgs}
+                argName={argName}
+                typeName={typeName}
+                setState={setState}
+                stateField={stateField}
+                stateChange={stateChange}
+                create={true}
+                createNotification={createNotification}
+              />
+            )}
+          </Mutation> : 
+          <DisplayCallbacks 
+            currentComponent={currentComponent}
+            updateComponent={updateComponent}
+            editCb={this.editCb}
+            resetUpdateCallbacks={this.resetUpdateCallbacks}
+            resetHighlight={this.resetHighlight}
+            setHighlight={this.setHighlight}
+            toggleForm={this.toggleForm}
+            highlighted={highlighted}
+            createNotification={createNotification}
+          />
+        }
       </div>
     )
   }

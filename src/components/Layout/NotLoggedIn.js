@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import HeaderContainer from "../Header/HeaderContainer";
-import LoginForm from "../Auth/LoginForm";
-import SignupForm from "../Auth/SignupForm";
-import LogoutForm from "../Auth/LogoutForm";
-import Polling from "../Polling/Polling";
-import RightDashoard from "../RightDashboard/RightDashboard";
-import "../../styles/Layout.css";
+import HeaderContainer from '../Header/HeaderContainer';
+import LoginForm from '../Auth/LoginForm';
+import SignupForm from '../Auth/SignupForm';
+import LogoutForm from '../Auth/LogoutForm';
+import Polling from '../Polling/Polling';
+import RightDashoard from '../RightDashboard/RightDashboard';
+import notifications from '../HOC/notifications'
+import '../../styles/Layout.css';
 
 class NotLoggedIn extends Component {
   render() {
@@ -35,4 +36,4 @@ class NotLoggedIn extends Component {
   }
 }
 
-export default NotLoggedIn;
+export default notifications(NotLoggedIn);

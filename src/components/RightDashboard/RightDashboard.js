@@ -20,6 +20,7 @@ class RightDashboard extends Component {
       updateComponent,
       addComponent,
       setParent,
+      createNotification
     } = this.props;
 
     return (
@@ -90,6 +91,7 @@ class RightDashboard extends Component {
               {...renderProps}
               updateComponent={updateComponent}
               currentProject={currentProject}
+              createNotification={createNotification}
             />
           }
         />
@@ -112,6 +114,7 @@ class RightDashboard extends Component {
               updateComponent={updateComponent}
               addComponent={addComponent}
               setParent={setParent}
+              createNotification={createNotification}
             />
           }
         />

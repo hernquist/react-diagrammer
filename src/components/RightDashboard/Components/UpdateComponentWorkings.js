@@ -37,8 +37,19 @@ class UpdateComponentWorkings extends Component {
   setHighlight = () => this.setState({ onHover: false});
 
   render() {
-    const { currentProject, history, updateComponent, type } = this.props;
-    
+    const { 
+      showAddField, 
+      value1,
+      value2, 
+      highlighted,
+      onHover
+    } = this.state;
+    const { 
+      currentProject, 
+      history, 
+      updateComponent, 
+      type
+    } = this.props;
     const { components } = currentProject;
     if (!components) return <div>No Components</div>
 
@@ -48,13 +59,6 @@ class UpdateComponentWorkings extends Component {
     const currentComponent = components
       .filter(c => c.name === name)
       .filter(c => c.iteration === Number(index))[0];
-    const { 
-      showAddField, 
-      value1,
-      value2, 
-      highlighted,
-      onHover
-    } = this.state;
 
 
     if (currentComponent.style === 'presentational' && type === "state") return (

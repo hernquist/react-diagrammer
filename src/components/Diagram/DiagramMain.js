@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import auth from "../HOC/auth"
+import auth from '../HOC/auth'
 import '../../styles/DiagramMain.css'
 import ShowUnassigned from './ShowUnassigned';
-import helper from '../../Helper/helper';
+import helper from '../../helpers/helper';
 
 const DisplayComponent = ({ component, parent, history }) => {
   const { name, iteration } = component;
@@ -14,7 +14,6 @@ const DisplayComponent = ({ component, parent, history }) => {
     'rgba(255, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.1)';
   const margin = '0 3px';
   const styles = { border, backgroundColor, margin };
-  // console.log(styles, parent, component);
     
   return (
     <div 
@@ -51,7 +50,7 @@ class DiagramMain extends Component {
     const { components } = currentProject
     let branches = helper.childs(components);
     let root = helper.root(components);
-    console.log('branches', branches)
+    
     let tree = branches.reduce((acc, _, i) => 
       [...acc, acc[i].reduce((a, c) => a.concat(c.children), [])
         .map(branch => helper.find(branches, branch))], [root])

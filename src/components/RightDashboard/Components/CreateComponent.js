@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
 import { CREATE_COMPONENT, ADD_CHILD } from '../../../graphql/mutations';
 import ComponentList from './StateAndProps/ComponentList';
-import helper from '../../../Helper/helper';
+import helper from '../../../helpers/helper';
 
 export default class CreateComponent extends Component {
   constructor(props) {
     super(props);
+    
     const newProject = !props.currentProject.components;
     this.state = {
       name: newProject ? 'index' : '',
@@ -25,13 +26,9 @@ export default class CreateComponent extends Component {
 
   handleRoot = () => console.log("Are you sure you want this to be a root?")
 
-  handleUnassigned = () => {
-    this.setState({ placement: 'unassigned' });
-  }
-
-  handleChild = () => {
-    this.setState({ placement: 'child'});
-  }
+  handleUnassigned = () => this.setState({ placement: 'unassigned' });
+  
+  handleChild = () => this.setState({ placement: 'child'});
 
   addChild = async (childId, mutation) => {
     const components = this.props.currentProject.components || [];
@@ -57,6 +54,16 @@ export default class CreateComponent extends Component {
     if (data.createComponent.placement === 'child') this.addChild(data.createComponent._id, addChild);
     this.props.setParent('')
     this.props.history.push(`/main/component/${name}/0`);
+  }
+
+  validation = (CreateComponent, AddChild) => {
+    const { name, placement, highlighted } = this.state;
+    const message = name.length < 3 ? 'minimumLength' 
+      : placement === 'child' && !highlighted ? 'parentNotSelected'
+      : null;
+    const details = message === 'minimumLength' ? 'component name' : ''
+    message ? this.props.createNotification('warning', message, message, details)()
+      : this.saveComponent(CreateComponent, AddChild)
   }
 
   render() {
@@ -132,7 +139,7 @@ export default class CreateComponent extends Component {
                 </label>
                 <button
                   className="dashboard-button"
-                  onClick={() => this.saveComponent(CreateComponent, AddChild)}
+                  onClick={() => this.validation(CreateComponent, AddChild)}
                   >
                   DONE
                 </button>

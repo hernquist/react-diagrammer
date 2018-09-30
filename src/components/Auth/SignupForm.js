@@ -1,28 +1,62 @@
-import React, { Component } from "react";
-import { Mutation } from "react-apollo";
-import { SIGNUP } from "../../graphql/mutations";
+import React, { Component } from 'react';
+import { Mutation } from 'react-apollo';
+import { SIGNUP } from '../../graphql/mutations';
+import { validateEmail } from '../../helpers/validations';
 
 class SignupForm extends Component {
     constructor(props) {
       super(props);
         this.state = { 
             errors: [],
-            email: "",
-            name: "",
-            password: "" 
+            email: '',
+            name: '',
+            password: '' 
         };
     }
 
-    onSubmit = async (event, Signup) => {
-        event.preventDefault();
+    validation = (event, mutation) => {
+      event.preventDefault();
+      const { email, name, password } = this.state;
+      let message, title, details;
+
+      switch (false) {
+        case validateEmail(email):
+          message = 'invalidEmail';
+          title = 'signup';
+          break;
+        case name.length >= 6:
+          message = 'minLengthGeneric';
+          title = 'minimumLength';
+          details = {
+            number: 6,
+            name: 'username'
+          };
+          break;
+        case password.length >= 8:
+          message = 'minLengthGeneric';
+          title = 'minimumLength';
+          details = {
+            number: 8,
+            name: 'password'
+          };
+          break;
+        default:
+          break;
+      }
+
+      message ? this.props.createNotification('warning', message, title, details)()
+      : this.onSubmit(event, mutation)
+    }
+
+    onSubmit = async (event, mutation) => {
         const { email, name, password } = this.state;
-        await Signup({ variables: { email, name, password } });
+        await mutation({ variables: { email, name, password } });
     };
 
   render() {
     const { name, email, password, errors } = this.state;
     return <div>
-        <h3>Signup</h3>
+        <h2>Signup</h2>
         <Mutation 
             mutation={SIGNUP}
             onCompleted={result => {
@@ -30,7 +64,7 @@ class SignupForm extends Component {
                 this.props.history.push("/main/new-project");
             }}
         >
-          {Signup => <form onSubmit={e => this.onSubmit(e, Signup)} >
+          {Signup => <form onSubmit={e => this.validation(e, Signup)} >
               <div className="input-field">
                 <label>Name</label>
                 <input value={name} onChange={e => this.setState({

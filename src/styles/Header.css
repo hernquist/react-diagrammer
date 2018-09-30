@@ -1,12 +1,8 @@
 .header-container {
     display: grid;
-    /* width: 100%; */
     grid-template-columns: auto 1fr;
     grid-auto-flow: column;
     grid-gap: 20px;
-    /* justify-content: space-between; */
-    /* justify-content: start; */
-    /* align-content: center; */
     align-items: center;
     margin: 10px;
     font: 'Tajawal';
@@ -14,18 +10,17 @@
 
 .app-name {
     font-size: 40px;
-    color: black;
+    color: #21c2f8;
     margin-top: 10px;
-    /* align-self: center; */
 }
 
 .user-name {
     margin-top: 8px;
     font-size: 28px;
+    color: #21c2f8;
 }
 
 .nav {
-    /* justify-self: end; */
     display: grid;
     grid-template-columns: auto auto;
     margin: 10px;
@@ -40,15 +35,19 @@
     align-content: center;
     align-items: center;
     padding-top: 6px;
-    background: #BADA55;
-    border: 2px solid black;
     border-radius: 4px;
-    box-shadow: 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover {
+    background-color: rgba(33,194,248, 0.6);
+    border-radius: 4px;
+    box-shadow: 3px 3px rgba(33,194,248, 0.2);
+    color: #202020;
 }
 
 a {
     display: grid;
     text-decoration: none;
-    color: black;
+    color: #21c2f8;
     font-size: 20px;
 }

@@ -1,6 +1,17 @@
 import React, { Component } from 'react'
 
 export default class CallbackForm extends Component {
+  validation = name => {
+    const mapping = {
+      functionArgs: ['callback arguments', 'argName', 'typeName'],
+      setState: ['setState', 'stateField', 'stateChange']
+    }
+    const [first, second] = [this.props[mapping[name][1]].length, this.props[mapping[name][2]].length]
+    const message = first === 0 || second === 0 ? 'emptyFields' : null;
+    message ? this.props.createNotification('warning', message, message, mapping[name][0])()
+      : this.props.addElement(name);
+  }
+
   render() {
     const {
       name,
@@ -8,17 +19,17 @@ export default class CallbackForm extends Component {
       functionArgs,
       argName,
       typeName,
-      addElement,
       setState,
       stateField,
       stateChange,
       // highlighted,
       // onHover,
       handleChange,
-
-      mutation,
-      callback,
-      currentComponent
+      create,
+      deleteElement,
+      callback, 
+      currentComponent,
+      mutation
     } = this.props;
 
     return (
@@ -37,8 +48,10 @@ export default class CallbackForm extends Component {
           </label>
         </div>
 
-        {functionArgs.map((arg, i) => 
-          <div key={arg.argName+i}>{arg.argName} and {arg.typeName}</div>
+        {functionArgs.map((field, i) => 
+          <div key={i}>{field.name} and {field.typeName}
+            <span onClick={() => deleteElement(field, 'functionArgs')}> X </span>
+          </div>
         )}
 
         <div>
@@ -59,14 +72,17 @@ export default class CallbackForm extends Component {
 
         <div 
           className="dashboard-button" 
-          onClick={()=>addElement('functionArgs')}
+          // onClick={this.props.createNotification('warning')}
+          onClick={() => this.validation('functionArgs')}
         >
           <div className="button-content">SUBMIT</div>
           <div className="button-content">ARGUMENT</div>
         </div>
         
-        {setState.map((field, i) =>
-          <div key={field.stateChange + i}>{field.stateField} and {field.stateChange}</div>
+        {setState.map((field, i) => 
+          <div key={i}>{field.stateField} and {field.stateChange}
+            <span onClick={() => deleteElement(field, 'setState')}> X </span>
+          </div>
         )}
         
         {/* todo make a selector */}
@@ -89,22 +105,23 @@ export default class CallbackForm extends Component {
 
         <div 
           className="dashboard-button"
-          onClick={() => addElement('setState')}
+          onClick={() => this.validation('setState')}
         >
           <div className="button-content">SUBMIT</div>
           <div className="button-content">STATE</div>
           <div className="button-content">CHANGE</div>
         </div>
 
-        <div
-          className="dashboard-button"
-          onClick={() => callback(currentComponent, mutation)}
-        >
-          <div className="button-content">SAVE</div>
-          <div className="button-content">CALLBACK</div>
-        </div>
-
-
+        {create && 
+          <div
+            className="dashboard-button"
+          onClick={callback(currentComponent, mutation)}
+          >
+            <div className="button-content">SAVE</div>
+            <div className="button-content">CALLBACK</div>
+          </div>
+        }
+       
       </div>
     )
   }

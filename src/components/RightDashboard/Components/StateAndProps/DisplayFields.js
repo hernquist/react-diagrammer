@@ -18,7 +18,7 @@ class DisplayFields extends Component {
       <div>
         <h3>Existing { header }</h3>
 
-        {fields.map((field, index) => (
+        {fields.map(field => (
           <div 
             style={{ fontSize: "16px", margin: "4px" }} 
             key={field._id}

@@ -18,7 +18,9 @@ const httpLink = createHttpLink({
 const middlewareLink = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
+      // eslint-disable-next-line
       ["x-token"]: localStorage.getItem("token") || null,
+      // eslint-disable-next-line
       ["x-refresh-token"]: localStorage.getItem("refreshToken") || null
     }
   });
@@ -31,15 +33,12 @@ const client = new ApolloClient({
   cache
 });
 
-
 const Index = () => {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
         <div>
-          <Route 
-            path="/(login|signup|logout|)" 
-            component={NotLoggedIn} />
+          <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
           <Route path="/main" component={LoggedIn} />
         </div>
       </BrowserRouter>

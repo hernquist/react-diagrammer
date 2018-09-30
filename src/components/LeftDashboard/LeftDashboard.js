@@ -10,85 +10,65 @@ class LeftDashboard extends Component {
     this.props.needsSetting && this.props.setCurrentProject(this.props.currentProject);
   }
 
-  handleSwitch = () => this.props.layout === "full-screen" ?
-      this.props.switchLayout("logged-in") : 
-      this.props.switchLayout("full-screen");
+  handleSwitch = () => this.props.layout === 'full-screen' ?
+      this.props.switchLayout('logged-in') : 
+      this.props.switchLayout('full-screen');
 
-  updateCSS = () => {
-    const buttons = document.querySelectorAll(".hideable");
-    buttons.forEach(button => button.style.display = 
-      this.state.selector ? "none" : "grid");
-    let dashboard = document.querySelector(".left-dashboard-container");
-    dashboard.style['grid-template-rows'] = 
-      this.state.selector ? "auto auto 1fr" : "auto repeat(6, 1fr)";
-  } 
 
-  activateSelector = async() => {
-    await this.setState({ selector: true });
-    this.updateCSS();
-    this.props.refetch();
+  activateSelector = async () => {
+    this.setState({ selector: true });
+    await this.props.refetch();
   }
 
-  deActivateSelector = async () => {
-    await this.setState({ selector: false});
-    this.updateCSS();
+  deactivateSelector = () => {
+    this.setState({ selector: false});
   }
 
   render() {
     const { layout, projects, currentProject, setCurrentProject } = this.props;
     const content = {
-      "full-screen": "SHOW",
-      "logged-in": "HIDE"
+      'full-screen': 'SHOW',
+      'logged-in': 'HIDE'
     };
     const { selector } = this.state;
+    const project = currentProject.name.length > 12 ?
+      `${currentProject.name}` : `PROJECT ${ currentProject.name }`
     
     return ( 
-      <div 
-      className="left-dashboard-container"
-      onMouseLeave={this.deActivateSelector} 
-      >
-        <div className="current-project-title">
-          <div>PROJECT</div>
-          <div>{currentProject.name}</div>
+      <div>
+        <div className='left-dashboard-container'>
+          <div className='current-project-title'>
+            <div>{project}</div>
+          </div>
+          <div className='buttons'>
+            <div 
+              className='dashboard-button selector'
+              onClick={selector ? this.deactivateSelector : this.activateSelector}
+            >
+              <div className='button-content'>SWITCH PROJECT</div>
+            </div>
+            <Link to='/main/new-project' className='dashboard-button hideable'>
+              <div className='button-content'>+ PROJECT</div>
+            </Link>
+            <Link to='/main/delete-project' className='dashboard-button hideable'>
+              <div className='button-content'>DELETE PROJECT</div>
+            </Link>
+            <Link to='/main/component/new' className='dashboard-button hideable'>
+              <div className='button-content'>+ COMPONENT</div>
+            </Link>
+            <Link to='/main/component/add-existing' className='dashboard-button hideable'>
+              <div className='button-content'>+ EXISTING COMPONENT</div>
+            </Link>
+            <div className='dashboard-button hideable' onClick={this.handleSwitch}>
+              <div className='button-content'>{content[layout]}</div>
+            </div>
+          </div>
         </div>
-        <div 
-          className="dashboard-button selector"
-          onClick={selector ? this.deActivateSelector : this.activateSelector}
-          >
-          <div className="button-content">{selector ? `DONE` : `SWITCH`}</div>
-          <div className="button-content">{selector ? null : `PROJECT`}</div>
-        </div>
-          {selector && <ProjectList projects={projects} setCurrentProject={setCurrentProject}/>}
-        <Link to='/main/new-project'>
-          <div className="dashboard-button hideable">
-            <div className="button-content">NEW</div>
-            <div className="button-content">PROJECT</div>
-          </div>
-        </Link>
-        <Link to='/main/delete-project'>
-          <div className="dashboard-button hideable">
-            <div className="button-content">DELETE</div>
-            <div className="button-content">PROJECT</div>
-          </div>
-        </Link>
-        <Link to='/main/component/new'>
-          <div className="dashboard-button hideable">
-            <div className="button-content">CREATE</div>
-            <div className="button-content">NEW</div>
-            <div className="button-content">COMPONENT</div>
-          </div>
-        </Link>
-        <Link to='/main/component/add-existing'>
-          <div className="dashboard-button hideable">
-            <div className="button-content">ADD</div>
-            <div className="button-content">EXISTING</div>
-            <div className="button-content">COMPONENT</div>
-          </div>
-        </Link>
-        <div className="dashboard-button hideable" onClick={this.handleSwitch}>
-          <div className="button-content">{content[layout]}</div>
-          <div className="button-content">DASHBOARD</div>
-        </div>
+        {selector && <ProjectList 
+          deactivateSelector={this.deactivateSelector} 
+          projects={projects} 
+          setCurrentProject={setCurrentProject}
+        />}
       </div>
     )
   }

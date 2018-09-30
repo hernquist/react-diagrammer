@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
 import { COPY_COMPONENT, ADD_CHILD, COPY_CHILDREN } from '../../../graphql/mutations';
 import ComponentList from './StateAndProps/ComponentList';
-import helper from '../../../Helper/helper';
+import helper from '../../../helpers/helper';
 import KeepChildren from './Children/KeepChildren';
 
 export default class AddExistingComponent extends Component {
@@ -50,17 +50,28 @@ export default class AddExistingComponent extends Component {
   
   saveComponent = async (mutation, addChild, copyChildren) => {
     const { placement, keepChildren, copiedComponent } = this.state;
-    const childrenData = copiedComponent.children.map(child => ({ 
-      _id: child,
-      iteration: this.findIteration(child)
-    }));
-
-    const result = await copyChildren({ variables: { childrenData } }); 
     
-    const { cloneId } = copiedComponent;
-    const iteration = this.findIteration(cloneId);
+    let children = []
+    let result = {}
 
-    const children = keepChildren ? result.data.copyChildren.map(child => child._id) : [];
+    if (keepChildren) {
+      const childrenData = copiedComponent.children.map(child => ({ 
+        _id: child,
+        iteration: this.findIteration(child)
+      }));
+
+      result = await copyChildren({ variables: { childrenData } });
+      console.log ('result', result, keepChildren); 
+      children = result.data.copyChildren.map(child => child._id);
+    }
+    
+    // TODO why does copiedComponent sometimes not have a cloneId?
+    // is it not being returned from the backend
+    let cloneId = copiedComponent.cloneId || copiedComponent._id;
+    const iteration = this.findIteration(cloneId);
+    console.log('iteration', iteration)
+
+    console.log('cloneId', cloneId, 'copiedComponent', copiedComponent)
     
     const component = Object.assign(
       {}, 
@@ -70,12 +81,21 @@ export default class AddExistingComponent extends Component {
       { iteration }, 
       { children }
     )
+    
     delete component._id;
+
+    // not really necessary
+    // delete component.callbacks;
+    // delete component.props;
+    // delete component.state;
+
+    console.log(component);
     const { data } = await mutation({ variables: component });
+    console.log('data', data);
     
     this.props.addComponent(data.copyComponent);
     // TODO: this Object.assign to cover up a glitch in the backend...
-    result.data.copyChildren.forEach( component => 
+    keepChildren && result.data.copyChildren.forEach(component => 
       this.props.addComponent(Object.assign({}, component, { children: [] }))
     );
     
