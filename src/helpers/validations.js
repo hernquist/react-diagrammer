@@ -1,3 +1,3 @@
-const re = /\S+@\S+\.\S+/;
+const validEmail = /\S+@\S+\.\S+/;
 
-export const validateEmail = email => re.test(email);
+export const validateEmail = email => validEmail.test(email);
