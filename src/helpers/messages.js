@@ -10,9 +10,11 @@ const messageBuilder = (type, m, t, d = {}, time, cb) => {
     invalidEmail: `Please provide a valid email`,
     minLengthGeneric: `At least ${d.number} characters needed for a ${d.name}`,
     nameTaken: 'Please select a different username',
-    emailTaken: 'Please select a different email'
+    emailTaken: 'Please select a different email',
+    [`Incorrect password`]: 'You entered the wrong password',
+    [`No user with that email`]: 'There is no user with that email'
   };
-
+  
   const titles = {
     emptyFields: 'Empty Field',
     emptyField: 'Empty Field',
@@ -20,7 +22,9 @@ const messageBuilder = (type, m, t, d = {}, time, cb) => {
     parentNotSelected: 'No Parent Selected',
     signup: 'Signup Failed',
     nameTaken: 'Username Already in Use',
-    emailTaken: 'Email Already in Use'
+    emailTaken: 'Email Already in Use',
+    [`Incorrect password`]: 'Incorrect Password',
+    [`No user with that email`]: 'Incorrect Email'
   };
 
   const timeMapping = {

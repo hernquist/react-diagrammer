@@ -42,7 +42,6 @@ class SignupForm extends Component {
       default:
         break;
     }
-
     message ? this.props.createNotification('warning', message, title, details)()
     : this.onSubmit(mutation)
   }
@@ -53,7 +52,6 @@ class SignupForm extends Component {
   };
 
   handleSignup = signup => {
-    console.log(signup);
     switch (signup) {
       case '1':
         this.props.createNotification('warning', 'nameTaken', 'nameTaken', {})();
@@ -68,47 +66,46 @@ class SignupForm extends Component {
       default:
         signup && localStorage.setItem("token", signup);
         this.props.history.push("/main/new-project");
-        break;
-      }
-  // TODO is the right ux
+    }
+  // TODO is the right ux?
   this.setState(this.initialState);
   }
 
   render() {
     const { name, email, password, errors } = this.state;
     return <div>
-        <h2>Signup</h2>
-        <Mutation 
-          mutation={SIGNUP}
-          onCompleted={result => this.handleSignup(result.signup)}
-        >
-          {Signup => <form onSubmit={e => this.validation(e, Signup)} >
-              <div className="input-field">
-                <label>Name</label>
-                <input value={name} onChange={e => this.setState({
-                      name: e.target.value
-                    })} />
-              </div>
-              <div className="input-field">
-                <label>Email</label>
-                <input value={email} onChange={e => this.setState({
-                      email: e.target.value
-                    })} />
-              </div>
-              <div className="input-field">
-                <label>Password</label>
-                <input value={password} onChange={e => this.setState({
-                      password: e.target.value
-                    })} />
-              </div>
-              <div className="errors">
-                {errors.map(error => <div key={error}>SIGNUP: {error}</div>)}
-              </div>
-              <button variant="raised">Submit</button>
-            </form>}
-        </Mutation>
-      </div>;
-    }
+      <h2>Signup</h2>
+      <Mutation 
+        mutation={SIGNUP}
+        onCompleted={result => this.handleSignup(result.signup)}
+      >
+        {Signup => <form onSubmit={e => this.validation(e, Signup)} >
+          <div className="input-field">
+            <label>Username</label>
+            <input value={name} onChange={e => this.setState({
+                  name: e.target.value
+                })} />
+          </div>
+          <div className="input-field">
+            <label>Email</label>
+            <input value={email} onChange={e => this.setState({
+                  email: e.target.value
+                })} />
+          </div>
+          <div className="input-field">
+            <label>Password</label>
+            <input value={password} onChange={e => this.setState({
+                  password: e.target.value
+                })} />
+          </div>
+          <div className="errors">
+            {errors.map(error => <div key={error}>SIGNUP: {error}</div>)}
+          </div>
+          <button variant="raised">Submit</button>
+        </form>}
+      </Mutation>
+    </div>;
+  }
 }
 
 export default SignupForm;

@@ -5,14 +5,13 @@ import { GET_AUTH_USER } from '../../graphql/queries';
 import '../../styles/Auth.css';
 
 class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      errors: [],
-      email: "",
-      password: ""
-    }
+  initialState = {
+    errors: [],
+    email: '',
+    password: ''
   }
+
+  state = this.initialState;
 
   onSubmit = async (event, Login) => {
     event.preventDefault();
@@ -23,6 +22,7 @@ class LoginForm extends Component {
 
   render() {
     const {email, password, errors} = this.state;
+    const { createNotification } = this.props;
   
     return (
       <Query query={GET_AUTH_USER} fetchPolicy="cache">
@@ -44,6 +44,10 @@ class LoginForm extends Component {
                   result.login && localStorage.setItem("token", result.login);
                   this.props.history.push("/main");
                 }}
+                onError={error => {
+                  createNotification('warning', error.message.split(': ')[1])()
+                  this.setState(this.initialState)
+                }}
               >
                 {Login => (
                   <form onSubmit={e => this.onSubmit(e, Login)}>
@@ -60,8 +64,7 @@ class LoginForm extends Component {
                       })} />
                     </div>
                     <div className="errors">
-                      {errors
-                        .filter(error => error !== 'Error! GraphQL error: user not authenticated')
+                      {errors.filter(error => error !== 'Error! GraphQL error: user not authenticated')
                         .map(error => <div key={error}>{error}</div>)}
                     </div>
                     <button>Submit</button>

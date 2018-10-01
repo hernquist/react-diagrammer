@@ -36,7 +36,6 @@ class LoggedIn extends Component {
     const components = project.components || [];
     const updatedComponents = [...components, updated];
     const currentProject = Object.assign({}, project, { components: updatedComponents});
-    console.log(currentProject);
     this.setState({ currentProject });
   }
   
@@ -63,8 +62,8 @@ class LoggedIn extends Component {
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) {
-            errors[0] = `Error! ${error.message}`
-            console.log(errors)
+            errors[0] = `Error! ${error.message}`;
+            console.log(errors);
             return <div>{errors[0]}</div>
           };
           const user = data.getAuthUser;
