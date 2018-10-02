@@ -17,9 +17,12 @@ class LeftDashboard extends Component {
     this.props.needsSetting && this.props.setCurrentProject(this.props.currentProject);
   }
 
-  handleSwitch = () => this.props.layout === 'full-screen' ?
-      this.props.switchLayout('logged-in') : 
-      this.props.switchLayout('full-screen');
+  handleSwitch = () => {
+    this.setState({ ...this.initialState })
+    this.props.layout === 'full-screen' ?
+      this.props.switchLayout('logged-in') 
+      : this.props.switchLayout('full-screen');
+  }
 
 
   activateSelector = async key => {

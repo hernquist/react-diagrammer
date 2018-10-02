@@ -6,7 +6,7 @@ const DeleteOptions = ({ deactivateSelector }) => {
   const width = window.innerWidth
     || document.documentElement.clientWidth
     || document.body.clientWidth;
-  const buttonsLength = 242;
+  const buttonsLength = 257;
   const position = width > buttonsLength ? width - buttonsLength : 0;
 
   return (

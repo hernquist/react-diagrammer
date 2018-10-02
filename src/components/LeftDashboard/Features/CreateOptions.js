@@ -6,7 +6,7 @@ const CreateOptions = ({ deactivateSelector }) => {
   const width = window.innerWidth
     || document.documentElement.clientWidth
     || document.body.clientWidth;
-  const buttonsLength = 316;
+  const buttonsLength = 332;
   const position = width > buttonsLength ? width - buttonsLength : 0;
 
   return (

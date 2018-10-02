@@ -5,7 +5,7 @@ const ProjectList = ({projects, setCurrentProject, deactivateSelector}) => {
   const width = window.innerWidth
     || document.documentElement.clientWidth
     || document.body.clientWidth;
-  const buttonsLength = 462;
+  const buttonsLength = 478;
   const position = width > buttonsLength ? width - buttonsLength : 0;
 
   return ( 
