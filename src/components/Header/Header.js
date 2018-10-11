@@ -12,7 +12,7 @@ class Header extends Component {
       <div className="app-name"> REACT DIAGRAMMER </div>
       <div className="user-name"> {loggedIn && `Welcome back, ${user.name}`} </div>
       {loggedIn ? <div className="nav">
-        <Modal><h3>About Page</h3></Modal>
+        <Modal text="modal"><h3>About Page</h3></Modal>
         <div className="button">
           <Link to="/logout">LOGOUT</Link>
         </div>
