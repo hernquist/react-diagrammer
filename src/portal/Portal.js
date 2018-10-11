@@ -6,15 +6,15 @@ const portalRoot = document.getElementById('portal');
 export default class Portal extends Component {
   constructor() {
     super();
-    this.el = document.createElement('div')
+    this.el = document.createElement('div');
   }
 
   componentDidMount = () => {
-    portalRoot.appendChild(this.el)
+    portalRoot.appendChild(this.el);
   }
 
   componentWillUnmount = () => {
-    portalRoot.removeChild(this.el)
+    portalRoot.removeChild(this.el);
   }
 
   render() {
