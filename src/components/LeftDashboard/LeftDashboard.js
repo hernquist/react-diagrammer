@@ -1,36 +1,50 @@
 import React, { Component } from 'react';
 import ProjectList from './Features/ProjectList';
-import { Link } from 'react-router-dom';
+import CreateOptions from './Features/CreateOptions';
+import DeleteOptions from './Features/DeleteOptions';
 import '../../styles/LeftDashboard.css';
 
 class LeftDashboard extends Component {
-  state = { selector: false };
+  initialState = {
+    changeProject: false,
+    createOptions: false,
+    deleteOptions: false
+  }
+  
+  state = this.initialState;
 
   componentDidMount() {
     this.props.needsSetting && this.props.setCurrentProject(this.props.currentProject);
   }
 
-  handleSwitch = () => this.props.layout === 'full-screen' ?
-      this.props.switchLayout('logged-in') : 
-      this.props.switchLayout('full-screen');
+  handleSwitch = () => {
+    this.setState({ ...this.initialState })
+    this.props.layout === 'full-screen' ?
+      this.props.switchLayout('logged-in') 
+      : this.props.switchLayout('full-screen');
+  }
 
 
-  activateSelector = async () => {
-    this.setState({ selector: true });
+  activateSelector = async key => {
+    this.setState({ 
+      ...this.initialState,
+      [key]: true });
     await this.props.refetch();
   }
 
-  deactivateSelector = () => {
-    this.setState({ selector: false});
-  }
+  deactivateSelector = () => this.setState({ ...this.initialState });
 
   render() {
     const { layout, projects, currentProject, setCurrentProject } = this.props;
     const content = {
-      'full-screen': 'SHOW',
-      'logged-in': 'HIDE'
+      'full-screen': 'SHOW DASHBOARD',
+      'logged-in': 'HIDE DASHBOARD'
     };
-    const { selector } = this.state;
+    const classNames = {
+      'full-screen': 'dashboard-button showable',
+      'logged-in': 'dashboard-button hideable'
+    }
+    const { changeProject, createOptions, deleteOptions } = this.state;
     const project = currentProject.name.length > 12 ?
       `${currentProject.name}` : `PROJECT ${ currentProject.name }`
     
@@ -43,31 +57,43 @@ class LeftDashboard extends Component {
           <div className='buttons'>
             <div 
               className='dashboard-button selector'
-              onClick={selector ? this.deactivateSelector : this.activateSelector}
+              onClick={changeProject ? this.deactivateSelector 
+                : () => this.activateSelector('changeProject')
+              }
             >
               <div className='button-content'>SWITCH PROJECT</div>
             </div>
-            <Link to='/main/new-project' className='dashboard-button hideable'>
-              <div className='button-content'>+ PROJECT</div>
-            </Link>
-            <Link to='/main/delete-project' className='dashboard-button hideable'>
-              <div className='button-content'>DELETE PROJECT</div>
-            </Link>
-            <Link to='/main/component/new' className='dashboard-button hideable'>
-              <div className='button-content'>+ COMPONENT</div>
-            </Link>
-            <Link to='/main/component/add-existing' className='dashboard-button hideable'>
-              <div className='button-content'>+ EXISTING COMPONENT</div>
-            </Link>
-            <div className='dashboard-button hideable' onClick={this.handleSwitch}>
+            <div 
+              className='dashboard-button selector'
+              onClick={createOptions ? this.deactivateSelector 
+                : () => this.activateSelector('createOptions')
+              }
+            >
+              CREATE
+            </div>
+            <div
+              className='dashboard-button selector'
+              onClick={deleteOptions ? this.deactivateSelector
+                : () => this.activateSelector('deleteOptions')
+              }
+            >
+              DELETE
+            </div>
+            <div className={classNames[layout]} onClick={this.handleSwitch}>
               <div className='button-content'>{content[layout]}</div>
             </div>
           </div>
         </div>
-        {selector && <ProjectList 
+        {changeProject && <ProjectList 
           deactivateSelector={this.deactivateSelector} 
           projects={projects} 
           setCurrentProject={setCurrentProject}
+        />}
+        {createOptions && <CreateOptions
+          deactivateSelector={this.deactivateSelector}
+        />}
+        {deleteOptions && <DeleteOptions
+          deactivateSelector={this.deactivateSelector}
         />}
       </div>
     )
