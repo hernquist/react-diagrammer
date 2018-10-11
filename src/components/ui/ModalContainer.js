@@ -4,14 +4,15 @@ import Modal from './Modal';
 
 export default class ModalContainer extends Component {
   render() {
+    const { children, text } = this.props;
 
     return (
       <Toggle>
         {({ visible, toggle }) => (
           <Fragment>
-            <button onClick={toggle}>{this.props.text}</button>
+            <button onClick={toggle}>{text}</button>
             <Modal visible={visible} toggle={toggle} >
-              {this.props.children}
+              {children}
             </Modal>
           </Fragment>
         )}
