@@ -5,3 +5,24 @@ export const Nav = styled.div`
   grid-template-columns: auto auto auto;
   margin: 5px;
 `;
+
+export const HeaderContainer = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-auto-flow: column;
+  grid-gap: 20px;
+  align-items: center;
+  margin: 10px;
+`;
+
+export const AppName = styled.div`
+  font-size: 40px;
+  color: #21c2f8;
+  margin-top: 10px;
+`;
+
+export const UserName = styled.div`
+  margin-top: 8px;
+  font-size: 28px;
+  color: #21c2f8;
+`;

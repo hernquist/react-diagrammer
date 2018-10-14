@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
-import { SIGNUP } from '../../graphql/mutations';
-import { validateEmail } from '../../helpers/validations';
+import React, { Component } from "react";
+import { Mutation } from "react-apollo";
+import { SIGNUP } from "../../graphql/mutations";
+import { validateEmail } from "../../helpers/validations";
+import { SubmitButton } from "../UI/SubmitButton";
+import { AuthWrapper, InputField } from "styles";
 
 class SignupForm extends Component {
   initialState = {
     errors: [],
-    email: '',
-    name: '',
-    password: ''
-  }
-  
+    email: "",
+    name: "",
+    password: ""
+  };
+
   state = this.initialState;
 
   validation = (event, mutation) => {
@@ -20,91 +22,133 @@ class SignupForm extends Component {
 
     switch (false) {
       case validateEmail(email):
-        message = 'invalidEmail';
-        title = 'signup';
+        message = "invalidEmail";
+        title = "signup";
         break;
       case name.length >= 6:
-        message = 'minLengthGeneric';
-        title = 'minimumLength';
+        message = "minLengthGeneric";
+        title = "minimumLength";
         details = {
           number: 6,
-          name: 'username'
+          name: "username"
         };
         break;
       case password.length >= 8:
-        message = 'minLengthGeneric';
-        title = 'minimumLength';
+        message = "minLengthGeneric";
+        title = "minimumLength";
         details = {
           number: 8,
-          name: 'password'
+          name: "password"
         };
         break;
       default:
         break;
     }
-    message ? this.props.createNotification('warning', message, title, details)()
-    : this.onSubmit(mutation)
-  }
+    message
+      ? this.props.createNotification("warning", message, title, details)()
+      : this.onSubmit(mutation);
+  };
 
-  onSubmit = async (mutation) => {
-      const { email, name, password } = this.state;
-      await mutation({ variables: { email, name, password } });
+  onSubmit = async mutation => {
+    const { email, name, password } = this.state;
+    await mutation({ variables: { email, name, password } });
   };
 
   handleSignup = signup => {
     switch (signup) {
-      case '1':
-        this.props.createNotification('warning', 'nameTaken', 'nameTaken', {})();
+      case "1":
+        this.props.createNotification(
+          "warning",
+          "nameTaken",
+          "nameTaken",
+          {}
+        )();
         break;
-      case '2':
-        this.props.createNotification('warning', 'emailTaken', 'emailTaken', {})();
+      case "2":
+        this.props.createNotification(
+          "warning",
+          "emailTaken",
+          "emailTaken",
+          {}
+        )();
         break;
-      case '3':
-        this.props.createNotification('warning', 'nameTaken', 'nameTaken', {})();
-        this.props.createNotification('warning', 'emailTaken', 'emailTaken', {})();
+      case "3":
+        this.props.createNotification(
+          "warning",
+          "nameTaken",
+          "nameTaken",
+          {}
+        )();
+        this.props.createNotification(
+          "warning",
+          "emailTaken",
+          "emailTaken",
+          {}
+        )();
         break;
       default:
         signup && localStorage.setItem("token", signup);
         this.props.history.push("/main/new-project");
     }
-  // TODO is the right ux?
-  this.setState(this.initialState);
-  }
+    // TODO is the right ux?
+    this.setState(this.initialState);
+  };
 
   render() {
     const { name, email, password, errors } = this.state;
-    return <div>
-      <h2>Signup</h2>
-      <Mutation 
-        mutation={SIGNUP}
-        onCompleted={result => this.handleSignup(result.signup)}
-      >
-        {Signup => <form onSubmit={e => this.validation(e, Signup)} >
-          <div className="input-field">
-            <label>Username</label>
-            <input value={name} onChange={e => this.setState({
-                  name: e.target.value
-                })} />
-          </div>
-          <div className="input-field">
-            <label>Email</label>
-            <input value={email} onChange={e => this.setState({
-                  email: e.target.value
-                })} />
-          </div>
-          <div className="input-field">
-            <label>Password</label>
-            <input value={password} onChange={e => this.setState({
-                  password: e.target.value
-                })} />
-          </div>
-          <div className="errors">
-            {errors.map(error => <div key={error}>SIGNUP: {error}</div>)}
-          </div>
-          <button variant="raised">Submit</button>
-        </form>}
-      </Mutation>
-    </div>;
+    return (
+      <AuthWrapper>
+        <h2>Signup</h2>
+        <Mutation
+          mutation={SIGNUP}
+          onCompleted={result => this.handleSignup(result.signup)}
+        >
+          {Signup => (
+            <form onSubmit={e => this.validation(e, Signup)}>
+              <InputField>
+                <label>Username</label>
+                <input
+                  value={name}
+                  onChange={e =>
+                    this.setState({
+                      name: e.target.value
+                    })
+                  }
+                />
+              </InputField>
+              <InputField>
+                <label>Email</label>
+                <input
+                  value={email}
+                  onChange={e =>
+                    this.setState({
+                      email: e.target.value
+                    })
+                  }
+                />
+              </InputField>
+              <InputField>
+                <label>Password</label>
+                <input
+                  value={password}
+                  onChange={e =>
+                    this.setState({
+                      password: e.target.value
+                    })
+                  }
+                />
+              </InputField>
+              <div className="errors">
+                {errors.map(error => (
+                  <div key={error}>SIGNUP: {error}</div>
+                ))}
+              </div>
+              <SubmitButton>Submit</SubmitButton>
+            </form>
+          )}
+        </Mutation>
+      </AuthWrapper>
+    );
   }
 }
 

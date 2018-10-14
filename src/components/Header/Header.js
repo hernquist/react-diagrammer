@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import ModalContainer from "../UI/ModalContainer";
-import "../../styles/Header.css";
 import About from "../Static/About";
 import { FlatButton } from "../UI/FlatButton";
+import { HeaderContainer, AppName, UserName, Nav } from "styles";
 
 class Header extends Component {
   render() {
@@ -11,13 +11,10 @@ class Header extends Component {
     const loggedIn = Object.keys(user).length !== 0;
 
     return (
-      <div className="header-container">
-        <div className="app-name"> REACT DIAGRAMMER </div>
-        <div className="user-name">
-          {" "}
-          {loggedIn && `Welcome back, ${user.name}`}{" "}
-        </div>
-        <div className="nav">
+      <HeaderContainer>
+        <AppName> REACT DIAGRAMMER </AppName>
+        <UserName> {loggedIn && `Welcome back, ${user.name}`} </UserName>
+        <Nav>
           <ModalContainer text="ABOUT" large>
             <About />
           </ModalContainer>
@@ -37,8 +34,8 @@ class Header extends Component {
               </FlatButton>
             </Fragment>
           )}
-        </div>
-      </div>
+        </Nav>
+      </HeaderContainer>
     );
   }
 }
