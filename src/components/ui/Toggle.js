@@ -5,7 +5,7 @@ export default class Toggle extends Component {
     visible: false
   }
 
-  toggle = () => this.setState((prevState) => ({
+  toggle = () => this.setState(prevState => ({
     visible: !prevState.visible
   }))
 
