@@ -30,8 +30,8 @@ export const LargeModalCard = styled.div`
   padding: 15px;
   z-index: 10;
   min-width: 800px;
-  min-height: 1000px;
-  margin-bottom: 400px;
+  min-height: 600px;
+  margin: 100px;
 `;
 
 export const ModalBackground = styled.div`
@@ -42,4 +42,22 @@ export const ModalBackground = styled.div`
   left: 0;
   background-color: black;
   opacity: 0.5;
+`;
+
+export const CloseModalButton = styled.button`
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background: inherit;
+  margin: 2px;
+  width: 100px;
+  height: 30px;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0;
+  color: ${props => props.theme.lightGrey};
+  font-size: 20px;
+  background: ${props => props.theme.teal}
+  border: 2px solid ${props => props.theme.madison};
+  box-shadow: none;
 `;

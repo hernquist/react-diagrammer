@@ -18,7 +18,7 @@ class Header extends Component {
           {loggedIn && `Welcome back, ${user.name}`}{" "}
         </div>
         <div className="nav">
-          <ModalContainer text="ABOUT">
+          <ModalContainer text="ABOUT" large>
             <About />
           </ModalContainer>
           {loggedIn ? (

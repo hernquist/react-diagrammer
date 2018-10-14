@@ -4,7 +4,8 @@ import {
   ModalBackground,
   ModalWrapper,
   ModalCard,
-  LargeModalCard
+  LargeModalCard,
+  CloseModalButton
 } from "./Modal";
 
 export {
@@ -15,5 +16,6 @@ export {
   ModalBackground,
   ModalWrapper,
   ModalCard,
-  LargeModalCard
+  LargeModalCard,
+  CloseModalButton
 };
