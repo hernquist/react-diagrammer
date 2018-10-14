@@ -3,7 +3,6 @@ import { Mutation } from "react-apollo";
 import styled from "styled-components";
 import { TOGGLE_COMPONENT_STYLE } from "../../../graphql/mutations";
 import helper from "../../../helpers/helper";
-
 import {
   RightDashboardContainer as Container,
   CurrentComponentTitle as Title

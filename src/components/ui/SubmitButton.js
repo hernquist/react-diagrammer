@@ -13,6 +13,8 @@ export const SubmitButton = styled.button`
   background: ${props => props.theme.teal};
   border: 2px solid ${props => props.theme.madison};
   box-shadow: none;
+
+  &: focus;
 `;
 
 export const WideButton = styled(SubmitButton)`
