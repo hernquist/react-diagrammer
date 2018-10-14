@@ -1,6 +1,6 @@
 import styled, { injectGlobal } from "styled-components";
 
-export const theme = {
+export const Theme = {
   black: "#202020",
   madison: "#2c3e50",
   teal: "#21c2f8",

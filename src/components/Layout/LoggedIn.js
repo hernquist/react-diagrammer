@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HeaderContainer from "../Header/HeaderContainer";
-import LeftDashboard from "../LeftDashboard/LeftDashboard";
+import TopDashboard from "../TopDashboard/TopDashboard";
 import RightDashoard from "../RightDashboard/RightDashboard";
 import DiagramMain from "../Diagram/DiagramMain";
 import { Query } from "react-apollo";
@@ -98,7 +98,7 @@ class LoggedIn extends Component {
                         <HeaderContainer className="header" />
                       </div>
                       <div className="left-dashboard">
-                        <LeftDashboard
+                        <TopDashboard
                           {...this.props}
                           switchLayout={this.switchLayout}
                           setCurrentProject={this.setCurrentProject}

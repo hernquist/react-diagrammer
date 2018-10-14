@@ -17,12 +17,12 @@ export const HeaderContainer = styled.div`
 
 export const AppName = styled.div`
   font-size: 40px;
-  color: #21c2f8;
+  color: ${props => props.theme.teal};
   margin-top: 10px;
 `;
 
 export const UserName = styled.div`
   margin-top: 8px;
   font-size: 28px;
-  color: #21c2f8;
+  color: ${props => props.theme.teal};
 `;

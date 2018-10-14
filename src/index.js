@@ -10,7 +10,7 @@ import { ThemeProvider } from "styled-components";
 
 import NotLoggedIn from "./components/Layout/NotLoggedIn";
 import LoggedIn from "./components/Layout/LoggedIn";
-import { theme } from "./styles";
+import { Theme } from "./styles";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:3001/graphql"
@@ -37,7 +37,7 @@ const client = new ApolloClient({
 const Index = () => {
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={Theme}>
         <BrowserRouter>
           <Fragment>
             <Route path="/(login|signup|logout|)" component={NotLoggedIn} />

@@ -24,6 +24,6 @@ export const InputField = styled.div`
   }
 
   input: focus {
-    outline: 2px offset #21c2f8;
+    outline: 2px offset ${props => props.theme.teal};
   }
 `;

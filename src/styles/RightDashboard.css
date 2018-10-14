@@ -1,8 +1,8 @@
 .right-dashboard-container {
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: auto repeat(6, 1fr);
-    height: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto repeat(6, 1fr);
+  height: 100%;
 }
 
 /* .dashboard-button {
@@ -13,7 +13,7 @@
     grid-template-rows: auto auto auto;
     justify-items: center;
     align-items: center;
-    background: #21c2f8;
+    background: ${props => props.theme.teal};
     border: 2px solid black;
     border-radius: 4px;
     box-shadow: 1px 2px rgba(0, 0, 0, 0.2);
@@ -24,13 +24,13 @@
 } */
 
 .current-component-title {
-    border-bottom: 1px solid black;
-    display: grid;
-    justify-items: center;
-    /*margin-left: 5px;*/
-    /*margin-right: 5px;*/
-    padding-bottom: 6px;
-    padding-top: 10px;
-    font-size: 20px;
-    background-color: rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid black;
+  display: grid;
+  justify-items: center;
+  /*margin-left: 5px;*/
+  /*margin-right: 5px;*/
+  padding-bottom: 6px;
+  padding-top: 10px;
+  font-size: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
 }

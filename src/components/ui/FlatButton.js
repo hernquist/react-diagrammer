@@ -37,6 +37,20 @@ export const FlatButton = styled.button`
   }
 `;
 
-export const SmallFlatButton = styled(FlatButton)`
-  font-size: 16px;
+export const SmallFlatButton = styled.button`
+  color: ${props => props.theme.teal};
+  text-align: center;
+  background: transparent;
+  border-radius: 4px;
+  font-size: 18px;
+  margin-right: 10px;
+  height: 22px;
+  border: none;
+
+  &:hover {
+    background-color: rgba(33, 194, 248, 0.6);
+    border-radius: 4px;
+    box-shadow: 2px 2px rgba(33, 194, 248, 0.2);
+    color: ${props => props.theme.black};
+  }
 `;
