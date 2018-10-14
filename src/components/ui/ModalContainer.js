@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Toggle from './Toggle';
 import Modal from './Modal';
+import { FlatButton } from './FlatButton';
 
 export default class ModalContainer extends Component {
   render() {
@@ -10,7 +11,7 @@ export default class ModalContainer extends Component {
       <Toggle>
         {({ visible, toggle }) => (
           <Fragment>
-            <button onClick={toggle}>{text}</button>
+            <FlatButton onClick={toggle}>{text}</FlatButton>
             <Modal visible={visible} toggle={toggle} >
               {children}
             </Modal>

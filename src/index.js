@@ -6,9 +6,11 @@ import { ApolloProvider } from "react-apollo";
 import { ApolloLink, concat } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { ThemeProvider } from "styled-components";
 
 import NotLoggedIn from "./components/Layout/NotLoggedIn";
 import LoggedIn from "./components/Layout/LoggedIn";
+import { theme } from "./styles"
 import "./styles/index.css";
 
 const httpLink = createHttpLink({
@@ -36,12 +38,14 @@ const client = new ApolloClient({
 const Index = () => {
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <div>
-          <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
-          <Route path="/main" component={LoggedIn} />
-        </div>
-      </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <div>
+            <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
+            <Route path="/main" component={LoggedIn} />
+          </div>
+        </BrowserRouter>
+      </ThemeProvider>
     </ApolloProvider>
   );
 };
