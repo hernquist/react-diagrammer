@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import ModalContainer from "../UI/ModalContainer";
 import "../../styles/Header.css";
+import About from "../Static/About";
 import { FlatButton } from "../UI/FlatButton";
 
 class Header extends Component {
@@ -18,7 +19,7 @@ class Header extends Component {
         </div>
         <div className="nav">
           <ModalContainer text="ABOUT">
-            <h3>About Page</h3>
+            <About />
           </ModalContainer>
           {loggedIn ? (
             <Fragment>
