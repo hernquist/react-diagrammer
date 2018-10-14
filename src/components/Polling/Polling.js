@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Polling extends Component {
   render() {
-    return (
-      <div>
-        Polling
-      </div>
-    );
+    return <div />;
   }
 }
 
