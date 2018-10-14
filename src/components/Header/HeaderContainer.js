@@ -3,7 +3,6 @@ import { Query } from "react-apollo";
 import { GET_AUTH_USER } from "../../graphql/queries";
 import Header from "../Header/Header";
 
-
 class HeaderContainer extends Component {
   state = {
     errors: []
