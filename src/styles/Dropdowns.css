@@ -4,6 +4,8 @@
   z-index: 9;
   top: 5px;
   border-radius: 3px;
+  display: flex;
+  flex-direction: column;
 }
 
 .small {

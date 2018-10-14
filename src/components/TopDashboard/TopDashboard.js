@@ -93,6 +93,9 @@ class LeftDashboard extends Component {
             <FlatButton
               className={classNames[layout]}
               onClick={this.handleSwitch}
+              style={{
+                width: 184
+              }}
             >
               {content[layout]}
             </FlatButton>
