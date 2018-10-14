@@ -1,16 +1,12 @@
 import styled, { injectGlobal } from "styled-components";
 
 export const theme = {
-  //  '#202020'
-  // '#2c3e50'
-  // '#21c2f8'
-  // '#bdc3c7'
-  // '#f3f7f8'
-  red: "#FF0000",
-  black: "#393939",
-  grey: "#3A3A3A",
-  lightgrey: "#E1E1E1",
-  offWhite: "#EDEDED",
+  black: "#202020",
+  madison: "#2c3e50",
+  teal: "#21c2f8",
+  grey: "#bdc3c7",
+  lightGrey: "#f3f7f8",
+  red: "#ff0000",
   maxWidth: "1000px",
   bs: "0 12px 24px 0 rgba(0, 0, 0, 0.09)"
 };

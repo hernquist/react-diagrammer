@@ -3,7 +3,7 @@ h2 {
   color: #202020;
 }
 
-button {
+/* button {
   background-color: #21c2f8;
   color: #202020;
   font-size: 20px;
@@ -18,7 +18,7 @@ button:hover {
   font-size: 22px;
   height: 34px;
   padding: 7px 8px 0 8px;
-}
+} */
 
 button:active {
   height: 34px;

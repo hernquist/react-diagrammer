@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import ModalContainer from '../UI/ModalContainer';
-import '../../styles/Header.css';
+import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
+import ModalContainer from "../UI/ModalContainer";
+import "../../styles/Header.css";
+import { FlatButton } from "../UI/FlatButton";
 
 class Header extends Component {
   render() {
@@ -11,22 +12,33 @@ class Header extends Component {
     return (
       <div className="header-container">
         <div className="app-name"> REACT DIAGRAMMER </div>
-        <div className="user-name"> {loggedIn && `Welcome back, ${user.name}`} </div>
-        {loggedIn ? <div className="nav">
-          <ModalContainer text="ABOUT"><h3>About Page</h3></ModalContainer>
-          <div className="button">
-            <Link to="/logout">LOGOUT</Link>
-          </div>
-        </div> : <div className="nav">
-            <div className="button">
-              <Link to="/signup">SIGN UP</Link>
-            </div>
-            <div className="button">
-              <Link to="/login">LOGIN</Link>
-            </div>
-          </div>}
+        <div className="user-name">
+          {" "}
+          {loggedIn && `Welcome back, ${user.name}`}{" "}
+        </div>
+        <div className="nav">
+          <ModalContainer text="ABOUT">
+            <h3>About Page</h3>
+          </ModalContainer>
+          {loggedIn ? (
+            <Fragment>
+              <FlatButton>
+                <Link to="/logout">LOGOUT</Link>
+              </FlatButton>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <FlatButton>
+                <Link to="/signup">SIGN UP</Link>
+              </FlatButton>
+              <FlatButton>
+                <Link to="/login">LOGIN</Link>
+              </FlatButton>
+            </Fragment>
+          )}
+        </div>
       </div>
-    )
+    );
   }
 }
 
