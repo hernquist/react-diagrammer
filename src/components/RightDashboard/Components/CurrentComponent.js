@@ -10,7 +10,11 @@ import {
 import { WideButton } from "../../UI/SubmitButton";
 
 const Button = styled(WideButton)`
-  margin: 10px 0;
+  width: 90%;
+  margin: 3% 5% 2% 5%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 class CurrentComponent extends Component {
