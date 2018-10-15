@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CreateProjectContainer = styled.div`
   display: grid;
-  background: #bdc3c7;
+  background: ${props => props.theme.grey};
   grid-template-rows: auto 1fr;
   justify-items: stretch;
   padding: 0px;
