@@ -1,0 +1,24 @@
+import styled from "styled-components";
+
+export const CreateProjectContainer = styled.div`
+  display: grid;
+  background: #bdc3c7;
+  grid-template-rows: auto 1fr;
+  justify-items: stretch;
+  padding: 0px;
+  margin: 15px;
+`;
+
+export const FormTitle = styled.div`
+  font-size: 32px;
+`;
+
+export const CreateProjectForm = styled.form`
+  input {
+    height: 28px;
+  }
+`;
+
+export const Textarea = styled.textarea`
+  font-size: 20px;
+`;

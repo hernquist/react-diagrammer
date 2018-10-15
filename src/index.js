@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 import { ApolloClient } from "apollo-client";
@@ -6,10 +6,11 @@ import { ApolloProvider } from "react-apollo";
 import { ApolloLink, concat } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { ThemeProvider } from "styled-components";
 
 import NotLoggedIn from "./components/Layout/NotLoggedIn";
 import LoggedIn from "./components/Layout/LoggedIn";
-import "./styles/index.css";
+import { Theme } from "./styles";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:3001/graphql"
@@ -36,12 +37,14 @@ const client = new ApolloClient({
 const Index = () => {
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <div>
-          <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
-          <Route path="/main" component={LoggedIn} />
-        </div>
-      </BrowserRouter>
+      <ThemeProvider theme={Theme}>
+        <BrowserRouter>
+          <Fragment>
+            <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
+            <Route path="/main" component={LoggedIn} />
+          </Fragment>
+        </BrowserRouter>
+      </ThemeProvider>
     </ApolloProvider>
   );
 };
