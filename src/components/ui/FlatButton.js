@@ -1,15 +1,11 @@
 import styled from "styled-components";
 
-// a {...} may not be necessary
 export const FlatButton = styled.button`
   background: inherit;
-  /* display: grid; */
   margin: 0;
   width: 100px;
   height: 26px;
   justify-content: center;
-  /* align-content: center; */
-  /* align-items: center; */
   padding: 0;
   border-radius: 4px;
   color: ${prop => prop.theme.teal};
@@ -28,6 +24,12 @@ export const FlatButton = styled.button`
     a {
       color: ${prop => prop.theme.black};
     }
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none !important;
   }
 
   a {
@@ -52,5 +54,11 @@ export const SmallFlatButton = styled.button`
     border-radius: 4px;
     box-shadow: 2px 2px rgba(33, 194, 248, 0.2);
     color: ${props => props.theme.black};
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none !important;
   }
 `;

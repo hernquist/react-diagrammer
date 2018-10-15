@@ -14,10 +14,20 @@ export const SubmitButton = styled.button`
   border: 2px solid ${props => props.theme.madison};
   box-shadow: none;
 
-  &: focus;
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none !important;
+  }
 `;
 
 export const WideButton = styled(SubmitButton)`
   min-height: 30px;
   width: 300px;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none !important;
+  }
 `;
