@@ -1,38 +1,30 @@
 import React from "react";
-import "../../../styles/Dropdowns.css";
+import { List, ListItem } from "styles";
+import helper from "helpers/helper";
 
 const ProjectList = ({ projects, setCurrentProject, deactivateSelector }) => {
-  const width =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
+  const screenWidth = helper.screenWidth();
   const buttonsLength = 562;
-  const position = width > buttonsLength ? width - buttonsLength : 0;
+  const position =
+    screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
 
   return (
-    <div
-      className="list large"
-      onMouseLeave={deactivateSelector}
-      style={{ left: `${position}px` }}
-    >
+    <List onMouseLeave={deactivateSelector} style={{ left: `${position}px` }}>
       {projects.length > 0 ? (
         projects.map(project => (
-          <div
+          <ListItem
             key={project._id}
-            className="list-item"
             onClick={() => {
               setCurrentProject(project);
             }}
           >
             {project.name}
-          </div>
+          </ListItem>
         ))
       ) : (
-        <div className="list-item" onClick={deactivateSelector}>
-          No Current Project
-        </div>
+        <ListItem onClick={deactivateSelector}>No Current Project</ListItem>
       )}
-    </div>
+    </List>
   );
 };
 

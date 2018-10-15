@@ -13,7 +13,9 @@ export const FlatButton = styled.button`
   border: none;
   box-shadow: none;
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     padding: 0;
     margin: 0;
     background-color: rgba(33, 194, 248, 0.6);

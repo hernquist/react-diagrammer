@@ -1,42 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import helper from "helpers/helper";
+import { List, ListItem } from "styles";
 
 const CreateOptions = ({ deactivateSelector }) => {
-  const width =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
+  const screenWidth = helper.screenWidth();
   const buttonsLength = 386;
-  const position = width > buttonsLength ? width - buttonsLength : 0;
+  const position =
+    screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
 
   return (
-    <div
-      className="list large"
-      onMouseLeave={deactivateSelector}
-      style={{ left: `${position}px` }}
-    >
-      <Link
-        to="/main/new-project"
-        className="list-item"
-        onClick={deactivateSelector}
-      >
-        PROJECT
-      </Link>
-      <Link
-        to="/main/component/new"
-        className="list-item"
-        onClick={deactivateSelector}
-      >
-        COMPONENT
-      </Link>
-      <Link
-        to="/main/component/add-existing"
-        className="list-item"
-        onClick={deactivateSelector}
-      >
-        EXISTING COMPONENT
-      </Link>
-    </div>
+    <List onMouseLeave={deactivateSelector} style={{ left: `${position}px` }}>
+      <ListItem>
+        <Link to="/main/new-project" onClick={deactivateSelector}>
+          PROJECT
+        </Link>
+      </ListItem>
+      <ListItem>
+        <Link
+          to="/main/component/new"
+          className="list-item"
+          onClick={deactivateSelector}
+        >
+          COMPONENT
+        </Link>
+      </ListItem>
+      <ListItem>
+        <Link
+          to="/main/component/add-existing"
+          className="list-item"
+          onClick={deactivateSelector}
+        >
+          EXISTING COMPONENT
+        </Link>
+      </ListItem>
+    </List>
   );
 };
 
