@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   ShowUnassignedContainer as Container,
   ShowUnassignedNumber as Number,
   ShowUnassignedText as Text
 } from "styles";
+import { SubmitButton } from "../UI/SubmitButton";
+import { SmallFlatButton } from "../UI/FlatButton";
 
 export default class ShowUnassigned extends Component {
   render() {
@@ -13,9 +15,10 @@ export default class ShowUnassigned extends Component {
 
     return (
       <Container style={{ fontSize: "24px" }}>
-        <Number>{unassigned.length}</Number>
+        <Number>{length}</Number>
         <Text>unassigned</Text>
         <Text>{text}</Text>
+        <SmallFlatButton>expand</SmallFlatButton>
       </Container>
     );
   }

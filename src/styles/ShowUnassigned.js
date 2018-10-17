@@ -4,11 +4,15 @@ export const ShowUnassignedContainer = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* align-content: center; */
-  background: yellow;
+  align-items: center;
+  background: ${props => props.theme.lightGrey};
   width: 120px;
-  height: 130px;
+  min-height: 120px;
+  border: 1px solid ${props => props.theme.madison};
+  border-radius: 4px;
+  margin: 10px;
+  padding: 5px;
+  /* box-shadow: 2px 2px 2px 2px black; */
 `;
 
 export const ShowUnassignedNumber = styled.div`

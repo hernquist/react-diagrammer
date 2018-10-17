@@ -30,10 +30,10 @@ class DiagramMain extends Component {
       return null;
     }
     const { components } = currentProject;
-    let branches = helper.childs(components);
-    let root = helper.root(components);
+    const branches = helper.childs(components);
+    const root = helper.root(components);
 
-    let tree = branches
+    const tree = branches
       .reduce(
         (acc, _, i) => [
           ...acc,
@@ -45,9 +45,11 @@ class DiagramMain extends Component {
       )
       .filter(branches => branches.length > 0);
 
+    const unassigned = helper.unassigned(components);
+
     return (
       <Fragment>
-        <ShowUnassigned unassigned={helper.unassigned(components)} />
+        {unassigned.length > 0 && <ShowUnassigned unassigned={unassigned} />}
         <Container>
           {tree.map((row, i) => (
             <TreeRow history={history} row={row} key={i} parent={parent} />
