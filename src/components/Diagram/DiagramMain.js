@@ -47,8 +47,7 @@ class DiagramMain extends Component {
 
     return (
       <Fragment>
-        {/* TODO */}
-        {/* <ShowUnassigned unassigned={helper.unassigned(components)} /> */}
+        <ShowUnassigned unassigned={helper.unassigned(components)} />
         <Container>
           {tree.map((row, i) => (
             <TreeRow history={history} row={row} key={i} parent={parent} />
