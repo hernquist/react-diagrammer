@@ -8,8 +8,7 @@ import {
   ParentName,
   Content,
   Numbers,
-  Element,
-  Key
+  Element
 } from "styles";
 
 import Icons from "utils/Icons";
@@ -20,9 +19,8 @@ class DisplayComponent extends Component {
   }
 
   handleClick = () => {
-    const { component, setSelected, history } = this.props;
-    const { _id, name, iteration } = component;
-    setSelected(_id);
+    const { component } = this.props;
+    const { name, iteration } = component;
     this.props.history.push(`/main/component/${name}/${iteration}`);
   };
 
@@ -43,8 +41,6 @@ class DisplayComponent extends Component {
     return (
       <Card onClick={this.handleClick}>
         <Name style={{ fontSize }}>{component.name}</Name>
-        {/* <div>{`STATE: ${stateOutput}`}</div> */}
-        {/* <div>{`PROPS: ${component.props.length}`}</div> */}
         <Content>
           <Icons icon={component.style} />
 
@@ -52,16 +48,16 @@ class DisplayComponent extends Component {
             {stateOutput && (
               <Element>
                 <div>state</div>
-                <Fragment>4</Fragment>
+                <Fragment>{component.state.length}</Fragment>
               </Element>
             )}
             <Element>
               <div>props</div>
-              <Fragment>2</Fragment>
+              <Fragment>{component.props.length}</Fragment>
             </Element>
             <Element>
               <div>cb's</div>
-              <Fragment>0</Fragment>
+              <Fragment>{component.callbacks.length}</Fragment>
             </Element>
           </Numbers>
         </Content>

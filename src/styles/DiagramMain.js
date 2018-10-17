@@ -22,6 +22,7 @@ export const BaseCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 5px;
 `;
 
 export const SelectedCard = styled(BaseCard)`
@@ -78,7 +79,6 @@ export const Numbers = styled.div`
 export const Element = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-content: center; */
   align-items: center;
   width: 35px;
 

@@ -24,10 +24,7 @@ class DiagramMain extends Component {
     selected: ""
   };
 
-  setSelected = selected => this.setState({ selected });
-
   render() {
-    const { selected } = this.props;
     const { currentProject, parent, history } = this.props;
     if (!currentProject || !currentProject.components) {
       return null;
@@ -54,14 +51,7 @@ class DiagramMain extends Component {
         {/* <ShowUnassigned unassigned={helper.unassigned(components)} /> */}
         <Container>
           {tree.map((row, i) => (
-            <TreeRow
-              history={history}
-              row={row}
-              key={i}
-              parent={parent}
-              setSelected={this.setSelected}
-              selected={selected}
-            />
+            <TreeRow history={history} row={row} key={i} parent={parent} />
           ))}
         </Container>
       </Fragment>
