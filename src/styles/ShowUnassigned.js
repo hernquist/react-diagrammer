@@ -4,7 +4,6 @@ export const ShowUnassignedContainer = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   /* align-items: center; */
   /* align-content: center; */
   background: yellow;
@@ -14,7 +13,7 @@ export const ShowUnassignedContainer = styled.div`
 
 export const ShowUnassignedNumber = styled.div`
   font-size: 40px;
-  margin: 0 auto;
+  margin: 10px auto 0;
 `;
 
 export const ShowUnassignedText = styled.div`
