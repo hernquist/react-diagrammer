@@ -8,7 +8,7 @@ export const RightDashboardContainer = styled.div`
 `;
 
 export const CurrentComponentTitle = styled.div`
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid ${props => props.theme.black};
   display: flex;
   flex-direction: column;
   align-items: center;

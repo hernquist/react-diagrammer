@@ -41,7 +41,7 @@ export const ModalBackground = styled.div`
   height: 100%;
   top: 0;
   left: 0;
-  background-color: black;
+  background-color: ${props => props.theme.black};
   opacity: 0.5;
 `;
 

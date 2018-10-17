@@ -1,46 +1,18 @@
 import React, { Component, Fragment } from "react";
 import auth from "../HOC/auth";
 import ShowUnassigned from "./ShowUnassigned";
+import DisplayComponent from "./DisplayComponent";
 import helper from "../../helpers/helper";
-import {
-  DiagramMainContainer as Container,
-  ComponentContainer,
-  ComponentName,
-  Row
-} from "styles";
+import { DiagramMainContainer as Container, Row } from "styles";
 
-const DisplayComponent = ({ component, parent, history }) => {
-  const { name, iteration } = component;
-  const stateOutput =
-    component.style === "presentational" ? "n/a" : component.state.length;
-  const border =
-    component.style === "container" ? "3px solid red" : "3px solid blue";
-  const backgroundColor =
-    parent === component._id ? "rgba(255, 0, 0, 0.5)" : "rgba(0, 0, 0, 0.1)";
-  const margin = "0 3px";
-  const styles = { border, backgroundColor, margin };
-
-  return (
-    <ComponentContainer
-      style={styles}
-      onClick={() => history.push(`/main/component/${name}/${iteration}`)}
-    >
-      <ComponentName>{component.name}</ComponentName>
-      <div>{`STATE: ${stateOutput}`}</div>
-      <div>{`PROPS: ${component.props.length}`}</div>
-    </ComponentContainer>
-  );
-};
-
-const TreeRow = ({ row, parent, history }) => {
+const TreeRow = props => {
   return (
     <Row>
-      {row.map(component => (
+      {props.row.map(component => (
         <DisplayComponent
           key={component._id}
           component={component}
-          history={history}
-          parent={parent}
+          {...props}
         />
       ))}
     </Row>
@@ -48,7 +20,14 @@ const TreeRow = ({ row, parent, history }) => {
 };
 
 class DiagramMain extends Component {
+  state = {
+    selected: ""
+  };
+
+  setSelected = selected => this.setState({ selected });
+
   render() {
+    const { selected } = this.props;
     const { currentProject, parent, history } = this.props;
     if (!currentProject || !currentProject.components) {
       return null;
@@ -75,7 +54,14 @@ class DiagramMain extends Component {
         {/* <ShowUnassigned unassigned={helper.unassigned(components)} /> */}
         <Container>
           {tree.map((row, i) => (
-            <TreeRow history={history} row={row} key={i} parent={parent} />
+            <TreeRow
+              history={history}
+              row={row}
+              key={i}
+              parent={parent}
+              setSelected={this.setSelected}
+              selected={selected}
+            />
           ))}
         </Container>
       </Fragment>

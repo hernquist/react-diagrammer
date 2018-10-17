@@ -8,7 +8,7 @@ export const AuthWrapper = styled.div`
 `;
 
 export const InputField = styled.div`
-  color: #202020;
+  color: ${props => props.theme.black}
   margin: 16px 0 8px 0;
   padding-bottom: 10px;
   font-size: 22px;
@@ -16,10 +16,10 @@ export const InputField = styled.div`
   flex-direction: column;
 
   input {
-    background-color: #f3f7f8;
+    background-color: ${props => props.theme.lightGrey};
     font-size: 22px;
     padding: 6px 6px 0 6px;
-    border: 1px solid #2c3e50;
+    border: 1px solid ${props => props.theme.madison};
     text-decoration: none;
   }
 
