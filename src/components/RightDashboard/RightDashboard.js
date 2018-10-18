@@ -133,7 +133,7 @@ class RightDashboard extends Component {
           )}
         />
         <Route
-          path="/main/component/assign-component"
+          path="/main/component/:component/:id/assign-component"
           render={renderProps => (
             <AssignComponent
               {...renderProps}
@@ -145,7 +145,7 @@ class RightDashboard extends Component {
           )}
         />
         <Route
-          path="/main/component/unassign-component"
+          path="/main/component/:component/:id/unassign-component"
           render={renderProps => (
             <UnassignComponent
               {...renderProps}

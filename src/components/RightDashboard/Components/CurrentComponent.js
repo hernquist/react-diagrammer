@@ -93,7 +93,8 @@ class CurrentComponent extends Component {
           disabled={isRoot}
           onClick={() =>
             this.props.history.push(
-              this.props.match.url + `/${!isUnassigned && `un`}assign-component`
+              this.props.match.url +
+                `/${isUnassigned ? `` : `un`}assign-component`
             )
           }
         >
