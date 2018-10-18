@@ -49,7 +49,9 @@ class DiagramMain extends Component {
 
     return (
       <Fragment>
-        {unassigned.length > 0 && <ShowUnassigned unassigned={unassigned} />}
+        {unassigned.length > 0 && (
+          <ShowUnassigned unassigned={unassigned} history={history} />
+        )}
         <Container>
           {tree.map((row, i) => (
             <TreeRow history={history} row={row} key={i} parent={parent} />

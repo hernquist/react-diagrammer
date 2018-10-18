@@ -10,14 +10,9 @@ import {
   Numbers,
   Element
 } from "styles";
-
 import Icons from "utils/Icons";
 
 class DisplayComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleClick = () => {
     const { component } = this.props;
     const { name, iteration } = component;

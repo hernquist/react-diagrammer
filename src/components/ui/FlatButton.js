@@ -48,7 +48,7 @@ export const SmallFlatButton = styled.button`
   border-radius: 4px;
   font-size: 18px;
   margin-right: 10px;
-  height: 22px;
+  height: 30px;
   border: none;
 
   &:hover {
@@ -56,6 +56,7 @@ export const SmallFlatButton = styled.button`
     border-radius: 4px;
     box-shadow: 2px 2px rgba(33, 194, 248, 0.2);
     color: ${props => props.theme.black};
+    border: 1px solid ${props => props.theme.madison};
   }
 
   &:hover,
