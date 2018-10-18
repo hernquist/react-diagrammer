@@ -35,6 +35,7 @@ class CurrentComponent extends Component {
     }
 
     const currentComponent = helper.currComp(components, name, index);
+    const presentational = currentComponent.style === "presentational";
 
     return (
       <Container>
@@ -44,6 +45,7 @@ class CurrentComponent extends Component {
           <div>{`${currentComponent.name}.js`}</div>
         </Title>
         <Button
+          disabled={presentational}
           onClick={() =>
             this.props.history.push(this.props.match.url + "/update-state")
           }
@@ -58,6 +60,7 @@ class CurrentComponent extends Component {
           UPDATE INCOMING PROPS
         </Button>
         <Button
+          disabled={presentational}
           onClick={() =>
             this.props.history.push(this.props.match.url + "/update-callbacks")
           }

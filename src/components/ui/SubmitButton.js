@@ -19,6 +19,11 @@ export const SubmitButton = styled.button`
   &:focus {
     outline: none !important;
   }
+
+  &:disabled {
+    background: rgba(0, 0, 0, 0.7);
+    color: ${props => props.theme.grey};
+  }
 `;
 
 export const WideButton = styled(SubmitButton)`
