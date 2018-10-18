@@ -35,7 +35,11 @@ class CurrentComponent extends Component {
     }
 
     const currentComponent = helper.currComp(components, name, index);
-    const presentational = currentComponent.style === "presentational";
+    const isPresentational = currentComponent.style === "presentational";
+    const isUnassigned = currentComponent.placement === "unassigned";
+    // later will add some functionality for unassigning a root, although oof
+    const isRoot = currentComponent.place === "root";
+    console.log(currentComponent);
 
     return (
       <Container>
@@ -45,7 +49,7 @@ class CurrentComponent extends Component {
           <div>{`${currentComponent.name}.js`}</div>
         </Title>
         <Button
-          disabled={presentational}
+          disabled={isPresentational}
           onClick={() =>
             this.props.history.push(this.props.match.url + "/update-state")
           }
@@ -60,7 +64,7 @@ class CurrentComponent extends Component {
           UPDATE INCOMING PROPS
         </Button>
         <Button
-          disabled={presentational}
+          disabled={isPresentational}
           onClick={() =>
             this.props.history.push(this.props.match.url + "/update-callbacks")
           }
@@ -84,6 +88,17 @@ class CurrentComponent extends Component {
           }
         >
           EDIT NAME
+        </Button>
+        <Button
+          disabled={isRoot}
+          onClick={() =>
+            this.props.history.push(
+              this.props.match.url + `/${!isUnassigned && `un`}assign-component`
+            )
+          }
+        >
+          {!isUnassigned && `UN`}
+          ASSIGN COMPONENT
         </Button>
       </Container>
     );
