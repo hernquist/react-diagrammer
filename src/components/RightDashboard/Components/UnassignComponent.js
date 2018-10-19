@@ -12,7 +12,7 @@ export default class UnassignComponent extends Component {
     const { data } = await mutation({ variables: { _id } });
     console.log(data);
 
-    component.placement = data.UnassignComponent;
+    component.placement = data.unassignComponent.placement;
     console.log(component);
   };
 
@@ -20,9 +20,6 @@ export default class UnassignComponent extends Component {
     const { history, currentProject } = this.props;
     const { pathname } = history.location;
     const { components } = currentProject;
-
-    console.log(components);
-    console.log(pathname);
 
     const component = helper.getComponentFromURL(pathname, components)[0];
     console.log(component);

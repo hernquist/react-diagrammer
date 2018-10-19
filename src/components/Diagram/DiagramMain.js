@@ -6,6 +6,8 @@ import helper from "../../helpers/helper";
 import { DiagramMainContainer as Container, Row } from "styles";
 
 const TreeRow = props => {
+  console.log("row:", props.row);
+
   return (
     <Row>
       {props.row.map(component => (
@@ -43,7 +45,8 @@ class DiagramMain extends Component {
         ],
         [root]
       )
-      .filter(branches => branches.length > 0);
+      .filter(branches => branches.length > 0)
+      .filter(branches => branches[0]);
 
     const unassigned = helper.unassigned(components);
 
