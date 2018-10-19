@@ -120,7 +120,6 @@ export default class CreateComponent extends Component {
                 <br />
                 <label>
                   Placement
-                  {/* 'end' placement was removed, 'end' is a 'child' with no children */}
                   <div
                     onClick={() => this.handleUnassigned("unassigned")}
                     style={{
@@ -142,7 +141,7 @@ export default class CreateComponent extends Component {
                     </div>
                   )}
                   <ComponentList
-                    childs={[...root, ...childs]}
+                    potentialParents={[...root, ...childs]}
                     chooseComponent={this.handleParent}
                     highlighted={highlighted}
                     display={placement === "child"}

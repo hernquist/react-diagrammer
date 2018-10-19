@@ -16,7 +16,14 @@ const helper = {
   screenWidth: () =>
     window.innerWidth ||
     document.documentElement.clientWidth ||
-    document.body.clientWidth
+    document.body.clientWidth,
+  getComponentFromURL: (pathname, components) => {
+    const [name, iteration] = pathname.split("/").slice(3);
+    return components.filter(
+      component =>
+        component.iteration === Number(iteration) && component.name === name
+    )[0];
+  }
 };
 
 export default helper;

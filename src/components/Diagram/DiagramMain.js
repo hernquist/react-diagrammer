@@ -5,19 +5,13 @@ import DisplayComponent from "./DisplayComponent";
 import helper from "../../helpers/helper";
 import { DiagramMainContainer as Container, Row } from "styles";
 
-const TreeRow = props => {
-  return (
-    <Row>
-      {props.row.map(component => (
-        <DisplayComponent
-          key={component._id}
-          component={component}
-          {...props}
-        />
-      ))}
-    </Row>
-  );
-};
+const TreeRow = props => (
+  <Row>
+    {props.row.map(component => (
+      <DisplayComponent key={component._id} component={component} {...props} />
+    ))}
+  </Row>
+);
 
 class DiagramMain extends Component {
   state = {
@@ -25,7 +19,7 @@ class DiagramMain extends Component {
   };
 
   render() {
-    const { currentProject, parent, history } = this.props;
+    const { currentProject, parent, history, setParent } = this.props;
     if (!currentProject || !currentProject.components) {
       return null;
     }
@@ -44,13 +38,18 @@ class DiagramMain extends Component {
         [root]
       )
       .filter(branches => branches.length > 0);
+    // .filter(branches => branches[0]);
 
     const unassigned = helper.unassigned(components);
 
     return (
       <Fragment>
         {unassigned.length > 0 && (
-          <ShowUnassigned unassigned={unassigned} history={history} />
+          <ShowUnassigned
+            setParent={setParent}
+            unassigned={unassigned}
+            history={history}
+          />
         )}
         <Container>
           {tree.map((row, i) => (

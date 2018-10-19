@@ -12,13 +12,17 @@ export default class Modal extends Component {
   render() {
     const { children, visible, toggle, large } = this.props;
     const Card = large ? LargeModalCard : ModalCard;
+    const childrenWithToggle = React.Children.map(children, child =>
+      React.cloneElement(child, { closeModal: toggle })
+    );
+
     return (
       <Portal>
         {visible && (
           <ModalWrapper>
             <Card>
               <CloseButton onClick={toggle}>Close</CloseButton>
-              <Fragment>{children}</Fragment>
+              <Fragment>{childrenWithToggle}</Fragment>
             </Card>
             <Background onClick={toggle} />
           </ModalWrapper>

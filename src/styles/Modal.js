@@ -18,7 +18,7 @@ export const ModalCard = styled.div`
   border-radius: 5px;
   box-shadow: 2px 2px 10px rbga(0, 0, 0, 0.3);
   padding: 15px;
-  z-index: 10;
+  z-index: 100;
   min-width: 320px;
   margin-bottom: 400px;
 `;
@@ -29,7 +29,7 @@ export const LargeModalCard = styled.div`
   border-radius: 5px;
   box-shadow: 2px 2px 10px rbga(0, 0, 0, 0.3);
   padding: 15px;
-  z-index: 10;
+  z-index: 100;
   min-width: 800px;
   min-height: 600px;
   margin: 100px;
@@ -43,10 +43,11 @@ export const ModalBackground = styled.div`
   left: 0;
   background-color: ${props => props.theme.black};
   opacity: 0.5;
+  z-index: 90;
 `;
 
 export const CloseModalButton = styled(SubmitButton)`
   position: absolute;
-  top: 3px;
-  right: 3px;
+  top: 4px;
+  right: 7px;
 `;

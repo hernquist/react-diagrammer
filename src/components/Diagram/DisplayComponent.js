@@ -50,10 +50,12 @@ class DisplayComponent extends Component {
               <div>props</div>
               <Fragment>{component.props.length}</Fragment>
             </Element>
-            <Element>
-              <div>cb's</div>
-              <Fragment>{component.callbacks.length}</Fragment>
-            </Element>
+            {stateOutput && (
+              <Element>
+                <div>cb's</div>
+                <Fragment>{component.callbacks.length}</Fragment>
+              </Element>
+            )}
           </Numbers>
         </Content>
       </Card>

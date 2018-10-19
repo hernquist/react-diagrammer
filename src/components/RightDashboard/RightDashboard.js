@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import CreateProject from './Projects/CreateProject';
-import DeleteProject from './Projects/DeleteProject';
-import CurrentComponent from './Components/CurrentComponent';
-import UpdateComponentWorkings from './Components/UpdateComponentWorkings';
-import UpdateCallbackWorkings from './Components/UpdateCallbackWorkings';
-import EditComponentName from './Components/EditComponentName';
-import CreateComponent from './Components/CreateComponent';
-import AddExistingComponent from './Components/AddExistingComponent';
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
+import CreateProject from "./Projects/CreateProject";
+import DeleteProject from "./Projects/DeleteProject";
+import CurrentComponent from "./Components/CurrentComponent";
+import UpdateComponentWorkings from "./Components/UpdateComponentWorkings";
+import UpdateCallbackWorkings from "./Components/UpdateCallbackWorkings";
+import EditComponentName from "./Components/EditComponentName";
+import CreateComponent from "./Components/CreateComponent";
+import AddExistingComponent from "./Components/AddExistingComponent";
+import AssignComponent from "./Components/AssignComponent";
 
 class RightDashboard extends Component {
   render() {
-    const { 
-      user, 
-      refetchProject, 
-      currentProject, 
-      setCurrentProject, 
+    const {
+      user,
+      refetchProject,
+      currentProject,
+      setCurrentProject,
       projects = [],
       updateComponent,
       addComponent,
@@ -25,20 +26,20 @@ class RightDashboard extends Component {
 
     return (
       <div>
-        <Route 
-          path="/main/new-project" 
-          render={renderProps => 
-            <CreateProject 
-              {...renderProps} 
+        <Route
+          path="/main/new-project"
+          render={renderProps => (
+            <CreateProject
+              {...renderProps}
               user={user}
               refetchProject={refetchProject}
               setCurrentProject={setCurrentProject}
-            /> 
-          }
+            />
+          )}
         />
         <Route
           path="/main/delete-project"
-          render={renderProps => 
+          render={renderProps => (
             <DeleteProject
               {...renderProps}
               user={user}
@@ -46,12 +47,12 @@ class RightDashboard extends Component {
               projects={projects}
               refetchProject={refetchProject}
             />
-          }
+          )}
         />
         <Route
-          exact 
+          exact
           path="/main/component/:component/:id"
-          render={renderProps => 
+          render={renderProps => (
             <CurrentComponent
               {...renderProps}
               user={user}
@@ -60,54 +61,54 @@ class RightDashboard extends Component {
               refetchProject={refetchProject}
               updateComponent={updateComponent}
             />
-          }
+          )}
         />
         <Route
           path="/main/component/:component/:id/update-state"
-          render={renderProps =>
+          render={renderProps => (
             <UpdateComponentWorkings
               {...renderProps}
               updateComponent={updateComponent}
               currentProject={currentProject}
               type="state"
             />
-          }
+          )}
         />
         <Route
           path="/main/component/:component/:id/update-props"
-          render={renderProps =>
+          render={renderProps => (
             <UpdateComponentWorkings
               {...renderProps}
               updateComponent={updateComponent}
               currentProject={currentProject}
               type="prop"
             />
-          }
+          )}
         />
         <Route
           path="/main/component/:component/:id/update-callbacks"
-          render={renderProps =>
+          render={renderProps => (
             <UpdateCallbackWorkings
               {...renderProps}
               updateComponent={updateComponent}
               currentProject={currentProject}
               createNotification={createNotification}
             />
-          }
+          )}
         />
-        <Route 
+        <Route
           path="/main/component/:component/:id/edit-name"
-          render={renderProps => 
+          render={renderProps => (
             <EditComponentName
               {...renderProps}
               updateComponent={updateComponent}
               currentProject={currentProject}
             />
-          }
+          )}
         />
         <Route
           path="/main/component/new"
-          render={renderProps =>
+          render={renderProps => (
             <CreateComponent
               {...renderProps}
               currentProject={currentProject}
@@ -116,11 +117,11 @@ class RightDashboard extends Component {
               setParent={setParent}
               createNotification={createNotification}
             />
-          }
+          )}
         />
         <Route
           path="/main/component/add-existing"
-          render={renderProps =>
+          render={renderProps => (
             <AddExistingComponent
               {...renderProps}
               currentProject={currentProject}
@@ -128,7 +129,18 @@ class RightDashboard extends Component {
               addComponent={addComponent}
               setParent={setParent}
             />
-          }
+          )}
+        />
+        <Route
+          path="/main/component/:component/:id/assign-component"
+          render={renderProps => (
+            <AssignComponent
+              {...renderProps}
+              currentProject={currentProject}
+              updateComponent={updateComponent}
+              setParent={setParent}
+            />
+          )}
         />
       </div>
     );

@@ -1,5 +1,6 @@
 export * from "./Auth";
 export * from "./CreateProject";
+export * from "./ComponentList";
 export * from "./CurrentComponent";
 export * from "./DiagramMain";
 export * from "./DisplayComponent";
@@ -11,3 +12,4 @@ export * from "./Modal";
 export * from "./ShowUnassigned";
 export * from "./Theme";
 export * from "./TopDashboard";
+export * from "./UnassignComponent";

@@ -11,13 +11,18 @@ export const SubmitButton = styled.button`
   color: ${props => props.theme.lightGrey};
   font-size: 20px;
   background: ${props => props.theme.teal};
-  border: 2px solid ${props => props.theme.madison};
-  box-shadow: none;
+  border: none;
+  box-shadow: ${props => props.theme.bs1};
 
   &:hover,
   &:active,
   &:focus {
     outline: none !important;
+  }
+
+  &:disabled {
+    background: rgba(0, 0, 0, 0.7);
+    color: ${props => props.theme.grey};
   }
 `;
 
