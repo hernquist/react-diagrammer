@@ -139,19 +139,6 @@ class RightDashboard extends Component {
               {...renderProps}
               currentProject={currentProject}
               updateComponent={updateComponent}
-              addComponent={addComponent}
-              setParent={setParent}
-            />
-          )}
-        />
-        <Route
-          path="/main/component/:component/:id/unassign-component"
-          render={renderProps => (
-            <UnassignComponent
-              {...renderProps}
-              currentProject={currentProject}
-              updateComponent={updateComponent}
-              addComponent={addComponent}
               setParent={setParent}
             />
           )}

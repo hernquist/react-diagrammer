@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   NotificationContainer,
   NotificationManager
@@ -54,13 +54,13 @@ export default WrappedComponent => {
 
     render() {
       return (
-        <div>
+        <Fragment>
           <WrappedComponent
             {...this.props}
             createNotification={this.createNotification}
           />
           <NotificationContainer />
-        </div>
+        </Fragment>
       );
     }
   }

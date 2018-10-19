@@ -379,9 +379,40 @@ const EDIT_CALLBACK = gql`
 `;
 
 const UNASSIGN_COMPONENT = gql`
-  mutation UnassignComponent($_id: String!) {
-    unassignComponent(_id: $_id) {
+  mutation UnassignComponent($_id: String!, $parentId: String!) {
+    unassignComponent(_id: $_id, parentId: $parentId) {
+      _id
+      name
+      projectId
+      style
+      state {
+        _id
+        name
+        statetype
+        componentId
+      }
+      iteration
       placement
+      props {
+        _id
+        name
+        proptype
+        componentId
+      }
+      callbacks {
+        _id
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
+      children
     }
   }
 `;

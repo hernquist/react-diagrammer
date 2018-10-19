@@ -8,10 +8,15 @@ import {
   CloseModalButton as CloseButton
 } from "styles";
 
-export default class Modal extends Component {
+class Wrapper extends Component {}
+
+export default class SubModal extends Component {
   render() {
     const { children, visible, toggle, large } = this.props;
     const Card = large ? LargeModalCard : ModalCard;
+    const childrenWithToggle = React.Children.map(children, child =>
+      React.cloneElement(child, { closeModal: toggle })
+    );
 
     return (
       <Portal>
@@ -19,7 +24,7 @@ export default class Modal extends Component {
           <ModalWrapper>
             <Card>
               <CloseButton onClick={toggle}>Close</CloseButton>
-              <Fragment>{children}</Fragment>
+              <div>{childrenWithToggle}</div>
             </Card>
             <Background onClick={toggle} />
           </ModalWrapper>

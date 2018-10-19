@@ -8,6 +8,8 @@ import {
   CurrentComponentTitle as Title
 } from "styles";
 import { WideButton } from "../../UI/SubmitButton";
+import InteractiveModal from "../../UI/InteractiveModal";
+import UnassignComponent from "./UnassignComponent";
 
 const Button = styled(WideButton)`
   width: 90%;
@@ -24,7 +26,7 @@ class CurrentComponent extends Component {
   };
 
   render() {
-    const { currentProject, history } = this.props;
+    const { currentProject, history, updateComponent } = this.props;
     const pieces = history.location.pathname.split("/");
     const name = pieces[3];
     const index = pieces[4];
@@ -38,8 +40,9 @@ class CurrentComponent extends Component {
     const isPresentational = currentComponent.style === "presentational";
     const isUnassigned = currentComponent.placement === "unassigned";
     // later will add some functionality for unassigning a root, although oof
-    const isRoot = currentComponent.place === "root";
+    const isRoot = currentComponent.placement === "root";
     console.log(currentComponent);
+    const buttonText = `${isUnassigned ? `ASSIGN` : `UNASSIGN`} COMPONENT`;
 
     return (
       <Container>
@@ -89,7 +92,7 @@ class CurrentComponent extends Component {
         >
           EDIT NAME
         </Button>
-        <Button
+        {/* <Button
           disabled={isRoot}
           onClick={() =>
             this.props.history.push(
@@ -100,7 +103,14 @@ class CurrentComponent extends Component {
         >
           {!isUnassigned && `UN`}
           ASSIGN COMPONENT
-        </Button>
+        </Button> */}
+        <InteractiveModal text={buttonText} button={Button} disabled={isRoot}>
+          <UnassignComponent
+            updateComponent={updateComponent}
+            currentProject={currentProject}
+            history={history}
+          />
+        </InteractiveModal>
       </Container>
     );
   }

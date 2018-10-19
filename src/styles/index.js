@@ -11,3 +11,4 @@ export * from "./Modal";
 export * from "./ShowUnassigned";
 export * from "./Theme";
 export * from "./TopDashboard";
+export * from "./UnassignComponent";
