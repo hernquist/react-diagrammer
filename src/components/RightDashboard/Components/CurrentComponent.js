@@ -8,7 +8,7 @@ import {
   CurrentComponentTitle as Title
 } from "styles";
 import { WideButton } from "../../UI/SubmitButton";
-import InteractiveModal from "../../UI/InteractiveModal";
+import ModalContainer from "../../UI/ModalContainer";
 import UnassignComponent from "./UnassignComponent";
 
 const Button = styled(WideButton)`
@@ -104,13 +104,13 @@ class CurrentComponent extends Component {
           {!isUnassigned && `UN`}
           ASSIGN COMPONENT
         </Button> */}
-        <InteractiveModal text={buttonText} button={Button} disabled={isRoot}>
+        <ModalContainer text={buttonText} button={Button} disabled={isRoot}>
           <UnassignComponent
             updateComponent={updateComponent}
             currentProject={currentProject}
             history={history}
           />
-        </InteractiveModal>
+        </ModalContainer>
       </Container>
     );
   }

@@ -5,15 +5,16 @@ import { FlatButton } from "./FlatButton";
 
 export default class ModalContainer extends Component {
   render() {
-    const { children, text, large, buttonType } = this.props;
-    const RenderedButton = buttonType ? buttonType : FlatButton;
-    const x = children;
+    const { children, text, large, button, disabled } = this.props;
+    const Button = button ? button : FlatButton;
 
     return (
       <Toggle>
         {({ visible, toggle }) => (
           <Fragment>
-            <FlatButton onClick={toggle}>{text}</FlatButton>
+            <Button onClick={toggle} disabled={disabled}>
+              {text}
+            </Button>
             <Modal visible={visible} toggle={toggle} large={large}>
               {children}
             </Modal>
