@@ -13,9 +13,11 @@ export default class UnassignComponent extends Component {
     const parent = components.filter(component =>
       component.children.some(id => id === _id)
     );
+
     const { data } = await mutation({
       variables: { _id, parentId: parent[0]._id }
     });
+
     data.unassignComponent.map(component => updateComponent(component));
     this.setState({ visible: false });
     closeModal();

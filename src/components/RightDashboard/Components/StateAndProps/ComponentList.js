@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import {
   ComponentList as Container,
   ComponentListTitle as Title,
@@ -15,6 +15,7 @@ export default class ComponentList extends Component {
       display
     } = this.props;
     if (!display) return null;
+
     return (
       <Container>
         <Title>{text}</Title>

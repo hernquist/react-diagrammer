@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import {
   UnassignedContainer,
   DisplayUnassignedContainer,
@@ -23,7 +23,6 @@ export default class ShowUnassigned extends Component {
       const [name, iteration] = props.history.location.pathname
         .split("/")
         .slice(3);
-      console.log(name, iteration);
       return (
         name === component.name && Number(iteration) === component.iteration
       );
