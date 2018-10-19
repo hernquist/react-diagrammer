@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import {
   UnassignedContainer,
   DisplayUnassignedContainer,
-  ShowUnassignedNumber as Number,
+  // ShowUnassignedNumber as Number,
   ShowUnassignedText as Text,
   ComponentList,
   IconContainer
@@ -61,8 +61,8 @@ export default class ShowUnassigned extends Component {
 
     return (
       <Container style={{ fontSize: "24px" }}>
-        <Number>{length}</Number>
-        {showing ? (
+        <Text>{length} unassigned</Text>
+        {showing && (
           <ComponentList>
             {unassigned.map(component => (
               <DisplayComponent
@@ -72,13 +72,7 @@ export default class ShowUnassigned extends Component {
               />
             ))}
           </ComponentList>
-        ) : (
-          <Fragment>
-            <Text>unassigned</Text>
-            <Text>{text}</Text>
-          </Fragment>
         )}
-        {/* convert Icons to renderProps */}
         <IconContainer onClick={this.toggleUnassigned}>
           <Icons icon={caret} />
         </IconContainer>

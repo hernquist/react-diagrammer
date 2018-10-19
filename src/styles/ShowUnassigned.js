@@ -7,7 +7,7 @@ export const UnassignedContainer = styled.div`
   align-items: center;
   background: ${props => props.theme.lightGrey};
   width: 150px;
-  min-height: 120px;
+  min-height: 70px;
   border: 1px solid ${props => props.theme.madison};
   border-radius: 4px;
   margin: 10px;
@@ -30,11 +30,6 @@ export const DisplayUnassignedContainer = styled(UnassignedContainer)`
   }
 `;
 
-export const ShowUnassignedNumber = styled.div`
-  font-size: 40px;
-  margin: 10px auto 0;
-`;
-
 export const ComponentList = styled.div`
   height: 440px;
   width: 100%
@@ -42,7 +37,7 @@ export const ComponentList = styled.div`
 `;
 
 export const ShowUnassignedText = styled.div`
-  font-size: 20px;
+  font-size: 24px;
   margin: 0 auto;
 `;
 
@@ -51,7 +46,7 @@ export const IconContainer = styled.button`
   background: rgb(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
-  margin: 0 4px;
+  margin: 4px 4px 0;
   border-radius: 4px;
 
   &:hover {
