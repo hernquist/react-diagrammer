@@ -13,7 +13,11 @@ const LOGIN = gql`
 `;
 
 const CREATE_PROJECT = gql`
-  mutation CreateProject($userId: String!, $name: String!, $description: String!){
+  mutation CreateProject(
+    $userId: String!
+    $name: String!
+    $description: String!
+  ) {
     createProject(userId: $userId, name: $name, description: $description) {
       _id
       userId
@@ -32,8 +36,18 @@ const DELETE_PROJECT = gql`
 `;
 
 const CREATE_COMPONENT = gql`
-  mutation CreateComponent ($name: String!, $projectId: String!, $style: ComponentType!, $placement: Placement!) {
-    createComponent(name: $name, projectId: $projectId, style: $style, placement: $placement) {
+  mutation CreateComponent(
+    $name: String!
+    $projectId: String!
+    $style: ComponentType!
+    $placement: Placement!
+  ) {
+    createComponent(
+      name: $name
+      projectId: $projectId
+      style: $style
+      placement: $placement
+    ) {
       _id
       projectId
       cloneId
@@ -74,21 +88,21 @@ const CREATE_COMPONENT = gql`
 
 const COPY_COMPONENT = gql`
   mutation CopyComponent(
-    $name: String!, 
-    $projectId: String!, 
-    $cloneId: String! 
-    $iteration: Int!, 
-    $style: ComponentType!, 
-    $placement: Placement!, 
+    $name: String!
+    $projectId: String!
+    $cloneId: String!
+    $iteration: Int!
+    $style: ComponentType!
+    $placement: Placement!
     $children: [String]
   ) {
     copyComponent(
-      name: $name, 
-      projectId: $projectId, 
-      cloneId: $cloneId, 
-      style: $style, 
-      iteration: $iteration, 
-      placement: $placement, 
+      name: $name
+      projectId: $projectId
+      cloneId: $cloneId
+      style: $style
+      iteration: $iteration
+      placement: $placement
       children: $children
     ) {
       _id
@@ -175,7 +189,7 @@ const ADD_CHILD = gql`
 `;
 
 const COPY_CHILDREN = gql`
-  mutation CopyChildren($childrenData: [InputChildrenData]){
+  mutation CopyChildren($childrenData: [InputChildrenData]) {
     copyChildren(childrenData: $childrenData) {
       _id
       cloneId
@@ -310,7 +324,7 @@ const EDIT_STATE = gql`
 
 const ADD_CALLBACK = gql`
   mutation AddCallback($callback: InputCallback) {
-    addCallback (callback: $callback) {
+    addCallback(callback: $callback) {
       _id
       componentId
       name
@@ -328,31 +342,31 @@ const ADD_CALLBACK = gql`
 `;
 
 const DELETE_CALLBACK = gql`
-  mutation DeleteCallback ($_id: String!) {
+  mutation DeleteCallback($_id: String!) {
     deleteCallback(_id: $_id)
   }
 `;
 
 const EDIT_CALLBACK = gql`
   mutation EditCallback(
-    $_id: String!,
-    $name: String,
-    $description: String,
-    $functionArgs: [InputArgument], 
+    $_id: String!
+    $name: String
+    $description: String
+    $functionArgs: [InputArgument]
     $setState: [InputSetStateParams]
   ) {
     editCallback(
-      _id: $_id,
-      name: $name,
-      description: $description,
-      functionArgs: $functionArgs,
+      _id: $_id
+      name: $name
+      description: $description
+      functionArgs: $functionArgs
       setState: $setState
     ) {
       _id
       componentId
       name
       description
-      setState{
+      setState {
         stateField
         stateChange
       }
@@ -364,9 +378,17 @@ const EDIT_CALLBACK = gql`
   }
 `;
 
-export { 
-  SIGNUP, 
-  LOGIN, 
+const UNASSIGN_COMPONENT = gql`
+  mutation UnassignComponent($_id: String!) {
+    unassignComponent(_id: $_id) {
+      placement
+    }
+  }
+`;
+
+export {
+  SIGNUP,
+  LOGIN,
   CREATE_PROJECT,
   DELETE_PROJECT,
   CREATE_COMPONENT,
@@ -383,5 +405,6 @@ export {
   EDIT_STATE,
   ADD_CALLBACK,
   DELETE_CALLBACK,
-  EDIT_CALLBACK
+  EDIT_CALLBACK,
+  UNASSIGN_COMPONENT
 };
