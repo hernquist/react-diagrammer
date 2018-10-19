@@ -48,6 +48,6 @@ export const ModalBackground = styled.div`
 
 export const CloseModalButton = styled(SubmitButton)`
   position: absolute;
-  top: 3px;
-  right: 3px;
+  top: 4px;
+  right: 7px;
 `;

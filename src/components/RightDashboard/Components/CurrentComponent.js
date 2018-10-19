@@ -32,9 +32,7 @@ class CurrentComponent extends Component {
     const index = pieces[4];
 
     const { components } = currentProject;
-    if (!components) {
-      return <div>No Components</div>;
-    }
+    if (!components) return <div>No Components</div>;
 
     const currentComponent = helper.currComp(components, name, index);
     const isPresentational = currentComponent.style === "presentational";
@@ -42,6 +40,10 @@ class CurrentComponent extends Component {
     // later will add some functionality for unassigning a root, although oof
     const isRoot = currentComponent.placement === "root";
     const buttonText = `${isUnassigned ? `ASSIGN` : `UNASSIGN`} COMPONENT`;
+    // const Assignment = isUnassigned ? AssignComponent : UnassignComponent;
+    const toggleText = `MAKE ${
+      isPresentational ? `CONTAINER` : `PRESENTATIONAL`
+    }`;
 
     return (
       <Container>
@@ -80,7 +82,7 @@ class CurrentComponent extends Component {
                 this.updateStyle(currentComponent, ToggleComponentStyle)
               }
             >
-              TOGGLE COMPONENT TYPE
+              {toggleText}
             </Button>
           )}
         </Mutation>
@@ -91,25 +93,27 @@ class CurrentComponent extends Component {
         >
           EDIT NAME
         </Button>
-        {/* <Button
-          disabled={isRoot}
-          onClick={() =>
-            this.props.history.push(
-              this.props.match.url +
-                `/${isUnassigned ? `` : `un`}assign-component`
-            )
-          }
-        >
-          {!isUnassigned && `UN`}
-          ASSIGN COMPONENT
-        </Button> */}
-        <ModalContainer text={buttonText} button={Button} disabled={isRoot}>
-          <UnassignComponent
-            updateComponent={updateComponent}
-            currentProject={currentProject}
-            history={history}
-          />
-        </ModalContainer>
+        {isUnassigned ? (
+          <Button
+            disabled={isRoot}
+            onClick={() =>
+              this.props.history.push(
+                this.props.match.url +
+                  `/${isUnassigned ? `` : `un`}assign-component`
+              )
+            }
+          >
+            {buttonText}
+          </Button>
+        ) : (
+          <ModalContainer text={buttonText} button={Button} disabled={isRoot}>
+            <UnassignComponent
+              updateComponent={updateComponent}
+              currentProject={currentProject}
+              history={history}
+            />
+          </ModalContainer>
+        )}
       </Container>
     );
   }

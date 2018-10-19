@@ -2,9 +2,8 @@ import React, { Component, Fragment } from "react";
 import {
   UnassignedContainer,
   DisplayUnassignedContainer,
-  // ShowUnassignedNumber as Number,
   ShowUnassignedText as Text,
-  ComponentList,
+  UnassignedList as List,
   IconContainer
 } from "styles";
 import DisplayComponent from "./DisplayComponent";
@@ -24,9 +23,10 @@ export default class ShowUnassigned extends Component {
       const [name, iteration] = props.history.location.pathname
         .split("/")
         .slice(3);
-      const isSelected =
-        name === component.name && iteration == component.iteration;
-      return isSelected;
+      console.log(name, iteration);
+      return (
+        name === component.name && Number(iteration) === component.iteration
+      );
     });
     const isSelected = match.length === 1;
     return {
@@ -50,20 +50,19 @@ export default class ShowUnassigned extends Component {
   };
 
   render() {
-    const { unassigned = [], history } = this.props || [];
+    const { unassigned = [], history, setParent } = this.props || [];
     const { showing } = this.state;
     const length = unassigned.length;
-    const text = length === 1 ? `component` : `components`;
     const caret = showing ? "caret-up" : "caret-down";
     const Container = showing
       ? DisplayUnassignedContainer
       : UnassignedContainer;
 
     return (
-      <Container style={{ fontSize: "24px" }}>
+      <Container style={{ fontSize: "24px" }} onClick={setParent}>
         <Text>{length} unassigned</Text>
         {showing && (
-          <ComponentList>
+          <List>
             {unassigned.map(component => (
               <DisplayComponent
                 key={component._id}
@@ -71,7 +70,7 @@ export default class ShowUnassigned extends Component {
                 history={history}
               />
             ))}
-          </ComponentList>
+          </List>
         )}
         <IconContainer onClick={this.toggleUnassigned}>
           <Icons icon={caret} />

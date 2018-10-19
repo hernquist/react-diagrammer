@@ -19,7 +19,7 @@ class DiagramMain extends Component {
   };
 
   render() {
-    const { currentProject, parent, history } = this.props;
+    const { currentProject, parent, history, setParent } = this.props;
     if (!currentProject || !currentProject.components) {
       return null;
     }
@@ -45,7 +45,11 @@ class DiagramMain extends Component {
     return (
       <Fragment>
         {unassigned.length > 0 && (
-          <ShowUnassigned unassigned={unassigned} history={history} />
+          <ShowUnassigned
+            setParent={setParent}
+            unassigned={unassigned}
+            history={history}
+          />
         )}
         <Container>
           {tree.map((row, i) => (

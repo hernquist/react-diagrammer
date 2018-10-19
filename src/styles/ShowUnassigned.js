@@ -13,26 +13,27 @@ export const UnassignedContainer = styled.div`
   margin: 10px;
   padding: 5px;
   z-index: 10;
+  max-height: 600px;
 
   &:hover {
     border: 2px solid ${props => props.theme.teal};
-    box-shadow: 2px 2px 2px 2px ${props => props.theme.madison};
+    box-shadow: ${props => props.theme.bs1};
   }
 `;
 
 export const DisplayUnassignedContainer = styled(UnassignedContainer)`
   border: 2px solid ${props => props.theme.teal};
-  box-shadow: 2px 2px 2px 2px ${props => props.theme.madison};
+  box-shadow: ${props => props.theme.bs1};
 
   &:hover {
     border: 2px solid ${props => props.theme.teal};
-    box-shadow: 3px 3px 3px 3px ${props => props.theme.madison};
+    box-shadow: ${props => props.theme.bs1};
   }
 `;
 
-export const ComponentList = styled.div`
-  height: 440px;
-  width: 100%
+export const UnassignedList = styled.div`
+  max-height: 440px;
+  width: 100%;
   overflow-y: scroll;
 `;
 

@@ -9,7 +9,6 @@ import EditComponentName from "./Components/EditComponentName";
 import CreateComponent from "./Components/CreateComponent";
 import AddExistingComponent from "./Components/AddExistingComponent";
 import AssignComponent from "./Components/AssignComponent";
-import UnassignComponent from "./Components/UnassignComponent";
 
 class RightDashboard extends Component {
   render() {

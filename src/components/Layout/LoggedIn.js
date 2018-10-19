@@ -117,6 +117,7 @@ class LoggedIn extends Component {
                           {...this.props}
                           parent={parent}
                           currentProject={currentProject}
+                          setParent={this.setParent}
                         />
                       </div>
                       <div className="right-dashboard" style={fullScreen}>

@@ -1,5 +1,6 @@
 export * from "./Auth";
 export * from "./CreateProject";
+export * from "./ComponentList";
 export * from "./CurrentComponent";
 export * from "./DiagramMain";
 export * from "./DisplayComponent";
