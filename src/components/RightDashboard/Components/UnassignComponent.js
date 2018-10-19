@@ -6,7 +6,7 @@ import { SubmitButton } from "../../UI/SubmitButton";
 import { UnassignedPrompt as Prompt, Buttons } from "styles";
 
 export default class UnassignComponent extends Component {
-  updateComponent = (mutation, component) => async () => {
+  updateComponents = (mutation, component) => async () => {
     const { updateComponent, currentProject, closeModal } = this.props;
     const { _id } = component;
     const { components } = currentProject;
@@ -46,7 +46,7 @@ export default class UnassignComponent extends Component {
             </Prompt>
             <Buttons>
               <SubmitButton
-                onClick={this.updateComponent(UnassignComponent, component)}
+                onClick={this.updateComponents(UnassignComponent, component)}
               >
                 YES
               </SubmitButton>

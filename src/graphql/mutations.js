@@ -417,6 +417,45 @@ const UNASSIGN_COMPONENT = gql`
   }
 `;
 
+const ASSIGN_COMPONENT = gql`
+  mutation AssignComponent($_id: String!, $parentId: String!) {
+    assignComponent(_id: $_id, parentId: $parentId) {
+      _id
+      name
+      projectId
+      style
+      state {
+        _id
+        name
+        statetype
+        componentId
+      }
+      iteration
+      placement
+      props {
+        _id
+        name
+        proptype
+        componentId
+      }
+      callbacks {
+        _id
+        name
+        functionArgs {
+          name
+          typeName
+        }
+        setState {
+          stateField
+          stateChange
+        }
+        description
+      }
+      children
+    }
+  }
+`;
+
 export {
   SIGNUP,
   LOGIN,
@@ -437,5 +476,6 @@ export {
   ADD_CALLBACK,
   DELETE_CALLBACK,
   EDIT_CALLBACK,
-  UNASSIGN_COMPONENT
+  UNASSIGN_COMPONENT,
+  ASSIGN_COMPONENT
 };

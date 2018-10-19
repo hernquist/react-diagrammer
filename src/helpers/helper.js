@@ -22,7 +22,7 @@ const helper = {
     return components.filter(
       component =>
         component.iteration === Number(iteration) && component.name === name
-    );
+    )[0];
   }
 };
 
