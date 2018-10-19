@@ -5,21 +5,13 @@ import DisplayComponent from "./DisplayComponent";
 import helper from "../../helpers/helper";
 import { DiagramMainContainer as Container, Row } from "styles";
 
-const TreeRow = props => {
-  console.log("row:", props.row);
-
-  return (
-    <Row>
-      {props.row.map(component => (
-        <DisplayComponent
-          key={component._id}
-          component={component}
-          {...props}
-        />
-      ))}
-    </Row>
-  );
-};
+const TreeRow = props => (
+  <Row>
+    {props.row.map(component => (
+      <DisplayComponent key={component._id} component={component} {...props} />
+    ))}
+  </Row>
+);
 
 class DiagramMain extends Component {
   state = {

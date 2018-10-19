@@ -41,7 +41,6 @@ class CurrentComponent extends Component {
     const isUnassigned = currentComponent.placement === "unassigned";
     // later will add some functionality for unassigning a root, although oof
     const isRoot = currentComponent.placement === "root";
-    console.log(currentComponent);
     const buttonText = `${isUnassigned ? `ASSIGN` : `UNASSIGN`} COMPONENT`;
 
     return (

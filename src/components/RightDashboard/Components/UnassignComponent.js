@@ -27,7 +27,6 @@ export default class UnassignComponent extends Component {
     const { components } = currentProject;
 
     const component = helper.getComponentFromURL(pathname, components)[0];
-    console.log(component);
     const { name = "" } = component;
     if (component.children.length > 0)
       return (

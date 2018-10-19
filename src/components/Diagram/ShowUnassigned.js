@@ -38,7 +38,7 @@ export default class ShowUnassigned extends Component {
   toggleUnassigned = () => {
     const { history } = this.props;
     const { showing } = this.state;
-    console.log("showing", showing);
+
     this.setState({ showing: !showing });
     if (showing) {
       const path = history.location.pathname
