@@ -7,19 +7,6 @@ export const ComponentList = styled.div`
   margin-bottom: 5px;
 `;
 
-export const ComponentListTitle = styled.div`
-  font-size: 24px;
-  margin: 0 auto 3px;
-  height: 36px;
-  border: 1px solid ${props => props.theme.lightGrey};
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding-top: 6px;
-  color: ${props => props.theme.grey};
-  background: ${props => props.theme.madison};
-`;
-
 export const ComponentListItem = styled.div`
   border: 1px solid black;
   border-radius: 4px;

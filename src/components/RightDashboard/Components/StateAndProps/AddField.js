@@ -1,6 +1,42 @@
-import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
-import { ADD_PROP, ADD_STATE } from '../../../../graphql/mutations';
+import React, { Component, Fragment } from "react";
+import { Mutation } from "react-apollo";
+import Select from "react-select";
+import { ADD_PROP, ADD_STATE } from "../../../../graphql/mutations";
+import {
+  Label,
+  LabelText,
+  RightDashboardTitle as Title,
+  ComponentWorkingsContainer as Container
+} from "styles";
+import { OPTIONS } from "helpers/const";
+
+const styles = {
+  multiValue: (base, state) => {
+    return state.data.isFixed ? { ...base, backgroundColor: "gray" } : base;
+  },
+  multiValueLabel: (base, state) => {
+    return state.data.isFixed
+      ? {
+          ...base,
+          fontWeight: "bold",
+          color: "green",
+          paddingRight: 6,
+          fontSize: "24px"
+        }
+      : base;
+  },
+  multiValueRemove: (base, state) => {
+    return state.data.isFixed ? { ...base, display: "none" } : base;
+  },
+  option: (base, state) => {
+    return { ...base, fontSize: "24px", color: "green" };
+  },
+  container: (base, state) => {
+    return state.data.isFixed
+      ? { ...base, fontSize: "24px" }
+      : { ...base, fontSize: "24px" };
+  }
+};
 
 class AddField extends Component {
   mutationProp = async (currentComponent, mutation) => {
@@ -13,7 +49,7 @@ class AddField extends Component {
     const { data } = await mutation({ variables: { prop } });
     const props = data.addProp.props.map(prop => ({ ...prop, componentId }));
     return Object.assign({}, currentComponent, { props });
-  }
+  };
 
   mutationState = async (currentComponent, mutation) => {
     const componentId = currentComponent._id;
@@ -23,54 +59,73 @@ class AddField extends Component {
       statetype: this.props.value2
     };
     const { data } = await mutation({ variables: { state } });
-    const stateObjects = data.addState.state.map(stateItem => ({ ...stateItem, componentId }));
+    const stateObjects = data.addState.state.map(stateItem => ({
+      ...stateItem,
+      componentId
+    }));
     return Object.assign({}, currentComponent, { state: stateObjects });
-  }
+  };
 
   saveField = async (currentComponent, mutation) => {
-    const updatedComponent = this.props.type === 'state' ?
-      await this.mutationState(currentComponent, mutation) :
-      await this.mutationProp(currentComponent, mutation);
+    const updatedComponent =
+      this.props.type === "state"
+        ? await this.mutationState(currentComponent, mutation)
+        : await this.mutationProp(currentComponent, mutation);
     console.log(updatedComponent);
-    this.props.updateComponent(updatedComponent)
+    this.props.updateComponent(updatedComponent);
     this.props.discardField();
-  }
+  };
 
   render() {
-    const { type, currentComponent, value1, value2, handleChange, discardField } = this.props;
-    const MUTATION = type === 'state' ? ADD_STATE : ADD_PROP;
+    const {
+      type,
+      currentComponent,
+      value1,
+      value2,
+      handleChange,
+      handleSelect,
+      discardField
+    } = this.props;
+    const MUTATION = type === "state" ? ADD_STATE : ADD_PROP;
+    const placeholder =
+      type === "state" ? "add a state key..." : "add a prop key...";
+    const keyText = `${type.charAt(0).toUpperCase() + type.slice(1)} Key`;
+    const typeText = `${type.charAt(0).toUpperCase() + type.slice(1)} Type`;
 
     return (
       <Mutation mutation={MUTATION}>
         {AddField => (
-          <div>
-            <label>
-              {type} NAME
-                <input onChange={(e) => handleChange(e, 'value1')} value={value1} />
-            </label>
-            <label>
-              {type === 'state' ? "STATE TYPE" : "PROPTYPE"}
-              <select value={value2} onChange={e => handleChange(e, 'value2')}>
-                <option value="boolean">boolean</option>
-                <option value="number">number</option>
-                <option value="string">string</option>
-                <option value="array">array</option>
-                <option value="object">object</option>
-              </select>
-            </label>
+          <Container>
+            <Title>Adding A State Field</Title>
+            <Label>
+              <LabelText>{keyText}</LabelText>
+              <input
+                onChange={e => handleChange(e, "value1")}
+                value={value1}
+                placeholder={placeholder}
+              />
+            </Label>
+            <Label>
+              <LabelText>{typeText}</LabelText>
+              <div style={{ fontSize: "24px", color: "#21c2f8" }}>
+                <Select
+                  options={OPTIONS}
+                  defaultValue={value2}
+                  onChange={e => handleSelect(e.value, "value2")}
+                  style={styles}
+                />
+              </div>
+            </Label>
             <button
-              className="dashboard-button" 
+              className="dashboard-button"
               onClick={() => this.saveField(currentComponent, AddField)}
             >
               ADD {type}
             </button>
-            <button 
-              className="dashboard-button"
-              onClick={discardField}
-            >
+            <button className="dashboard-button" onClick={discardField}>
               DISCARD {type}
             </button>
-          </div>
+          </Container>
         )}
       </Mutation>
     );

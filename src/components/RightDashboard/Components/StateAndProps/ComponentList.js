@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {
   ComponentList as Container,
-  ComponentListTitle as Title,
+  RightDashboardTitle as Title,
   ComponentListItem as ListItem
 } from "styles";
 
@@ -19,7 +19,6 @@ export default class ComponentList extends Component {
     return (
       <Container>
         <Title>{text}</Title>
-
         {potentialParents.map(parent => (
           <ListItem
             key={parent._id}
