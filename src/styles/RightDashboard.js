@@ -20,11 +20,17 @@ export const Label = styled.div`
   width: 95%;
 
   input {
-    height: 28px;
+    height: 32px;
     width: 100%;
     font-size: 24px;
     background: ${props => props.theme.lightGrey};
     margin: 0;
+    padding-top: 3px;
+    color: ${props => props.theme.madison};
+
+    div {
+      height: 20px;
+    }
   }
 `;
 

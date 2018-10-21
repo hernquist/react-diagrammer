@@ -9,34 +9,7 @@ import {
   ComponentWorkingsContainer as Container
 } from "styles";
 import { OPTIONS } from "helpers/const";
-
-const styles = {
-  multiValue: (base, state) => {
-    return state.data.isFixed ? { ...base, backgroundColor: "gray" } : base;
-  },
-  multiValueLabel: (base, state) => {
-    return state.data.isFixed
-      ? {
-          ...base,
-          fontWeight: "bold",
-          color: "green",
-          paddingRight: 6,
-          fontSize: "24px"
-        }
-      : base;
-  },
-  multiValueRemove: (base, state) => {
-    return state.data.isFixed ? { ...base, display: "none" } : base;
-  },
-  option: (base, state) => {
-    return { ...base, fontSize: "24px", color: "green" };
-  },
-  container: (base, state) => {
-    return state.data.isFixed
-      ? { ...base, fontSize: "24px" }
-      : { ...base, fontSize: "24px" };
-  }
-};
+import "./select.css";
 
 class AddField extends Component {
   mutationProp = async (currentComponent, mutation) => {
@@ -107,12 +80,21 @@ class AddField extends Component {
             </Label>
             <Label>
               <LabelText>{typeText}</LabelText>
-              <div style={{ fontSize: "24px", color: "#21c2f8" }}>
+              <div
+                style={{
+                  fontSize: "24px",
+                  color: "#21c2f8",
+                  height: "20px",
+                  paddingBottom: 0,
+                  marginBottom: 0
+                }}
+              >
                 <Select
                   options={OPTIONS}
                   defaultValue={value2}
                   onChange={e => handleSelect(e.value, "value2")}
-                  style={styles}
+                  className="react-select-container"
+                  classNamePrefix="react-select"
                 />
               </div>
             </Label>
