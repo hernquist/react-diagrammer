@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { SmallList, ListItem } from "styles";
+import helper from "helpers/helper";
 
 const DeleteOptions = ({ deactivateSelector }) => {
-  const width =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
+  const screenWidth = helper.screenWidth();
   const buttonsLength = 296;
-  const position = width > buttonsLength ? width - buttonsLength : 0;
+  const position =
+    screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
 
   return (
     <SmallList

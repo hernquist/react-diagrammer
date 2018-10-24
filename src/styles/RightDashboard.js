@@ -25,6 +25,7 @@ export const Label = styled.div`
     font-size: 24px;
     background: ${props => props.theme.lightGrey};
     margin: 0;
+    padding-left: 8px;
     padding-top: 3px;
     color: ${props => props.theme.madison};
 
@@ -36,4 +37,10 @@ export const Label = styled.div`
 
 export const LabelText = styled.div`
   padding-left: 10px;
+`;
+
+export const ButtonContainer = styled.div`
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 `;

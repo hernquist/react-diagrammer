@@ -5,8 +5,11 @@ class DisplayFields extends Component {
   render() {
     const {
       currentComponent,
+      showEdit,
+      hideEdit,
+
       editField,
-      resetHighlight,
+      onHover,
       setHighlight,
       type
     } = this.props;
@@ -14,9 +17,9 @@ class DisplayFields extends Component {
     const fields =
       type === "state" ? currentComponent.state : currentComponent.props;
     const fieldtype = type === "state" ? "statetype" : "proptype";
-    let header = `Existing ${type === `state` ? `state fields` : `props`}`;
+    let header = `Existing ${type === "state" ? `state fields` : `props`}`;
     if (fields.length === 0) {
-      header = "No state";
+      header = type === "state" ? "No state" : "No props";
     }
 
     return (
@@ -26,11 +29,15 @@ class DisplayFields extends Component {
           <StateField
             style={{ fontSize: "16px", margin: "4px" }}
             key={field._id}
-            onMouseEnter={() => editField(field)}
-            onMouseLeave={resetHighlight}
-            onClick={setHighlight}
+            onMouseEnter={() => {
+              onHover && showEdit(field._id);
+            }}
+            onMouseLeave={hideEdit}
+            onClick={() => setHighlight(field)}
           >
-            {`${field.name}: ${field[fieldtype]}`}
+            {editField === field._id
+              ? `EDIT`
+              : `${field.name}: ${field[fieldtype]}`}
           </StateField>
         ))}
       </div>

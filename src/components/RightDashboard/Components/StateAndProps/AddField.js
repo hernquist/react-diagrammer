@@ -1,17 +1,30 @@
 import React, { Component, Fragment } from "react";
 import { Mutation } from "react-apollo";
-import Select from "react-select";
 import { ADD_PROP, ADD_STATE } from "../../../../graphql/mutations";
+import TypeOptions from "./TypeOptions";
 import {
   Label,
   LabelText,
+  Buttons,
   RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
 } from "styles";
-import { OPTIONS } from "helpers/const";
-import "./select.css";
+import styled from "styled-components";
+import { SubmitButton } from "components/UI/SubmitButton";
+
+const ButtonsContainer = styled(Buttons)`
+  margin: 10px 0;
+`;
 
 class AddField extends Component {
+  state = {
+    showSelector: false
+  };
+
+  deactivateSelector = () => this.setState({ showSelector: false });
+
+  activateSelector = () => this.setState({ showSelector: true });
+
   mutationProp = async (currentComponent, mutation) => {
     const componentId = currentComponent._id;
     const prop = {
@@ -59,17 +72,19 @@ class AddField extends Component {
       handleSelect,
       discardField
     } = this.props;
+    const { showSelector } = this.state;
     const MUTATION = type === "state" ? ADD_STATE : ADD_PROP;
     const placeholder =
       type === "state" ? "add a state key..." : "add a prop key...";
-    const keyText = `${type.charAt(0).toUpperCase() + type.slice(1)} Key`;
-    const typeText = `${type.charAt(0).toUpperCase() + type.slice(1)} Type`;
+    const title = type.charAt(0).toUpperCase() + type.slice(1);
+    const keyText = `${title} Key`;
+    const typeText = `${title} Type`;
 
     return (
       <Mutation mutation={MUTATION}>
         {AddField => (
           <Container>
-            <Title>Adding A State Field</Title>
+            <Title>Adding A {title} Field</Title>
             <Label>
               <LabelText>{keyText}</LabelText>
               <input
@@ -78,35 +93,32 @@ class AddField extends Component {
                 placeholder={placeholder}
               />
             </Label>
-            <Label>
-              <LabelText>{typeText}</LabelText>
-              <div
-                style={{
-                  fontSize: "24px",
-                  color: "#21c2f8",
-                  height: "20px",
-                  paddingBottom: 0,
-                  marginBottom: 0
-                }}
-              >
-                <Select
-                  options={OPTIONS}
-                  defaultValue={value2}
-                  onChange={e => handleSelect(e.value, "value2")}
-                  className="react-select-container"
-                  classNamePrefix="react-select"
-                />
-              </div>
-            </Label>
-            <button
-              className="dashboard-button"
-              onClick={() => this.saveField(currentComponent, AddField)}
+            <Label
+              onMouseEnter={this.activateSelector}
+              onMouseLeave={this.deactivateSelector}
             >
-              ADD {type}
-            </button>
-            <button className="dashboard-button" onClick={discardField}>
-              DISCARD {type}
-            </button>
+              <LabelText>{typeText}</LabelText>
+              <input value={value2} />
+              {showSelector && (
+                <TypeOptions
+                  handleSelect={handleSelect}
+                  key="value2"
+                  deactivateSelector={this.deactivateSelector}
+                />
+              )}
+            </Label>
+            <ButtonsContainer>
+              {/* TODO add notification to make sure their are no duplicates, and other more complicated notifcations */}
+              <SubmitButton
+                disabled={value1.length === 0}
+                onClick={() => this.saveField(currentComponent, AddField)}
+              >
+                SAVE
+              </SubmitButton>
+              <SubmitButton className="dashboard-button" onClick={discardField}>
+                CANCEL
+              </SubmitButton>
+            </ButtonsContainer>
           </Container>
         )}
       </Mutation>

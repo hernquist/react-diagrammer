@@ -9,7 +9,8 @@ import { RightDashboardTitle as Title } from "styles";
 import { SubmitButton, WideButton } from "components/UI/SubmitButton";
 
 const Button = styled(WideButton)`
-  margin: 3px;
+  margin: 0 15%;
+  width: 70%;
 `;
 
 class UpdateComponentWorkings extends Component {
@@ -18,7 +19,19 @@ class UpdateComponentWorkings extends Component {
     value2: "string",
     showAddField: false,
     highlighted: null,
-    onHover: true
+    onHover: true,
+    editField: null
+  };
+
+  showEdit = id =>
+    this.setState({
+      editField: id
+    });
+
+  hideEdit = () => {
+    if (this.state.onHover) {
+      this.setState({ editField: null });
+    }
   };
 
   state = this.initialState;
@@ -47,10 +60,20 @@ class UpdateComponentWorkings extends Component {
     if (this.state.onHover) this.setState({ highlighted: null });
   };
 
-  setHighlight = () => this.setState({ onHover: false });
+  setHighlight = field => {
+    this.setState({ highlighted: field });
+    this.setState({ onHover: false });
+  };
 
   render() {
-    const { showAddField, value1, value2, highlighted, onHover } = this.state;
+    const {
+      showAddField,
+      value1,
+      value2,
+      highlighted,
+      onHover,
+      editField
+    } = this.state;
     const { currentProject, history, updateComponent, type } = this.props;
     const { components } = currentProject;
     if (!components) return <Title>No Components</Title>;
@@ -67,15 +90,10 @@ class UpdateComponentWorkings extends Component {
 
     return (
       <Fragment>
-        <ComponentHeader currentComponent={currentComponent} />
-        <DisplayFields
-          currentComponent={currentComponent}
-          updateComponent={updateComponent}
-          editField={this.editField}
-          resetHighlight={this.resetHighlight}
-          setHighlight={this.setHighlight}
-          type={type}
-        />
+        <ComponentHeader currentComponent={currentComponent}>
+          <SubmitButton onClick={this.exitComponent}>DONE</SubmitButton>
+        </ComponentHeader>
+
         {showAddField ? (
           <AddField
             type={type}
@@ -87,12 +105,7 @@ class UpdateComponentWorkings extends Component {
             value1={value1}
             value2={value2}
           />
-        ) : (
-          <Button onClick={this.displayAddField}>
-            {`ADD A NEW ${type.toUpperCase()}`}
-          </Button>
-        )}
-        {highlighted && (
+        ) : highlighted ? (
           <EditField
             field={highlighted}
             edit={!onHover}
@@ -101,8 +114,24 @@ class UpdateComponentWorkings extends Component {
             updateComponent={updateComponent}
             type={type}
           />
+        ) : (
+          <Fragment>
+            <DisplayFields
+              currentComponent={currentComponent}
+              updateComponent={updateComponent}
+              editField={editField}
+              showEdit={this.showEdit}
+              hideEdit={this.hideEdit}
+              resetHighlight={this.resetHighlight}
+              setHighlight={this.setHighlight}
+              onHover={onHover}
+              type={type}
+            />
+            <Button onClick={this.displayAddField}>
+              {`ADD A NEW ${type.toUpperCase()}`}
+            </Button>
+          </Fragment>
         )}
-        <SubmitButton onClick={this.exitComponent}>DONE</SubmitButton>
       </Fragment>
     );
   }
