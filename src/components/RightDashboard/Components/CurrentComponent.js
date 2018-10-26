@@ -3,12 +3,10 @@ import { Mutation } from "react-apollo";
 import styled from "styled-components";
 import { TOGGLE_COMPONENT_STYLE } from "../../../graphql/mutations";
 import helper from "../../../helpers/helper";
-import {
-  RightDashboardContainer as Container,
-  CurrentComponentTitle as Title
-} from "styles";
+import { RightDashboardContainer as Container } from "styles";
 import { WideButton } from "../../UI/SubmitButton";
 import ModalContainer from "../../UI/ModalContainer";
+import ComponentHeader from "./ComponentHeader";
 import UnassignComponent from "./UnassignComponent";
 
 const Button = styled(WideButton)`
@@ -47,11 +45,7 @@ class CurrentComponent extends Component {
 
     return (
       <Container>
-        <Title>
-          <div>{currentComponent.style.toUpperCase()}</div>
-          <div>COMPONENT</div>
-          <div>{`${currentComponent.name}.js`}</div>
-        </Title>
+        <ComponentHeader currentComponent={currentComponent} />
         <Button
           disabled={isPresentational}
           onClick={() =>

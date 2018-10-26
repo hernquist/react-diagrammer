@@ -1,8 +1,30 @@
-import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
-import { ADD_PROP, ADD_STATE } from '../../../../graphql/mutations';
+import React, { Component } from "react";
+import { Mutation } from "react-apollo";
+import { ADD_PROP, ADD_STATE } from "../../../../graphql/mutations";
+import TypeOptions from "./TypeOptions";
+import {
+  Label,
+  LabelText,
+  Buttons,
+  RightDashboardTitle as Title,
+  ComponentWorkingsContainer as Container
+} from "styles";
+import styled from "styled-components";
+import { SubmitButton } from "components/UI/SubmitButton";
+
+const ButtonsContainer = styled(Buttons)`
+  margin: 10px 0;
+`;
 
 class AddField extends Component {
+  state = {
+    showSelector: false
+  };
+
+  deactivateSelector = () => this.setState({ showSelector: false });
+
+  activateSelector = () => this.setState({ showSelector: true });
+
   mutationProp = async (currentComponent, mutation) => {
     const componentId = currentComponent._id;
     const prop = {
@@ -13,7 +35,7 @@ class AddField extends Component {
     const { data } = await mutation({ variables: { prop } });
     const props = data.addProp.props.map(prop => ({ ...prop, componentId }));
     return Object.assign({}, currentComponent, { props });
-  }
+  };
 
   mutationState = async (currentComponent, mutation) => {
     const componentId = currentComponent._id;
@@ -23,54 +45,81 @@ class AddField extends Component {
       statetype: this.props.value2
     };
     const { data } = await mutation({ variables: { state } });
-    const stateObjects = data.addState.state.map(stateItem => ({ ...stateItem, componentId }));
+    const stateObjects = data.addState.state.map(stateItem => ({
+      ...stateItem,
+      componentId
+    }));
     return Object.assign({}, currentComponent, { state: stateObjects });
-  }
+  };
 
   saveField = async (currentComponent, mutation) => {
-    const updatedComponent = this.props.type === 'state' ?
-      await this.mutationState(currentComponent, mutation) :
-      await this.mutationProp(currentComponent, mutation);
+    const updatedComponent =
+      this.props.type === "state"
+        ? await this.mutationState(currentComponent, mutation)
+        : await this.mutationProp(currentComponent, mutation);
     console.log(updatedComponent);
-    this.props.updateComponent(updatedComponent)
+    this.props.updateComponent(updatedComponent);
     this.props.discardField();
-  }
+  };
 
   render() {
-    const { type, currentComponent, value1, value2, handleChange, discardField } = this.props;
-    const MUTATION = type === 'state' ? ADD_STATE : ADD_PROP;
+    const {
+      type,
+      currentComponent,
+      value1,
+      value2,
+      handleChange,
+      handleSelect,
+      discardField
+    } = this.props;
+    const { showSelector } = this.state;
+    const MUTATION = type === "state" ? ADD_STATE : ADD_PROP;
+    const placeholder =
+      type === "state" ? "add a state key..." : "add a prop key...";
+    const title = type.charAt(0).toUpperCase() + type.slice(1);
+    const keyText = `${title} Key`;
+    const typeText = `${title} Type`;
 
     return (
       <Mutation mutation={MUTATION}>
         {AddField => (
-          <div>
-            <label>
-              {type} NAME
-                <input onChange={(e) => handleChange(e, 'value1')} value={value1} />
-            </label>
-            <label>
-              {type === 'state' ? "STATE TYPE" : "PROPTYPE"}
-              <select value={value2} onChange={e => handleChange(e, 'value2')}>
-                <option value="boolean">boolean</option>
-                <option value="number">number</option>
-                <option value="string">string</option>
-                <option value="array">array</option>
-                <option value="object">object</option>
-              </select>
-            </label>
-            <button
-              className="dashboard-button" 
-              onClick={() => this.saveField(currentComponent, AddField)}
+          <Container>
+            <Title>Adding A {title} Field</Title>
+            <Label>
+              <LabelText>{keyText}</LabelText>
+              <input
+                onChange={e => handleChange(e, "value1")}
+                value={value1}
+                placeholder={placeholder}
+              />
+            </Label>
+            <Label
+              onMouseEnter={this.activateSelector}
+              onMouseLeave={this.deactivateSelector}
             >
-              ADD {type}
-            </button>
-            <button 
-              className="dashboard-button"
-              onClick={discardField}
-            >
-              DISCARD {type}
-            </button>
-          </div>
+              <LabelText>{typeText}</LabelText>
+              <input value={value2} />
+              {showSelector && (
+                <TypeOptions
+                  handleSelect={handleSelect}
+                  key="value2"
+                  deactivateSelector={this.deactivateSelector}
+                />
+              )}
+            </Label>
+            <ButtonsContainer>
+              {/* TODO add notification to make sure their are no duplicates, and other more complicated notifcations */}
+              <SubmitButton
+                disabled={value1.length === 0}
+                onClick={() => this.saveField(currentComponent, AddField)}
+              >
+                SAVE
+              </SubmitButton>
+              <SubmitButton className="dashboard-button" onClick={discardField}>
+                CANCEL
+              </SubmitButton>
+            </ButtonsContainer>
+          </Container>
         )}
       </Mutation>
     );
