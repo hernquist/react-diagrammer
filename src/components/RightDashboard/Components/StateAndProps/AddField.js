@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import { ADD_PROP, ADD_STATE } from "../../../../graphql/mutations";
 import TypeOptions from "./TypeOptions";

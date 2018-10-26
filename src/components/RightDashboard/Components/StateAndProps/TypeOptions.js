@@ -1,14 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import helper from "helpers/helper";
+// import helper from "helpers/helper";
 import { List, ListItem } from "styles";
 import { OPTIONS } from "helpers/const";
 
 const TypeOptions = ({ deactivateSelector, handleSelect, fieldtype }) => {
-  const screenWidth = helper.screenWidth();
-  const buttonsLength = 386;
-  const position =
-    screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
+  // const screenWidth = helper.screenWidth();
+  // const buttonsLength = 386;
+  // const position =
+  // screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
 
   return (
     <List onMouseLeave={deactivateSelector}>
