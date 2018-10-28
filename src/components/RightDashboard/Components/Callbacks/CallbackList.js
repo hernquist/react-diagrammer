@@ -1,9 +1,12 @@
-import React, { Fragment } from 'react';
-import { Message } from 'styles';
+import React from 'react';
+import { 
+  Message, 
+  Callback,
+  CallbackListContainer as Container 
+} from 'styles';
 
 const CallbackList = ({
   callbacks,
-  highlighted,
   editCb,
   resetHighlight,
   setHighlight,
@@ -14,15 +17,10 @@ const CallbackList = ({
   }
 
   return (
-    <Fragment>
+    <Container>
       <Message>Click a Callback To Edit</Message>
       {callbacks.map(callback => (
-        <div
-          style={{ 
-            fontSize: "16px", 
-            margin: "4px",
-            backgroundColor: highlighted._id === callback._id && 'rgba(0, 0, 0, 0.3)'
-          }} 
+        <Callback 
           key={callback._id}
           onMouseEnter={() => editCb(callback)}
           onMouseLeave={resetHighlight}
@@ -32,9 +30,9 @@ const CallbackList = ({
           }}
         >
           {callback.name}
-        </div>
+        </Callback>
       ))}
-    </Fragment>
+    </Container>
   )
 }
 

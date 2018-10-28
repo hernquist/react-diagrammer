@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
 import { DELETE_CALLBACK, EDIT_CALLBACK } from '../../../../graphql/mutations'
-import { 
-  RightDashboardTitle as Title,
-  Message 
- } from 'styles';
+import { RightDashboardTitle as Title } from 'styles';
 import CallbackForm from './CallbackForm';
 import { WideButton } from 'components/UI/SubmitButton';
 import CallbackList from './CallbackList';
@@ -138,7 +135,7 @@ export default class DisplayCallbacks extends Component {
                 <CallbackForm
                   argName={argName}
                   addElement={this.addElement}
-                  callback={() => console.log("callback from DisplayCallbacks")}
+                  callback={() => console.log('empty callback')}
                   description={description}
                   deleteElement={this.deleteElement}
                   functionArgs={functionArgs}
@@ -149,21 +146,17 @@ export default class DisplayCallbacks extends Component {
                   stateField={stateField}
                   typeName={typeName}
                   createNotification={createNotification}
-                  />
-                <div
-                  className="dashboard-button hideable"
+                />
+                <WideButton
                   onClick={() => this.updateValidation(EditCallback)}
-                  >
-                  <div className="button-content">UPDATE</div>
-                  <div className="button-content">CALLBACK</div>
-                </div>
-                <div
-                  className="dashboard-button hideable "
+                >
+                  UPDATE CALLBACK
+                </WideButton>
+                <WideButton
                   onClick={() => this.deleteCallback(DeleteCallback)}
-                  >
-                  <div className="button-content">DELETE</div>
-                  <div className="button-content">CALLBACK</div>
-                </div>
+                >
+                  DELETE CALLBACK
+                </WideButton>
               </Fragment> :
               <Fragment>
                 <Title>UPDATE CALLBACKS</Title>

@@ -9,7 +9,7 @@ import Arguments from './Arguments';
 import SetStates from './SetStates';
 
 export default class CallbackForm extends Component {
-  state = { section: '' }
+  state = { section: 'basics' }
 
   showSection = section => () => this.setState({ section })
 
