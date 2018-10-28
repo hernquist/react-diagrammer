@@ -4,6 +4,9 @@ import {
   AccordionTitle as Title,
   AccordionText as Text 
 } from 'styles';
+import Basics from './Basics';
+import Arguments from './Arguments';
+import SetStates from './SetStates';
 
 export default class CallbackForm extends Component {
   state = { section: '' }
