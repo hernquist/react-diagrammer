@@ -5,7 +5,11 @@ import EditField from "./StateAndProps/EditField";
 import AddField from "./StateAndProps/AddField";
 import NoStateAllowed from "./StateAndProps/NoStateAllowed";
 import ComponentHeader from "./ComponentHeader";
-import { RightDashboardTitle as Title } from "styles";
+import helper from "helpers/helper";
+import { 
+  RightDashboardTitle as Title,
+  ComponentWorkingsContainer as Container
+ } from "styles";
 import { SubmitButton, WideButton } from "components/UI/SubmitButton";
 
 const Button = styled(WideButton)`
@@ -22,19 +26,16 @@ class UpdateComponentWorkings extends Component {
     onHover: true,
     editField: null
   };
+  
+  state = this.initialState;
 
-  showEdit = id =>
-    this.setState({
-      editField: id
-    });
+  showEdit = id => this.setState({ editField: id });
 
   hideEdit = () => {
     if (this.state.onHover) {
       this.setState({ editField: null });
     }
   };
-
-  state = this.initialState;
 
   handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
@@ -49,10 +50,8 @@ class UpdateComponentWorkings extends Component {
   };
 
   exitComponent = () => {
-    const match = this.props.match.url
-      .split("/")
-      .slice(0, 5)
-      .join("/");
+    const { url } = this.props.match;
+    const match = helper.trimUrl(url, 5);
     this.props.history.push(match);
   };
 
@@ -60,10 +59,10 @@ class UpdateComponentWorkings extends Component {
     if (this.state.onHover) this.setState({ highlighted: null });
   };
 
-  setHighlight = field => {
-    this.setState({ highlighted: field });
-    this.setState({ onHover: false });
-  };
+  setHighlight = field => this.setState({ 
+    highlighted: field, 
+    onHover: false 
+  });
 
   render() {
     const {
@@ -75,25 +74,20 @@ class UpdateComponentWorkings extends Component {
       editField
     } = this.state;
     const { currentProject, history, updateComponent, type } = this.props;
+    const { pathname } = history.location;
     const { components } = currentProject;
     if (!components) return <Title>No Components</Title>;
 
-    const pieces = history.location.pathname.split("/");
-    const name = pieces[3];
-    const index = pieces[4];
-    const currentComponent = components
-      .filter(c => c.name === name)
-      .filter(c => c.iteration === Number(index))[0];
+    const currentComponent = helper.getComponentFromURL(pathname, components);
 
     if (currentComponent.style === "presentational" && type === "state")
       return <NoStateAllowed exit={this.exitComponent} />;
 
     return (
-      <Fragment>
+      <Container>
         <ComponentHeader currentComponent={currentComponent}>
           <SubmitButton onClick={this.exitComponent}>DONE</SubmitButton>
         </ComponentHeader>
-
         {showAddField ? (
           <AddField
             type={type}
@@ -132,7 +126,7 @@ class UpdateComponentWorkings extends Component {
             </Button>
           </Fragment>
         )}
-      </Fragment>
+      </Container>
     );
   }
 }

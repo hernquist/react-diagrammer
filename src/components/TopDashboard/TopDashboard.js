@@ -55,7 +55,7 @@ class LeftDashboard extends Component {
       currentProject.name.length > 12
         ? `${currentProject.name}`
         : `PROJECT ${currentProject.name}`;
-
+        
     return (
       <Fragment>
         <Container>

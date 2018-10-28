@@ -1,6 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react';
+import { WideButton } from 'components/UI/SubmitButton';
+import { 
+  AccordionTitle as Title,
+  AccordionText as Text 
+} from 'styles';
 
 export default class CallbackForm extends Component {
+  state = { section: '' }
+
+  showSection = section => () => this.setState({ section })
+
   validation = name => {
     const mapping = {
       functionArgs: ['callback arguments', 'argName', 'typeName'],
@@ -8,121 +17,59 @@ export default class CallbackForm extends Component {
     }
     const [first, second] = [this.props[mapping[name][1]].length, this.props[mapping[name][2]].length]
     const message = first === 0 || second === 0 ? 'emptyFields' : null;
+    
     message ? this.props.createNotification('warning', message, message, mapping[name][0])()
       : this.props.addElement(name);
   }
 
   render() {
     const {
-      name,
-      description,
-      functionArgs,
-      argName,
-      typeName,
-      setState,
-      stateField,
-      stateChange,
-      // highlighted,
-      // onHover,
-      handleChange,
-      create,
-      deleteElement,
       callback, 
+      create,
       currentComponent,
       mutation
     } = this.props;
+    const { section } = this.state;
 
+    const expand = isExpanded => isExpanded ? '-' : '+';
+    const basics = section === 'basics';
+    const args = section === 'arguments';
+    const setStates = section === 'setStates';
+    
     return (
-      <div>
-        <div>
-          <label>
-            Callback name
-            <input value={name} onChange={e => handleChange(e, 'name') } />
-          </label>
-        </div>
-
-        <div>
-          <label>
-            Optional Description
-            <input value={description} onChange={e => handleChange(e, 'description') } />
-          </label>
-        </div>
-
-        {functionArgs.map((field, i) => 
-          <div key={i}>{field.name} and {field.typeName}
-            <span onClick={() => deleteElement(field, 'functionArgs')}> X </span>
-          </div>
-        )}
-
-        <div>
-          <label>
-            Callback Argument
-            <input value={argName} onChange={e => handleChange(e, 'argName') } />
-          </label>
-        </div>
-        
-        {/* selector for types */}
-
-        <div>
-          <label>
-            Argument Type 
-            <input value={typeName} onChange={e => handleChange(e, 'typeName') } />
-          </label>
-        </div>
-
-        <div 
-          className="dashboard-button" 
-          // onClick={this.props.createNotification('warning')}
-          onClick={() => this.validation('functionArgs')}
-        >
-          <div className="button-content">SUBMIT</div>
-          <div className="button-content">ARGUMENT</div>
-        </div>
-        
-        {setState.map((field, i) => 
-          <div key={i}>{field.stateField} and {field.stateChange}
-            <span onClick={() => deleteElement(field, 'setState')}> X </span>
-          </div>
-        )}
-        
-        {/* todo make a selector */}
-        
-        <div>
-          <label>
-            State Field  
-            <input value={stateField} onChange={e => handleChange(e, 'stateField') } />
-          </label>
-        </div>
-        
-        {/* offer some sort of guidance */}
-
-        <div>
-          <label>
-            State Change
-            <input value={stateChange} onChange={e => handleChange(e, 'stateChange') } />
-          </label>
-        </div>
-
-        <div 
-          className="dashboard-button"
-          onClick={() => this.validation('setState')}
-        >
-          <div className="button-content">SUBMIT</div>
-          <div className="button-content">STATE</div>
-          <div className="button-content">CHANGE</div>
-        </div>
-
+      <Fragment>
+        <Title onClick={this.showSection('basics')}>
+          <Text>CALLBACK BASICS</Text> 
+          <Text>{expand(basics)}</Text>
+        </Title>
+        <Basics
+          visible={basics}
+          {...this.props}
+        />
+        <Title onClick={this.showSection('arguments')}>
+          <Text>CALLBACK ARGUMENTS</Text> 
+          <Text>{expand(args)}</Text>
+        </Title>
+        <Arguments
+          visible={args}
+          validation={this.validation}
+          {...this.props}
+        />
+        <Title onClick={this.showSection('setStates')}>
+          <Text>CALLBACK SETSTATES</Text> 
+          <Text>{expand(setStates)}</Text>
+        </Title>
+        <SetStates
+          visible={setStates}
+          validation={this.validation}
+          {...this.props}
+        />
         {create && 
-          <div
-            className="dashboard-button"
-          onClick={callback(currentComponent, mutation)}
-          >
-            <div className="button-content">SAVE</div>
-            <div className="button-content">CALLBACK</div>
-          </div>
+          <WideButton onClick={() => callback(currentComponent, mutation)}>
+            SAVE CALLBACK
+          </WideButton>
         }
-       
-      </div>
+      </Fragment>
     )
   }
 }

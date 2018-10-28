@@ -53,11 +53,9 @@ class AddField extends Component {
   };
 
   saveField = async (currentComponent, mutation) => {
-    const updatedComponent =
-      this.props.type === "state"
-        ? await this.mutationState(currentComponent, mutation)
-        : await this.mutationProp(currentComponent, mutation);
-    console.log(updatedComponent);
+    const updatedComponent = this.props.type === "state"
+      ? await this.mutationState(currentComponent, mutation)
+      : await this.mutationProp(currentComponent, mutation);
     this.props.updateComponent(updatedComponent);
     this.props.discardField();
   };
@@ -98,12 +96,13 @@ class AddField extends Component {
               onMouseLeave={this.deactivateSelector}
             >
               <LabelText>{typeText}</LabelText>
-              <input value={value2} />
+              <input value={value2} readOnly/>
               {showSelector && (
                 <TypeOptions
                   handleSelect={handleSelect}
                   key="value2"
                   deactivateSelector={this.deactivateSelector}
+                  fieldtype={"value2"}
                 />
               )}
             </Label>

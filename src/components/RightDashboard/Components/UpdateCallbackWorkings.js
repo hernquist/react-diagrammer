@@ -1,8 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import DisplayCallbacks from './Callbacks/DisplayCallbacks';
 import CallbackForm from './Callbacks/CallbackForm';
 import { Mutation } from 'react-apollo';
 import { ADD_CALLBACK } from '../../../graphql/mutations';
+import helper from "helpers/helper";
+import { 
+  RightDashboardTitle as Title,
+  ComponentWorkingsContainer as Container
+
+} from "styles";
+import ComponentHeader from "./ComponentHeader";
+import { SubmitButton } from "components/UI/SubmitButton";
 
 export default class UpdateCallbackWorkings extends Component {
   initialState = {
@@ -23,10 +31,9 @@ export default class UpdateCallbackWorkings extends Component {
     renderForm: false
   }
 
-  handleChange = (e, key) => {
-    console.log(e.target.value, key);
-    this.setState({ [key]: e.target.value });
-  }
+  handleChange = (e, key) => this.setState({ [key]: e.target.value });
+
+  handleClear = key => this.setState({ [key]: ''})
 
   addElement = key => {
     const { argName, typeName, functionArgs, stateField, stateChange, setState } = this.state;
@@ -59,15 +66,17 @@ export default class UpdateCallbackWorkings extends Component {
       setState
     }
     const { data } = await mutation({  variables: { callback }})
-    const component = Object.assign({}, currentComponent, { callbacks: [...currentComponent.callbacks, data.addCallback] });
+    const component = Object.assign(
+      {}, 
+      currentComponent, 
+      { callbacks: [...currentComponent.callbacks, data.addCallback]}
+    );
     this.props.updateComponent(component);
     this.setState( this.initialState )
     this.toggleForm()
   }
 
-  toggleForm = () => {
-    this.setState({ renderForm: !this.state.renderForm })
-  }
+  toggleForm = () => this.setState({ renderForm: !this.state.renderForm })
 
   editCb = cb => {
     if (this.state.onHover) this.setState({ highlighted: cb });
@@ -77,9 +86,12 @@ export default class UpdateCallbackWorkings extends Component {
     if (this.state.onHover) this.setState({ highlighted: { _id: null } });
   };
 
-  setHighlight = cb => cb._id === this.state.highlighted._id && this.state.onHover === false ? 
-    this.setState({ onHover: true, highlighted: { _id: null } }) :
-    this.setState({ onHover: false, highlighted: cb });
+  setHighlight = cb => {
+    const { highlighted, onHover} = this.state;
+    cb._id === highlighted._id && !onHover ? 
+      this.setState({ onHover: true, highlighted: { _id: null } }) :
+      this.setState({ onHover: false, highlighted: cb });
+  }
   
   resetUpdateCallbacks = () => {
     this.setState({ onHover: true });
@@ -100,39 +112,37 @@ export default class UpdateCallbackWorkings extends Component {
       renderForm
     } = this.state;
     const { currentProject, history, updateComponent, createNotification } = this.props;
+    const { pathname } = history.location;
     const { components } = currentProject;
-    if (!components) return <div>No Components</div>
+    if (!components) return <Title>No Components</Title>;
 
-    console.log('ADD_CALLBACK', ADD_CALLBACK)
-
-    const pieces = history.location.pathname.split("/");
-    const pathname = pieces[3];
-    const index = pieces[4];
-    const currentComponent = components
-      .filter(c => c.name === pathname)
-      .filter(c => c.iteration === Number(index))[0];
-
+    const currentComponent = helper.getComponentFromURL(pathname, components);
+  
     return (
-      <div>
+      <Container>
+        <ComponentHeader currentComponent={currentComponent}>
+          <SubmitButton onClick={this.exitComponent}>DONE</SubmitButton>
+        </ComponentHeader>
         {renderForm ? 
           <Mutation mutation={ADD_CALLBACK}>
             {AddCallback => (
               <CallbackForm
-                currentComponent={currentComponent}
-                callback={this.saveCallback}
-                mutation={AddCallback}
-                handleChange={this.handleChange}
                 addElement={this.addElement}
-                name={name}
-                description={description} 
-                functionArgs={functionArgs}
                 argName={argName}
-                typeName={typeName}
-                setState={setState}
-                stateField={stateField}
-                stateChange={stateChange}
+                callback={this.saveCallback}
                 create={true}
                 createNotification={createNotification}
+                currentComponent={currentComponent}
+                description={description} 
+                functionArgs={functionArgs}
+                handleChange={this.handleChange}
+                handleClear={this.handleClear}
+                mutation={AddCallback}
+                name={name}
+                setState={setState}
+                stateChange={stateChange}
+                stateField={stateField}
+                typeName={typeName}
               />
             )}
           </Mutation> : 
@@ -148,7 +158,7 @@ export default class UpdateCallbackWorkings extends Component {
             createNotification={createNotification}
           />
         }
-      </div>
+      </Container>
     )
   }
 }

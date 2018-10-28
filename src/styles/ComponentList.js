@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const ComponentList = styled.div`
+export const ComponentList = styled.div `
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 5px;
 `;
 
-export const ComponentListItem = styled.div`
+export const ComponentListItem = styled.div `
   border: 1px solid black;
   border-radius: 4px;
   margin: 3px 10px;

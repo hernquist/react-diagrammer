@@ -1,7 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Mutation } from "react-apollo";
 import { CREATE_COMPONENT, ADD_CHILD } from "../../../graphql/mutations";
 import ComponentList from "./StateAndProps/ComponentList";
+import {
+  Label,
+  LabelText,
+  Buttons,
+  Input,
+  Selection,
+  Selections,
+  RightDashboardTitle as Title,
+  CreateComponentContainer as Container
+} from "styles";
+import { SubmitButton } from "components/UI/SubmitButton";
 import helper from "../../../helpers/helper";
 
 export default class CreateComponent extends Component {
@@ -24,11 +35,7 @@ export default class CreateComponent extends Component {
 
   handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
-  handleRoot = () => console.log("Are you sure you want this to be a root?");
-
-  handleUnassigned = () => this.setState({ placement: "unassigned" });
-
-  handleChild = () => this.setState({ placement: "child" });
+  handlePlacement = placement => this.setState({ placement });
 
   addChild = async (childId, mutation) => {
     const components = this.props.currentProject.components || [];
@@ -39,7 +46,6 @@ export default class CreateComponent extends Component {
     if (success.data.addChild) {
       const children = [...parentComponent.children, childId];
       const updatedParent = Object.assign({}, parentComponent, { children });
-      console.log("updatedParent:", updatedParent);
       this.props.updateComponent(updatedParent);
     } else {
       console.log("failure");
@@ -50,7 +56,9 @@ export default class CreateComponent extends Component {
     const projectId = this.props.currentProject._id;
     const { name, placement, style } = this.state;
     const component = { projectId, name, placement, style };
+    
     const { data } = await mutation({ variables: component });
+    
     this.props.addComponent(data.createComponent);
 
     if (data.createComponent.placement === "child")
@@ -86,60 +94,59 @@ export default class CreateComponent extends Component {
         {AddChild => (
           <Mutation mutation={CREATE_COMPONENT}>
             {CreateComponent => (
-              <div>
-                <label>
-                  Component Name
-                  <input
+              <Container>
+                <Title>Creating a Component</Title>
+                <Label>
+                  <LabelText>Component Name</LabelText>
+                  <Input
                     onChange={e => this.handleChange(e, "name")}
                     value={name}
+                    type="text"
                   />
-                </label>
-                <br />
-                <br />
-                <label>
-                  Component Type
-                  <div
-                    onClick={() => this.setState({ style: "container" })}
-                    style={{
-                      backgroundColor:
-                        style === "container" && "rgba(0, 0, 0, 0.3)"
-                    }}
-                  >
-                    CONTAINER
-                  </div>
-                  <div
-                    onClick={() => this.setState({ style: "presentational" })}
-                    style={{
-                      backgroundColor:
-                        style === "presentational" && "rgba(0, 0, 0, 0.3)"
-                    }}
-                  >
-                    PRESENTATIONAL
-                  </div>
-                </label>
-                <br />
-                <label>
-                  Placement
-                  <div
-                    onClick={() => this.handleUnassigned("unassigned")}
-                    style={{
-                      backgroundColor:
-                        placement === "unassigned" && "rgba(0, 0, 0, 0.3)"
-                    }}
-                  >
-                    UNASSIGNED
-                  </div>
-                  {doesRootExist && (
-                    <div
-                      onClick={() => this.handleChild("child")}
+                </Label>
+                <Label>
+                  <LabelText>Component Type</LabelText>
+                  <Selections>
+                    <Selection
+                      onClick={() => this.setState({ style: "container" })}
                       style={{
                         backgroundColor:
-                          placement === "child" && "rgba(0, 0, 0, 0.3)"
-                      }}
-                    >
-                      CHILD
-                    </div>
+                        style === "container" && "rgba(33, 194, 248, 0.7)"                   }}
+                        >
+                      CONTAINER
+                    </Selection>
+                    <Selection
+                      onClick={() => this.setState({ style: "presentational" })}
+                      style={{
+                        backgroundColor:
+                        style === "presentational" && "rgba(33, 194, 248, 0.7)"                   }}
+                        >
+                      PRESENTATIONAL
+                    </Selection>
+                  </Selections>
+                </Label>
+                <Label>
+                  <LabelText>Placement</LabelText>
+                  <Selections>
+                    <Selection
+                      onClick={() => this.handlePlacement("unassigned")}
+                      style={{
+                        backgroundColor:
+                        placement === "unassigned" && "rgba(33, 194, 248, 0.7)"                    }}
+                        >
+                      UNASSIGNED
+                    </Selection>
+                    {doesRootExist && (
+                      <Selection
+                      onClick={() => this.handlePlacement("child")}
+                      style={{
+                        backgroundColor:
+                        placement === "child" && "rgba(33, 194, 248, 0.7)"                      }}
+                        >
+                        CHILD
+                      </Selection>
                   )}
+                  </Selections>
                   <ComponentList
                     potentialParents={[...root, ...childs]}
                     chooseComponent={this.handleParent}
@@ -148,30 +155,30 @@ export default class CreateComponent extends Component {
                     text="Choose a parent?"
                   />
                   {!doesRootExist && (
-                    <div
-                      onClick={() => this.handleRoot("root")}
+                    <Selection
+                      onClick={() => this.handlePlacement("root")}
                       style={{
                         backgroundColor:
-                          placement === "root" && "rgba(0, 0, 0, 0.3)"
+                          placement === "root" && "rgba(33, 194, 248, 0.7)"
                       }}
                     >
                       ROOT
-                    </div>
+                    </Selection>
                   )}
-                </label>
-                <button
-                  className="dashboard-button"
-                  onClick={() => this.validation(CreateComponent, AddChild)}
-                >
-                  DONE
-                </button>
-                <button
-                  className="dashboard-button"
-                  onClick={() => history.push("/main")}
-                >
-                  CANCEL
-                </button>
-              </div>
+                </Label>
+                <Buttons>
+                  <SubmitButton
+                    onClick={() => this.validation(CreateComponent, AddChild)}
+                    >
+                    DONE
+                  </SubmitButton>
+                  <SubmitButton
+                    onClick={() => history.push("/main")}
+                    >
+                    CANCEL
+                  </SubmitButton>
+                </Buttons>
+              </Container>
             )}
           </Mutation>
         )}

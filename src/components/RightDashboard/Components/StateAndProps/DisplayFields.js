@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { RightDashboardTitle as Title, StateField } from "styles";
+import { 
+  RightDashboardTitle as Title, 
+  Field } from "styles";
 
 class DisplayFields extends Component {
   render() {
@@ -26,7 +28,7 @@ class DisplayFields extends Component {
       <div>
         <Title>{header}</Title>
         {fields.map(field => (
-          <StateField
+          <Field
             style={{ fontSize: "16px", margin: "4px" }}
             key={field._id}
             onMouseEnter={() => {
@@ -38,7 +40,7 @@ class DisplayFields extends Component {
             {editField === field._id
               ? `EDIT`
               : `${field.name}: ${field[fieldtype]}`}
-          </StateField>
+          </Field>
         ))}
       </div>
     );

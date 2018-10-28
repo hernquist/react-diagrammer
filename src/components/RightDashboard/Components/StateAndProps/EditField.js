@@ -117,7 +117,7 @@ class EditField extends Component {
                   onMouseLeave={this.deactivateSelector}
                 >
                   <LabelText>{typeText}</LabelText>
-                  <input value={field[fieldtype]} />
+                  <input value={field[fieldtype]} readOnly/>
                   {showSelector && (
                     <TypeOptions
                       handleSelect={this.handleSelect}

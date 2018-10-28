@@ -13,6 +13,16 @@ export const RightDashboardTitle = styled.div`
   background: ${props => props.theme.madison};
 `;
 
+export const AccordionTitle = styled(RightDashboardTitle)`
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+`;
+
+export const AccordionText = styled.div`
+  padding: 0 10px;
+`;
+
 export const Label = styled.div`
   font-size: 10px;
   margin: 2px 3px;

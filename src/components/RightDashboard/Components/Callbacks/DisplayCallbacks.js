@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
-import CallbackForm from './CallbackForm';
 import { DELETE_CALLBACK, EDIT_CALLBACK } from '../../../../graphql/mutations'
+import { 
+  RightDashboardTitle as Title,
+  Message 
+ } from 'styles';
+import CallbackForm from './CallbackForm';
+import { WideButton } from 'components/UI/SubmitButton';
 
 export default class DisplayCallbacks extends Component {
   state = {
-    argName: "",
-    typeName: "",
-    stateField: "",
-    stateChange: "",
+    argName: '',
+    typeName: '',
+    stateField: '',
+    stateChange: '',
   }
   
   static getDerivedStateFromProps(props, prevState) {
@@ -21,19 +26,15 @@ export default class DisplayCallbacks extends Component {
         setState: props.highlighted.setState,
         renderEditForm: false
       }
-    // } else {
-    //   state = {}
     }
     return {...prevState, ...state };
   }
 
-  handleChange = (e, key) => {
-    console.log(e.target.value, key);
-    this.setState({ [key]: e.target.value });
-  }
+  handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
+  handleClear = key => this.setState({ [key]: ''});
+  
   addElement = key => {
-    console.log('addElement', key)
     const { argName, typeName, functionArgs, stateField, stateChange, setState } = this.state;
     key === 'functionArgs' && this.setState({
       functionArgs: [...functionArgs, { name: argName, typeName }],
@@ -50,7 +51,6 @@ export default class DisplayCallbacks extends Component {
   deleteCallback = async mutation => {
     const { _id } = this.props.highlighted;
     const { data } = await mutation({ variables: { _id } });
-    console.log(data);
     // TODO should be based on data variable
     const updatedCallbacks = this.props.currentComponent.callbacks.filter(callback => callback._id !== _id)
     const component = Object.assign({}, this.props.currentComponent, { callbacks: updatedCallbacks });
@@ -59,13 +59,8 @@ export default class DisplayCallbacks extends Component {
   }
 
   updateValidation = (mutation) => {
-    const {
-      createNotification
-    } = this.props;
-    const {
-      name
-    } = this.state;
-
+    const { createNotification } = this.props;
+    const { name } = this.state;
     let message, title, details;
 
     switch (true) {
@@ -77,7 +72,6 @@ export default class DisplayCallbacks extends Component {
         message = 'minimumLength';
         details = 'callback name';
         break;
-
       default:
         message = false;
         break;
@@ -134,53 +128,56 @@ export default class DisplayCallbacks extends Component {
       stateChange,
       stateField
     } = this.state;
-    
     const { callbacks } = currentComponent;
     
     return (
-      <Mutation mutation={EDIT_CALLBACK}>
-        {EditCallback => (
-          <Mutation mutation={DELETE_CALLBACK}>
-            {DeleteCallback =>  (
-              renderEditForm ? 
-              <div>
-                <CallbackForm
-                  name={name}
-                  description={description}
-                  functionArgs={functionArgs}
-                  setState={setState}
-                  handleChange={this.handleChange}
-                  addElement={this.addElement}
-                  argName={argName}
-                  typeName={typeName}
-                  stateField={stateField}
-                  stateChange={stateChange}
-                  deleteElement={this.deleteElement}
-                  createNotification={createNotification}
-                />
-                <div
-                  className="dashboard-button hideable"
-                  onClick={() => this.updateValidation(EditCallback)}
-                >
-                  <div className="button-content">UPDATE</div>
-                  <div className="button-content">CALLBACK</div>
-                </div>
-                <div
-                  className="dashboard-button hideable "
-                  onClick={() => this.deleteCallback(DeleteCallback)}
-                >
-                  <div className="button-content">DELETE</div>
-                  <div className="button-content">CALLBACK</div>
-                </div>
-              </div> :
-              <div>
-                {callbacks.length < 1 ? 
-                  ( <h3>No Callbacks To Show</h3> )
-                  : 
-                  ( <div>
-                    <h3>Click a Callback To Edit</h3>
-                    {callbacks.map(callback => (
-                      <div
+      <Fragment>
+        <Title>UPDATE CALLBACKS</Title>
+        <Mutation mutation={EDIT_CALLBACK}>
+          {EditCallback => (
+            <Mutation mutation={DELETE_CALLBACK}>
+              {DeleteCallback =>  (
+                renderEditForm ? 
+                  <Fragment>
+                    <CallbackForm
+                      name={name}
+                      callback={() => console.log("callback from DisplayCallbacks")}
+                      description={description}
+                      functionArgs={functionArgs}
+                      setState={setState}
+                      handleChange={this.handleChange}
+                      addElement={this.addElement}
+                      argName={argName}
+                      typeName={typeName}
+                      stateField={stateField}
+                      stateChange={stateChange}
+                      deleteElement={this.deleteElement}
+                      createNotification={createNotification}
+                      />
+                    <div
+                      className="dashboard-button hideable"
+                      onClick={() => this.updateValidation(EditCallback)}
+                      >
+                      <div className="button-content">UPDATE</div>
+                      <div className="button-content">CALLBACK</div>
+                    </div>
+                    <div
+                      className="dashboard-button hideable "
+                      onClick={() => this.deleteCallback(DeleteCallback)}
+                      >
+                      <div className="button-content">DELETE</div>
+                      <div className="button-content">CALLBACK</div>
+                    </div>
+                  </Fragment> :
+                  <Fragment>
+                  
+                  {callbacks.length < 1 ? 
+                    ( <Message>No Callbacks To Show</Message> )
+                    : 
+                    ( <Fragment>
+                      <Message>Click a Callback To Edit</Message>
+                      {callbacks.map(callback => (
+                        <div
                         style={{ 
                           fontSize: "16px", 
                           margin: "4px",
@@ -193,26 +190,21 @@ export default class DisplayCallbacks extends Component {
                           setHighlight(callback);
                           this.setState({ renderEditForm: true })
                         }}
-                      >
-                        {callback.name}
-                      </div>)
-                    )}
-                  </div> )
-                }
-                <div
-                  className="dashboard-button hideable add-new-callback"
-                  onClick={toggleForm}
-                >
-                  <div className="button-content">ADD</div>
-                  <div className="button-content">NEW</div>
-                  <div className="button-content">CALLBACK</div>
-                </div>
-
-              </div>
-            )}
-          </Mutation>
-        )}
-      </Mutation>
+                        >
+                            {callback.name}
+                          </div>)
+                        )}
+                        </Fragment> )
+                      }
+                  <WideButton onClick={toggleForm}>
+                    ADD NEW CALLBACK
+                  </WideButton>
+                </Fragment>
+              )}
+            </Mutation>
+          )}
+        </Mutation>
+      </Fragment>
     );
   }
 }

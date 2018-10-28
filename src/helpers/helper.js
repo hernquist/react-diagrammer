@@ -23,7 +23,11 @@ const helper = {
       component =>
         component.iteration === Number(iteration) && component.name === name
     )[0];
-  }
+  },
+  trimUrl: (url, numberOfPaths) => url
+    .split("/")
+    .slice(0, numberOfPaths)
+    .join("/"),
 };
 
 export default helper;
