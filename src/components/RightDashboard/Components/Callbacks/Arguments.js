@@ -4,24 +4,31 @@ import Display from 'components/UI/Display';
 import { 
   Buttons, 
   Label, 
-  LabelText, 
+  LabelText,
+  CallbackDetail,
+  CallbackDetailText as Text,
+  Delete 
 } from 'styles';
 
 const Arguments = ({ 
-  visible,
-  functionArgs,
-  deleteElement,
   argName,
-  typeName,
+  container,
+  deleteElement,
+  functionArgs,
   handleChange,
   handleClear,
-  validation
+  typeName,
+  validation,
+  visible
 }) => (
-  <Display visible={visible}>
+  <Display visible={visible} container={container}>
     {functionArgs.map((field, i) => 
-      <div key={i}>{field.name} and {field.typeName}
-        <span onClick={() => deleteElement(field, 'functionArgs')}> X </span>
-      </div>
+      <CallbackDetail key={i}>
+        <Text>{field.name}: {field.typeName}</Text>
+        <Delete onClick={() => deleteElement(field, 'functionArgs')}>
+          X
+        </Delete>
+      </CallbackDetail>
     )}
     <Label>
       <LabelText>Callback Argument</LabelText>

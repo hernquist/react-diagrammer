@@ -1,9 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
 import { DELETE_CALLBACK, EDIT_CALLBACK } from '../../../../graphql/mutations'
-import { RightDashboardTitle as Title } from 'styles';
+import { 
+  RightDashboardTitle as Title,
+  DisplayCBsButtonContainer as Buttons  
+ } from 'styles';
 import CallbackForm from './CallbackForm';
 import { WideButton } from 'components/UI/SubmitButton';
+
 import CallbackList from './CallbackList';
 
 export default class DisplayCallbacks extends Component {
@@ -133,30 +137,33 @@ export default class DisplayCallbacks extends Component {
             {DeleteCallback => (renderEditForm ? 
               <Fragment>
                 <CallbackForm
-                  argName={argName}
                   addElement={this.addElement}
+                  argName={argName}
                   callback={() => console.log('empty callback')}
-                  description={description}
+                  createNotification={createNotification}
                   deleteElement={this.deleteElement}
+                  description={description}
                   functionArgs={functionArgs}
                   handleChange={this.handleChange}
+                  handleClear={this.handleClear}
                   name={name}
                   setState={setState}
                   stateChange={stateChange}
                   stateField={stateField}
                   typeName={typeName}
-                  createNotification={createNotification}
                 />
-                <WideButton
-                  onClick={() => this.updateValidation(EditCallback)}
-                >
-                  UPDATE CALLBACK
-                </WideButton>
-                <WideButton
-                  onClick={() => this.deleteCallback(DeleteCallback)}
-                >
-                  DELETE CALLBACK
-                </WideButton>
+                <Buttons>
+                  <WideButton
+                    onClick={() => this.updateValidation(EditCallback)}
+                    >
+                    UPDATE CALLBACK
+                  </WideButton>
+                  <WideButton
+                    onClick={() => this.deleteCallback(DeleteCallback)}
+                    >
+                    DELETE CALLBACK
+                  </WideButton>
+                </Buttons>
               </Fragment> :
               <Fragment>
                 <Title>UPDATE CALLBACKS</Title>

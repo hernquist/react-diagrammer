@@ -2,11 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { WideButton } from 'components/UI/SubmitButton';
 import { 
   AccordionTitle as Title,
-  AccordionText as Text 
+  AccordionText as Text,
+  CallbackFormContainer as Container
 } from 'styles';
 import Basics from './Basics';
 import Arguments from './Arguments';
 import SetStates from './SetStates';
+
 
 export default class CallbackForm extends Component {
   state = { section: 'basics' }
@@ -47,6 +49,7 @@ export default class CallbackForm extends Component {
         </Title>
         <Basics
           visible={basics}
+          container={Container}
           {...this.props}
         />
         <Title onClick={this.showSection('arguments')}>
@@ -55,6 +58,7 @@ export default class CallbackForm extends Component {
         </Title>
         <Arguments
           visible={args}
+          container={Container}
           validation={this.validation}
           {...this.props}
         />
@@ -64,6 +68,7 @@ export default class CallbackForm extends Component {
         </Title>
         <SetStates
           visible={setStates}
+          container={Container}
           validation={this.validation}
           {...this.props}
         />
