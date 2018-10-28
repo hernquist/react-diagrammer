@@ -29,7 +29,7 @@ const Arguments = ({
     </Label>
     {/* selector for types */}
     <Label>
-      Argument Type 
+      <LabelText>Argument Type</LabelText>
       <input value={typeName} onChange={e => handleChange(e, 'typeName') } />
     </Label>
     <Buttons>

@@ -7,6 +7,7 @@ import {
  } from 'styles';
 import CallbackForm from './CallbackForm';
 import { WideButton } from 'components/UI/SubmitButton';
+import CallbackList from './CallbackList';
 
 export default class DisplayCallbacks extends Component {
   state = {
@@ -81,6 +82,8 @@ export default class DisplayCallbacks extends Component {
       : this.editCallback(mutation)
   }
 
+  setRenderFormTrue = () => this.setState({ renderEditForm: true })
+
   editCallback = async mutation => {
     const { name, description } = this.state;
     const { highlighted, currentComponent, resetUpdateCallbacks, updateComponent } = this.props;
@@ -110,11 +113,7 @@ export default class DisplayCallbacks extends Component {
   render() {
     const { 
       currentComponent, 
-      editCb, 
-      resetHighlight, 
-      setHighlight, 
       toggleForm,
-      highlighted,
       createNotification
     } = this.props;
     const {
@@ -131,80 +130,56 @@ export default class DisplayCallbacks extends Component {
     const { callbacks } = currentComponent;
     
     return (
-      <Fragment>
-        <Title>UPDATE CALLBACKS</Title>
-        <Mutation mutation={EDIT_CALLBACK}>
-          {EditCallback => (
-            <Mutation mutation={DELETE_CALLBACK}>
-              {DeleteCallback =>  (
-                renderEditForm ? 
-                  <Fragment>
-                    <CallbackForm
-                      name={name}
-                      callback={() => console.log("callback from DisplayCallbacks")}
-                      description={description}
-                      functionArgs={functionArgs}
-                      setState={setState}
-                      handleChange={this.handleChange}
-                      addElement={this.addElement}
-                      argName={argName}
-                      typeName={typeName}
-                      stateField={stateField}
-                      stateChange={stateChange}
-                      deleteElement={this.deleteElement}
-                      createNotification={createNotification}
-                      />
-                    <div
-                      className="dashboard-button hideable"
-                      onClick={() => this.updateValidation(EditCallback)}
-                      >
-                      <div className="button-content">UPDATE</div>
-                      <div className="button-content">CALLBACK</div>
-                    </div>
-                    <div
-                      className="dashboard-button hideable "
-                      onClick={() => this.deleteCallback(DeleteCallback)}
-                      >
-                      <div className="button-content">DELETE</div>
-                      <div className="button-content">CALLBACK</div>
-                    </div>
-                  </Fragment> :
-                  <Fragment>
-                  
-                  {callbacks.length < 1 ? 
-                    ( <Message>No Callbacks To Show</Message> )
-                    : 
-                    ( <Fragment>
-                      <Message>Click a Callback To Edit</Message>
-                      {callbacks.map(callback => (
-                        <div
-                        style={{ 
-                          fontSize: "16px", 
-                          margin: "4px",
-                          backgroundColor: highlighted._id === callback._id && 'rgba(0, 0, 0, 0.3)'
-                        }} 
-                        key={callback._id}
-                        onMouseEnter={() => editCb(callback)}
-                        onMouseLeave={resetHighlight}
-                        onClick={() => {
-                          setHighlight(callback);
-                          this.setState({ renderEditForm: true })
-                        }}
-                        >
-                            {callback.name}
-                          </div>)
-                        )}
-                        </Fragment> )
-                      }
-                  <WideButton onClick={toggleForm}>
-                    ADD NEW CALLBACK
-                  </WideButton>
-                </Fragment>
-              )}
-            </Mutation>
-          )}
-        </Mutation>
-      </Fragment>
+      <Mutation mutation={EDIT_CALLBACK}>
+        {EditCallback => (
+          <Mutation mutation={DELETE_CALLBACK}>
+            {DeleteCallback => (renderEditForm ? 
+              <Fragment>
+                <CallbackForm
+                  argName={argName}
+                  addElement={this.addElement}
+                  callback={() => console.log("callback from DisplayCallbacks")}
+                  description={description}
+                  deleteElement={this.deleteElement}
+                  functionArgs={functionArgs}
+                  handleChange={this.handleChange}
+                  name={name}
+                  setState={setState}
+                  stateChange={stateChange}
+                  stateField={stateField}
+                  typeName={typeName}
+                  createNotification={createNotification}
+                  />
+                <div
+                  className="dashboard-button hideable"
+                  onClick={() => this.updateValidation(EditCallback)}
+                  >
+                  <div className="button-content">UPDATE</div>
+                  <div className="button-content">CALLBACK</div>
+                </div>
+                <div
+                  className="dashboard-button hideable "
+                  onClick={() => this.deleteCallback(DeleteCallback)}
+                  >
+                  <div className="button-content">DELETE</div>
+                  <div className="button-content">CALLBACK</div>
+                </div>
+              </Fragment> :
+              <Fragment>
+                <Title>UPDATE CALLBACKS</Title>
+                <CallbackList 
+                  callbacks={callbacks}
+                  setRenderFormTrue={this.setRenderFormTrue}
+                  {...this.props}
+                />
+                <WideButton onClick={toggleForm}>
+                  ADD NEW CALLBACK
+                </WideButton>
+              </Fragment>
+            )}
+          </Mutation>
+        )}
+      </Mutation>
     );
   }
 }
