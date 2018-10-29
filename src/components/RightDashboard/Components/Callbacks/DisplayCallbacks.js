@@ -53,6 +53,7 @@ export default class DisplayCallbacks extends Component {
   deleteCallback = async mutation => {
     const { _id } = this.props.highlighted;
     const { data } = await mutation({ variables: { _id } });
+    console.log(data);
     // TODO should be based on data variable
     const updatedCallbacks = this.props.currentComponent.callbacks.filter(callback => callback._id !== _id)
     const component = Object.assign({}, this.props.currentComponent, { callbacks: updatedCallbacks });

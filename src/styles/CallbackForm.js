@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Callback } from './CallbackList';
 
 export const CallbackFormContainer = styled.div`
   width: 100%;
