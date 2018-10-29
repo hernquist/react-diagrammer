@@ -29,14 +29,11 @@ class CurrentComponent extends Component {
     const pieces = history.location.pathname.split("/");
     const name = pieces[3];
     const index = pieces[4];
-    console.log(name, index);
 
     const { components } = currentProject;
-    console.log(components)
     if (!components) return <div>No Components</div>;
 
     const currentComponent = helper.currComp(components, name, index);
-    console.log("currentComponent", currentComponent);
 
     if (!currentComponent) {
       return null
