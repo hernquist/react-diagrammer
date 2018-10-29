@@ -25,7 +25,7 @@ class CurrentComponent extends Component {
   };
 
   render() {
-    const { currentProject, history, updateComponent } = this.props;
+    const { currentProject, history } = this.props;
     const pieces = history.location.pathname.split("/");
     const name = pieces[3];
     const index = pieces[4];

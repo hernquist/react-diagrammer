@@ -7,7 +7,6 @@ import { Query } from "react-apollo";
 import { GET_AUTH_USER, PROJECTS_BY_USER_ID } from "../../graphql/queries";
 import notifications from "../HOC/notifications";
 import { Layout } from "styles";
-import helper from 'helpers/helper';
 
 class LoggedIn extends Component {
   constructor(props) {
