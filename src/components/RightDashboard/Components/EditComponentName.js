@@ -1,67 +1,74 @@
-import React, { Component } from "react";
-import { Mutation } from "react-apollo";
-import { EDIT_COMPONENT_NAME } from "../../../graphql/mutations";
+import React, { Component, Fragment } from 'react';
+import { Mutation } from 'react-apollo';
+import { EDIT_COMPONENT_NAME } from '../../../graphql/mutations';
+import helper from 'helpers/helper';
+import { SubmitButton } from 'components/UI/SubmitButton';
+import { InputField, Buttons, ShowUnassignedText as Text } from 'styles';
 
-class EditComponentName extends Component {
-  state = {
-    name: ""
-  };
+const isFileName = /^[a-zA-Z]+$/
+
+export default class EditComponentName extends Component {
+  state = { name: '' };
 
   handleInput = e => this.setState({ name: e.target.value });
+
+  updateURL = ({ name }) => {
+    const parts = this.props.history.location.pathname.split('/').slice(0, 5);
+    parts[3] = name;
+    this.props.history.push(parts.join('/'));
+  }
+
+  handleResponse = ({ editComponentName }) => {
+    this.props.updateComponent(editComponentName);
+    this.updateURL(editComponentName)
+  }
 
   updateName = async ({ _id }, mutation) => {
     const { data } = await mutation({
       variables: { _id, name: this.state.name }
     });
-    this.props.updateComponent(data.editComponentName);
-    const parts = this.props.history.location.pathname.split("/").slice(0, 5);
-    parts[3] = data.editComponentName.name;
-    this.props.history.push(parts.join("/"));
+    this.handleResponse(data);
   };
 
-  leave = () =>
-    this.props.history.push(
-      this.props.history.location.pathname
-        .split("/")
-        .slice(0, 5)
-        .join("/")
-    );
-
+  validation = (component, mutation) => () => 
+    isFileName.test(this.state.name) ? 
+      this.updateName(component, mutation)
+      : this.props.createNotification('warning', 'invalidName', 'componentName')()
+  
   render() {
-    const { currentProject, history } = this.props;
-    const pieces = history.location.pathname.split("/");
-    const name = pieces[3];
-    const index = pieces[4];
-
+    const { currentProject, history, closeModal } = this.props;
+    const { pathname } = history.location;
     const { components } = currentProject;
-    if (!components) {
-      return <div>No Components</div>;
-    }
-
-    const currentComponent = components
-      .filter(c => c.name === name)
-      .filter(c => c.iteration === Number(index))[0];
+    const currentComponent = helper.getComponentFromURL(pathname, components);
+    
+    if (!components) return <div>No Components</div>;
 
     return (
       <Mutation mutation={EDIT_COMPONENT_NAME}>
         {EditComponentName => (
-          <div>
-            Edit name
-            <input onChange={this.handleInput} value={this.state.name} />
-            Do you want to update this component's name?
-            <button
-              onClick={() => {
-                this.updateName(currentComponent, EditComponentName);
-              }}
-            >
-              YES
-            </button>
-            <button onClick={this.leave}>NO</button>
-          </div>
+          <Fragment>
+            <InputField >
+              <label>Edit name</label>
+              <input
+                autoFocus 
+                onChange={this.handleInput} 
+                value={this.state.name} 
+              />
+            </InputField>
+            <Text>
+              Do you want to update this component's name? 
+            </Text>
+            <Buttons>
+              <SubmitButton
+                onClick={this.validation(currentComponent, EditComponentName)}
+              >
+                YES
+              </SubmitButton>
+              <SubmitButton onClick={closeModal}>NO</SubmitButton>
+            </Buttons>
+          </Fragment>
         )}
       </Mutation>
     );
   }
 }
-
-export default EditComponentName;

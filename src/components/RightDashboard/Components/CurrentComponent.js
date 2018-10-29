@@ -1,13 +1,14 @@
-import React, { Component } from "react";
-import { Mutation } from "react-apollo";
-import styled from "styled-components";
-import { TOGGLE_COMPONENT_STYLE } from "../../../graphql/mutations";
-import helper from "../../../helpers/helper";
-import { RightDashboardContainer as Container } from "styles";
-import { WideButton } from "../../UI/SubmitButton";
-import ModalContainer from "../../UI/ModalContainer";
-import ComponentHeader from "./ComponentHeader";
-import UnassignComponent from "./UnassignComponent";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { Mutation } from 'react-apollo';
+import { TOGGLE_COMPONENT_STYLE } from '../../../graphql/mutations';
+import helper from '../../../helpers/helper';
+import ModalContainer from '../../UI/ModalContainer';
+import ComponentHeader from './ComponentHeader';
+import EditComponentName from './EditComponentName';             
+import UnassignComponent from './UnassignComponent';
+import { RightDashboardContainer as Container } from 'styles';
+import { WideButton } from '../../UI/SubmitButton';
 
 const Button = styled(WideButton)`
   width: 90%;
@@ -24,7 +25,7 @@ class CurrentComponent extends Component {
   };
 
   render() {
-    const { currentProject, history, updateComponent } = this.props;
+    const { currentProject, history } = this.props;
     const pieces = history.location.pathname.split("/");
     const name = pieces[3];
     const index = pieces[4];
@@ -33,6 +34,11 @@ class CurrentComponent extends Component {
     if (!components) return <div>No Components</div>;
 
     const currentComponent = helper.currComp(components, name, index);
+
+    if (!currentComponent) {
+      return null
+    }
+
     const isPresentational = currentComponent.style === "presentational";
     const isUnassigned = currentComponent.placement === "unassigned";
     // later will add some functionality for unassigning a root, although oof
@@ -80,13 +86,12 @@ class CurrentComponent extends Component {
             </Button>
           )}
         </Mutation>
-        <Button
-          onClick={() =>
-            this.props.history.push(this.props.match.url + "/edit-name")
-          }
-        >
-          EDIT NAME
-        </Button>
+        <ModalContainer text={"EDIT NAME"} button={Button}>
+          <EditComponentName
+            currentProject={currentProject}
+            {...this.props}            
+          />
+        </ModalContainer>
         {isUnassigned ? (
           <Button
             disabled={isRoot}
@@ -99,15 +104,14 @@ class CurrentComponent extends Component {
           >
             {buttonText}
           </Button>
-        ) : (
+        ) : 
           <ModalContainer text={buttonText} button={Button} disabled={isRoot}>
             <UnassignComponent
-              updateComponent={updateComponent}
               currentProject={currentProject}
-              history={history}
+              {...this.props}
             />
           </ModalContainer>
-        )}
+        }
       </Container>
     );
   }

@@ -60,6 +60,7 @@ class RightDashboard extends Component {
               currentProject={currentProject}
               refetchProject={refetchProject}
               updateComponent={updateComponent}
+              createNotification={createNotification}
             />
           )}
         />

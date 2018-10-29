@@ -5,8 +5,8 @@ import {
   LabelText, 
 } from 'styles';
 
-const Basics = ({ visible, name, description, handleChange }) => ( 
-  <Display visible={visible}>
+const Basics = ({ visible, name, description, handleChange, container }) => ( 
+  <Display visible={visible} container={container}>
     <Label>
       <LabelText>Callback name</LabelText>
       <input 

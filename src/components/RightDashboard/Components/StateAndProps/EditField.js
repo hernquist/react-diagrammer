@@ -33,11 +33,9 @@ class EditField extends Component {
     this.setState({ field: { ...this.state.field, [key]: e.target.value } });
   };
 
-  handleSelect = (value, key) => {
-    console.log(value, key);
+  handleSelect = (value, key) => 
     this.setState({ field: { ...this.state.field, [key]: value } });
-  };
-
+  
   updateWithProps = (id, currentComponent, data) => {
     const props = currentComponent.props.map(
       prop => (id === prop._id ? data.editProp : prop)

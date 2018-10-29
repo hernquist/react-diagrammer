@@ -32,7 +32,7 @@ class LoggedIn extends Component {
     const currentProject = Object.assign({}, project, {
       components: updatedComponents
     });
-    this.setState({ currentProject });
+    this.setState({ currentProject });    
   };
 
   addComponent = updated => {

@@ -4,24 +4,31 @@ import Display from 'components/UI/Display';
 import { 
   Buttons, 
   Label, 
-  LabelText, 
+  LabelText,
+  CallbackDetail,
+  CallbackDetailText as Text,
+  Delete 
 } from 'styles';
 
 const SetStates = ({
-  visible,
-  setState,
+  container,
   deleteElement,
-  stateChange,
-  stateField,
   handleChange,
   handleClear,
-  validation
+  setState,
+  stateChange,
+  stateField,
+  validation,
+  visible
 }) => (
-  <Display visible={visible}>
-    {setState.map((field, i) => 
-      <div key={i}>{field.stateField} and {field.stateChange}
-        <span onClick={() => deleteElement(field, 'setState')}> X </span>
-      </div>
+  <Display visible={visible} container={container}>
+    {setState.map((field, i) =>
+      <CallbackDetail key={i}>
+        <Text>{field.stateField}: {field.stateChange}</Text>
+        <Delete onClick={() => deleteElement(field, 'setState')}>
+          X
+        </Delete>
+      </CallbackDetail> 
     )}
     {/* todo make a selector */}
     <Label>

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import DisplayCallbacks from './Callbacks/DisplayCallbacks';
 import CallbackForm from './Callbacks/CallbackForm';
 import { Mutation } from 'react-apollo';
@@ -7,7 +7,6 @@ import helper from "helpers/helper";
 import { 
   RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
-
 } from "styles";
 import ComponentHeader from "./ComponentHeader";
 import { SubmitButton } from "components/UI/SubmitButton";
@@ -72,11 +71,11 @@ export default class UpdateCallbackWorkings extends Component {
       { callbacks: [...currentComponent.callbacks, data.addCallback]}
     );
     this.props.updateComponent(component);
-    this.setState( this.initialState )
-    this.toggleForm()
+    this.setState(this.initialState);
+    this.toggleForm();
   }
 
-  toggleForm = () => this.setState({ renderForm: !this.state.renderForm })
+  toggleForm = () => this.setState({ renderForm: !this.state.renderForm });
 
   editCb = cb => {
     if (this.state.onHover) this.setState({ highlighted: cb });
