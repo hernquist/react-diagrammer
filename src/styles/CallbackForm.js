@@ -23,16 +23,6 @@ export const CallbackDetail = styled.div`
   color: ${ props => props.theme.teal };
   padding: 4px 10px;
 
-  // &:last-child {
-  //   border-bottom-right-radius: 5px;
-  //   border-bottom-left-radius: 5px;
-  // }
-
-  // &:first-child {
-  //   border-top-right-radius: 5px;
-  //   border-top-left-radius: 5px;
-  // }
-
   &:hover {
     background-color: ${ props => props.theme.madison };
     color: ${ props => props.theme.lightGrey };

@@ -5,9 +5,11 @@ const messageBuilder = (type, m, t, d = {}, time, cb) => {
   const messages = {
     emptyFields: `Please fill the empty ${d} fields`,
     emptyField: `${d} is empty`,
+    invalidName: 'Names of components must be letters only',
     minimumLength: `At least 3 characters needed for ${d}`,
     parentNotSelected: `Please select a parent for this child component or choose UNASSIGNED for this component's placement`,
     invalidEmail: `Please provide a valid email`,
+
     minLengthGeneric: `At least ${d.number} characters needed for a ${d.name}`,
     nameTaken: 'Please select a different username',
     emailTaken: 'Please select a different email',
@@ -18,6 +20,7 @@ const messageBuilder = (type, m, t, d = {}, time, cb) => {
   const titles = {
     emptyFields: 'Empty Field',
     emptyField: 'Empty Field',
+    componentName: 'Component Name',
     minimumLength: 'Field Too Short',
     parentNotSelected: 'No Parent Selected',
     signup: 'Signup Failed',

@@ -7,6 +7,7 @@ import { Query } from "react-apollo";
 import { GET_AUTH_USER, PROJECTS_BY_USER_ID } from "../../graphql/queries";
 import notifications from "../HOC/notifications";
 import { Layout } from "styles";
+import helper from 'helpers/helper';
 
 class LoggedIn extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class LoggedIn extends Component {
   setCurrentProject = currentProject => this.setState({ currentProject });
 
   updateComponent = updated => {
+    console.log('hitting updateComponent in LoggedIn');
     const project = this.state.currentProject;
     const components = this.state.currentProject.components;
     const updatedComponents = components.map(
@@ -32,7 +34,7 @@ class LoggedIn extends Component {
     const currentProject = Object.assign({}, project, {
       components: updatedComponents
     });
-    this.setState({ currentProject });
+    this.setState({ currentProject });    
   };
 
   addComponent = updated => {
