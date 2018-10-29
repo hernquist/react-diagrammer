@@ -1,13 +1,13 @@
-import React, { Component, Fragment } from "react";
-import { Mutation } from "react-apollo";
-import { UNASSIGN_COMPONENT } from "graphql/mutations";
-import helper from "helpers/helper";
-import { SubmitButton } from "../../UI/SubmitButton";
-import { UnassignedPrompt as Prompt, Buttons } from "styles";
+import React, { Component, Fragment } from 'react';
+import { Mutation } from 'react-apollo';
+import { UNASSIGN_COMPONENT } from 'graphql/mutations';
+import helper from 'helpers/helper';
+import { SubmitButton } from '../../UI/SubmitButton';
+import { UnassignedPrompt as Prompt, Buttons } from 'styles';
 
 export default class UnassignComponent extends Component {
   updateComponents = (mutation, component) => async () => {
-    const { updateComponent, currentProject, closeModal } = this.props;
+    const { updateComponent, currentProject } = this.props;
     const { _id } = component;
     const { components } = currentProject;
     const parent = components.filter(component =>
@@ -19,17 +19,14 @@ export default class UnassignComponent extends Component {
     });
 
     data.unassignComponent.map(component => updateComponent(component));
-    this.setState({ visible: false });
-    closeModal();
   };
 
   render() {
     const { history, currentProject, closeModal } = this.props;
     const { pathname } = history.location;
     const { components } = currentProject;
-
-    const component = helper.getComponentFromURL(pathname, components)[0];
-    const { name = "" } = component;
+    const component = helper.getComponentFromURL(pathname, components);
+    const { name = '' } = component;
     if (component.children.length > 0)
       return (
         <Prompt>

@@ -95,7 +95,6 @@ class CurrentComponent extends Component {
             {...this.props}            
           />
         </ModalContainer>
-
         {isUnassigned ? (
           <Button
             disabled={isRoot}
@@ -108,15 +107,14 @@ class CurrentComponent extends Component {
           >
             {buttonText}
           </Button>
-        ) : (
+        ) : 
           <ModalContainer text={buttonText} button={Button} disabled={isRoot}>
             <UnassignComponent
-              updateComponent={updateComponent}
               currentProject={currentProject}
-              history={history}
+              {...this.props}
             />
           </ModalContainer>
-        )}
+        }
       </Container>
     );
   }

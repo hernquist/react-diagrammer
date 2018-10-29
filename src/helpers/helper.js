@@ -24,7 +24,7 @@ const helper = {
         component.iteration === Number(iteration) && component.name === name
     )[0];
   },
-  trimUrl: (url, numberOfPaths) => url
+  trimURL: (url, numberOfPaths) => url
     .split("/")
     .slice(0, numberOfPaths)
     .join("/"),

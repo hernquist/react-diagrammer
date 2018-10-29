@@ -51,7 +51,7 @@ class UpdateComponentWorkings extends Component {
 
   exitComponent = () => {
     const { url } = this.props.match;
-    const match = helper.trimUrl(url, 5);
+    const match = helper.trimURL(url, 5);
     this.props.history.push(match);
   };
 
