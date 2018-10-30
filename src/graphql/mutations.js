@@ -261,6 +261,12 @@ const EDIT_COMPONENT_NAME = gql`
   }
 `;
 
+const DELETE_COMPONENT = gql`
+  mutation DeleteComponent($_id: String!, $parentId: String!) {
+    deleteComponent(_id: $_id, parentId: $parentId) 
+  }
+`;
+
 const ADD_PROP = gql`
   mutation AddProp($prop: InputProp) {
     addProp(prop: $prop) {
@@ -457,25 +463,26 @@ const ASSIGN_COMPONENT = gql`
 `;
 
 export {
-  SIGNUP,
-  LOGIN,
-  CREATE_PROJECT,
-  DELETE_PROJECT,
-  CREATE_COMPONENT,
-  COPY_COMPONENT,
-  COPY_CHILDREN,
-  TOGGLE_COMPONENT_STYLE,
-  ADD_CHILD,
-  EDIT_COMPONENT_NAME,
-  ADD_PROP,
-  DELETE_PROP,
-  EDIT_PROP,
-  ADD_STATE,
-  DELETE_STATE,
-  EDIT_STATE,
   ADD_CALLBACK,
+  ADD_CHILD,
+  ADD_PROP,
+  ADD_STATE,
+  ASSIGN_COMPONENT,
+  COPY_CHILDREN,
+  COPY_COMPONENT,
+  CREATE_COMPONENT,
+  CREATE_PROJECT,
   DELETE_CALLBACK,
+  DELETE_COMPONENT,
+  DELETE_PROJECT,
+  DELETE_PROP,
+  DELETE_STATE,
   EDIT_CALLBACK,
+  EDIT_COMPONENT_NAME,
+  EDIT_PROP,
+  EDIT_STATE,
+  LOGIN,
+  SIGNUP,
+  TOGGLE_COMPONENT_STYLE,
   UNASSIGN_COMPONENT,
-  ASSIGN_COMPONENT
 };
