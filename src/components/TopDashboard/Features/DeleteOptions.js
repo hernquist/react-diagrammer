@@ -15,7 +15,10 @@ const DeleteOptions = ({ deactivateSelector }) => {
       style={{ left: `${position}px` }}
     >
       <ListItem>
-        <Link to="/main/delete-project" onClick={deactivateSelector}>
+        <Link 
+          to="/main/delete-project" 
+          onClick={deactivateSelector}
+        >
           PROJECT
         </Link>
       </ListItem>

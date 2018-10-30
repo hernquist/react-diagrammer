@@ -7,6 +7,7 @@ import UpdateComponentWorkings from "./Components/UpdateComponentWorkings";
 import UpdateCallbackWorkings from "./Components/UpdateCallbackWorkings";
 import EditComponentName from "./Components/EditComponentName";
 import CreateComponent from "./Components/CreateComponent";
+import DeleteComponent from "./Components/DeleteComponent";
 import AddExistingComponent from "./Components/AddExistingComponent";
 import AssignComponent from "./Components/AssignComponent";
 
@@ -111,6 +112,19 @@ class RightDashboard extends Component {
           path="/main/component/new"
           render={renderProps => (
             <CreateComponent
+              {...renderProps}
+              currentProject={currentProject}
+              updateComponent={updateComponent}
+              addComponent={addComponent}
+              setParent={setParent}
+              createNotification={createNotification}
+            />
+          )}
+        />
+        <Route
+          path="/main/component/delete-component"
+          render={renderProps => (
+            <DeleteComponent
               {...renderProps}
               currentProject={currentProject}
               updateComponent={updateComponent}
