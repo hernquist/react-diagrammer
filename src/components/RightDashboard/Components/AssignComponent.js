@@ -29,11 +29,8 @@ export default class AssignComponent extends Component {
 
   close = () => {
     const { history } = this.props;
-    const pathname = history.location.pathname
-      .split('/')
-      .slice(0, 5)
-      .join('/');
-    this.props.history.push(pathname);
+    const { pathname } = history.location;
+    history.push(helper.trimURL(pathname));
   };
 
   handleParent = id => {

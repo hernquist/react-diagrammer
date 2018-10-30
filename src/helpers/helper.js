@@ -1,14 +1,10 @@
 const helper = {
   unassigned: components =>
-    components.filter(component => component.placement === "unassigned"),
+    components.filter(component => component.placement === 'unassigned'),
   root: components =>
-    components.filter(component => component.placement === "root"),
+    components.filter(component => component.placement === 'root'),
   childs: components =>
-    components.filter(component => component.placement === "child"),
-  currComp: (components, name, index) =>
-    components
-      .filter(c => c.name === name)
-      .filter(c => c.iteration === Number(index))[0],
+    components.filter(component => component.placement === 'child'),
   find: (components, id) => {
     let c = components.filter(c => c._id === id);
     return c[0];
@@ -18,16 +14,16 @@ const helper = {
     document.documentElement.clientWidth ||
     document.body.clientWidth,
   getComponentFromURL: (pathname, components) => {
-    const [name, iteration] = pathname.split("/").slice(3);
+    const [name, iteration] = pathname.split('/').slice(3);
     return components.filter(
       component =>
         component.iteration === Number(iteration) && component.name === name
     )[0];
   },
   trimURL: (url, numberOfPaths) => url
-    .split("/")
+    .split('/')
     .slice(0, numberOfPaths)
-    .join("/"),
+    .join('/'),
 };
 
 export default helper;
