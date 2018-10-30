@@ -27,15 +27,15 @@ class DeleteComponent extends Component {
       component.children.some(id => id === _id)
     );
 
-    console.log(parent);
+    console.log(parent[0]);
     const { data } = await mutation({ 
       variables: { _id, parentId: parent[0]._id }})
       
     console.log('remove component', data);
-    
+
     if (data.deleteComponent) {
-      const children = parent.children(id => id !== _id)
-      const updatedComponent = Object.assign({}, parent, { children })
+      const children = parent[0].children(id => id !== _id)
+      const updatedComponent = Object.assign({}, parent[0], { children })
       updateComponent(updatedComponent);
       // make deleteComponent or have some route which will reset the tree get the project from mongo
       // deleteComponent(currentProject, _id); 
