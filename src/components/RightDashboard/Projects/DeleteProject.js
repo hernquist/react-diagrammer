@@ -49,7 +49,7 @@ class DeleteProject extends Component {
                 > Yes
               </SubmitButton>
               <Link to='/main'>
-                <SubmitButton className='button'>No</SubmitButton>
+                <SubmitButton>No</SubmitButton>
               </Link>
             </Buttons>
           </Container>

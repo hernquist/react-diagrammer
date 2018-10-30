@@ -48,11 +48,11 @@ class DeleteComponent extends Component {
             </Errors>
             <Buttons>
               <SubmitButton
-                onClick={() => this.removeProject(DeleteProject)}
+                onClick={() => this.removeComponent(DeleteComponent)}
                 > Yes
               </SubmitButton>
               <Link to='/main'>
-                <SubmitButton className='button'>No</SubmitButton>
+                <SubmitButton>No</SubmitButton>
               </Link>
             </Buttons>
           </Container>
