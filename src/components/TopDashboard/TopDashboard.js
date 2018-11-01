@@ -46,10 +46,6 @@ class LeftDashboard extends Component {
       "full-screen": "SHOW DASHBOARD",
       "logged-in": "HIDE DASHBOARD"
     };
-    const classNames = {
-      "full-screen": "dashboard-button showable",
-      "logged-in": "dashboard-button hideable"
-    };
     const { changeProject, createOptions, deleteOptions } = this.state;
     const project =
       currentProject.name.length > 12
@@ -81,7 +77,6 @@ class LeftDashboard extends Component {
               CREATE
             </FlatButton>
             <FlatButton
-              className="dashboard-button selector"
               onClick={
                 deleteOptions
                   ? this.deactivateSelector
@@ -91,7 +86,6 @@ class LeftDashboard extends Component {
               DELETE
             </FlatButton>
             <FlatButton
-              className={classNames[layout]}
               onClick={this.handleSwitch}
               style={{
                 width: 184

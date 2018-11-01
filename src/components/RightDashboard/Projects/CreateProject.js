@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import { Mutation } from "react-apollo";
-import { CREATE_PROJECT } from "../../../graphql/mutations";
+import React, { Component } from 'react';
+import { Mutation } from 'react-apollo';
+import { CREATE_PROJECT } from '../../../graphql/mutations';
 import {
   CreateProjectContainer as Container,
   CreateProjectForm as Form,
   FormTitle as Title,
   InputField,
   Textarea,
-  Errors
-} from "../../../styles";
-import { SubmitButton } from "../../UI/SubmitButton";
+} from 'styles';
+import { SubmitButton } from '../../UI/SubmitButton';
+import Errors from '../../UI/Errors';
 
 class CreateProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
       errors: [],
-      name: "",
-      description: ""
+      name: '',
+      description: ''
     };
   }
 
@@ -31,7 +31,7 @@ class CreateProject extends Component {
     });
     this.props.setCurrentProject(data.createProject);
 
-    this.props.history.push("/main/component/new");
+    this.props.history.push('/main/component/new');
   };
 
   render() {
@@ -44,9 +44,9 @@ class CreateProject extends Component {
               <Title>Create Project</Title>
               <Form onSubmit={e => this.onSubmit(e, CreateProject)}>
                 <InputField>
-                  <div>Name</div>
+                  <label>Name</label>
                   <input
-                    className="input"
+                    className='input'
                     value={name}
                     onChange={e => this.setState({ name: e.target.value })}
                   />
@@ -56,7 +56,7 @@ class CreateProject extends Component {
                   <Textarea
                     value={description}
                     rows={3}
-                    placeholder="Add an optional description..."
+                    placeholder='Add an optional description...'
                     onChange={e =>
                       this.setState({
                         description: e.target.value
@@ -64,11 +64,7 @@ class CreateProject extends Component {
                     }
                   />
                 </InputField>
-                <Errors>
-                  {errors.map(error => (
-                    <div key={error}>SIGNUP: {error}</div>
-                  ))}
-                </Errors>
+                <Errors errors={errors} from='CreateProject' />
                 <SubmitButton>Submit</SubmitButton>
               </Form>
             </Container>

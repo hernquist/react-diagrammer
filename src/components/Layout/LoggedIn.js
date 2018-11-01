@@ -84,11 +84,6 @@ class LoggedIn extends Component {
                   errors[0] = `Error! ${error.message}`;
                   data = {};
                 }
-                // Not an optimal pattern, calling refetch here...
-                // I also tried passing refetch down to RightDashboard and
-                // then createProject, calling it upon submission of creating
-                // a new project, but it caused a hiccup on the screen
-                // refetch();
                 const projects = data.projectsByUserId;
 
                 return (

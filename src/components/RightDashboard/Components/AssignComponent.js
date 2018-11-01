@@ -1,14 +1,14 @@
-import React, { Component, Fragment } from "react";
-import { Mutation } from "react-apollo";
-import { ASSIGN_COMPONENT } from "../../../graphql/mutations";
-import ComponentList from "./StateAndProps/ComponentList";
-import { Buttons } from "styles";
-import { SubmitButton } from "components/UI/SubmitButton";
-import helper from "../../../helpers/helper";
+import React, { Component, Fragment } from 'react';
+import { Mutation } from 'react-apollo';
+import { ASSIGN_COMPONENT } from '../../../graphql/mutations';
+import ComponentList from './StateAndProps/ComponentList';
+import { Buttons } from 'styles';
+import { SubmitButton } from 'components/UI/SubmitButton';
+import helper from '../../../helpers/helper';
 
 export default class AssignComponent extends Component {
   state = {
-    highlighted: ""
+    highlighted: ''
   };
 
   updateComponents = (mutation, parentId) => async () => {
@@ -23,17 +23,14 @@ export default class AssignComponent extends Component {
     });
 
     data.assignComponent.map(component => updateComponent(component));
-    history.push("/main/component");
-    setParent("");
+    history.push('/main/component');
+    setParent('');
   };
 
   close = () => {
     const { history } = this.props;
-    const pathname = history.location.pathname
-      .split("/")
-      .slice(0, 5)
-      .join("/");
-    this.props.history.push(pathname);
+    const { pathname } = history.location;
+    history.push(helper.trimURL(pathname));
   };
 
   handleParent = id => {
@@ -57,7 +54,7 @@ export default class AssignComponent extends Component {
               chooseComponent={this.handleParent}
               highlighted={highlighted}
               display={true}
-              text="Choose a parent?"
+              text='Choose a parent?'
             />
             <Buttons>
               <SubmitButton

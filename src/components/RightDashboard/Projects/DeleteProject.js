@@ -1,54 +1,56 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Mutation } from "react-apollo";
-import { DELETE_PROJECT } from "../../../graphql/mutations";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Mutation } from 'react-apollo';
+import { DELETE_PROJECT } from '../../../graphql/mutations';
+import {
+  CreateProjectContainer as Container,
+  FormTitle as Title,
+  Buttons,
+  Message
+} from 'styles';
+import { SubmitButton } from 'components/UI/SubmitButton';
+import Errors from 'components/UI/Errors';
 
 class DeleteProject extends Component {
   state = { errors: [] };
 
-  removeProject = async mutation => {
+  removeProject = mutation => async () => {
     const { currentProject, history, refetchProject } = this.props;
     const { _id } = currentProject;
     const { data } = await mutation({ variables: { _id } });
     if (data.deleteProject) {
-      console.log("Delete project working!");
+      console.log('Delete project working!');
       await refetchProject();
     } else {
-      console.log("Delete project not working!");
+      console.log('Delete project not working!');
     }
-    await history.push("/");
+    await history.push('/');
   };
 
   render() {
     const { errors } = this.state;
     return (
-      <div>
-        <Mutation mutation={DELETE_PROJECT}>
-          {DeleteProject => (
-            <div className="delete-project-container">
-              <div className="form-title">Delete Project</div>
-              <div>
-                Are you sure you want to erase this projects and all its related
-                components?
-              </div>
-              <div className="errors">
-                {errors.map(error => (
-                  <div key={error}>SIGNUP: {error}</div>
-                ))}
-              </div>
-              <button
-                className="button"
-                onClick={() => this.removeProject(DeleteProject)}
-              >
-                Yes
-              </button>
-              <Link to="/main">
-                <button className="button">No</button>
+      <Mutation mutation={DELETE_PROJECT}>
+        {DeleteProject => (
+          <Container>
+            <Title>Delete Project</Title>
+            <Message>
+              Are you sure you want to erase this projects and all its related
+              components?
+            </Message>
+            <Errors errors={errors} from='DeleteProject' />
+            <Buttons>
+              <SubmitButton
+                onClick={this.removeProject(DeleteProject)}
+                > Yes
+              </SubmitButton>
+              <Link to='/main'>
+                <SubmitButton>No</SubmitButton>
               </Link>
-            </div>
-          )}
-        </Mutation>
-      </div>
+            </Buttons>
+          </Container>
+        )}
+      </Mutation>
     );
   }
 }

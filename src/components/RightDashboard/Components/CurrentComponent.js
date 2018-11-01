@@ -26,14 +26,11 @@ class CurrentComponent extends Component {
 
   render() {
     const { currentProject, history } = this.props;
-    const pieces = history.location.pathname.split("/");
-    const name = pieces[3];
-    const index = pieces[4];
-
+    const { pathname } = history.location;
     const { components } = currentProject;
     if (!components) return <div>No Components</div>;
 
-    const currentComponent = helper.currComp(components, name, index);
+    const currentComponent = helper.getComponentFromURL(pathname, components);
 
     if (!currentComponent) {
       return null

@@ -3,7 +3,7 @@ import { Mutation, Query } from "react-apollo";
 import { LOGIN } from "../../graphql/mutations";
 import { GET_AUTH_USER } from "../../graphql/queries";
 import { SubmitButton } from "../UI/SubmitButton";
-import { AuthWrapper, InputField } from "styles";
+import { AuthWrapper, InputField, ErrorsContainer as Errors } from "styles";
 
 class LoginForm extends Component {
   initialState = {
@@ -73,7 +73,7 @@ class LoginForm extends Component {
                         }
                       />
                     </InputField>
-                    <div className="errors">
+                    <Errors>
                       {errors
                         .filter(
                           error =>
@@ -83,7 +83,7 @@ class LoginForm extends Component {
                         .map(error => (
                           <div key={error}>{error}</div>
                         ))}
-                    </div>
+                    </Errors>
                     <SubmitButton>Submit</SubmitButton>
                   </form>
                 )}
