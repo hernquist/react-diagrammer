@@ -1,7 +1,7 @@
 import React from 'react';
-import { Errors as ErrorsContainer} from 'styles';
+import { ErrorsContainer } from 'styles';
 
-export default Errors = (errors, from="component") => {
+const Errors = (errors, from="component") => {
   return (
     <ErrorsContainer>
       {errors.map(error => (
@@ -10,3 +10,5 @@ export default Errors = (errors, from="component") => {
     </ErrorsContainer>
   )
 }
+
+export default Errors;

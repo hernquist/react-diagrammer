@@ -1,17 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
-import { ComponentList as List } from 'components/UI/ComponentList';
+import { DELETE_COMPONENT, DELETE_UNASSIGNED_COMPONENT } from '../../../graphql/mutations';
+import helper from 'helpers/helper';
 import {
   CreateProjectContainer as Container,
   FormTitle as Title,
   Buttons,
-  Message,
-  Errors
-} from '../../../styles';
-import helper from 'helpers/helper';
+  Message
+} from 'styles';
+import { ComponentList as List } from 'components/UI/ComponentList';
 import { SubmitButton } from 'components/UI/SubmitButton';
-import { DELETE_COMPONENT, DELETE_UNASSIGNED_COMPONENT } from '../../../graphql/mutations';
+import Errors from 'components/UI/Errors';
 
 class DeleteComponent extends Component {
   state = {
@@ -22,8 +22,7 @@ class DeleteComponent extends Component {
   handleData = data => {
     const { history, refetchProject } = this.props;
     (data.deleteComponent || data.deleteUnassignedComponent) ?
-      refetchProject() :
-      console.log('Delete project not working!');
+      refetchProject() : console.log('Delete project not working!');
     history.push('/');
   }
 
@@ -37,7 +36,7 @@ class DeleteComponent extends Component {
     this.handleData(data);
   }
 
-  handleMutation = (assigned, unassigned) => {
+  handleMutation = (assigned, unassigned) => () => {
     const { highlighted } = this.state;
     if (!highlighted) { console.log('no component selected') };
     if (highlighted.placement === 'unassigned') {
@@ -57,7 +56,6 @@ class DeleteComponent extends Component {
       component.placement === 'unassigned' || component.children.length === 0;
     const deletableComponents = components.filter(deletable);
     
-
     return (
       <Mutation mutation={DELETE_COMPONENT}>
         {DeleteComponent => (
@@ -81,7 +79,7 @@ class DeleteComponent extends Component {
                     </Message>
                     <Buttons>
                       <SubmitButton
-                        onClick={() => this.handleMutation(DeleteComponent, DeleteUnassignedComponent)}
+                        onClick={this.handleMutation(DeleteComponent, DeleteUnassignedComponent)}
                         > Yes
                       </SubmitButton>
                       <Link to='/main'>

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
+import { DELETE_PROJECT } from '../../../graphql/mutations';
 import {
   CreateProjectContainer as Container,
   FormTitle as Title,
   Buttons,
-  Message,
-  Errors
-} from '../../../styles';
+  Message
+} from 'styles';
 import { SubmitButton } from 'components/UI/SubmitButton';
-import { DELETE_PROJECT } from '../../../graphql/mutations';
+import Errors from 'components/UI/Errors';
 
 class DeleteProject extends Component {
   state = { errors: [] };
@@ -38,11 +38,7 @@ class DeleteProject extends Component {
               Are you sure you want to erase this projects and all its related
               components?
             </Message>
-            <Errors >
-              {errors.map(error => (
-                <div key={error}>SIGNUP: {error}</div>
-              ))}
-            </Errors>
+            <Errors errors={errors} from='DeleteProject' />
             <Buttons>
               <SubmitButton
                 onClick={this.removeProject(DeleteProject)}
