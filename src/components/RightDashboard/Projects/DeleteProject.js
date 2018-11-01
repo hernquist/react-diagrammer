@@ -14,7 +14,7 @@ import { DELETE_PROJECT } from '../../../graphql/mutations';
 class DeleteProject extends Component {
   state = { errors: [] };
 
-  removeProject = async mutation => {
+  removeProject = mutation => async () => {
     const { currentProject, history, refetchProject } = this.props;
     const { _id } = currentProject;
     const { data } = await mutation({ variables: { _id } });
@@ -45,7 +45,7 @@ class DeleteProject extends Component {
             </Errors>
             <Buttons>
               <SubmitButton
-                onClick={() => this.removeProject(DeleteProject)}
+                onClick={this.removeProject(DeleteProject)}
                 > Yes
               </SubmitButton>
               <Link to='/main'>

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
+import { ComponentList as List } from 'components/UI/ComponentList';
 import {
   CreateProjectContainer as Container,
   FormTitle as Title,
@@ -8,8 +9,9 @@ import {
   Message,
   Errors
 } from '../../../styles';
+import helper from 'helpers/helper';
 import { SubmitButton } from 'components/UI/SubmitButton';
-import { DELETE_COMPONENT } from '../../../graphql/mutations';
+import { DELETE_COMPONENT, DELETE_UNASSIGNED_COMPONENT } from '../../../graphql/mutations';
 
 class DeleteComponent extends Component {
   state = {
@@ -17,91 +19,80 @@ class DeleteComponent extends Component {
     errors: [] 
   };
 
-  removeComponent = async mutation => {
-    const { currentProject, updateComponent, history} = this.props;
-    const _id = this.state.highlighted;
-    const { components } = currentProject;
-    console.log( _id)
-    console.log(components);
-    let parent = components.filter(component =>
-      component.children.some(id => id === _id)
-    );
+  handleData = data => {
+    const { history, refetchProject } = this.props;
+    (data.deleteComponent || data.deleteUnassignedComponent) ?
+      refetchProject() :
+      console.log('Delete project not working!');
+    history.push('/');
+  }
 
-    console.log(parent[0]);
-    const { data } = await mutation({ 
-      variables: { _id, parentId: parent[0]._id }})
-      
-    console.log('remove component', data);
+  removeComponent = async (mutation, unassigned) => {
+    const { _id } = this.state.highlighted;
+    const { components } = this.props.currentProject;
+    const parent = helper.getParent(components, _id);
+    const variables = unassigned ? { _id } : { _id, parentId: parent[0]._id }
+    const params = { variables };
+    const { data } =  await mutation(params);
+    this.handleData(data);
+  }
 
-    if (data.deleteComponent) {
-      const children = parent[0].children(id => id !== _id)
-      const updatedComponent = Object.assign({}, parent[0], { children })
-      updateComponent(updatedComponent);
-      // make deleteComponent or have some route which will reset the tree get the project from mongo
-      // deleteComponent(currentProject, _id); 
+  handleMutation = (assigned, unassigned) => {
+    const { highlighted } = this.state;
+    if (!highlighted) { console.log('no component selected') };
+    if (highlighted.placement === 'unassigned') {
+      this.removeComponent(unassigned, true);
+    } else if (highlighted.placement === 'child') {
+      this.removeComponent(assigned, false);
     }
   }
 
   updateHighlight = highlighted => () => this.setState({ highlighted }) 
 
-
-  // removeProject = async mutation => {
-  //   const { currentProject, history, refetchProject } = this.props;
-  //   const { _id } = currentProject;
-  //   const { data } = await mutation({ variables: { _id } });
-  //   if (data.deleteProject) {
-  //     console.log('Delete project working!');
-  //     await refetchProject();
-  //   } else {
-  //     console.log('Delete project not working!');
-  //   }
-  //   await history.push('/');
-  // };
-
   render() {
     const { errors, highlighted } = this.state;
     const { currentProject } = this.props;
     const { components } = currentProject;
+    const deletable = component => 
+      component.placement === 'unassigned' || component.children.length === 0;
+    const deletableComponents = components.filter(deletable);
+    
 
     return (
       <Mutation mutation={DELETE_COMPONENT}>
         {DeleteComponent => (
-          <Container>
-            <Title>Delete Component</Title>
-            <Message>
-              Select a component to delete 
-            </Message>
-            <Errors >
-              {errors.map(error => (
-                <div key={error}>SIGNUP: {error}</div>
-              ))}
-            </Errors>
-            {components.map(component => (
-              <div 
-                key={component._id}
-                onClick={this.updateHighlight(component._id)}
-              >
-                {component.name}
-              </div>
-            ))}
-            
-            {highlighted && (
-              <Fragment>
+          <Mutation mutation={DELETE_UNASSIGNED_COMPONENT}>
+            {DeleteUnassignedComponent => (
+              <Container>
+                <Title>Delete Component</Title>
                 <Message>
-                  Do you want to delete the selected 
+                  Select a component to delete 
                 </Message>
-                <Buttons>
-                  <SubmitButton
-                    onClick={() => this.removeComponent(DeleteComponent)}
-                    > Yes
-                  </SubmitButton>
-                  <Link to='/main'>
-                    <SubmitButton>No</SubmitButton>
-                  </Link>
-                </Buttons>
-              </Fragment>
+                <Errors errors={errors} from="DeleteComponent" />
+                <List 
+                  components={deletableComponents} 
+                  setHighlight={this.updateHighlight}
+                  highlighted={highlighted}
+                />
+                {highlighted && (
+                  <Fragment>
+                    <Message>
+                      Do you want to delete the selected component? 
+                    </Message>
+                    <Buttons>
+                      <SubmitButton
+                        onClick={() => this.handleMutation(DeleteComponent, DeleteUnassignedComponent)}
+                        > Yes
+                      </SubmitButton>
+                      <Link to='/main'>
+                        <SubmitButton>No</SubmitButton>
+                      </Link>
+                    </Buttons>
+                  </Fragment>
+                )}
+              </Container>
             )}
-          </Container>
+          </Mutation>
         )}
       </Mutation>
     );

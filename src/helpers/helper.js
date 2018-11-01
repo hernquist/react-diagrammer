@@ -9,6 +9,9 @@ const helper = {
     let c = components.filter(c => c._id === id);
     return c[0];
   },
+  getParent: (components, _id) => components.filter(component =>
+    component.children.some(id => id === _id)
+  ),
   screenWidth: () =>
     window.innerWidth ||
     document.documentElement.clientWidth ||

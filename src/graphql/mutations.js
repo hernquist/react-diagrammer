@@ -267,6 +267,12 @@ const DELETE_COMPONENT = gql`
   }
 `;
 
+const DELETE_UNASSIGNED_COMPONENT = gql`
+  mutation DeleteUnassignedComponent($_id: String!) {
+    deleteUnassignedComponent(_id: $_id)
+  }
+`;
+
 const ADD_PROP = gql`
   mutation AddProp($prop: InputProp) {
     addProp(prop: $prop) {
@@ -477,6 +483,7 @@ export {
   DELETE_PROJECT,
   DELETE_PROP,
   DELETE_STATE,
+  DELETE_UNASSIGNED_COMPONENT,
   EDIT_CALLBACK,
   EDIT_COMPONENT_NAME,
   EDIT_PROP,
