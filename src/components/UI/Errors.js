@@ -1,7 +1,7 @@
 import React from 'react';
 import { ErrorsContainer } from 'styles';
 
-const Errors = (errors, from="component") => {
+const Errors = ({errors = [], from = 'UnnamedComponent'}) => {
   return (
     <ErrorsContainer>
       {errors.map(error => (
