@@ -4,7 +4,12 @@ import { SIGNUP } from '../../graphql/mutations';
 import { validateEmail } from '../../helpers/validations';
 import { SubmitButton } from '../UI/SubmitButton';
 import Errors from '../UI/Errors';
-import { AuthWrapper, InputField } from 'styles';
+import { 
+  AuthWrapper, 
+  InputField, 
+  FormTitle as Title,
+  LabelText
+  } from 'styles';
 
 class SignupForm extends Component {
   initialState = {
@@ -55,6 +60,8 @@ class SignupForm extends Component {
     await mutation({ variables: { email, name, password } });
   };
 
+  handleInput = (e, key) => this.setState({ [key]: e.target.value });
+
   handleSignup = signup => {
     switch (signup) {
       case '1':
@@ -99,7 +106,7 @@ class SignupForm extends Component {
     const { name, email, password, errors } = this.state;
     return (
       <AuthWrapper>
-        <h2>Signup</h2>
+        <Title>Signup</Title>
         <Mutation
           mutation={SIGNUP}
           onCompleted={result => this.handleSignup(result.signup)}
@@ -107,36 +114,24 @@ class SignupForm extends Component {
           {Signup => (
             <form onSubmit={e => this.validation(e, Signup)}>
               <InputField>
-                <label>Username</label>
+                <LabelText>Username</LabelText>
                 <input
                   value={name}
-                  onChange={e =>
-                    this.setState({
-                      name: e.target.value
-                    })
-                  }
+                  onChange={e => this.handleInput(e, 'name')}
                 />
               </InputField>
               <InputField>
-                <label>Email</label>
+                <LabelText>Email</LabelText>
                 <input
                   value={email}
-                  onChange={e =>
-                    this.setState({
-                      email: e.target.value
-                    })
-                  }
+                  onChange={e => this.handleInput(e, 'email')}
                 />
               </InputField>
               <InputField>
-                <label>Password</label>
+                <LabelText>Password</LabelText>
                 <input
                   value={password}
-                  onChange={e =>
-                    this.setState({
-                      password: e.target.value
-                    })
-                  }
+                  onChange={e => this.handleInput(e, 'password')}
                 />
               </InputField>
               <Errors errors={errors} from='SignupForm' />
