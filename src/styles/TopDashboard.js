@@ -27,5 +27,9 @@ export const CurrentProjectTitle = styled.div`
   justify-content: flex-end;
   align-items: center;
   flex-grow: 3;
+
+  @media only screen and (max-width: 548px) {
+    display: none;
+  }
 `;
 

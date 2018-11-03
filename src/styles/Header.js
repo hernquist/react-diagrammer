@@ -17,6 +17,10 @@ export const AppName = styled.div`
   margin-top: 10px;
   margin-right: 10px
   color: ${props => props.theme.teal};
+
+  @media only screen and (max-width: 585px) {
+    display: none;
+  }
 `;
 
 export const UserNameLarge = styled.div`

@@ -21,7 +21,7 @@ class LoggedIn extends Component {
 
   switchLayout = layout => this.setState({ layout });
 
-  setCurrentProject = currentProject => this.setState({ currentProject });
+  setCurrentProject = currentProject => () => this.setState({ currentProject });
 
   updateComponent = updated => {
     const project = this.state.currentProject;

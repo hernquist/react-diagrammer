@@ -12,7 +12,6 @@ import {
 import UserName from './Username';
 
 class Header extends Component {
-
   render() {
     const { user } = this.props;
     const loggedIn = Object.keys(user).length !== 0;

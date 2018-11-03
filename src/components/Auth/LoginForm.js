@@ -3,7 +3,13 @@ import { Mutation, Query } from "react-apollo";
 import { LOGIN } from "../../graphql/mutations";
 import { GET_AUTH_USER } from "../../graphql/queries";
 import { SubmitButton } from "../UI/SubmitButton";
-import { AuthWrapper, InputField, ErrorsContainer as Errors } from "styles";
+import Errors from "../UI/Errors";
+import { 
+  AuthWrapper, 
+  InputField, 
+  FormTitle as Title,
+  LabelText
+} from "styles";
 
 class LoginForm extends Component {
   initialState = {
@@ -19,6 +25,8 @@ class LoginForm extends Component {
     const { email, password } = this.state;
     await Login({ variables: { email, password } });
   };
+
+  handleInput = (e, key) => this.setState({ [key]: e.target.value });
 
   render() {
     const { email, password, errors } = this.state;
@@ -37,7 +45,7 @@ class LoginForm extends Component {
           }
           return (
             <AuthWrapper>
-              <h2>Login</h2>
+              <Title>Login</Title>
               <Mutation
                 mutation={LOGIN}
                 onCompleted={result => {
@@ -52,38 +60,20 @@ class LoginForm extends Component {
                 {Login => (
                   <form onSubmit={e => this.onSubmit(e, Login)}>
                     <InputField>
-                      <label>Email</label>
+                      <LabelText>Email</LabelText>
                       <input
                         value={email}
-                        onChange={e =>
-                          this.setState({
-                            email: e.target.value
-                          })
-                        }
+                        onChange={e => this.handleInput(e, 'email')}
                       />
                     </InputField>
                     <InputField>
-                      <label>Password</label>
+                      <LabelText>Password</LabelText>
                       <input
                         value={password}
-                        onChange={e =>
-                          this.setState({
-                            password: e.target.value
-                          })
-                        }
+                        onChange={e => this.handleInput(e, 'password')}
                       />
                     </InputField>
-                    <Errors>
-                      {errors
-                        .filter(
-                          error =>
-                            error !==
-                            "Error! GraphQL error: user not authenticated"
-                        )
-                        .map(error => (
-                          <div key={error}>{error}</div>
-                        ))}
-                    </Errors>
+                    <Errors errors={errors} exception={"auth"} from={"LoginForm"} />
                     <SubmitButton>Submit</SubmitButton>
                   </form>
                 )}
