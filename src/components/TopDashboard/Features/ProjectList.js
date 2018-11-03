@@ -14,7 +14,7 @@ const ProjectList = ({ projects, setCurrentProject, deactivateSelector }) => {
         projects.map(project => (
           <ListItem
             key={project._id}
-            onClick={() => {setCurrentProject(project)}}
+            onClick={setCurrentProject(project)}
           >
             {project.name}
           </ListItem>

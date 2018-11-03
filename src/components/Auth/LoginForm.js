@@ -8,7 +8,8 @@ import {
   AuthWrapper, 
   InputField, 
   FormTitle as Title,
-  LabelText
+  LabelText,
+  CreateProjectForm as Form,
 } from "styles";
 
 class LoginForm extends Component {
@@ -58,7 +59,7 @@ class LoginForm extends Component {
                 }}
               >
                 {Login => (
-                  <form onSubmit={e => this.onSubmit(e, Login)}>
+                  <Form onSubmit={e => this.onSubmit(e, Login)}>
                     <InputField>
                       <LabelText>Email</LabelText>
                       <input
@@ -75,7 +76,7 @@ class LoginForm extends Component {
                     </InputField>
                     <Errors errors={errors} exception={"auth"} from={"LoginForm"} />
                     <SubmitButton>Submit</SubmitButton>
-                  </form>
+                  </Form>
                 )}
               </Mutation>
             </AuthWrapper>
