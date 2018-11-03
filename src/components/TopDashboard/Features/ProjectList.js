@@ -4,7 +4,7 @@ import helper from "helpers/helper";
 
 const ProjectList = ({ projects, setCurrentProject, deactivateSelector }) => {
   const screenWidth = helper.screenWidth();
-  const buttonsLength = 562;
+  const buttonsLength = 549;
   const position =
     screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
 

@@ -1,28 +1,58 @@
 import styled from "styled-components";
 
-export const Nav = styled.div`
-  display: grid;
-  grid-template-columns: auto auto auto;
-  margin: 5px;
+export const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
 `;
 
-export const HeaderContainer = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-auto-flow: column;
-  grid-gap: 20px;
+export const TitlesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  margin: 10px;
 `;
 
 export const AppName = styled.div`
   font-size: 40px;
-  color: ${props => props.theme.teal};
   margin-top: 10px;
+  margin-right: 10px
+  color: ${props => props.theme.teal};
 `;
 
-export const UserName = styled.div`
-  margin-top: 8px;
-  font-size: 28px;
-  color: ${props => props.theme.teal};
+export const UserNameLarge = styled.div`
+  @media only screen and (min-width: 1000px) {
+    font-size: 28px;
+    margin: 10px 10px 0 10px; 
+    color: ${props => props.theme.teal};
+  }
+
+  @media only screen and (max-width: 999px) {
+    display: none;
+  }
+`;
+
+export const UserNameMedium = styled.div`
+  @media only screen and (max-width: 999px) {
+    margin: 10px 10px 0 10px;    
+    font-size: 28px;
+    color: ${props => props.theme.teal};
+  }
+  
+  @media only screen and (min-width: 1000px) {
+    display: none;
+  }
+`;
+
+export const HideWrapper = styled.div`
+  @media only screen and (max-width: ${props => props.breakpoint}) {
+    display: none;
+  }
+`;
+
+export const Nav = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 2px;
 `;

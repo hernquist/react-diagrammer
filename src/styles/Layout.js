@@ -75,18 +75,20 @@ export const Layout = styled.div`
     border-radius: 1px;
   }
 
-  @media (max-width: 800px) {
-    .logged-in {
-      grid-template-columns: minmax(140px, 250px) repeat(2, 1fr);
-      grid-template-rows: 75px 1fr;
-      justify-content: stretch;
-      grid-template-areas:
-        "nb nb nb"
-        "ld ld ld"
-        "td td td";
-    }
-    .right-dashboard {
-      display: none;
+  .layout {
+    @media (max-width: 800px) {
+      .logged-in {
+        grid-template-columns: minmax(140px, 250px) repeat(2, 1fr);
+        grid-template-rows: 75px 1fr;
+        justify-content: stretch;
+        grid-template-areas:
+          "nb nb nb"
+          "ld ld ld"
+          "td td td";
+      }
+      .right-dashboard {
+        display: none;
+      }
     }
   }
 `;

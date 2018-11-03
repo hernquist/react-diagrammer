@@ -1,13 +1,13 @@
-import React, { Component, Fragment } from "react";
-import ProjectList from "./Features/ProjectList";
-import CreateOptions from "./Features/CreateOptions";
-import DeleteOptions from "./Features/DeleteOptions";
-import { SmallFlatButton as FlatButton } from "../UI/FlatButton";
+import React, { Component, Fragment } from 'react';
+import ProjectList from './Features/ProjectList';
+import CreateOptions from './Features/CreateOptions';
+import DeleteOptions from './Features/DeleteOptions';
+import { SmallFlatButton as FlatButton } from '../UI/FlatButton';
 import {
   TopDashboardContainer as Container,
   CurrentProjectTitle as Title,
   ButtonsContainer
-} from "styles";
+} from 'styles';
 
 class LeftDashboard extends Component {
   initialState = {
@@ -25,9 +25,9 @@ class LeftDashboard extends Component {
 
   handleSwitch = () => {
     this.setState({ ...this.initialState });
-    this.props.layout === "full-screen"
-      ? this.props.switchLayout("logged-in")
-      : this.props.switchLayout("full-screen");
+    this.props.layout === 'full-screen'
+      ? this.props.switchLayout('logged-in')
+      : this.props.switchLayout('full-screen');
   };
 
   activateSelector = async key => {
@@ -43,14 +43,12 @@ class LeftDashboard extends Component {
   render() {
     const { layout, projects, currentProject, setCurrentProject } = this.props;
     const content = {
-      "full-screen": "SHOW DASHBOARD",
-      "logged-in": "HIDE DASHBOARD"
+      'full-screen': 'SHOW DASHBOARD',
+      'logged-in': 'HIDE DASHBOARD'
     };
     const { changeProject, createOptions, deleteOptions } = this.state;
-    const project =
-      currentProject.name.length > 12
-        ? `${currentProject.name}`
-        : `PROJECT ${currentProject.name}`;
+    const project = currentProject.name.length > 12 ? 
+      `${currentProject.name}` : `PROJECT ${currentProject.name}`;
         
     return (
       <Fragment>
@@ -61,7 +59,7 @@ class LeftDashboard extends Component {
               onClick={
                 changeProject
                   ? this.deactivateSelector
-                  : () => this.activateSelector("changeProject")
+                  : () => this.activateSelector('changeProject')
               }
             >
               SWITCH PROJECT
@@ -70,26 +68,26 @@ class LeftDashboard extends Component {
               onClick={
                 createOptions
                   ? this.deactivateSelector
-                  : () => this.activateSelector("createOptions")
+                  : () => this.activateSelector('createOptions')
               }
+              style={{ width: 78 }}
             >
-              {" "}
+              {' '}
               CREATE
             </FlatButton>
             <FlatButton
               onClick={
                 deleteOptions
                   ? this.deactivateSelector
-                  : () => this.activateSelector("deleteOptions")
+                  : () => this.activateSelector('deleteOptions')
               }
+              style={{ width: 78 }}
             >
               DELETE
             </FlatButton>
             <FlatButton
               onClick={this.handleSwitch}
-              style={{
-                width: 184
-              }}
+              style={{ width: 184 }}
             >
               {content[layout]}
             </FlatButton>

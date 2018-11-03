@@ -5,7 +5,7 @@ import { List, ListItem } from "styles";
 
 const CreateOptions = ({ deactivateSelector }) => {
   const screenWidth = helper.screenWidth();
-  const buttonsLength = 386;
+  const buttonsLength = 371;
   const position =
     screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
 
