@@ -9,8 +9,7 @@ export const CreateProjectContainer = styled.div`
   margin: 15px;
 `;
 
-export const FormTitle = styled.div`
-  font-size: 32px;
+export const FormTitle = styled.h2`
 `;
 
 export const CreateProjectForm = styled.form`

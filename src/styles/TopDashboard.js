@@ -6,13 +6,6 @@ export const TopDashboardContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 12px;
-`;
-
 export const CurrentProjectTitle = styled.div`
   color: ${props => props.theme.teal};
   padding: 3px 5px 3px 11px;
@@ -22,4 +15,21 @@ export const CurrentProjectTitle = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex-grow: 1;
+  
+  @media only screen and (max-width: 820px) {
+    display: none;
+  }
+  `;
+  
+  export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-grow: 3;
+
+  @media only screen and (max-width: 548px) {
+    display: none;
+  }
 `;
+

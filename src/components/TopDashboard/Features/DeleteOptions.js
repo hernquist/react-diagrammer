@@ -5,7 +5,7 @@ import helper from "helpers/helper";
 
 const DeleteOptions = ({ deactivateSelector }) => {
   const screenWidth = helper.screenWidth();
-  const buttonsLength = 296;
+  const buttonsLength = 283;
   const position =
     screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
 

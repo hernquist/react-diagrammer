@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const AuthWrapper = styled.div`
   margin: 12px;
+
   h2 {
     color: ${props => props.theme.madison};
   }
@@ -26,4 +27,8 @@ export const InputField = styled.div`
   input: focus {
     outline: 2px offset ${props => props.theme.teal};
   }
+`;
+
+export const LabelText = styled.label`
+  
 `;

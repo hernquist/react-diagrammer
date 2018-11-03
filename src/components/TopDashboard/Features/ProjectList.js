@@ -4,7 +4,7 @@ import helper from "helpers/helper";
 
 const ProjectList = ({ projects, setCurrentProject, deactivateSelector }) => {
   const screenWidth = helper.screenWidth();
-  const buttonsLength = 562;
+  const buttonsLength = 549;
   const position =
     screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
 
@@ -14,9 +14,7 @@ const ProjectList = ({ projects, setCurrentProject, deactivateSelector }) => {
         projects.map(project => (
           <ListItem
             key={project._id}
-            onClick={() => {
-              setCurrentProject(project);
-            }}
+            onClick={() => {setCurrentProject(project)}}
           >
             {project.name}
           </ListItem>

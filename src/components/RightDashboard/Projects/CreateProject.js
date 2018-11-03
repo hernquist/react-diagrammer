@@ -6,7 +6,8 @@ import {
   CreateProjectForm as Form,
   FormTitle as Title,
   InputField,
-  Textarea,
+  LabelText,
+  Textarea
 } from 'styles';
 import { SubmitButton } from '../../UI/SubmitButton';
 import Errors from '../../UI/Errors';
@@ -44,7 +45,7 @@ class CreateProject extends Component {
               <Title>Create Project</Title>
               <Form onSubmit={e => this.onSubmit(e, CreateProject)}>
                 <InputField>
-                  <label>Name</label>
+                  <LabelText>Name</LabelText>
                   <input
                     className='input'
                     value={name}
