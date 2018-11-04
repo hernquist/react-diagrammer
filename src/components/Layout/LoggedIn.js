@@ -29,6 +29,7 @@ class LoggedIn extends Component {
     const updatedComponents = components.map(
       component => (component._id === updated._id ? updated : component)
     );
+    
     const currentProject = Object.assign({}, project, {
       components: updatedComponents
     });

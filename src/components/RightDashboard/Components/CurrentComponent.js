@@ -6,7 +6,6 @@ import helper from '../../../helpers/helper';
 import ModalContainer from '../../UI/ModalContainer';
 import ComponentHeader from './ComponentHeader';
 import EditComponentName from './EditComponentName';             
-import UnassignComponent from './UnassignComponent';
 import { RightDashboardContainer as Container } from 'styles';
 import { WideButton } from '../../UI/SubmitButton';
 
@@ -89,26 +88,17 @@ class CurrentComponent extends Component {
             {...this.props}            
           />
         </ModalContainer>
-        {isUnassigned ? (
-          <Button
-            disabled={isRoot}
-            onClick={() =>
-              this.props.history.push(
-                this.props.match.url +
-                  `/${isUnassigned ? `` : `un`}assign-component`
-              )
-            }
-          >
-            {buttonText}
-          </Button>
-        ) : 
-          <ModalContainer text={buttonText} button={Button} disabled={isRoot}>
-            <UnassignComponent
-              currentProject={currentProject}
-              {...this.props}
-            />
-          </ModalContainer>
-        }
+        <Button
+          disabled={isRoot}
+          onClick={() =>
+            this.props.history.push(
+              this.props.match.url +
+                `/${isUnassigned ? `` : `un`}assign-component`
+            )
+          }
+        >
+          {buttonText}
+        </Button>
       </Container>
     );
   }
