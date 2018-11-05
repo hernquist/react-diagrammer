@@ -20,7 +20,7 @@ class DisplayComponent extends Component {
   };
 
   render() {
-    const { component, parent, history } = this.props;
+    const { component, parent, history, x, y } = this.props;
     const stateOutput = component.style === "container";
     const [name, iteration] = history.location.pathname.split("/").slice(3);
     const isSelected =
@@ -34,11 +34,17 @@ class DisplayComponent extends Component {
     const Name = isSelected ? SelectedName : isParent ? ParentName : BaseName;
 
     return (
-      <Card onClick={this.handleClick}>
+      <Card 
+        onClick={this.handleClick} 
+        style={{
+          position: 'absolute',
+          left: x,
+          top: y
+        }}   
+      >
         <Name style={{ fontSize }}>{component.name}</Name>
         <Content>
           <Icons icon={component.style} />
-
           <Numbers>
             {stateOutput && (
               <Element>
