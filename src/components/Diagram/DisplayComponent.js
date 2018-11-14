@@ -32,15 +32,18 @@ class DisplayComponent extends Component {
 
     const Card = isSelected ? SelectedCard : isParent ? ParentCard : BaseCard;
     const Name = isSelected ? SelectedName : isParent ? ParentName : BaseName;
+    const isUnassigned = component.placement === 'unassigned';
+    const cardStyles = isUnassigned ? null : 
+      { 
+        position: 'absolute',
+        left: x,
+        top: y
+      };
 
     return (
       <Card 
         onClick={this.handleClick} 
-        style={{
-          position: 'absolute',
-          left: x,
-          top: y
-        }}   
+        style={cardStyles}
       >
         <Name style={{ fontSize }}>{component.name}</Name>
         <Content>

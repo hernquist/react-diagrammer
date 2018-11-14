@@ -35,6 +35,7 @@ export const UnassignedList = styled.div`
   max-height: 440px;
   width: 100%;
   overflow-y: scroll;
+ 
 `;
 
 export const ShowUnassignedText = styled.div`

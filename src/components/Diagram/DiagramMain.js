@@ -39,39 +39,39 @@ class DiagramMain extends Component {
         [root]
       )
       .filter(branches => branches.length > 0);
-    console.log('tree:', tree);
 
-    const COLUMNS = 13;    
+    const width = document.getElementsByClassName("diagram")[0].offsetWidth;
+    const height = document.getElementsByClassName("diagram")[0].offsetHeight;
+    
+    const spaceAround = tree.map((row, j) => {
+      const spaces = (width - row.length * 110) / (row.length + 1);
+      return row.map((component, i) => 
+        Object.assign(
+          {}, 
+          component, 
+          { left: (i+1) * spaces + i * 110 },
+          { top : j * 130 + 80 }
+        )
+      )
+    });
 
-    const maxRowSize = tree.reduce((acc, curr) => curr.length > acc ? 
-      curr.length : acc, 0);
-    console.log('maxRowSize:', maxRowSize);
-    const maxColumns = maxRowSize * 2 - 1;
-    console.log('maxColumns:', maxColumns);
-
-    const rowLength = tree.map(row => row.length);
-    console.log('rowLength:', rowLength);
-    const columns = rowLength.map(length => length * 2 - 1);
-    console.log('colums:', columns);
-
-    const spaceAround = tree.map((row, i) => {
-      const spaces = (COLUMNS - rowLength[i]) / (rowLength[i] + 1)
-      // const row = [...Array(COLUMNS)].map((_, i) => {
-      //   if (i<)
-      let counter = 0;
-      let spacesCounter = 0;
-      const rowAsArray = row.reduce((acc, curr, i) => {
-        const accountSpaces = Math.round(spaces + counter) - spacesCounter;
-        const x = acc.concat([...Array(accountSpaces)].map(_ => false).concat([curr]));
-        spacesCounter = spacesCounter + accountSpaces;
-        counter = counter + spaces;
-        return x;
-      }, []);
-      const remainingSpaces = COLUMNS - rowAsArray.length
-      return rowAsArray.concat([...Array(remainingSpaces)].map(_ => false));
-    })
+    const lines = spaceAround.map((row, i, array) => 
+      row.reduce((acc, component) => {
+        const connections = component.children.map(id => {
+          const child = array[i+1].filter(comp => comp._id === id)[0]
+          return ({
+            x1: component.left,
+            y1: component.top,
+            x2: child.left,
+            y2: child.top
+          })
+        })
+        return ([...acc, ...connections])
+      }, [])
+    ).filter(row => row.length > 0)
 
     console.log('spaceAround:', spaceAround);
+    console.log('lines:', lines)
 
     return (
       <Fragment>
@@ -82,29 +82,21 @@ class DiagramMain extends Component {
             history={history}
           />
         )}
-        {/* <Container>
-          {tree.map((row, i) => (
-            <TreeRow history={history} row={row} key={i} parent={parent} />
-          ))}
-        </Container> */}
         <div style={{
           display: 'flex',
-          flexDirection: 'column',
-          // justifyContent: 'flex-start'
+          flexDirection: 'column'
         }}>
-          {spaceAround.map((row, i) => (
+          {spaceAround.map(row => (
             <div style={{
               display: 'flex',
               flexDirection: 'row',
             }}>
-              {row.map((card, j) => {
+              {row.map(card => {
                 if (!card) return null;
-                const x = j * 60;
-                const y = i * 130 + 80
                 return (
                   <DisplayComponent
-                    y={i * 130 + 80}
-                    x={x}
+                    y={card.top}
+                    x={card.left}
                     key={card._id} 
                     component={card} 
                     {...this.props} 
@@ -113,6 +105,22 @@ class DiagramMain extends Component {
               })}
             </div>
           ))}
+            <svg height={height} width={width}>
+          {lines.map((row, i) => (
+              row.map(card => (
+                <line 
+                  x1={card.x1 + 60} 
+                  y1={card.y1 + 25} 
+                  x2={card.x2 + 60} 
+                  y2={card.y2 - 75} 
+                  style={{
+                    stroke: "#2c3e50",
+                    strokeWidth: "2" 
+                  }}
+                />
+              ))
+              ))}
+              </svg>
         </div>
       </Fragment>
     );
