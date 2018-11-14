@@ -86,11 +86,14 @@ class DiagramMain extends Component {
           display: 'flex',
           flexDirection: 'column'
         }}>
-          {spaceAround.map(row => (
-            <div style={{
-              display: 'flex',
-              flexDirection: 'row',
-            }}>
+          {spaceAround.map((row, i) => (
+            <div 
+              key={i}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
               {row.map(card => {
                 if (!card) return null;
                 return (
