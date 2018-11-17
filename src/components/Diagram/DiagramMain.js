@@ -24,9 +24,10 @@ class DiagramMain extends Component {
       return null;
     }
     const { components } = currentProject;
+    const unassigned = helper.unassigned(components);
     const branches = helper.childs(components);
     const root = helper.root(components);
-
+    
     const tree = branches
       .reduce(
         (acc, _, i) => [
@@ -38,9 +39,39 @@ class DiagramMain extends Component {
         [root]
       )
       .filter(branches => branches.length > 0);
-    // .filter(branches => branches[0]);
 
-    const unassigned = helper.unassigned(components);
+    const width = document.getElementsByClassName("diagram")[0].offsetWidth;
+    const height = document.getElementsByClassName("diagram")[0].offsetHeight;
+    
+    const spaceAround = tree.map((row, j) => {
+      const spaces = (width - row.length * 110) / (row.length + 1);
+      return row.map((component, i) => 
+        Object.assign(
+          {}, 
+          component, 
+          { left: (i+1) * spaces + i * 110 },
+          { top : j * 130 + 80 }
+        )
+      )
+    });
+
+    const lines = spaceAround.map((row, i, array) => 
+      row.reduce((acc, component) => {
+        const connections = component.children.map(id => {
+          const child = array[i+1].filter(comp => comp._id === id)[0]
+          return ({
+            x1: component.left,
+            y1: component.top,
+            x2: child.left,
+            y2: child.top
+          })
+        })
+        return ([...acc, ...connections])
+      }, [])
+    ).filter(row => row.length > 0)
+
+    console.log('spaceAround:', spaceAround);
+    console.log('lines:', lines)
 
     return (
       <Fragment>
@@ -51,11 +82,49 @@ class DiagramMain extends Component {
             history={history}
           />
         )}
-        <Container>
-          {tree.map((row, i) => (
-            <TreeRow history={history} row={row} key={i} parent={parent} />
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
+          {spaceAround.map((row, i) => (
+            <div 
+              key={i}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
+              {row.map(card => {
+                if (!card) return null;
+                return (
+                  <DisplayComponent
+                    y={card.top}
+                    x={card.left}
+                    key={card._id} 
+                    component={card} 
+                    {...this.props} 
+                  />
+                )
+              })}
+            </div>
           ))}
-        </Container>
+            <svg height={height} width={width}>
+          {lines.map((row, i) => (
+              row.map(card => (
+                <line 
+                  x1={card.x1 + 60} 
+                  y1={card.y1 + 25} 
+                  x2={card.x2 + 60} 
+                  y2={card.y2 - 75} 
+                  style={{
+                    stroke: "#2c3e50",
+                    strokeWidth: "2" 
+                  }}
+                />
+              ))
+              ))}
+              </svg>
+        </div>
       </Fragment>
     );
   }

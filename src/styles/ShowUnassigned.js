@@ -6,9 +6,9 @@ export const UnassignedContainer = styled.div`
   flex-direction: column;
   align-items: center;
   background: ${props => props.theme.lightGrey};
+  border: 1px solid ${props => props.theme.madison};
   width: 150px;
   min-height: 70px;
-  border: 1px solid ${props => props.theme.madison};
   border-radius: 4px;
   margin: 10px;
   padding: 5px;
@@ -35,6 +35,10 @@ export const UnassignedList = styled.div`
   max-height: 440px;
   width: 100%;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
 `;
 
 export const ShowUnassignedText = styled.div`

@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
 export const CreateProjectContainer = styled.div`
-  display: grid;
+  display: flex;
   background: ${props => props.theme.grey};
-  grid-template-rows: auto 1fr;
-  justify-items: stretch;
+  flex-direction: column;
   padding: 0px;
   margin: 15px;
 `;
 
 export const FormTitle = styled.h2`
+  margin-top: 0;
+  margin-bottom: 0;
+  color: ${props => props.theme.madison};
 `;
 
 export const CreateProjectForm = styled.form`

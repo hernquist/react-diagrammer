@@ -95,7 +95,7 @@ export default class CreateComponent extends Component {
           <Mutation mutation={CREATE_COMPONENT}>
             {CreateComponent => (
               <Container>
-                <Title>Creating a Component</Title>
+                <Title>Create Component</Title>
                 <Label>
                   <LabelText>Component Name</LabelText>
                   <Input

@@ -20,7 +20,7 @@ class LeftDashboard extends Component {
 
   componentDidMount() {
     this.props.needsSetting &&
-      this.props.setCurrentProject(this.props.currentProject);
+      this.props.setCurrentProject(this.props.currentProject)();
   }
 
   handleSwitch = () => {

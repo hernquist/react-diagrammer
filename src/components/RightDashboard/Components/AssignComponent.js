@@ -4,7 +4,7 @@ import { ASSIGN_COMPONENT } from '../../../graphql/mutations';
 import ComponentList from './StateAndProps/ComponentList';
 import { Buttons } from 'styles';
 import { SubmitButton } from 'components/UI/SubmitButton';
-import helper from '../../../helpers/helper';
+import helper from 'helpers/helper';
 
 export default class AssignComponent extends Component {
   state = {
@@ -23,14 +23,14 @@ export default class AssignComponent extends Component {
     });
 
     data.assignComponent.map(component => updateComponent(component));
-    history.push('/main/component');
     setParent('');
+    history.push('/main/component');
   };
 
   close = () => {
     const { history } = this.props;
     const { pathname } = history.location;
-    history.push(helper.trimURL(pathname));
+    history.push(helper.trimURL(pathname, 5));
   };
 
   handleParent = id => {

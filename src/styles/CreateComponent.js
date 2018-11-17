@@ -36,7 +36,5 @@ export const Selection = styled.div`
 export const CreateComponentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 360px;
-  justify-content: space-around;
 `
 

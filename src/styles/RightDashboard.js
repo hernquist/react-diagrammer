@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const RightDashboardTitle = styled.div`
   font-size: 24px;
-  margin: 0 auto 3px;
+  margin-bottom: 3px;
   height: 36px;
   border: 1px solid ${props => props.theme.lightGrey};
   width: 100%;

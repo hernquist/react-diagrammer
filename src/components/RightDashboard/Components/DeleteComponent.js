@@ -19,11 +19,11 @@ class DeleteComponent extends Component {
     errors: [] 
   };
 
-  handleData = data => {
+  handleData = async data => {
     const { history, refetchProject } = this.props;
     (data.deleteComponent || data.deleteUnassignedComponent) ?
-      refetchProject() : console.log('Delete project not working!');
-    history.push('/');
+      await refetchProject() : console.log('Delete project not working!');
+    await history.push('/');
   }
 
   removeComponent = async (mutation, unassigned) => {

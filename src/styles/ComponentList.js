@@ -4,6 +4,7 @@ export const ComponentList = styled.div `
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 5px;
   margin-bottom: 5px;
 `;
 
