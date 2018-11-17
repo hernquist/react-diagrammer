@@ -22,19 +22,16 @@ const Warning = ({name}) => {
 
 export default class UnassignComponent extends Component {
   updateComponents = (mutation, component) => async () => {
-    const { updateComponent, currentProject } = this.props;
+    const { refetchProject, currentProject, history } = this.props;
     const { _id } = component;
     const { components } = currentProject;
     const parent = components.filter(component =>
       component.children.some(id => id === _id)
     );
 
-    const { data } = await mutation({
-      variables: { _id, parentId: parent[0]._id }
-    });
-
-    await data.unassignComponent.map(component => updateComponent(component));
-    this.props.history.push('/main/component');
+    await mutation({ variables: { _id, parentId: parent[0]._id } });
+    await refetchProject();
+    await history.push('/');
   };
 
   handleCancel = () => {

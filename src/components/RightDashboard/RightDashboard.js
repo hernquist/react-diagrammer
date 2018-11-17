@@ -165,6 +165,7 @@ class RightDashboard extends Component {
               {...renderProps}
               currentProject={currentProject}
               updateComponent={updateComponent}
+              refetchProject={refetchProject}
             />
           )}
         />
