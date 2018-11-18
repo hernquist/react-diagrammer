@@ -3,15 +3,6 @@ import auth from "../HOC/auth";
 import ShowUnassigned from "./ShowUnassigned";
 import DisplayComponent from "./DisplayComponent";
 import helper from "../../helpers/helper";
-import { DiagramMainContainer as Container, Row } from "styles";
-
-const TreeRow = props => (
-  <Row>
-    {props.row.map(component => (
-      <DisplayComponent key={component._id} component={component} {...props} />
-    ))}
-  </Row>
-);
 
 class DiagramMain extends Component {
   state = {
