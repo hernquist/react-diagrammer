@@ -9,7 +9,7 @@ export const AuthWrapper = styled.div`
 `;
 
 export const InputField = styled.div`
-  color: ${props => props.theme.madison}
+  color: ${props => props.theme.madison};
   margin: 16px 0 8px 0;
   padding-bottom: 10px;
   font-size: 22px;
@@ -24,7 +24,7 @@ export const InputField = styled.div`
     text-decoration: none;
   }
 
-  input: focus {
+  input:focus {
     outline: 2px offset ${props => props.theme.teal};
   }
 `;

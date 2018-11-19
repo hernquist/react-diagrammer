@@ -3,6 +3,11 @@ import auth from "../HOC/auth";
 import ShowUnassigned from "./ShowUnassigned";
 import DisplayComponent from "./DisplayComponent";
 import helper from "../../helpers/helper";
+import LinesMaker from "./LinesMaker";
+import { 
+  DiagramMainContainer as Container,
+  Row
+ } from 'styles';
 
 class DiagramMain extends Component {
   state = {
@@ -10,14 +15,16 @@ class DiagramMain extends Component {
   };
 
   render() {
-    const { currentProject, parent, history, setParent } = this.props;
-    if (!currentProject || !currentProject.components) {
-      return null;
-    }
+    const { currentProject, history, setParent } = this.props;
+    if (!currentProject || !currentProject.components) return null;
+    
     const { components } = currentProject;
     const unassigned = helper.unassigned(components);
     const branches = helper.childs(components);
     const root = helper.root(components);
+
+    const width = document.getElementsByClassName("diagram")[0].offsetWidth;
+    const height = document.getElementsByClassName("diagram")[0].offsetHeight;
     
     const tree = branches
       .reduce(
@@ -30,9 +37,6 @@ class DiagramMain extends Component {
         [root]
       )
       .filter(branches => branches.length > 0);
-
-    const width = document.getElementsByClassName("diagram")[0].offsetWidth;
-    const height = document.getElementsByClassName("diagram")[0].offsetHeight;
     
     const spaceAround = tree.map((row, j) => {
       const spaces = (width - row.length * 110) / (row.length + 1);
@@ -61,9 +65,6 @@ class DiagramMain extends Component {
       }, [])
     ).filter(row => row.length > 0)
 
-    console.log('spaceAround:', spaceAround);
-    console.log('lines:', lines)
-
     return (
       <Fragment>
         {unassigned.length > 0 && (
@@ -73,49 +74,22 @@ class DiagramMain extends Component {
             history={history}
           />
         )}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column'
-        }}>
+        <Container>
           {spaceAround.map((row, i) => (
-            <div 
-              key={i}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              {row.map(card => {
-                if (!card) return null;
-                return (
-                  <DisplayComponent
-                    y={card.top}
-                    x={card.left}
-                    key={card._id} 
-                    component={card} 
-                    {...this.props} 
-                  />
-                )
-              })}
-            </div>
+            <Row key={i}>
+              {row.map(card => card ?
+                <DisplayComponent
+                  y={card.top}
+                  x={card.left}
+                  key={card._id} 
+                  component={card} 
+                  {...this.props} 
+                /> : null
+              )}
+            </Row>
           ))}
-            <svg height={height} width={width}>
-          {lines.map((row, i) => (
-              row.map(card => (
-                <line 
-                  x1={card.x1 + 60} 
-                  y1={card.y1 + 25} 
-                  x2={card.x2 + 60} 
-                  y2={card.y2 - 75} 
-                  style={{
-                    stroke: "#2c3e50",
-                    strokeWidth: "2" 
-                  }}
-                />
-              ))
-              ))}
-              </svg>
-        </div>
+          <LinesMaker lines={lines} width={width} height={height} />
+        </Container>
       </Fragment>
     );
   }

@@ -27,7 +27,6 @@ class DisplayComponent extends Component {
       name === component.name && Number(iteration) === component.iteration;
     const isParent = parent === component._id;
 
-    // TODO, determine pixel length of strength
     const fontSize = component.name.length > 10 ? "12px" : "20px";
 
     const Card = isSelected ? SelectedCard : isParent ? ParentCard : BaseCard;
