@@ -8,13 +8,14 @@ import {
 export default class ComponentList extends Component {
   render() {
     const {
-      potentialParents,
+      potentialParents = [],
       chooseComponent,
       highlighted,
       text,
       display
     } = this.props;
     if (!display) return null;
+    console.log("we're here");
 
     return (
       <Container>
