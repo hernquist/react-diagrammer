@@ -5,34 +5,32 @@ import {
   ComponentListItem as ListItem
 } from "styles";
 
-export default class ComponentList extends Component {
-  render() {
-    const {
-      potentialParents = [],
-      chooseComponent,
-      highlighted,
-      text,
-      display
-    } = this.props;
-    if (!display) return null;
-    console.log("we're here");
+const ComponentList = ({
+  potentialParents = [],
+  chooseComponent,
+  highlighted,
+  text,
+  display
+}) => {
+  if (!display) return null;
 
-    return (
-      <Container>
-        <Title>{text}</Title>
-        {potentialParents.map(parent => (
-          <ListItem
-            key={parent._id}
-            onClick={() => chooseComponent(parent._id)}
-            style={{
-              backgroundColor:
-                highlighted === parent._id && "rgba(0, 0, 0, 0.3)"
-            }}
-          >
-            {parent.name}
-          </ListItem>
-        ))}
-      </Container>
-    );
-  }
+  return (
+    <Container>
+      <Title>{text}</Title>
+      {potentialParents.map(parent => (
+        <ListItem
+          key={parent._id}
+          onClick={() => chooseComponent(parent._id)}
+          style={{
+            backgroundColor:
+              highlighted === parent._id && "rgba(0, 0, 0, 0.3)"
+          }}
+        >
+          {parent.name}
+        </ListItem>
+      ))}
+    </Container>
+  );
 }
+
+export default ComponentList;
