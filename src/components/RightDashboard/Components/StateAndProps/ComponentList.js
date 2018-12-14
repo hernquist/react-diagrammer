@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   ComponentList as Container,
   RightDashboardTitle as Title,
@@ -6,7 +6,7 @@ import {
 } from "styles";
 
 const ComponentList = ({
-  potentialParents = [],
+  potentialParents,
   chooseComponent,
   highlighted,
   text,
