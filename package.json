@@ -1,10 +1,12 @@
 {
   "name": "react-tree-maker",
+  "homepage": "http://gitname.github.io/react-diagrammer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "apollo-boost": "^0.1.7",
     "apollo-cache-inmemory": "^1.2.2",
+    "gh-pages": "^2.0.1",
     "graphql": "^0.13.2",
     "react": "^16.4.0",
     "react-apollo": "^2.1.4",
@@ -19,6 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
