@@ -37,7 +37,7 @@ export default class AddExistingComponent extends Component {
 
   addChild = async (childId, mutation) => {
     const components = this.props.currentProject.components || [];
-    const parentComponent = helper.find(components, this.state.highlighted);
+    const parentComponent = helper.find(components, this.state.highlighted) || {};
     const success = await mutation({ variables: { _id: parentComponent._id, childId } })
     if (success.data.addChild) {
       const children = [...parentComponent.children, childId];
@@ -64,7 +64,7 @@ export default class AddExistingComponent extends Component {
       children = result.data.copyChildren.map(child => child._id);
     }
     
-    // TODO why does copiedComponent sometimes not have a cloneId?
+    // TODO: why does copiedComponent sometimes not have a cloneId?
     // is it not being returned from the backend
     let cloneId = copiedComponent.cloneId || copiedComponent._id;
     const iteration = this.findIteration(cloneId);
@@ -77,13 +77,7 @@ export default class AddExistingComponent extends Component {
       { iteration }, 
       { children }
     )
-    
     delete component._id;
-
-    // not really necessary
-    // delete component.callbacks;
-    // delete component.props;
-    // delete component.state;
 
     const { data } = await mutation({ variables: component });
     
@@ -94,6 +88,7 @@ export default class AddExistingComponent extends Component {
     );
     
     if (data.copyComponent.placement === 'child') this.addChild(data.copyComponent._id, addChild);
+    
     this.props.setParent('');
     const { name } = data.copyComponent;
     this.props.history.push(`/main/component/${name}/0`);
@@ -133,7 +128,8 @@ export default class AddExistingComponent extends Component {
                             CHILD 
                           </div>
                           <ComponentList 
-                            childs={[...root, ...childs]}
+                            // childs={[...root, ...childs]}
+                            potentialParents={[...root, ...childs]}
                             display={placement === 'child'} 
                             chooseComponent={this.chooseComponent}
                             highlighted={highlighted}
@@ -166,7 +162,7 @@ export default class AddExistingComponent extends Component {
                     :
                       <div>
                         <ComponentList
-                          childs={[...root, ...childs]}
+                          potentialParents={[...root, ...childs]}
                           chooseComponent={this.chooseComponent}
                           highlighted={highlighted}
                           display={true}
