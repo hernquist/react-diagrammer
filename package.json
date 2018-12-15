@@ -1,6 +1,6 @@
 {
   "name": "react-tree-maker",
-  "homepage": "http://hernquist.github.io/react-diagrammer",
+  "homepage": "https://hernquist.github.io/react-diagrammer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
