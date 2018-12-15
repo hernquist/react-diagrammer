@@ -13,7 +13,8 @@ import LoggedIn from "./components/Layout/LoggedIn";
 import { Theme } from "./styles";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:3001/graphql"
+  // uri: "http://localhost:3001/graphql",
+  uri: "https://mysterious-caverns-78630.herokuapp.com/graphql"
 });
 
 const middlewareLink = new ApolloLink((operation, forward) => {
