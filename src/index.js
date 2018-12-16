@@ -40,9 +40,7 @@ const Index = () => {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={Theme}>
-        <BrowserRouter
-          basename={basename}
-        >
+        <BrowserRouter basename={basename}>
           <Fragment>
             <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
             <Route path="/main" component={LoggedIn} />
