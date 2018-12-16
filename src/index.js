@@ -40,7 +40,7 @@ const Index = () => {
     <ApolloProvider client={client}>
       <ThemeProvider theme={Theme}>
         <BrowserRouter
-          basename={"https://hernquist.github.io/react-diagrammer"}
+          basename={"/react-diagrammer"}
         >
           <Fragment>
             <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
