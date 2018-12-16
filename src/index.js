@@ -12,9 +12,14 @@ import NotLoggedIn from "./components/Layout/NotLoggedIn";
 import LoggedIn from "./components/Layout/LoggedIn";
 import { Theme } from "./styles";
 
-const uri = process.NODE_ENV === "production" ? 
+const uri = process.env.NODE_ENV === "production" ? 
   "https://mysterious-caverns-78630.herokuapp.com/graphql" : 
   "http://localhost:3001/graphql";
+
+console.log (uri);
+
+const basename = process.env.NODE_ENV === "production" ?
+"/react-diagrammer" : "";
 
 const httpLink = createHttpLink({ uri });
 
@@ -41,7 +46,7 @@ const Index = () => {
     <ApolloProvider client={client}>
       <ThemeProvider theme={Theme}>
         <BrowserRouter
-          basename={"/react-diagrammer"}
+          basename={basename}
         >
           <Fragment>
             <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
