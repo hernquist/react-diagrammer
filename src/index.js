@@ -7,19 +7,14 @@ import { ApolloLink, concat } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ThemeProvider } from "styled-components";
-
 import NotLoggedIn from "./components/Layout/NotLoggedIn";
 import LoggedIn from "./components/Layout/LoggedIn";
 import { Theme } from "./styles";
+import { SERVER, LOCAL_SERVER, BASENAME } from "./helpers/const";
 
-const uri = process.env.NODE_ENV === "production" ? 
-  "https://mysterious-caverns-78630.herokuapp.com/graphql" : 
-  "http://localhost:3001/graphql";
-
-console.log (uri);
-
-const basename = process.env.NODE_ENV === "production" ?
-"/react-diagrammer" : "";
+const prod = process.env.NODE_ENV === "production"
+const uri = prod ? SERVER : LOCAL_SERVER;
+const basename = prod ? BASENAME : "";
 
 const httpLink = createHttpLink({ uri });
 
