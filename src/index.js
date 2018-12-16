@@ -12,10 +12,11 @@ import NotLoggedIn from "./components/Layout/NotLoggedIn";
 import LoggedIn from "./components/Layout/LoggedIn";
 import { Theme } from "./styles";
 
-const httpLink = createHttpLink({
-  // uri: "http://localhost:3001/graphql",
-  uri: "https://mysterious-caverns-78630.herokuapp.com/graphql"
-});
+const uri = process.NODE_ENV === "production" ? 
+  "https://mysterious-caverns-78630.herokuapp.com/graphql" : 
+  "http://localhost:3001/graphql";
+
+const httpLink = createHttpLink({ uri });
 
 const middlewareLink = new ApolloLink((operation, forward) => {
   operation.setContext({
