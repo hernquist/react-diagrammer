@@ -10,12 +10,11 @@ import { ThemeProvider } from "styled-components";
 import NotLoggedIn from "./components/Layout/NotLoggedIn";
 import LoggedIn from "./components/Layout/LoggedIn";
 import { Theme } from "./styles";
-import { SERVER, LOCAL_SERVER, BASENAME } from "./helpers/const";
+import { API, LOCAL_API, BASENAME } from "./helpers/const";
 
-const prod = process.env.NODE_ENV === "production"
-const uri = prod ? SERVER : LOCAL_SERVER;
+const prod = process.env.NODE_ENV === "production";
+const uri = prod ? API : LOCAL_API;
 const basename = prod ? BASENAME : "";
-
 const httpLink = createHttpLink({ uri });
 
 const middlewareLink = new ApolloLink((operation, forward) => {
@@ -36,19 +35,17 @@ const client = new ApolloClient({
   cache
 });
 
-const Index = () => {
-  return (
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={Theme}>
-        <BrowserRouter basename={basename}>
-          <Fragment>
-            <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
-            <Route path="/main" component={LoggedIn} />
-          </Fragment>
-        </BrowserRouter>
-      </ThemeProvider>
-    </ApolloProvider>
-  );
-};
+const Index = () => (
+  <ApolloProvider client={client}>
+    <ThemeProvider theme={Theme}>
+      <BrowserRouter basename={basename}>
+        <Fragment>
+          <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
+          <Route path="/main" component={LoggedIn} />
+        </Fragment>
+      </BrowserRouter>
+    </ThemeProvider>
+  </ApolloProvider>
+);
 
 ReactDOM.render(<Index />, document.querySelector("#root"));
