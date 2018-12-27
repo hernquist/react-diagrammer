@@ -14,9 +14,7 @@ import { API, LOCAL_API, BASENAME } from "./helpers/const";
 
 const prod = process.env.NODE_ENV === "production";
 const uri = prod ? API : LOCAL_API;
-console.log(uri)
 const basename = prod ? BASENAME : "";
-
 const httpLink = createHttpLink({ uri });
 
 const middlewareLink = new ApolloLink((operation, forward) => {
