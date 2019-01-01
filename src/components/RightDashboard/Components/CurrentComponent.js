@@ -76,7 +76,6 @@ class CurrentComponent extends Component {
         </Mutation>
         <ModalContainer text={"EDIT NAME"} button={Button}>
           <EditComponentName
-            currentProject={currentProject}
             {...this.props}            
           />
         </ModalContainer>
@@ -90,7 +89,6 @@ class CurrentComponent extends Component {
         </Button>
         <ModalContainer text={"COMPONENT DETAILS"} button={Button}>
           <ShowComponent
-            currentProject={currentProject}
             {...this.props}            
           />
         </ModalContainer>
