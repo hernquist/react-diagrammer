@@ -15,6 +15,7 @@ export * from './Header';
 export * from './Layout';
 export * from './Modal';
 export * from './RightDashboard';
+export * from './ShowComponent';
 export * from './ShowUnassigned';
 export * from './Theme';
 export * from './TopDashboard';

@@ -38,8 +38,7 @@ class CurrentComponent extends Component {
     const isUnassigned = currentComponent.placement === "unassigned";
     const isRoot = currentComponent.placement === "root";
     const buttonText = `${isUnassigned ? `ASSIGN` : `UNASSIGN`} COMPONENT`;
-    const toggleText = 
-      `MAKE ${ isPresentational ? `CONTAINER` : `PRESENTATIONAL`}`;
+    const toggleText = `MAKE ${ isPresentational ? `CONTAINER` : `PRESENTATIONAL`}`;
 
     return (
       <Container>
@@ -57,40 +56,28 @@ class CurrentComponent extends Component {
         </Button>
         <Button
           disabled={isPresentational}
-          onClick={() =>
-            history.push(match.url + "/update-callbacks")
-          }
+          onClick={() => history.push(match.url + "/update-callbacks")}
         >
           UPDATE CALLBACKS
         </Button>
         <Mutation mutation={TOGGLE_COMPONENT_STYLE}>
           {ToggleComponentStyle => (
-            <Button
-              onClick={() =>
-                this.updateStyle(currentComponent, ToggleComponentStyle)
-              }
-            >
+            <Button onClick={() => this.updateStyle(currentComponent, ToggleComponentStyle)}>
               {toggleText}
             </Button>
           )}
         </Mutation>
         <ModalContainer text={"EDIT NAME"} button={Button}>
-          <EditComponentName
-            {...this.props}            
-          />
+          <EditComponentName {...this.props} />
         </ModalContainer>
         <Button
           disabled={isRoot}
-          onClick={() =>
-            history.push(match.url + `/${isUnassigned ? `` : `un`}assign-component`)
-          }
+          onClick={() => history.push(match.url + `/${isUnassigned ? `` : `un`}assign-component`)}
         >
           {buttonText}
         </Button>
-        <ModalContainer text={"COMPONENT DETAILS"} button={Button}>
-          <ShowComponent
-            {...this.props}            
-          />
+        <ModalContainer text={"COMPONENT DETAILS"} button={Button} large>
+          <ShowComponent {...this.props} />
         </ModalContainer>
       </Container>
     );
