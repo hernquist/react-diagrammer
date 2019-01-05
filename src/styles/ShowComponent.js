@@ -38,4 +38,6 @@ export const ActiveTab = styled(ShowComponentTab)`
 
 export const ShowComponentContent = styled.div`
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 `;

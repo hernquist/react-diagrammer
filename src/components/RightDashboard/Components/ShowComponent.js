@@ -53,9 +53,21 @@ export default class ShowComponent extends Component {
             <Tab active={showCallbacks} onClick={()=>this.setTab('callbacks')}>CALLBACKS</Tab>
           </Bar>
           <Content>
-            <ShowState visible={showState} state={state} />
-            <ShowProps visible={showProps} props={props} />
-            <ShowCallbacks visible={showCallbacks} callbacks={callbacks} />
+            <ShowState 
+              order={showState ? 1 : 3} 
+              highlighted={showState} 
+              state={state} 
+            />
+            <ShowProps 
+              order={showProps ? 1 : showCallbacks ? 4 : 2} 
+              highlighted={showProps} 
+              props={props} 
+            />
+            <ShowCallbacks 
+              order={showCallbacks ? 1 : 2}
+              highlighted={showCallbacks} 
+              callbacks={callbacks} 
+            />
           </Content>
 
 
