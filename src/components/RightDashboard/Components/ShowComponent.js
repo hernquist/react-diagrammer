@@ -3,13 +3,20 @@ import helper from 'helpers/helper';
 import { 
   FormTitle as Title, 
   ShowComponentText as Text,
-  ShowComponentTable as Table, 
+  ShowComponentContainer as Container, 
   ShowComponentBar as Bar, 
   ShowComponentTab as Tab, 
+  ShowComponentContent as Content
 } from 'styles';
+import { ShowState, ShowProps, ShowCallbacks } from "./ShowComponentContent";
 
 export default class ShowComponent extends Component {
+  state = { activeTab: 'state' };
+
+  setTab = tab => this.setState({ activeTab: tab })
+
   render() {
+    const { activeTab } = this.state;
     const { currentProject, history, closeModal } = this.props;
     const { pathname } = history.location;
     const { components } = currentProject;
@@ -30,26 +37,30 @@ export default class ShowComponent extends Component {
       'unassigned': `${name} is a unassigned component` 
     }
 
+    const showState = activeTab==='state';
+    const showProps = activeTab==='props';
+    const showCallbacks = activeTab==='callbacks';
+
     return (
       <Fragment>
         <Title>{name}</Title>
         <Title>{componentStyle} Component</Title>
         <Text>{descriptionMap[placement]}</Text>
-        <Table>
+        <Container>
           <Bar >
-            <Tab>STATE</Tab>
-            <Tab>PROPS</Tab>
-            <Tab>CALLBACKS</Tab>
+            <Tab active={showState} onClick={()=>this.setTab('state')}>STATE</Tab>
+            <Tab active={showProps} onClick={()=>this.setTab('props')}>PROPS</Tab>
+            <Tab active={showCallbacks} onClick={()=>this.setTab('callbacks')}>CALLBACKS</Tab>
           </Bar>
+          <Content>
+            <ShowState visible={showState} state={state} />
+            <ShowProps visible={showProps} props={props} />
+            <ShowCallbacks visible={showCallbacks} callbacks={callbacks} />
+          </Content>
 
-          <div>STATE</div>
-            {state.map(obj => <div key={obj.name + obj.statetype}>{obj.name}: {obj.statetype}</div>)}
-          <div>PROPS</div>
-            {props.map(obj => <div key={obj.name +obj.proptype}>{obj.name}: {obj.proptype}</div>)}
-          <div>CALLBACKS</div>
-            {callbacks.map(obj => <div key={obj.name + obj.statetype}>{obj.name}: {obj.statetype}</div>)}
+
         
-        </Table>
+        </Container>
       </Fragment>
     )
   }
