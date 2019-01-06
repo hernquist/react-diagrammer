@@ -41,3 +41,7 @@ export const ShowComponentContent = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const ShowComponentField = styled.div`
+  margin-left: 15px;
+`

@@ -17,13 +17,12 @@ export default class ShowComponent extends Component {
 
   render() {
     const { activeTab } = this.state;
-    const { currentProject, history, closeModal } = this.props;
+    const { currentProject, history } = this.props;
     const { pathname } = history.location;
     const { components } = currentProject;
     const component = helper.getComponentFromURL(pathname, components);
     
     if (!components) return <div>No Components</div>;
-    console.log(component);
 
     const { state, props, callbacks, children, style, placement, name } = component;
     const componentStyle = style === 'presentational' ? 'Presentional' : 'ES6 Class or Container';
@@ -37,9 +36,9 @@ export default class ShowComponent extends Component {
       'unassigned': `${name} is a unassigned component` 
     }
 
-    const showState = activeTab==='state';
-    const showProps = activeTab==='props';
-    const showCallbacks = activeTab==='callbacks';
+    const showState = activeTab==='state',
+      showProps = activeTab==='props',
+      showCallbacks = activeTab==='callbacks';
 
     return (
       <Fragment>
@@ -69,9 +68,6 @@ export default class ShowComponent extends Component {
               callbacks={callbacks} 
             />
           </Content>
-
-
-        
         </Container>
       </Fragment>
     )
