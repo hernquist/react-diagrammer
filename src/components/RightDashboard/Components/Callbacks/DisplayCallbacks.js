@@ -7,7 +7,6 @@ import {
  } from 'styles';
 import CallbackForm from './CallbackForm';
 import { WideButton } from 'components/UI/SubmitButton';
-
 import CallbackList from './CallbackList';
 
 export default class DisplayCallbacks extends Component {

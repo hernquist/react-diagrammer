@@ -6,6 +6,7 @@ const teal = "#21c2f8";
 const grey = "#bdc3c7";
 const lightGrey = "#f3f7f8";
 const red = "#ff0000";
+const lightBlue = "lightBlue";
 
 export const Theme = { 
   black,
@@ -13,6 +14,7 @@ export const Theme = {
   teal,
   grey,
   lightGrey,
+  lightBlue,
   red,
   maxWidth: "1000px",
   bs1: `2px 2px 2px 2px ${madison}`,

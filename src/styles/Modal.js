@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { SubmitButton } from "../components/UI/SubmitButton";
 
 export const ModalWrapper = styled.div`
   position: absolute;
@@ -46,8 +45,17 @@ export const ModalBackground = styled.div`
   z-index: 90;
 `;
 
-export const CloseModalButton = styled(SubmitButton)`
+export const CloseModalButton = styled.button`
+  width: 100px;
+  height: 40px;
+  border: 2px solid black;
+  font-size: 14px;
   position: absolute;
   top: 4px;
   right: 7px;
+  
+  &:hover {
+    background: ${props => props.theme.lightBlue};
+  };
 `;
+
