@@ -5,12 +5,12 @@ const About = () => (
     <h2>React Tree Maker</h2>
     <p style={{ fontSize: "20px" }}>
       When I was an coding instructor, teaching React to aspiring developers, I
-      ran into a common problem: the so-called React Learn Curve. I wanted the
-      students to diagram their React App's tree diagram so they could visualize
-      the uni-directional data flow. At first, I thought the problem was
-      conceptual: they didn't understand that props were read-only, didn't get
-      the syntax involved with callbacks, etc. To me the primary problem lay in
-      their inability to see the tree structure they were creating. How can a
+      ran into a common problem: the so-called React Learning Curve. I wanted
+      the students to diagram their React App's tree diagram so they could
+      visualize the uni-directional data flow. At first, I thought the problem
+      was conceptual: they didn't understand that props were read-only, didn't
+      get the syntax involved with callbacks, etc. To me the primary problem lay
+      in their inability to see the tree structure they were creating. How can a
       dev understand what is props and what is state if the dev can't see where
       in the application he or she coding. Let alone to understand that the
       problem you're trying to solve can either be promoted or encumbered by the
@@ -24,8 +24,8 @@ const About = () => (
       and state-changing callbacks in their applications.
     </p>
     <p style={{ fontSize: "20px" }}>
-      Coming Soon. React Tree Maker will have the ability to create react
-      boilerplate based on the user tree diagram!
+      <b>Coming Soon...</b> React Tree Maker will have the ability to create
+      react boilerplate based on the user tree diagram!
     </p>
   </Fragment>
 );
