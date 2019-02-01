@@ -1,15 +1,13 @@
-import React, { Component, Fragment } from 'react';
-import { Mutation } from 'react-apollo';
-import { ASSIGN_COMPONENT } from '../../../graphql/mutations';
-import ComponentList from './StateAndProps/ComponentList';
-import { Buttons } from 'styles';
-import { SubmitButton } from 'components/UI/SubmitButton';
-import helper from 'helpers/helper';
+import React, { Component, Fragment } from "react";
+import { Mutation } from "react-apollo";
+import { ASSIGN_COMPONENT } from "../../../graphql/mutations";
+import ComponentList from "./StateAndProps/ComponentList";
+import { Buttons } from "styles";
+import { SubmitButton } from "components/UI/SubmitButton";
+import helper from "helpers/helper";
 
 export default class AssignComponent extends Component {
-  state = {
-    highlighted: ''
-  };
+  state = { highlighted: "" };
 
   updateComponents = (mutation, parentId) => async () => {
     const { updateComponent, currentProject, history, setParent } = this.props;
@@ -23,8 +21,8 @@ export default class AssignComponent extends Component {
     });
 
     data.assignComponent.map(component => updateComponent(component));
-    setParent('');
-    history.push('/main/component');
+    setParent("");
+    history.push("/main/component");
   };
 
   close = () => {
@@ -54,7 +52,7 @@ export default class AssignComponent extends Component {
               chooseComponent={this.handleParent}
               highlighted={highlighted}
               display={true}
-              text='Choose a parent?'
+              text="Choose a parent?"
             />
             <Buttons>
               <SubmitButton

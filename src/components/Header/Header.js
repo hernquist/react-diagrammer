@@ -1,15 +1,15 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import ModalContainer from '../UI/ModalContainer';
-import About from '../Static/About';
-import { FlatButton } from '../UI/FlatButton';
-import { 
-  HeaderContainer, 
-  AppName, 
-  Nav, 
-  TitlesContainer as Titles 
-} from 'styles';
-import UserName from './Username';
+import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
+import ModalContainer from "../UI/ModalContainer";
+import About from "../Static/About";
+import { FlatButton } from "../UI/FlatButton";
+import {
+  HeaderContainer,
+  AppName,
+  Nav,
+  TitlesContainer as Titles
+} from "styles";
+import UserName from "./Username";
 
 class Header extends Component {
   render() {
@@ -19,26 +19,26 @@ class Header extends Component {
     return (
       <HeaderContainer>
         <Titles>
-          <AppName>REACT DIAGRAMMER</AppName>
+          <AppName>REACT TREE MAKER</AppName>
           <UserName visible={loggedIn} userName={user.name} />
         </Titles>
         <Nav>
-          <ModalContainer text='ABOUT' large>
+          <ModalContainer text="ABOUT" large>
             <About />
           </ModalContainer>
           {loggedIn ? (
             <Fragment>
               <FlatButton>
-                <Link to='/logout'>LOGOUT</Link>
+                <Link to="/logout">LOGOUT</Link>
               </FlatButton>
             </Fragment>
           ) : (
             <Fragment>
               <FlatButton>
-                <Link to='/signup'>SIGN UP</Link>
+                <Link to="/signup">SIGN UP</Link>
               </FlatButton>
               <FlatButton>
-                <Link to='/login'>LOGIN</Link>
+                <Link to="/login">LOGIN</Link>
               </FlatButton>
             </Fragment>
           )}
