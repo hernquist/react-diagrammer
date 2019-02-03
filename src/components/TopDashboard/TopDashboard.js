@@ -3,13 +3,15 @@ import ProjectList from './Features/ProjectList';
 import CreateOptions from './Features/CreateOptions';
 import DeleteOptions from './Features/DeleteOptions';
 import { SmallFlatButton as FlatButton } from '../UI/FlatButton';
+import { Menu } from '../UI/Menu';
 import {
   TopDashboardContainer as Container,
   CurrentProjectTitle as Title,
   ButtonsContainer
 } from 'styles';
+import { select } from 'async';
 
-class LeftDashboard extends Component {
+class TopDashboard extends Component {
   initialState = {
     changeProject: false,
     createOptions: false,
@@ -40,14 +42,14 @@ class LeftDashboard extends Component {
 
   deactivateSelector = () => this.setState({ ...this.initialState });
 
+  handleClick = selector => this.state[selector] ? 
+    this.deactivateSelector
+    : () => this.activateSelector(selector);
+
   render() {
-    const { layout, projects, currentProject, setCurrentProject } = this.props;
-    const content = {
-      'full-screen': 'SHOW DASHBOARD',
-      'logged-in': 'HIDE DASHBOARD'
-    };
+    const { projects, currentProject, setCurrentProject } = this.props;
     const { changeProject, createOptions, deleteOptions } = this.state;
-    const project = currentProject.name.length > 12 ? 
+    const project = currentProject.name.length > 16 ? 
       `${currentProject.name}` : `PROJECT ${currentProject.name}`;
         
     return (
@@ -55,60 +57,35 @@ class LeftDashboard extends Component {
         <Container>
           <Title>{project}</Title>
           <ButtonsContainer>
-            <FlatButton
-              onClick={
-                changeProject
-                  ? this.deactivateSelector
-                  : () => this.activateSelector('changeProject')
-              }
-            >
+            <FlatButton onClick={this.handleClick('changeProject')}>
               SWITCH PROJECT
             </FlatButton>
             <FlatButton
-              onClick={
-                createOptions
-                  ? this.deactivateSelector
-                  : () => this.activateSelector('createOptions')
-              }
+              onClick={this.handleClick('createOptions')}
               style={{ width: 78 }}
             >
-              {' '}
               CREATE
             </FlatButton>
             <FlatButton
-              onClick={
-                deleteOptions
-                  ? this.deactivateSelector
-                  : () => this.activateSelector('deleteOptions')
-              }
+              onClick={this.handleClick('deleteOptions')}
               style={{ width: 78 }}
             >
               DELETE
             </FlatButton>
-            <FlatButton
-              onClick={this.handleSwitch}
-              style={{ width: 184 }}
-            >
-              {content[layout]}
-            </FlatButton>
+            <Menu handleClick={this.handleSwitch} />
           </ButtonsContainer>
         </Container>
-        {changeProject && (
-          <ProjectList
-            deactivateSelector={this.deactivateSelector}
-            projects={projects}
-            setCurrentProject={setCurrentProject}
-          />
-        )}
-        {createOptions && (
-          <CreateOptions deactivateSelector={this.deactivateSelector} />
-        )}
-        {deleteOptions && (
-          <DeleteOptions deactivateSelector={this.deactivateSelector} />
-        )}
+        <ProjectList
+          visible={changeProject}
+          deactivateSelector={this.deactivateSelector}
+          projects={projects}
+          setCurrentProject={setCurrentProject}
+        />
+        <CreateOptions visible={createOptions} deactivateSelector={this.deactivateSelector} />
+        <DeleteOptions visible={deleteOptions} deactivateSelector={this.deactivateSelector} />
       </Fragment>
     );
   }
 }
 
-export default LeftDashboard;
+export default TopDashboard;

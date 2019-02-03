@@ -43,6 +43,7 @@ class LoggedIn extends Component {
     const currentProject = Object.assign({}, project, {
       components: updatedComponents
     });
+
     this.setState({ currentProject });
   };
 
@@ -114,6 +115,7 @@ class LoggedIn extends Component {
                           parent={parent}
                           currentProject={currentProject}
                           setParent={this.setParent}
+                          layout={layout}
                         />
                       </div>
                       <div className="right-dashboard" style={fullScreen}>

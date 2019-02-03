@@ -1,9 +1,7 @@
 import React from 'react';
 
 const Display = ({ visible, container, children }) => {
-  if (!visible) { 
-    var styles = { display: "none" } 
-  }
+  if (!visible) var styles = { display: "none" };
 
   if (container) {
     const Container = container;

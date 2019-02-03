@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import helper from "helpers/helper";
 import { List, ListItem } from "styles";
 
-const CreateOptions = ({ deactivateSelector }) => {
+const CreateOptions = ({ deactivateSelector, visible }) => {
   const screenWidth = helper.screenWidth();
-  const buttonsLength = 371;
+  const buttonsLength = 221;
   const position =
     screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
+  if (!visible) return null;
 
   return (
     <List onMouseLeave={deactivateSelector} style={{ left: `${position}px` }}>

@@ -2,11 +2,17 @@ import React from "react";
 import { List, ListItem } from "styles";
 import helper from "helpers/helper";
 
-const ProjectList = ({ projects, setCurrentProject, deactivateSelector }) => {
+const ProjectList = ({ 
+  projects, 
+  setCurrentProject, 
+  deactivateSelector,
+  visible 
+}) => {
   const screenWidth = helper.screenWidth();
-  const buttonsLength = 549;
+  const buttonsLength = 398;
   const position =
     screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
+  if (!visible) return null;
 
   return (
     <List onMouseLeave={deactivateSelector} style={{ left: `${position}px` }}>

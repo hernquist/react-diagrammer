@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { SmallList, ListItem } from "styles";
 import helper from "helpers/helper";
 
-const DeleteOptions = ({ deactivateSelector }) => {
+const DeleteOptions = ({ deactivateSelector, visible }) => {
   const screenWidth = helper.screenWidth();
-  const buttonsLength = 283;
+  const buttonsLength = 134;
   const position =
     screenWidth > buttonsLength ? screenWidth - buttonsLength : 0;
+  if (!visible) return null;
 
   return (
     <SmallList

@@ -1,21 +1,31 @@
-import React, { Component, Fragment } from "react";
-import auth from "../HOC/auth";
-import ShowUnassigned from "./ShowUnassigned";
-import DisplayComponent from "./DisplayComponent";
-import helper from "../../helpers/helper";
-import LinesMaker from "./LinesMaker";
+import React, { Component, Fragment } from 'react';
+import auth from '../HOC/auth';
+import ShowUnassigned from './ShowUnassigned';
+import DisplayComponent from './DisplayComponent';
+import helper from '../../helpers/helper';
+import LinesMaker from './LinesMaker';
 import { 
   DiagramMainContainer as Container,
   Row
  } from 'styles';
 
 class DiagramMain extends Component {
-  state = {
-    selected: ""
-  };
+  state = { selected: '' };
+
+  shouldComponentUpdate(nextProps) {
+    this.updated = nextProps.layout !== this.props.layout;
+    return nextProps !== this.props;
+  }
+
+  componentDidUpdate() {
+    if (this.updated) {
+      this.forceUpdate();
+      this.updated = false;
+    }
+  }
 
   render() {
-    const { currentProject, history, setParent } = this.props;
+    const { currentProject, history, setParent, layout } = this.props;
     if (!currentProject || !currentProject.components) return null;
     
     const { components } = currentProject;
@@ -23,8 +33,8 @@ class DiagramMain extends Component {
     const branches = helper.childs(components);
     const root = helper.root(components);
 
-    const width = document.getElementsByClassName("diagram")[0].offsetWidth;
-    const height = document.getElementsByClassName("diagram")[0].offsetHeight;
+    const width = document.getElementsByClassName('diagram')[0].offsetWidth;
+    const height = document.getElementsByClassName('diagram')[0].offsetHeight;
     
     const tree = branches
       .reduce(
