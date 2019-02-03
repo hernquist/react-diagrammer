@@ -1,21 +1,22 @@
 import React, { Component, Fragment } from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import DisplayFields from "./StateAndProps/DisplayFields";
 import EditField from "./StateAndProps/EditField";
 import AddField from "./StateAndProps/AddField";
 import NoStateAllowed from "./StateAndProps/NoStateAllowed";
 import ComponentHeader from "./ComponentHeader";
 import helper from "helpers/helper";
-import { 
+import {
   RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
- } from "styles";
-import { SubmitButton, WideButton } from "components/UI/SubmitButton";
+} from "styles";
+// import { SubmitButton, WideButton } from "components/UI/SubmitButton";
+import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 
-const Button = styled(WideButton)`
-  margin: 0 15%;
-  width: 70%;
-`;
+// const Button = styled(WideButton)`
+//   margin: 0 15%;
+//   width: 70%;
+// `;
 
 class UpdateComponentWorkings extends Component {
   initialState = {
@@ -26,7 +27,7 @@ class UpdateComponentWorkings extends Component {
     onHover: true,
     editField: null
   };
-  
+
   state = this.initialState;
 
   showEdit = id => this.setState({ editField: id });
@@ -59,10 +60,11 @@ class UpdateComponentWorkings extends Component {
     if (this.state.onHover) this.setState({ highlighted: null });
   };
 
-  setHighlight = field => this.setState({ 
-    highlighted: field, 
-    onHover: false 
-  });
+  setHighlight = field =>
+    this.setState({
+      highlighted: field,
+      onHover: false
+    });
 
   render() {
     const {
@@ -85,9 +87,7 @@ class UpdateComponentWorkings extends Component {
 
     return (
       <Container>
-        <ComponentHeader currentComponent={currentComponent}>
-          <SubmitButton onClick={this.exitComponent}>DONE</SubmitButton>
-        </ComponentHeader>
+        <ComponentHeader currentComponent={currentComponent} />
         {showAddField ? (
           <AddField
             type={type}
@@ -121,9 +121,11 @@ class UpdateComponentWorkings extends Component {
               onHover={onHover}
               type={type}
             />
-            <Button onClick={this.displayAddField}>
-              {`ADD A NEW ${type.toUpperCase()}`}
-            </Button>
+            <Button
+              onClick={this.displayAddField}
+              text={`ADD A NEW ${type.toUpperCase()}`}
+            />
+            <Button onClick={this.exitComponent} text="DONE" />
           </Fragment>
         )}
       </Container>
