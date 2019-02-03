@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import HeaderContainer from "../Header/HeaderContainer";
 import TopDashboard from "../TopDashboard/TopDashboard";
-import RightDashoard from "../RightDashboard/RightDashboard";
+import RightDashboard from "../RightDashboard/RightDashboard";
 import DiagramMain from "../Diagram/DiagramMain";
 import { Query } from "react-apollo";
 import { GET_AUTH_USER, PROJECTS_BY_USER_ID } from "../../graphql/queries";
@@ -79,6 +79,7 @@ class LoggedIn extends Component {
                   data = {};
                 }
                 const projects = data.projectsByUserId;
+                const latestProject = currentProject || findLatest(projects);
 
                 return (
                   <Layout className={layout}>
@@ -111,13 +112,11 @@ class LoggedIn extends Component {
                         />
                       </div>
                       <div className="right-dashboard" style={fullScreen}>
-                        <RightDashoard
+                        <RightDashboard
                           {...this.props}
                           refetchProject={refetch}
                           user={user}
-                          currentProject={
-                            currentProject || findLatest(projects)
-                          }
+                          currentProject={latestProject}
                           projects={projects}
                           setCurrentProject={this.setCurrentProject}
                           updateComponent={this.updateComponent}

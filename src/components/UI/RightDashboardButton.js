@@ -39,9 +39,4 @@ export const RightDashboardButton = styled.button`
   }
 `;
 
-// export const WideButton = styled(SubmitButton)`
-//   min-height: 30px;
-//   width: 300px;
-// `;
-
 
