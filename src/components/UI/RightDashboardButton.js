@@ -1,6 +1,7 @@
+import React from 'react';
 import styled from "styled-components";
 
-export const RightDashboardButton = styled.button`
+const Button = styled.button`
   margin: 2px;
   width: 100px;
   height: 30px;
@@ -23,6 +24,11 @@ export const RightDashboardButton = styled.button`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  &.disabled-button {
+    color: green;
+    background: yellow;
+  }
   
   &:hover,
   &:active,
@@ -32,11 +38,17 @@ export const RightDashboardButton = styled.button`
       box-shadow: ${props => props.theme.bs1};
   }
 
-  &:disabled {
+  &:disabled,
+  &.disabled-button {
     background: ${props => props.theme.grey};
     color: rgba(0, 0, 0, 0.7);
     box-shadow: none;
   }
 `;
+
+export const RightDashboardButton = props =>
+  <Button {...props}>
+    {props.text}
+  </Button>
 
 

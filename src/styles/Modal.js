@@ -51,8 +51,8 @@ export const CloseModalButton = styled.button`
   border: 2px solid black;
   font-size: 14px;
   position: absolute;
-  top: 4px;
-  right: 7px;
+  top: 8px;
+  right: 8px;
   
   &:hover {
     background: ${props => props.theme.lightBlue};
