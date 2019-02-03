@@ -9,7 +9,6 @@ import {
   CurrentProjectTitle as Title,
   ButtonsContainer
 } from 'styles';
-import { select } from 'async';
 
 class TopDashboard extends Component {
   initialState = {

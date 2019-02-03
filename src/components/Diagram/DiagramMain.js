@@ -25,7 +25,7 @@ class DiagramMain extends Component {
   }
 
   render() {
-    const { currentProject, history, setParent, layout } = this.props;
+    const { currentProject, history, setParent } = this.props;
     if (!currentProject || !currentProject.components) return null;
     
     const { components } = currentProject;

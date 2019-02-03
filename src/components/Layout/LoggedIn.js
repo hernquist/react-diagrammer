@@ -9,15 +9,12 @@ import notifications from "../HOC/notifications";
 import { Layout } from "styles";
 
 class LoggedIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      layout: "logged-in",
-      currentProject: null,
-      errors: [],
-      parent: ""
-    };
-  }
+  state = {
+    layout: "logged-in",
+    currentProject: null,
+    errors: [],
+    parent: ""
+  };
 
   switchLayout = layout => this.setState({ layout });
 
@@ -29,11 +26,11 @@ class LoggedIn extends Component {
     const updatedComponents = components.map(
       component => (component._id === updated._id ? updated : component)
     );
-    
+
     const currentProject = Object.assign({}, project, {
       components: updatedComponents
     });
-    this.setState({ currentProject });    
+    this.setState({ currentProject });
   };
 
   addComponent = updated => {
@@ -52,19 +49,14 @@ class LoggedIn extends Component {
   render() {
     const { layout, errors, currentProject, parent } = this.state;
     const { createNotification } = this.props;
-    const fullScreen = {
-      display: layout === "full-screen" && "none"
-    };
+    const fullScreen = { display: layout === "full-screen" && "none" };
 
-    const findLatest = projects => {
-      if (!projects || projects.length < 1) {
-        return { name: "no projects" };
-      } else {
-        return projects.reduce(
-          (prev, curr) => (curr.dateVisited > prev.dateVisited ? curr : prev)
-        );
-      }
-    };
+    const findLatest = projects => 
+      (!projects || projects.length < 1) ?
+        ({ name: "no projects" }) 
+        : projects.reduce(
+            (prev, curr) => (curr.dateVisited > prev.dateVisited ? curr : prev)
+          );
 
     return (
       <Query query={GET_AUTH_USER}>
