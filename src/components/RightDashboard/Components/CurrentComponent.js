@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { Mutation } from 'react-apollo';
 import { TOGGLE_COMPONENT_STYLE } from '../../../graphql/mutations';
 import helper from '../../../helpers/helper';
 import ModalContainer from '../../UI/ModalContainer';
 import ComponentHeader from './ComponentHeader';
 import EditComponentName from './EditComponentName';             
-import { RightDashboardContainer as Container } from 'styles';
-import { WideButton } from '../../UI/SubmitButton';
+import { RightDashboardContainer as Container} from 'styles';
+import { RightDashboardButton as Button } from '../../UI/RightDashboardButton';
 import ShowComponent from './ShowComponent';
-
-const Button = styled(WideButton)`
-  width: 90%;
-  margin: 3% 5% 2% 5%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
 
 class CurrentComponent extends Component {
   updateStyle = async ({ _id }, mutation) => {

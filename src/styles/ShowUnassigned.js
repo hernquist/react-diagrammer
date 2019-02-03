@@ -17,17 +17,17 @@ export const UnassignedContainer = styled.div`
 
   &:hover {
     border: 2px solid ${props => props.theme.teal};
-    box-shadow: ${props => props.theme.bs1};
+    box-shadow: ${props => props.theme.bs2};
   }
 `;
 
 export const DisplayUnassignedContainer = styled(UnassignedContainer)`
   border: 2px solid ${props => props.theme.teal};
-  box-shadow: ${props => props.theme.bs1};
+  box-shadow: ${props => props.theme.bs2};
 
   &:hover {
     border: 2px solid ${props => props.theme.teal};
-    box-shadow: ${props => props.theme.bs1};
+    box-shadow: ${props => props.theme.bs2};
   }
 `;
 

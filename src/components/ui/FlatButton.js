@@ -21,10 +21,10 @@ export const FlatButton = styled.button`
     background-color: rgba(33, 194, 248, 0.6);
     border-radius: 4px;
     box-shadow: 3px 3px rgba(33, 194, 248, 0.2);
-    color: ${prop => prop.theme.black};
+    color: ${props => props.theme.black};
     font-size: 20px;
     a {
-      color: ${prop => prop.theme.black};
+      color: ${props => props.theme.black};
     }
   }
 
@@ -36,7 +36,7 @@ export const FlatButton = styled.button`
 
   a {
     text-decoration: none;
-    color: ${prop => prop.theme.teal};
+    color: ${props => props.theme.teal};
     font-size: 20px;
   }
 `;

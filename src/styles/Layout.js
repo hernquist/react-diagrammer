@@ -14,7 +14,7 @@ export const Layout = styled.div`
   .logged-in {
     display: grid;
     height: 100vh;
-    grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 130px 130px 130px;
     grid-template-rows: 48px 32px 1fr;
     grid-template-areas:
       "nb nb nb nb nb nb nb nb nb nb"
