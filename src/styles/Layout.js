@@ -14,7 +14,7 @@ export const Layout = styled.div`
   .logged-in {
     display: grid;
     height: 100vh;
-    grid-template-columns: minmax(140px, 1fr) repeat(9, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 100px 100px 100px;
     grid-template-rows: 48px 32px 1fr;
     grid-template-areas:
       "nb nb nb nb nb nb nb nb nb nb"
@@ -64,7 +64,8 @@ export const Layout = styled.div`
   .right-dashboard {
     display: grid;
     grid-area: rd;
-    background: ${props => props.theme.grey};
+    background: ${props => props.theme.lightBlue};
+    border-left: 1px solid black;
     border-radius: 1px;
   }
 

@@ -14,7 +14,10 @@ const messageBuilder = (type, m, t, d = {}, time, cb) => {
     nameTaken: 'Please select a different username',
     emailTaken: 'Please select a different email',
     [`Incorrect password`]: 'You entered the wrong password',
-    [`No user with that email`]: 'There is no user with that email'
+    [`No user with that email`]: 'There is no user with that email',
+    [`update-state`]: `Presentional components don't have state to update`, 
+    [`update-callbacks`]: `Presentional components don't have stateful callbacks to update`,
+    [`unassign-component`]: 'Root components at the top of a tree cannot be unassigned' 
   };
   
   const titles = {
@@ -27,7 +30,9 @@ const messageBuilder = (type, m, t, d = {}, time, cb) => {
     nameTaken: 'Username Already in Use',
     emailTaken: 'Email Already in Use',
     [`Incorrect password`]: 'Incorrect Password',
-    [`No user with that email`]: 'Incorrect Email'
+    [`No user with that email`]: 'Incorrect Email',
+    isPresentational: '',
+    isRoot: ''
   };
 
   const timeMapping = {

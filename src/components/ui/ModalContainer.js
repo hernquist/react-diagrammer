@@ -12,7 +12,7 @@ export default class ModalContainer extends Component {
       <Toggle>
         {({ visible, toggle }) => (
           <Fragment>
-            <Button onClick={toggle} disabled={disabled}>
+            <Button text={text} onClick={toggle} disabled={disabled}>
               {text}
             </Button>
             <Modal visible={visible} toggle={toggle} large={large}>

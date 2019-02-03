@@ -10,9 +10,12 @@ const MenuIcon = styled.div`
 
   &:hover {
     background: rgba(33, 194, 248, 0.6);
+    border-radius: 1px;
+    box-shadow: 2px 2px rgba(33, 194, 248, 0.2);
+    border: 1px solid ${props => props.theme.madison};
 
     span {
-      background: ${prop => prop.theme.black};
+      background: ${props => props.theme.black};
     }
   }
 `;
@@ -22,7 +25,7 @@ const Line = styled.span`
   height: 3px; 
   width: 80%; 
   left: 4px;
-  background: ${prop => prop.theme.teal};
+  background: ${props => props.theme.teal};
   border-radius: 2px;
 `;
 
@@ -36,10 +39,10 @@ const Line3 = styled(Line)`
   top: 75%
 `;
 
-export const Menu = ({ handleClick }) => (
+export const Menu = ({ handleClick }) => 
   <MenuIcon onClick={handleClick}>
     <Line1 />
     <Line2 />
     <Line3 />
   </MenuIcon>
-);
+

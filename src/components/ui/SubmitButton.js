@@ -12,7 +12,7 @@ export const SubmitButton = styled.button`
   font-size: 20px;
   background: ${props => props.theme.teal};
   border: none;
-  box-shadow: ${props => props.theme.bs1};
+  box-shadow: ${props => props.theme.bs2};
 
   &:hover,
   &:active,

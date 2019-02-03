@@ -17,8 +17,9 @@ export const Theme = {
   lightBlue,
   red,
   maxWidth: "1000px",
-  bs1: `2px 2px 2px 2px ${madison}`,
-  bs2: `3px 3px 3px 3px ${madison}`
+  bs1: `1px 1px 1px 1px ${madison}`,
+  bs2: `2px 2px 2px 2px ${madison}`,
+  bs3: `3px 3px 3px 3px ${madison}`
 };
 
 export const StyledPage = styled.div`
