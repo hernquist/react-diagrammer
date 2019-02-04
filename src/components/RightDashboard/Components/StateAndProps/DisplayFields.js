@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Field } from "styles";
 
 const DisplayFields = ({
@@ -13,10 +13,6 @@ const DisplayFields = ({
   const fields =
     type === "state" ? currentComponent.state : currentComponent.props;
   const fieldtype = type === "state" ? "statetype" : "proptype";
-  let header = `Existing ${type === "state" ? `state fields` : `props`}`;
-  if (fields.length === 0) {
-    header = type === "state" ? "No state" : "No props";
-  }
 
   return (
     <div>

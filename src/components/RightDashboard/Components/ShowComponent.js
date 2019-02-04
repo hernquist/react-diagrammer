@@ -11,7 +11,16 @@ import {
 import { ShowState, ShowProps, ShowCallbacks } from "./ShowComponentContent";
 
 export default class ShowComponent extends Component {
-  state = { activeTab: "state" };
+  constructor(props) {
+    super(props);
+    const activeTab = props.updatedProps
+      ? "props"
+      : props.updatedCallbacks
+      ? "callbacks"
+      : "state";
+
+    this.state = { activeTab };
+  }
 
   setTab = tab => this.setState({ activeTab: tab });
 

@@ -40,7 +40,6 @@ class CurrentComponent extends Component {
     if (!components) return <div>No Components</div>;
 
     const currentComponent = helper.getComponentFromURL(pathname, components);
-
     if (!currentComponent) return null;
 
     const isPresentational = currentComponent.style === "presentational";

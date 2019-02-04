@@ -95,6 +95,7 @@ class UpdateComponentWorkings extends Component {
 
     if (currentComponent.style === "presentational" && type === "state")
       return <NoStateAllowed exit={this.exitComponent} />;
+
     const updatedState = showAddField
       ? {
           name: value1,
