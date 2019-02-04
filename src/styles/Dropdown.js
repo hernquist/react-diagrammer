@@ -16,7 +16,8 @@ export const SmallList = styled(List)`
 `;
 
 export const ListItem = styled.div`
-  background-color: ${props => props.highlight ? props.theme.teal : props.theme.madison};
+  background-color: ${props =>
+    props.highlight ? props.theme.teal : props.theme.madison};
   color: ${props => props.theme.lightGrey};
   font-size: 20px;
   padding: 5px 2px 0 6px;
@@ -41,5 +42,10 @@ export const ListItem = styled.div`
   &:hover {
     background-color: ${props => props.theme.teal};
     color: ${props => props.theme.lightGrey};
+  }
+
+  &.selected {
+    background-color: white;
+    color: ${props => props.theme.teal};
   }
 `;

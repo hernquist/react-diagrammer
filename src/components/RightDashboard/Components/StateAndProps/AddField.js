@@ -17,13 +17,11 @@ const ButtonsContainer = styled(Buttons)`
 `;
 
 class AddField extends Component {
-  state = {
-    showSelector: false
-  };
+  state = { showSelector: false };
 
-  deactivateSelector = () => this.setState({ showSelector: false });
+  // deactivateSelector = () => this.setState({ showSelector: false });
 
-  activateSelector = () => this.setState({ showSelector: true });
+  // activateSelector = () => this.setState({ showSelector: true });
 
   mutationProp = async (currentComponent, mutation) => {
     const componentId = currentComponent._id;
@@ -53,9 +51,10 @@ class AddField extends Component {
   };
 
   saveField = async (currentComponent, mutation) => {
-    const updatedComponent = this.props.type === "state"
-      ? await this.mutationState(currentComponent, mutation)
-      : await this.mutationProp(currentComponent, mutation);
+    const updatedComponent =
+      this.props.type === "state"
+        ? await this.mutationState(currentComponent, mutation)
+        : await this.mutationProp(currentComponent, mutation);
     this.props.updateComponent(updatedComponent);
     this.props.discardField();
   };
@@ -82,7 +81,7 @@ class AddField extends Component {
       <Mutation mutation={MUTATION}>
         {AddField => (
           <Container>
-            <Title>Adding A {title} Field</Title>
+            {/* <Title>Adding A {title} Field</Title> */}
             <Label>
               <LabelText>{keyText}</LabelText>
               <input
@@ -91,20 +90,14 @@ class AddField extends Component {
                 placeholder={placeholder}
               />
             </Label>
-            <Label
-              onMouseEnter={this.activateSelector}
-              onMouseLeave={this.deactivateSelector}
-            >
+            <Label>
               <LabelText>{typeText}</LabelText>
-              <input value={value2} readOnly/>
-              {showSelector && (
-                <TypeOptions
-                  handleSelect={handleSelect}
-                  key="value2"
-                  deactivateSelector={this.deactivateSelector}
-                  fieldtype={"value2"}
-                />
-              )}
+              <TypeOptions
+                handleSelect={handleSelect}
+                key="value2"
+                fieldtype={"value2"}
+                selected={value2}
+              />
             </Label>
             <ButtonsContainer>
               {/* TODO add notification to make sure their are no duplicates, and other more complicated notifcations */}

@@ -10,13 +10,10 @@ import {
   RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
 } from "styles";
+import PopUp from "../../UI/PopUp";
 // import { SubmitButton, WideButton } from "components/UI/SubmitButton";
 import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
-
-// const Button = styled(WideButton)`
-//   margin: 0 15%;
-//   width: 70%;
-// `;
+import ShowComponent from "./ShowComponent";
 
 class UpdateComponentWorkings extends Component {
   initialState = {
@@ -25,7 +22,8 @@ class UpdateComponentWorkings extends Component {
     showAddField: false,
     highlighted: null,
     onHover: true,
-    editField: null
+    editField: null,
+    popUp: "state"
   };
 
   state = this.initialState;
@@ -37,6 +35,11 @@ class UpdateComponentWorkings extends Component {
       this.setState({ editField: null });
     }
   };
+
+  closePopUp = () =>
+    this.setState({
+      popUp: ""
+    });
 
   handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
@@ -73,7 +76,8 @@ class UpdateComponentWorkings extends Component {
       value2,
       highlighted,
       onHover,
-      editField
+      editField,
+      popUp
     } = this.state;
     const { currentProject, history, updateComponent, type } = this.props;
     const { pathname } = history.location;
@@ -88,6 +92,9 @@ class UpdateComponentWorkings extends Component {
     return (
       <Container>
         <ComponentHeader currentComponent={currentComponent} />
+        <PopUp visible={popUp === "state"} toggle={this.closePopUp}>
+          <ShowComponent {...this.props} />
+        </PopUp>
         {showAddField ? (
           <AddField
             type={type}
@@ -110,7 +117,7 @@ class UpdateComponentWorkings extends Component {
           />
         ) : (
           <Fragment>
-            <DisplayFields
+            {/* <DisplayFields
               currentComponent={currentComponent}
               updateComponent={updateComponent}
               editField={editField}
@@ -120,7 +127,7 @@ class UpdateComponentWorkings extends Component {
               setHighlight={this.setHighlight}
               onHover={onHover}
               type={type}
-            />
+            /> */}
             <Button
               onClick={this.displayAddField}
               text={`ADD A NEW ${type.toUpperCase()}`}

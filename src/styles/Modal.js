@@ -22,6 +22,18 @@ export const ModalCard = styled.div`
   margin-bottom: 400px;
 `;
 
+export const ModalLeft = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  background: ${props => props.theme.lightGrey};
+  border-radius: 5px;
+  box-shadow: 2px 2px 10px rbga(0, 0, 0, 0.3);
+  padding: 15px;
+  z-index: 100;
+  min-width: 700px;
+`;
+
 export const LargeModalCard = styled.div`
   position: relative;
   background: ${props => props.theme.lightGrey};
@@ -53,9 +65,8 @@ export const CloseModalButton = styled.button`
   position: absolute;
   top: 8px;
   right: 8px;
-  
+
   &:hover {
     background: ${props => props.theme.lightBlue};
-  };
+  }
 `;
-
