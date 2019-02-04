@@ -29,6 +29,4 @@ export const InputField = styled.div`
   }
 `;
 
-export const LabelText = styled.label`
-  
-`;
+export const LabelText = styled.label``;

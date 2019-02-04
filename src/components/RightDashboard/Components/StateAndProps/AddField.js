@@ -6,24 +6,18 @@ import {
   Label,
   LabelText,
   Buttons,
-  RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
 } from "styles";
 import styled from "styled-components";
-import { SubmitButton } from "components/UI/SubmitButton";
+import { RightDashboardButton as Button } from "../../../UI/RightDashboardButton";
 
 const ButtonsContainer = styled(Buttons)`
   margin: 10px 0;
+  width: 200px;
 `;
 
 class AddField extends Component {
-  state = {
-    showSelector: false
-  };
-
-  deactivateSelector = () => this.setState({ showSelector: false });
-
-  activateSelector = () => this.setState({ showSelector: true });
+  state = { showSelector: false };
 
   mutationProp = async (currentComponent, mutation) => {
     const componentId = currentComponent._id;
@@ -53,9 +47,10 @@ class AddField extends Component {
   };
 
   saveField = async (currentComponent, mutation) => {
-    const updatedComponent = this.props.type === "state"
-      ? await this.mutationState(currentComponent, mutation)
-      : await this.mutationProp(currentComponent, mutation);
+    const updatedComponent =
+      this.props.type === "state"
+        ? await this.mutationState(currentComponent, mutation)
+        : await this.mutationProp(currentComponent, mutation);
     this.props.updateComponent(updatedComponent);
     this.props.discardField();
   };
@@ -82,7 +77,6 @@ class AddField extends Component {
       <Mutation mutation={MUTATION}>
         {AddField => (
           <Container>
-            <Title>Adding A {title} Field</Title>
             <Label>
               <LabelText>{keyText}</LabelText>
               <input
@@ -91,32 +85,27 @@ class AddField extends Component {
                 placeholder={placeholder}
               />
             </Label>
-            <Label
-              onMouseEnter={this.activateSelector}
-              onMouseLeave={this.deactivateSelector}
-            >
+            <Label>
               <LabelText>{typeText}</LabelText>
-              <input value={value2} readOnly/>
-              {showSelector && (
-                <TypeOptions
-                  handleSelect={handleSelect}
-                  key="value2"
-                  deactivateSelector={this.deactivateSelector}
-                  fieldtype={"value2"}
-                />
-              )}
+              <TypeOptions
+                handleSelect={handleSelect}
+                key="value2"
+                fieldtype={"value2"}
+                selected={value2}
+              />
             </Label>
             <ButtonsContainer>
               {/* TODO add notification to make sure their are no duplicates, and other more complicated notifcations */}
-              <SubmitButton
+              <Button
                 disabled={value1.length === 0}
                 onClick={() => this.saveField(currentComponent, AddField)}
-              >
-                SAVE
-              </SubmitButton>
-              <SubmitButton className="dashboard-button" onClick={discardField}>
-                CANCEL
-              </SubmitButton>
+                text={"SAVE"}
+              />
+              <Button
+                className="dashboard-button"
+                onClick={discardField}
+                text={"CANCEL"}
+              />
             </ButtonsContainer>
           </Container>
         )}

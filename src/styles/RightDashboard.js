@@ -26,15 +26,14 @@ export const AccordionText = styled.div`
 export const Label = styled.div`
   font-size: 10px;
   margin: 2px 3px;
-  align-self: center;
-  width: 95%;
+  align-self: start;
+  width: 277px;
 
   input {
     height: 32px;
-    width: 100%;
+    width: 277px;
     font-size: 24px;
     background: ${props => props.theme.lightGrey};
-    margin: 0;
     padding-left: 8px;
     padding-top: 3px;
     color: ${props => props.theme.madison};
@@ -53,4 +52,41 @@ export const ButtonContainer = styled.div`
   position: absolute;
   right: 10px;
   bottom: 10px;
+`;
+
+export const RightDashboardList = styled.div`
+  position: relative;
+  margin: 2px 10px 2px 2px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const RightDashboardListItem = styled.div`
+  background-color: white;
+  color: ${props => props.theme.black};
+  font-size: 20px;
+  padding: 5px 4px 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 278px;
+  border: 1px solid black;
+
+  a {
+    color: ${props => props.theme.lightGrey};
+  }
+
+  &:hover {
+    background-color: ${props => props.theme.lightBlue};
+    color: ${props => props.theme.lightGrey};
+  }
+
+  &.selected {
+    background-color: ${props => props.theme.teal};
+    color: white;
+  }
 `;

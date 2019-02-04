@@ -1,7 +1,7 @@
 export const OPTIONS = [
+  { value: "string" },
   { value: "boolean" },
   { value: "number" },
-  { value: "string" },
   { value: "array" },
   { value: "object" }
 ];

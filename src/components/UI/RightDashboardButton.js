@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const Button = styled.button`
@@ -12,11 +12,11 @@ const Button = styled.button`
   font-size: 18px;
   background: ${props => props.theme.white};
   border: none;
-  
+
   width: 100px;
   height: 40px;
   border: 2px solid black;
-  
+
   position: relative;
   width: 90%;
   max-width: 250px;
@@ -29,13 +29,13 @@ const Button = styled.button`
     color: green;
     background: yellow;
   }
-  
+
   &:hover,
   &:active,
   &:focus {
-      outline: none !important;
-      background: ${props => props.theme.lightBlue};
-      box-shadow: ${props => props.theme.bs1};
+    outline: none !important;
+    background: ${props => props.theme.lightBlue};
+    box-shadow: ${props => props.theme.bs1};
   }
 
   &:disabled,
@@ -46,9 +46,9 @@ const Button = styled.button`
   }
 `;
 
-export const RightDashboardButton = props =>
-  <Button {...props}>
-    {props.text}
-  </Button>
+export const RightDashboardButton = props => {
+  const { visible = true } = props;
+  if (!visible) return null;
 
-
+  return <Button {...props}>{props.text}</Button>;
+};

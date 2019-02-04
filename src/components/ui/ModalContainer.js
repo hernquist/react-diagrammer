@@ -13,6 +13,7 @@ export default class ModalContainer extends Component {
         {({ visible, toggle }) => (
           <Fragment>
             <Button text={text} onClick={toggle} disabled={disabled}>
+              {/* Update buttons so that text is consistently rendered as props */}
               {text}
             </Button>
             <Modal visible={visible} toggle={toggle} large={large}>
