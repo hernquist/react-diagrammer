@@ -18,6 +18,7 @@ class UpdateComponentWorkings extends Component {
     value1: "",
     value2: "string",
     showAddField: false,
+    showEditFields: false,
     highlighted: null,
     onHover: true,
     editField: null,
@@ -43,7 +44,17 @@ class UpdateComponentWorkings extends Component {
 
   handleSelect = (value, key) => this.setState({ [key]: value });
 
-  displayAddField = () => this.setState({ showAddField: true });
+  displayAddField = () =>
+    this.setState({
+      showAddField: true,
+      showEditFields: false
+    });
+
+  editFields = () =>
+    this.setState({
+      showEditFields: true,
+      showAddField: false
+    });
 
   discardField = () => this.setState({ ...this.initialState });
 
@@ -70,6 +81,7 @@ class UpdateComponentWorkings extends Component {
   render() {
     const {
       showAddField,
+      showEditFields,
       value1,
       value2,
       highlighted,
@@ -104,7 +116,7 @@ class UpdateComponentWorkings extends Component {
             value1={value1}
             value2={value2}
           />
-        ) : highlighted ? (
+        ) : showEditFields ? (
           <EditField
             field={highlighted}
             edit={!onHover}

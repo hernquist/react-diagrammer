@@ -11,9 +11,7 @@ const TypeOptions = ({ handleSelect, fieldtype, selected }) => (
       <ListItem
         key={option.value}
         className={selected === option.value && "selected"}
-        onClick={() => {
-          handleSelect(option.value, fieldtype);
-        }}
+        onClick={() => handleSelect(option.value, fieldtype)}
       >
         {option.value}
       </ListItem>
