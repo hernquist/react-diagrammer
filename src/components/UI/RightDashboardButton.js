@@ -46,6 +46,9 @@ const Button = styled.button`
   }
 `;
 
-export const RightDashboardButton = props => (
-  <Button {...props}>{props.text}</Button>
-);
+export const RightDashboardButton = props => {
+  const { visible = true } = props;
+  if (!visible) return null;
+
+  return <Button {...props}>{props.text}</Button>;
+};

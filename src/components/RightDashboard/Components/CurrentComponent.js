@@ -7,7 +7,6 @@ import ComponentHeader from "./ComponentHeader";
 import EditComponentName from "./EditComponentName";
 import { RightDashboardContainer as Container } from "styles";
 import { RightDashboardButton as Button } from "../../UI/RightDashboardButton";
-
 import ShowComponent from "./ShowComponent";
 
 class CurrentComponent extends Component {
@@ -62,7 +61,6 @@ class CurrentComponent extends Component {
           onClick={() => this.handleClick(isPresentational, "update-state")}
           text={"UPDATE STATE"}
         />
-
         <Button
           onClick={() => history.push(match.url + "/update-props")}
           text={"UPDATE INCOMING PROPS"}

@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-// import styled from "styled-components";
 import DisplayFields from "./StateAndProps/DisplayFields";
 import EditField from "./StateAndProps/EditField";
 import AddField from "./StateAndProps/AddField";
@@ -11,7 +10,6 @@ import {
   ComponentWorkingsContainer as Container
 } from "styles";
 import PopUp from "../../UI/PopUp";
-// import { SubmitButton, WideButton } from "components/UI/SubmitButton";
 import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 import ShowComponent from "./ShowComponent";
 
@@ -131,6 +129,11 @@ class UpdateComponentWorkings extends Component {
             <Button
               onClick={this.displayAddField}
               text={`ADD A NEW ${type.toUpperCase()}`}
+            />
+            <Button
+              visible={currentComponent.state.length > 0}
+              onClick={this.editFields}
+              text={`EDIT ${type.toUpperCase()}`}
             />
             <Button onClick={this.exitComponent} text="DONE" />
           </Fragment>
