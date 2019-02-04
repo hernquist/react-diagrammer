@@ -110,7 +110,6 @@ class EditField extends Component {
           <Mutation mutation={DELETE}>
             {Delete => (
               <Container>
-                {/* <Title>Edit State Field</Title> */}
                 <Label>
                   <LabelText>{keyText}</LabelText>
                   <input
@@ -124,19 +123,11 @@ class EditField extends Component {
                   onMouseLeave={this.deactivateSelector}
                 >
                   <LabelText>{typeText}</LabelText>
-                  {/* <input value={field[fieldtype]} readOnly /> */}
-
                   <TypeOptions
                     handleSelect={this.handleSelect}
                     fieldtype={fieldtype}
                     selected={field.statetype}
                   />
-                  {/* <TypeOptions
-                    handleSelect={handleSelect}
-                    key="value2"
-                    fieldtype={"value2"}
-                    selected={value2}
-                  /> */}
                 </Label>
                 <ButtonsContainer>
                   <Button
