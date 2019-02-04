@@ -6,7 +6,6 @@ import {
   Label,
   LabelText,
   Buttons,
-  RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
 } from "styles";
 import styled from "styled-components";

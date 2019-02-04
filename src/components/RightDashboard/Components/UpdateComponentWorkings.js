@@ -35,10 +35,7 @@ class UpdateComponentWorkings extends Component {
     }
   };
 
-  closePopUp = () =>
-    this.setState({
-      popUp: ""
-    });
+  closePopUp = () => this.setState({ popUp: "" });
 
   handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
@@ -98,12 +95,18 @@ class UpdateComponentWorkings extends Component {
 
     if (currentComponent.style === "presentational" && type === "state")
       return <NoStateAllowed exit={this.exitComponent} />;
+    const updatedState = showAddField
+      ? {
+          name: value1,
+          statetype: value2
+        }
+      : null;
 
     return (
       <Container>
         <ComponentHeader currentComponent={currentComponent} />
         <PopUp visible={popUp === "state"} toggle={this.closePopUp}>
-          <ShowComponent {...this.props} />
+          <ShowComponent {...this.props} updatedState={updatedState} />
         </PopUp>
         {showAddField ? (
           <AddField
@@ -117,17 +120,17 @@ class UpdateComponentWorkings extends Component {
             value2={value2}
           />
         ) : showEditFields ? (
-          <EditField
-            field={highlighted}
-            edit={!onHover}
-            reset={this.discardField}
-            currentComponent={currentComponent}
-            updateComponent={updateComponent}
-            type={type}
-          />
-        ) : (
-          <Fragment>
-            {/* <DisplayFields
+          highlighted ? (
+            <EditField
+              field={highlighted}
+              edit={!onHover}
+              reset={this.discardField}
+              currentComponent={currentComponent}
+              updateComponent={updateComponent}
+              type={type}
+            />
+          ) : (
+            <DisplayFields
               currentComponent={currentComponent}
               updateComponent={updateComponent}
               editField={editField}
@@ -137,7 +140,10 @@ class UpdateComponentWorkings extends Component {
               setHighlight={this.setHighlight}
               onHover={onHover}
               type={type}
-            /> */}
+            />
+          )
+        ) : (
+          <Fragment>
             <Button
               onClick={this.displayAddField}
               text={`ADD A NEW ${type.toUpperCase()}`}

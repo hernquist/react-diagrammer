@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import { Mutation } from "react-apollo";
 import {
   DELETE_PROP,
@@ -7,14 +8,22 @@ import {
   EDIT_STATE
 } from "graphql/mutations";
 import TypeOptions from "./TypeOptions";
-import { SubmitButton } from "components/UI/SubmitButton";
+import { RightDashboardButton } from "components/UI/RightDashboardButton";
 import {
   Label,
   LabelText,
   Buttons,
-  RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
 } from "styles";
+
+const ButtonsContainer = styled(Buttons)`
+  margin: 10px 0;
+  width: 270px;
+`;
+
+const Button = styled(RightDashboardButton)`
+  margin: 2px;
+`;
 
 class EditField extends Component {
   constructor(props) {
@@ -33,19 +42,19 @@ class EditField extends Component {
     this.setState({ field: { ...this.state.field, [key]: e.target.value } });
   };
 
-  handleSelect = (value, key) => 
+  handleSelect = (value, key) =>
     this.setState({ field: { ...this.state.field, [key]: value } });
-  
+
   updateWithProps = (id, currentComponent, data) => {
-    const props = currentComponent.props.map(
-      prop => (id === prop._id ? data.editProp : prop)
+    const props = currentComponent.props.map(prop =>
+      id === prop._id ? data.editProp : prop
     );
     return Object.assign({}, currentComponent, { props });
   };
 
   updateWithState = (id, currentComponent, data) => {
-    const state = currentComponent.state.map(
-      s => (id === s._id ? data.editState : s)
+    const state = currentComponent.state.map(s =>
+      id === s._id ? data.editState : s
     );
     return Object.assign({}, currentComponent, { state });
   };
@@ -101,7 +110,7 @@ class EditField extends Component {
           <Mutation mutation={DELETE}>
             {Delete => (
               <Container>
-                <Title>Edit State Field</Title>
+                {/* <Title>Edit State Field</Title> */}
                 <Label>
                   <LabelText>{keyText}</LabelText>
                   <input
@@ -115,24 +124,31 @@ class EditField extends Component {
                   onMouseLeave={this.deactivateSelector}
                 >
                   <LabelText>{typeText}</LabelText>
-                  <input value={field[fieldtype]} readOnly/>
-                  {showSelector && (
-                    <TypeOptions
-                      handleSelect={this.handleSelect}
-                      deactivateSelector={this.deactivateSelector}
-                      fieldtype={fieldtype}
-                    />
-                  )}
+                  {/* <input value={field[fieldtype]} readOnly /> */}
+
+                  <TypeOptions
+                    handleSelect={this.handleSelect}
+                    fieldtype={fieldtype}
+                    selected={field.statetype}
+                  />
+                  {/* <TypeOptions
+                    handleSelect={handleSelect}
+                    key="value2"
+                    fieldtype={"value2"}
+                    selected={value2}
+                  /> */}
                 </Label>
-                <Buttons>
-                  <SubmitButton onClick={() => this.updateField(_id, Edit)}>
-                    UPDATE
-                  </SubmitButton>
-                  <SubmitButton onClick={() => this.deleteField(_id, Delete)}>
-                    DELETE
-                  </SubmitButton>
-                  <SubmitButton onClick={reset}>CANCEL</SubmitButton>
-                </Buttons>
+                <ButtonsContainer>
+                  <Button
+                    onClick={() => this.updateField(_id, Edit)}
+                    text={"UPDATE"}
+                  />
+                  <Button
+                    onClick={() => this.deleteField(_id, Delete)}
+                    text={"DELETE"}
+                  />
+                  <Button onClick={reset} text={"CANCEL"} />
+                </ButtonsContainer>
               </Container>
             )}
           </Mutation>
