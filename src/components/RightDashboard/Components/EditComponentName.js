@@ -1,16 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
-import styled from "styled-components";
 import { EDIT_COMPONENT_NAME } from '../../../graphql/mutations';
 import helper from 'helpers/helper';
-import { RightDashboardButton } from 'components/UI/RightDashboardButton';
+import { NoBoxShadowButton as Button } from 'components/UI/RightDashboardButton';
 import { InputField, Buttons, ShowUnassignedText as Text } from 'styles';
 
-const Button = styled(RightDashboardButton)`
-  &:hover {
-    box-shadow: none;
-  }
-`
 const isFileName = /^[a-zA-Z]+$/
 
 export default class EditComponentName extends Component {
@@ -53,7 +47,7 @@ export default class EditComponentName extends Component {
       <Mutation mutation={EDIT_COMPONENT_NAME}>
         {EditComponentName => (
           <Fragment>
-            <InputField >
+            <InputField style={{ paddingTop: '20px' }}>
               <label>Edit name</label>
               <input
                 autoFocus 
