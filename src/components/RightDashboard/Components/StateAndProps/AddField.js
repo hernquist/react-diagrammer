@@ -17,8 +17,6 @@ const ButtonsContainer = styled(Buttons)`
 `;
 
 class AddField extends Component {
-  state = { showSelector: false };
-
   mutationProp = async (currentComponent, mutation) => {
     const componentId = currentComponent._id;
     const prop = {
@@ -65,7 +63,6 @@ class AddField extends Component {
       handleSelect,
       discardField
     } = this.props;
-    const { showSelector } = this.state;
     const MUTATION = type === "state" ? ADD_STATE : ADD_PROP;
     const placeholder =
       type === "state" ? "add a state key..." : "add a prop key...";

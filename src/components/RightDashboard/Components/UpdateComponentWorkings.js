@@ -22,10 +22,16 @@ class UpdateComponentWorkings extends Component {
     highlighted: null,
     onHover: true,
     editField: null,
-    popUp: "state"
   };
 
-  state = this.initialState;
+  constructor(props){
+    super(props);
+
+    this.state = {
+      ...this.initialState,
+      popUp: props.type
+    }
+  }
 
   showEdit = id => this.setState({ editField: id });
 
@@ -95,19 +101,36 @@ class UpdateComponentWorkings extends Component {
 
     if (currentComponent.style === "presentational" && type === "state")
       return <NoStateAllowed exit={this.exitComponent} />;
+    
+    let updatedState = null; 
+    let updatedProps = null;
 
-    const updatedState = showAddField
+    if (popUp === "state") {
+       updatedState = showAddField
       ? {
           name: value1,
           statetype: value2
         }
       : null;
+      } else if (popUp === "prop") {
+        updatedProps = showAddField 
+        ? {
+          name: value1,
+          proptype: value2
+        } : null;
+      }
+
+    const visible = popUp === "state" || popUp === "prop";
 
     return (
       <Container>
         <ComponentHeader currentComponent={currentComponent} />
-        <PopUp visible={popUp === "state"} toggle={this.closePopUp}>
-          <ShowComponent {...this.props} updatedState={updatedState} />
+        <PopUp visible={visible} toggle={this.closePopUp}>
+          <ShowComponent 
+            {...this.props} 
+            updatedState={updatedState} 
+            updatedProps={updatedProps}
+          />
         </PopUp>
         {showAddField ? (
           <AddField
