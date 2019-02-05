@@ -30,13 +30,8 @@ class EditField extends Component {
     super(props);
     this.state = {
       field: props.field,
-      showSelector: false
     };
   }
-
-  deactivateSelector = () => this.setState({ showSelector: false });
-
-  activateSelector = () => this.setState({ showSelector: true });
 
   handleChange = (e, key) => {
     this.setState({ field: { ...this.state.field, [key]: e.target.value } });
@@ -83,7 +78,7 @@ class EditField extends Component {
       if (type === "state") {
         const state = currentComponent.state.filter(s => _id !== s._id);
         updatedComponent = Object.assign({}, currentComponent, { state });
-      } else if (type === "props") {
+      } else if (type === "prop") {
         const props = currentComponent.props.filter(prop => _id !== prop._id);
         updatedComponent = Object.assign({}, currentComponent, { props });
       }
@@ -95,7 +90,7 @@ class EditField extends Component {
   };
 
   render() {
-    const { field, showSelector } = this.state;
+    const { field } = this.state;
     const { type, reset } = this.props;
     const { _id } = field;
     const fieldtype = type === "state" ? "statetype" : "proptype";
@@ -120,7 +115,6 @@ class EditField extends Component {
                 </Label>
                 <Label
                   onClick={this.activateSelector}
-                  onMouseLeave={this.deactivateSelector}
                 >
                   <LabelText>{typeText}</LabelText>
                   <TypeOptions

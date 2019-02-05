@@ -13,12 +13,13 @@ import { ShowState, ShowProps, ShowCallbacks } from "./ShowComponentContent";
 export default class ShowComponent extends Component {
   constructor(props) {
     super(props);
-    const activeTab = props.updatedProps
-      ? "props"
-      : props.updatedCallbacks
-      ? "callbacks"
-      : "state";
 
+    const activeTabMap = {
+      prop: "props",
+      state: "state",
+      callbacks: "callbacks"
+    }
+    const activeTab = activeTabMap[props.type] || "state";
     this.state = { activeTab };
   }
 
@@ -26,7 +27,7 @@ export default class ShowComponent extends Component {
 
   render() {
     const { activeTab } = this.state;
-    const { currentProject, history, updatedState = {} } = this.props;
+    const { currentProject, history, updatedState = {}, updatedProps = {} } = this.props;
     const { pathname } = history.location;
     const { components } = currentProject;
     const component = helper.getComponentFromURL(pathname, components);
@@ -59,12 +60,19 @@ export default class ShowComponent extends Component {
       showProps = activeTab === "props",
       showCallbacks = activeTab === "callbacks";
 
-    const displayState = updatedState
+    const displayState = Object.keys(updatedState).length > 0
       ? [
           ...state,
           { name: updatedState.name, statetype: updatedState.statetype }
         ]
       : state;
+
+      const displayProps = Object.keys(updatedProps).length > 0
+      ? [
+          ...props,
+          { name: updatedProps.name, proptype: updatedProps.proptype }
+        ]
+      : props;
 
     return (
       <Fragment>
@@ -96,7 +104,7 @@ export default class ShowComponent extends Component {
             <ShowProps
               order={showProps ? 1 : showCallbacks ? 4 : 2}
               highlighted={showProps}
-              props={props}
+              props={displayProps}
             />
             <ShowCallbacks
               visible={style !== "presentational"}
