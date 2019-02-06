@@ -9,7 +9,7 @@ import { RightDashboardButton as Button } from "components/UI/RightDashboardButt
 export default class DisplayCallbacks extends Component {
   state = {
     argName: "",
-    typeName: "",
+    typeName: "string",
     stateField: "",
     stateChange: "",
     showCallbacksToEdit: false
@@ -35,6 +35,8 @@ export default class DisplayCallbacks extends Component {
   handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
   handleClear = key => this.setState({ [key]: "" });
+
+  // handleSelect = (value, key) => this.setState({ [key]: value });
 
   addElement = key => {
     const {
@@ -171,6 +173,7 @@ export default class DisplayCallbacks extends Component {
                     functionArgs={functionArgs}
                     handleChange={this.handleChange}
                     handleClear={this.handleClear}
+                    // handleSelect={this.handleSelect}
                     name={name}
                     setState={setState}
                     stateChange={stateChange}

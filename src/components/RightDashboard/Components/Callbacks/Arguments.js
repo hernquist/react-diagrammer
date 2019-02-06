@@ -1,6 +1,7 @@
 import React from 'react';
 import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 import Display from 'components/UI/Display';
+import TypeOptions from "../StateAndProps/TypeOptions";
 import { 
   Buttons, 
   Label, 
@@ -17,6 +18,7 @@ const Arguments = ({
   functionArgs,
   handleChange,
   handleClear,
+  handleSelect,
   typeName,
   validation,
   visible
@@ -37,7 +39,12 @@ const Arguments = ({
     {/* selector for types */}
     <Label>
       <LabelText>Argument Type</LabelText>
-      <input value={typeName} onChange={e => handleChange(e, 'typeName') } />
+      <TypeOptions
+        handleSelect={handleSelect}
+        key="typeName"
+        fieldtype={"typeName"}
+        selected={typeName}
+      />
     </Label>
     <Buttons style={{ width: "200px" }}>
       <Button onClick={() => validation('functionArgs')}

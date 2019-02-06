@@ -36,7 +36,7 @@ export default class CallbackForm extends Component {
   };
 
   render() {
-    const { callback, create, currentComponent, mutation } = this.props;
+    const { callback, create, currentComponent, mutation, handleSelect } = this.props;
     const { section } = this.state;
 
     const expand = isExpanded => (isExpanded ? "-" : "+");
@@ -59,6 +59,7 @@ export default class CallbackForm extends Component {
           visible={args}
           container={Container}
           validation={this.validation}
+          handleSelect={handleSelect}
           {...this.props}
         />
         <Title onClick={this.showSection("setStates")}>

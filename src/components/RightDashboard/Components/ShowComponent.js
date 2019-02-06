@@ -66,8 +66,11 @@ export default class ShowComponent extends Component {
       showProps = activeTab === "props",
       showCallbacks = activeTab === "callbacks";
 
+    console.log("updatedState", updatedState)
+    console.log("state", state)
+
     const displayState =
-      Object.keys(updatedState).length > 0
+      Object.keys(updatedState || {}).length > 0
         ? [
             ...state,
             { name: updatedState.name, statetype: updatedState.statetype }
@@ -75,7 +78,7 @@ export default class ShowComponent extends Component {
         : state;
 
     const displayProps =
-      Object.keys(updatedProps).length > 0
+      Object.keys(updatedProps || {}).length > 0
         ? [
             ...props,
             { name: updatedProps.name, proptype: updatedProps.proptype }
@@ -83,7 +86,7 @@ export default class ShowComponent extends Component {
         : props;
 
     const displayCallbacks =
-      updatedCallbacks.name.length > 0
+      (updatedCallbacks && updatedCallbacks.name && updatedCallbacks.name.length || 0) > 0
         ? [
             ...callbacks,
             {

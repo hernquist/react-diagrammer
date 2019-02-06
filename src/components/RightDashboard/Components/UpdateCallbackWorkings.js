@@ -12,7 +12,6 @@ import ComponentHeader from "./ComponentHeader";
 import PopUp from "../../UI/PopUp";
 import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 import ShowComponent from "./ShowComponent";
-// import { SubmitButton } from "components/UI/SubmitButton";
 
 export default class UpdateCallbackWorkings extends Component {
   initialState = {
@@ -20,7 +19,7 @@ export default class UpdateCallbackWorkings extends Component {
     description: "",
     functionArgs: [],
     argName: "",
-    typeName: "",
+    typeName: "string",
     setState: [],
     stateField: "",
     stateChange: "",
@@ -37,6 +36,8 @@ export default class UpdateCallbackWorkings extends Component {
   handleChange = (e, key) => this.setState({ [key]: e.target.value });
 
   handleClear = key => this.setState({ [key]: "" });
+
+  handleSelect = (value, key) => this.setState({ [key]: value });
 
   addElement = key => {
     const {
@@ -182,6 +183,7 @@ export default class UpdateCallbackWorkings extends Component {
                 functionArgs={functionArgs}
                 handleChange={this.handleChange}
                 handleClear={this.handleClear}
+                handleSelect={this.handleSelect}
                 mutation={AddCallback}
                 name={name}
                 setState={setState}
