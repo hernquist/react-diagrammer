@@ -9,7 +9,11 @@ import {
   ComponentWorkingsContainer as Container
 } from "styles";
 import ComponentHeader from "./ComponentHeader";
-import { SubmitButton } from "components/UI/SubmitButton";
+import PopUp from "../../UI/PopUp";
+import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
+import ShowComponent from "./ShowComponent";
+// import { SubmitButton } from "components/UI/SubmitButton";
+
 
 export default class UpdateCallbackWorkings extends Component {
   initialState = {
@@ -21,6 +25,7 @@ export default class UpdateCallbackWorkings extends Component {
     setState: [],
     stateField: "",
     stateChange: "",
+    visible: true
   }
 
   state = {
@@ -97,6 +102,8 @@ export default class UpdateCallbackWorkings extends Component {
     this.resetHighlight();
   }
 
+  closePopUp = () => this.setState({ visible: false });
+
   render() {
     const { 
       name, 
@@ -108,7 +115,8 @@ export default class UpdateCallbackWorkings extends Component {
       stateField,
       stateChange,
       highlighted,
-      renderForm
+      renderForm,
+      visible 
     } = this.state;
     const { currentProject, history, updateComponent, createNotification } = this.props;
     const { pathname } = history.location;
@@ -116,12 +124,20 @@ export default class UpdateCallbackWorkings extends Component {
     if (!components) return <Title>No Components</Title>;
 
     const currentComponent = helper.getComponentFromURL(pathname, components);
+
+    const updatedCallbacks = null;
   
     return (
       <Container>
-        <ComponentHeader currentComponent={currentComponent}>
-          <SubmitButton onClick={this.exitComponent}>DONE</SubmitButton>
-        </ComponentHeader>
+        <ComponentHeader currentComponent={currentComponent}/>
+        <PopUp visible={visible} toggle={this.closePopUp}>
+          <ShowComponent 
+            {...this.props} 
+            updatedCallbacks={updatedCallbacks} 
+
+          />
+        </PopUp>
+        <Button onClick={this.exitComponent} text="DONE" />
         {renderForm ? 
           <Mutation mutation={ADD_CALLBACK}>
             {AddCallback => (
