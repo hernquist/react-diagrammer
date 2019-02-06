@@ -1,27 +1,31 @@
 import styled from 'styled-components';
 
 export const Callback = styled.div`
+  
   font-size: 20px; 
-  height: 28px;
+  height: 40px;
   width: 90%;
   max-width: 90%;
   border: 1px solid ${ props => props.theme.madison };
+  border-bottom: none;
   background-color: ${ props => props.theme.lightGrey };
   color: ${ props => props.theme.teal };
-  padding: 4px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 6px;
 
   &:last-child {
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-bottom: 1px solid ${ props => props.theme.madison };
   }
 
-  &:nth-child(2) {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-  }
+  // &:nth-child(2) {
+  //   border-top-right-radius: 5px;
+  //   border-top-left-radius: 5px;
+  // }
 
   &:hover {
-    background-color: ${ props => props.theme.madison };
+    background-color: ${ props => props.theme.lightBlue };
     color: ${ props => props.theme.lightGrey };
   }
 `;

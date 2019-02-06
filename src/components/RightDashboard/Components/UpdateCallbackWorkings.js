@@ -136,23 +136,27 @@ export default class UpdateCallbackWorkings extends Component {
       updateComponent,
       createNotification
     } = this.props;
+
     const { pathname } = history.location;
     const { components } = currentProject;
     if (!components) return <Title>No Components</Title>;
 
     const currentComponent = helper.getComponentFromURL(pathname, components);
 
+    // glitch showing in ShowComponent
     let updatedCallbacks = {
       name,
       description,
-      functionArgs: [...functionArgs, { name: argName, typeName }],
+      functionArgs: [...functionArgs, argName && { name: argName, typeName }],
       setState: [...setState, { stateField, stateChange }]
-    }
+    };
 
-    console.log("updatedCallbacks:", updatedCallbacks)
-    console.log("functionArgs:", updatedCallbacks.functionArgs[0].argName, updatedCallbacks.functionArgs.length)
-
-
+    console.log("updatedCallbacks:", updatedCallbacks);
+    console.log(
+      "functionArgs:",
+      updatedCallbacks.functionArgs[0].argName,
+      updatedCallbacks.functionArgs.length
+    );
 
     return (
       <Container>
@@ -200,16 +204,9 @@ export default class UpdateCallbackWorkings extends Component {
               highlighted={highlighted}
               createNotification={createNotification}
             />
-            <div
-              style={{
-                height: "60px"
-              }}
-            >
-              {" "}
-            </div>
           </Fragment>
         )}
-        <Button onClick={this.exitComponent} text="DONE" />
+        <Button onClick={this.exitComponent} text="MAIN MENU" />
       </Container>
     );
   }

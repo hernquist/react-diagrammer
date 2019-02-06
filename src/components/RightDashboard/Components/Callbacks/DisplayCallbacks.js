@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Mutation } from "react-apollo";
 import { DELETE_CALLBACK, EDIT_CALLBACK } from "../../../../graphql/mutations";
-import {
-  DisplayCBsButtonContainer as Buttons
-} from "styles";
+import { DisplayCBsButtonContainer as Buttons } from "styles";
 import CallbackForm from "./CallbackForm";
 import CallbackList from "./CallbackList";
 import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
@@ -64,7 +62,7 @@ export default class DisplayCallbacks extends Component {
   deleteCallback = async mutation => {
     const { _id } = this.props.highlighted;
     const { data } = await mutation({ variables: { _id } });
-    console.log(data)
+    console.log(data);
     // TODO should be based on data variable
     const updatedCallbacks = this.props.currentComponent.callbacks.filter(
       callback => callback._id !== _id
@@ -177,9 +175,9 @@ export default class DisplayCallbacks extends Component {
                     setState={setState}
                     stateChange={stateChange}
                     stateField={stateField}
-                    typeName={typeName} 
+                    typeName={typeName}
                   />
-                  <Buttons>
+                  <Buttons style={{ height: "120px"}}>
                     <Button
                       onClick={() => this.updateValidation(EditCallback)}
                       text="UPDATE CALLBACK"
