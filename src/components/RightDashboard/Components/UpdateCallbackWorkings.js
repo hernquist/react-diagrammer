@@ -152,20 +152,7 @@ export default class UpdateCallbackWorkings extends Component {
     console.log("updatedCallbacks:", updatedCallbacks)
     console.log("functionArgs:", updatedCallbacks.functionArgs[0].argName, updatedCallbacks.functionArgs.length)
 
-    // if (popUp === "state") {
-    //    updatedState = showAddField
-    //   ? {
-    //       name: value1,
-    //       statetype: value2
-    //     }
-    //   : null;
-    //   } else if (popUp === "prop") {
-    //     updatedProps = showAddField 
-    //     ? {
-    //       name: value1,
-    //       proptype: value2
-    //     } : null;
-    //   }
+
 
     return (
       <Container>
