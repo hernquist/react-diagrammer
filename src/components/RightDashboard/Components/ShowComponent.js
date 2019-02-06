@@ -17,7 +17,7 @@ export default class ShowComponent extends Component {
     const activeTabMap = {
       prop: "props",
       state: "state",
-      callbacks: "callbacks"
+      callback: "callbacks"
     }
     const activeTab = activeTabMap[props.type] || "state";
     this.state = { activeTab };

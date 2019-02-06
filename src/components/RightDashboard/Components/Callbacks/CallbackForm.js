@@ -1,58 +1,58 @@
-import React, { Component, Fragment } from 'react';
-import { WideButton } from 'components/UI/SubmitButton';
-import { 
+import React, { Component, Fragment } from "react";
+import {
   AccordionTitle as Title,
   AccordionText as Text,
   CallbackFormContainer as Container
-} from 'styles';
-import Basics from './Basics';
-import Arguments from './Arguments';
-import SetStates from './SetStates';
+} from "styles";
+import Basics from "./Basics";
+import Arguments from "./Arguments";
+import SetStates from "./SetStates";
+import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 
 export default class CallbackForm extends Component {
-  state = { section: 'basics' }
+  state = { section: "basics" };
 
-  showSection = section => () => this.setState({ section })
+  showSection = section => () => this.setState({ section });
 
   validation = name => {
     const mapping = {
-      functionArgs: ['callback arguments', 'argName', 'typeName'],
-      setState: ['setState', 'stateField', 'stateChange']
-    }
-    const [first, second] = [this.props[mapping[name][1]].length, this.props[mapping[name][2]].length]
-    const message = first === 0 || second === 0 ? 'emptyFields' : null;
-    
-    message ? this.props.createNotification('warning', message, message, mapping[name][0])()
+      functionArgs: ["callback arguments", "argName", "typeName"],
+      setState: ["setState", "stateField", "stateChange"]
+    };
+    const [first, second] = [
+      this.props[mapping[name][1]].length,
+      this.props[mapping[name][2]].length
+    ];
+    const message = first === 0 || second === 0 ? "emptyFields" : null;
+
+    message
+      ? this.props.createNotification(
+          "warning",
+          message,
+          message,
+          mapping[name][0]
+        )()
       : this.props.addElement(name);
-  }
+  };
 
   render() {
-    const {
-      callback, 
-      create,
-      currentComponent,
-      mutation
-    } = this.props;
+    const { callback, create, currentComponent, mutation } = this.props;
     const { section } = this.state;
 
-    const expand = isExpanded => isExpanded ? '-' : '+';
-    const basics = section === 'basics';
-    const args = section === 'arguments';
-    const setStates = section === 'setStates';
-    
+    const expand = isExpanded => (isExpanded ? "-" : "+");
+    const basics = section === "basics";
+    const args = section === "arguments";
+    const setStates = section === "setStates";
+
     return (
       <Fragment>
-        <Title onClick={this.showSection('basics')}>
-          <Text>CALLBACK BASICS</Text> 
+        <Title onClick={this.showSection("basics")}>
+          <Text>CALLBACK BASICS</Text>
           <Text>{expand(basics)}</Text>
         </Title>
-        <Basics
-          visible={basics}
-          container={Container}
-          {...this.props}
-        />
-        <Title onClick={this.showSection('arguments')}>
-          <Text>CALLBACK ARGUMENTS</Text> 
+        <Basics visible={basics} container={Container} {...this.props} />
+        <Title onClick={this.showSection("arguments")}>
+          <Text>CALLBACK ARGUMENTS</Text>
           <Text>{expand(args)}</Text>
         </Title>
         <Arguments
@@ -61,8 +61,8 @@ export default class CallbackForm extends Component {
           validation={this.validation}
           {...this.props}
         />
-        <Title onClick={this.showSection('setStates')}>
-          <Text>CALLBACK SETSTATES</Text> 
+        <Title onClick={this.showSection("setStates")}>
+          <Text>CALLBACK SETSTATES</Text>
           <Text>{expand(setStates)}</Text>
         </Title>
         <SetStates
@@ -71,12 +71,13 @@ export default class CallbackForm extends Component {
           validation={this.validation}
           {...this.props}
         />
-        {create && 
-          <WideButton onClick={() => callback(currentComponent, mutation)}>
-            SAVE CALLBACK
-          </WideButton>
-        }
+        {create && (
+          <Button
+            onClick={() => callback(currentComponent, mutation)}
+            text="SAVE CALLBACK"
+          />
+        )}
       </Fragment>
-    )
+    );
   }
 }
