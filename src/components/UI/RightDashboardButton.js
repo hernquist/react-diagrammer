@@ -52,3 +52,9 @@ export const RightDashboardButton = props => {
 
   return <Button {...props}>{props.text}</Button>;
 };
+
+export const NoBoxShadowButton = styled(RightDashboardButton)`
+  &:hover {
+    box-shadow: none;
+  }
+`;

@@ -2,23 +2,21 @@ import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
 import { UNASSIGN_COMPONENT } from 'graphql/mutations';
 import helper from 'helpers/helper';
-import { SubmitButton } from '../../UI/SubmitButton';
+import { RightDashboardButton as Button} from '../../UI/RightDashboardButton';
 import ModalContainer from '../../UI/ModalContainer';
 import { 
   UnassignedPrompt as Prompt, 
   Buttons, 
   Message,
-  RightDashboardTitle as Title,
 } from 'styles';
+import ComponentHeader from './ComponentHeader';
 
-const Warning = ({name}) => {
-  return (
-    <Prompt>
-      Removing components with children breaks a react tree. Please remove
-      all children components to unassign {name.toUpperCase()}.
-    </Prompt>
-  )
-}
+const Warning = ({name}) => (
+  <Prompt>
+    Removing components with children breaks a react tree. Please remove
+    all children components to unassign {name.toUpperCase()}.
+  </Prompt>
+)
 
 export default class UnassignComponent extends Component {
   updateComponents = (mutation, component) => async () => {
@@ -53,24 +51,24 @@ export default class UnassignComponent extends Component {
       <Mutation mutation={UNASSIGN_COMPONENT}>
         {UnassignComponent => (
           <Fragment>
-            <Title>Unassign Component</Title>
+            {/* <Title>Unassign Component</Title> */}
+            <ComponentHeader currentComponent={component} />
             <Message style={{margin: '20px 10px 10px'}}>
               Are you sure you want to remove {name.toUpperCase()} from the
               react tree?
             </Message>
             <Buttons>
               {hasChildren ?
-                <ModalContainer button={SubmitButton} text="YES">
+                <ModalContainer button={Button} text="YES">
                   <Warning name={name} {...this.props} />
                 </ModalContainer>
                 : 
-                <SubmitButton
+                <Button
                   onClick={this.updateComponents(UnassignComponent, component)}
-                > 
-                  YES
-                </SubmitButton>
+                  text="YES"
+                /> 
               }
-              <SubmitButton onClick={this.handleCancel}>No</SubmitButton>
+              <Button onClick={this.handleCancel} text="NO" />
             </Buttons>
           </Fragment>
         )}

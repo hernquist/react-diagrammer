@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
 import { EDIT_COMPONENT_NAME } from '../../../graphql/mutations';
 import helper from 'helpers/helper';
-import { SubmitButton } from 'components/UI/SubmitButton';
+import { NoBoxShadowButton as Button } from 'components/UI/RightDashboardButton';
 import { InputField, Buttons, ShowUnassignedText as Text } from 'styles';
 
 const isFileName = /^[a-zA-Z]+$/
@@ -47,7 +47,7 @@ export default class EditComponentName extends Component {
       <Mutation mutation={EDIT_COMPONENT_NAME}>
         {EditComponentName => (
           <Fragment>
-            <InputField >
+            <InputField style={{ paddingTop: '20px' }}>
               <label>Edit name</label>
               <input
                 autoFocus 
@@ -59,12 +59,11 @@ export default class EditComponentName extends Component {
               Do you want to update this component's name? 
             </Text>
             <Buttons>
-              <SubmitButton
+              <Button
                 onClick={this.validation(currentComponent, EditComponentName)}
-              >
-                YES
-              </SubmitButton>
-              <SubmitButton onClick={closeModal}>NO</SubmitButton>
+                text={"YES"}
+              />
+              <Button onClick={closeModal} text={"NO"} />
             </Buttons>
           </Fragment>
         )}
