@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CreateProjectContainer = styled.div`
   display: flex;
-  background: ${props => props.theme.grey};
+  background: ${props => props.theme.lightBlue};
   flex-direction: column;
   padding: 0px;
   margin: 15px;
