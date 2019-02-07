@@ -26,7 +26,7 @@ export const AccordionText = styled.div`
 export const Label = styled.div`
   font-size: 10px;
   margin: 2px 3px;
-  align-self: start;
+  align-self: center;
   width: 277px;
 
   input {

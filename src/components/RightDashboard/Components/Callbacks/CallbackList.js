@@ -17,8 +17,8 @@ const CallbackList = ({
   }
 
   return (
-    <Container>
-      <Message>Click a Callback To Edit</Message>
+    <Container style={{ paddingTop: "16px" }} >
+      <Message style={{ paddingBottom: "6px" }}>Click a Callback To Edit</Message>
       {callbacks.map(callback => (
         <Callback 
           key={callback._id}

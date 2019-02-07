@@ -1,6 +1,7 @@
 import React from 'react';
-import { SubmitButton } from 'components/UI/SubmitButton';
+import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 import Display from 'components/UI/Display';
+import TypeOptions from "../StateAndProps/TypeOptions";
 import { 
   Buttons, 
   Label, 
@@ -17,6 +18,7 @@ const Arguments = ({
   functionArgs,
   handleChange,
   handleClear,
+  handleSelect,
   typeName,
   validation,
   visible
@@ -37,18 +39,22 @@ const Arguments = ({
     {/* selector for types */}
     <Label>
       <LabelText>Argument Type</LabelText>
-      <input value={typeName} onChange={e => handleChange(e, 'typeName') } />
+      <TypeOptions
+        handleSelect={handleSelect}
+        key="typeName"
+        fieldtype={"typeName"}
+        selected={typeName}
+      />
     </Label>
-    <Buttons>
-      <SubmitButton onClick={() => validation('functionArgs')}>
-        SUBMIT
-      </SubmitButton>
-      <SubmitButton onClick={() => {
+    <Buttons style={{ width: "200px" }}>
+      <Button onClick={() => validation('functionArgs')}
+        text="SUBMIT"
+        />
+      <Button onClick={() => {
         handleClear('argName');
         handleClear('typeName');
-      }}>
-        CLEAR
-      </SubmitButton>
+      }}
+        text="CLEAR"/>
     </Buttons>
   </Display>
 );

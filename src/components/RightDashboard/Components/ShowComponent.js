@@ -17,8 +17,8 @@ export default class ShowComponent extends Component {
     const activeTabMap = {
       prop: "props",
       state: "state",
-      callbacks: "callbacks"
-    }
+      callback: "callbacks"
+    };
     const activeTab = activeTabMap[props.type] || "state";
     this.state = { activeTab };
   }
@@ -27,7 +27,13 @@ export default class ShowComponent extends Component {
 
   render() {
     const { activeTab } = this.state;
-    const { currentProject, history, updatedState = {}, updatedProps = {} } = this.props;
+    const {
+      currentProject,
+      history,
+      updatedState = {},
+      updatedProps = {},
+      updatedCallbacks = {}
+    } = this.props;
     const { pathname } = history.location;
     const { components } = currentProject;
     const component = helper.getComponentFromURL(pathname, components);
@@ -60,19 +66,37 @@ export default class ShowComponent extends Component {
       showProps = activeTab === "props",
       showCallbacks = activeTab === "callbacks";
 
-    const displayState = Object.keys(updatedState).length > 0
-      ? [
-          ...state,
-          { name: updatedState.name, statetype: updatedState.statetype }
-        ]
-      : state;
+    console.log("updatedState", updatedState)
+    console.log("state", state)
 
-      const displayProps = Object.keys(updatedProps).length > 0
-      ? [
-          ...props,
-          { name: updatedProps.name, proptype: updatedProps.proptype }
-        ]
-      : props;
+    const displayState =
+      Object.keys(updatedState || {}).length > 0
+        ? [
+            ...state,
+            { name: updatedState.name, statetype: updatedState.statetype }
+          ]
+        : state;
+
+    const displayProps =
+      Object.keys(updatedProps || {}).length > 0
+        ? [
+            ...props,
+            { name: updatedProps.name, proptype: updatedProps.proptype }
+          ]
+        : props;
+
+    const displayCallbacks =
+      (updatedCallbacks && updatedCallbacks.name && updatedCallbacks.name.length || 0) > 0
+        ? [
+            ...callbacks,
+            {
+              name: updatedCallbacks.name || null,
+              description: updatedCallbacks.description || null,
+              functionArgs: updatedCallbacks.functionArgs || [],
+              setState: updatedCallbacks.setState || []
+            }
+          ]
+        : callbacks;
 
     return (
       <Fragment>
@@ -110,7 +134,7 @@ export default class ShowComponent extends Component {
               visible={style !== "presentational"}
               order={showCallbacks ? 1 : 2}
               highlighted={showCallbacks}
-              callbacks={callbacks}
+              callbacks={displayCallbacks}
             />
           </Content>
         </Container>
