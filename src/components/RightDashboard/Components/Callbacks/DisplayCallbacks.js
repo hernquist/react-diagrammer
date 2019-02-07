@@ -173,7 +173,7 @@ export default class DisplayCallbacks extends Component {
                     functionArgs={functionArgs}
                     handleChange={this.handleChange}
                     handleClear={this.handleClear}
-                    // handleSelect={this.handleSelect}
+                    handleSelect={this.handleSelect}
                     name={name}
                     setState={setState}
                     stateChange={stateChange}

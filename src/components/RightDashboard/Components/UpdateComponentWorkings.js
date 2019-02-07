@@ -122,6 +122,9 @@ class UpdateComponentWorkings extends Component {
 
     const visible = popUp === "state" || popUp === "prop";
 
+    const typeCheck = type === "prop" ? "props" : type; 
+    const showEditButton = currentComponent[typeCheck].length > 0;
+
     return (
       <Container>
         <ComponentHeader currentComponent={currentComponent} />
@@ -173,7 +176,7 @@ class UpdateComponentWorkings extends Component {
               text={`ADD A NEW ${type.toUpperCase()}`}
             />
             <Button
-              visible={currentComponent.state.length > 0}
+              visible={showEditButton}
               onClick={this.editFields}
               text={`EDIT ${type.toUpperCase()}`}
             />
