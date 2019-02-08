@@ -172,8 +172,6 @@ export default class UpdateCallbackWorkings extends Component {
         {renderForm ? (
           <Mutation mutation={ADD_CALLBACK}>
             {AddCallback => (
-              <div>
-                from UpdateCallbackWorkings (CallbackForm)
               <CallbackForm
                 addElement={this.addElement}
                 argName={argName}
@@ -193,13 +191,10 @@ export default class UpdateCallbackWorkings extends Component {
                 stateField={stateField}
                 typeName={typeName}
                 />
-            </div>
             )}
           </Mutation>
         ) : (
           <Fragment>
-            <div>
-            from UpdateCallbackWorkings (DisplayCallbacks)
             <DisplayCallbacks
               currentComponent={currentComponent}
               updateComponent={updateComponent}
@@ -211,7 +206,6 @@ export default class UpdateCallbackWorkings extends Component {
               highlighted={highlighted}
               createNotification={createNotification}
               />
-              </div>
           </Fragment>
         )}
         <Button onClick={this.exitComponent} text="MAIN MENU" />
