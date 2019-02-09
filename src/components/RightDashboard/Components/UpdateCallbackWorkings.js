@@ -4,14 +4,14 @@ import CallbackForm from "./Callbacks/CallbackForm";
 import { Mutation } from "react-apollo";
 import { ADD_CALLBACK } from "../../../graphql/mutations";
 import helper from "helpers/helper";
+import ComponentHeader from "./ComponentHeader";
+import ShowComponent from "./ShowComponent";
+import PopUp from "../../UI/PopUp";
+import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 import {
   RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
 } from "styles";
-import ComponentHeader from "./ComponentHeader";
-import PopUp from "../../UI/PopUp";
-import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
-import ShowComponent from "./ShowComponent";
 
 export default class UpdateCallbackWorkings extends Component {
   initialState = {
@@ -89,7 +89,6 @@ export default class UpdateCallbackWorkings extends Component {
 
   toggleForm = () => this.setState({ renderForm: !this.state.renderForm });
 
-
   setHighlight = cb => {
     const { highlighted, onHover } = this.state;
     cb._id === highlighted._id && !onHover
@@ -136,7 +135,6 @@ export default class UpdateCallbackWorkings extends Component {
 
     const currentComponent = helper.getComponentFromURL(pathname, components);
 
-    // glitch showing in ShowComponent
     let updatedCallbacks = {
       name,
       description,
@@ -147,35 +145,37 @@ export default class UpdateCallbackWorkings extends Component {
     return (
       <Container>
         <ComponentHeader currentComponent={currentComponent} />
-        <PopUp visible={visible} toggle={this.closePopUp}>
-          <ShowComponent
-            {...this.props}
-            updatedCallbacks={updatedCallbacks}
-            type="callback"
-          />
-        </PopUp>
         {renderForm ? (
           <Mutation mutation={ADD_CALLBACK}>
             {AddCallback => (
-              <CallbackForm
-                addElement={this.addElement}
-                argName={argName}
-                callback={this.saveCallback}
-                create={true}
-                createNotification={createNotification}
-                currentComponent={currentComponent}
-                description={description}
-                functionArgs={functionArgs}
-                handleChange={this.handleChange}
-                handleClear={this.handleClear}
-                handleSelect={this.handleSelect}
-                mutation={AddCallback}
-                name={name}
-                setState={setState}
-                stateChange={stateChange}
-                stateField={stateField}
-                typeName={typeName}
+              <Fragment>
+                <PopUp visible={visible} toggle={this.closePopUp}>
+                  <ShowComponent
+                    updatedCallbacks={updatedCallbacks}
+                    type="callback"
+                    {...this.props}
+                  />
+                </PopUp>
+                <CallbackForm
+                  addElement={this.addElement}
+                  argName={argName}
+                  callback={this.saveCallback}
+                  create={true}
+                  createNotification={createNotification}
+                  currentComponent={currentComponent}
+                  description={description}
+                  functionArgs={functionArgs}
+                  handleChange={this.handleChange}
+                  handleClear={this.handleClear}
+                  handleSelect={this.handleSelect}
+                  mutation={AddCallback}
+                  name={name}
+                  setState={setState}
+                  stateChange={stateChange}
+                  stateField={stateField}
+                  typeName={typeName}
                 />
+              </Fragment>
             )}
           </Mutation>
         ) : (
@@ -188,6 +188,7 @@ export default class UpdateCallbackWorkings extends Component {
               toggleForm={this.toggleForm}
               highlighted={highlighted}
               createNotification={createNotification}
+              {...this.props}
             />
           </Fragment>
         )}

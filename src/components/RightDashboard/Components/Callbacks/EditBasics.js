@@ -1,9 +1,6 @@
 import React from 'react';
 import Display from 'components/UI/Display';
-import { 
-  Label, 
-  LabelText, 
-} from 'styles';
+import { Label, LabelText } from 'styles';
 
 const EditBasics = ({ visible, name, description, handleChange, container }) => ( 
   <Display visible={visible} container={container}>

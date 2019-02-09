@@ -1,7 +1,7 @@
 import React from 'react';
+import TypeOptions from "../StateAndProps/TypeOptions";
 import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 import Display from 'components/UI/Display';
-import TypeOptions from "../StateAndProps/TypeOptions";
 import { 
   Buttons, 
   Label, 

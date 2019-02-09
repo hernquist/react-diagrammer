@@ -63,6 +63,3 @@ export const Delete = styled.div`
     border: 1px solid ${ props => props.theme.black};
   }
 `;
-
-
-

@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from "react";
+import EditBasics from "./EditBasics";
+import EditArguments from "./EditArguments";
+import EditSetStates from "./EditSetStates";
 import {
   AccordionTitle as Title,
   AccordionText as Text,
   CallbackFormContainer as Container
 } from "styles";
-import EditBasics from "./EditBasics";
-import EditArguments from "./EditArguments";
-import EditSetStates from "./EditSetStates";
 
-export default class EditCallbackForm extends Component {
+class EditCallbackForm extends Component {
   state = { section: "basics" };
 
   showSection = section => () => this.setState({ section });
@@ -37,7 +37,6 @@ export default class EditCallbackForm extends Component {
   render() {
     const { 
       currentComponent, 
-      mutation,
       argName,
       deleteElement,
       description,
@@ -93,17 +92,20 @@ export default class EditCallbackForm extends Component {
         </Title>
         <EditSetStates
           container={Container}
+          currentComponent={currentComponent}
+          deleteElement={deleteElement}
           handleChange={handleChange}
           handleClear={handleClear}
-          deleteElement={deleteElement}
-          validation={this.validation}
           handleSelect={handleSelect}
           setState={setState}
           stateChange={stateChange}
           stateField={stateField}
+          validation={this.validation}
           visible={setStates}
         />
       </Fragment>
     );
   }
 }
+
+export default EditCallbackForm;

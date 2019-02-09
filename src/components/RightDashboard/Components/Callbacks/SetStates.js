@@ -9,13 +9,11 @@ import {
   CallbackDetail,
   CallbackDetailText as Text,
   FunctionArgContainer
-  // Delete
 } from "styles";
 
 const SetStates = ({
   container,
   currentComponent,
-  // deleteElement,
   handleChange,
   handleClear,
   handleSelect,
@@ -44,7 +42,6 @@ const SetStates = ({
         fieldtype={"stateField"}
         selected={stateField}
       />
-      {/* <input value={stateField} onChange={e => handleChange(e, "stateField")} /> */}
     </Label>
     <Label>
       <LabelText>State Change</LabelText>

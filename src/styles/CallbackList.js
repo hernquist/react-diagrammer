@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Callback = styled.div`
-  
   font-size: 20px; 
   height: 40px;
   width: 90%;
@@ -18,11 +17,6 @@ export const Callback = styled.div`
   &:last-child {
     border-bottom: 1px solid ${ props => props.theme.madison };
   }
-
-  // &:nth-child(2) {
-  //   border-top-right-radius: 5px;
-  //   border-top-left-radius: 5px;
-  // }
 
   &:hover {
     background-color: ${ props => props.theme.lightBlue };

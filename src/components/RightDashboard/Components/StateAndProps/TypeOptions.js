@@ -1,9 +1,6 @@
 import React from "react";
-import {
-  RightDashboardList as List,
-  RightDashboardListItem as ListItem
-} from "styles";
 import { OPTIONS } from "helpers/const";
+import { RightDashboardList as List, RightDashboardListItem as ListItem } from "styles";
 
 const TypeOptions = ({ handleSelect, fieldtype, selected }) => (
   <List>

@@ -1,4 +1,5 @@
 import React from "react";
+import StateOptions from "../StateAndProps/StateOptions";
 import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 import Display from "components/UI/Display";
 import {
@@ -12,9 +13,11 @@ import {
 
 const EditSetStates = ({
   container,
+  currentComponent,
   deleteElement,
   handleChange,
   handleClear,
+  handleSelect,
   setState,
   stateChange,
   stateField,
@@ -32,7 +35,13 @@ const EditSetStates = ({
     ))}
     <Label>
       <LabelText>State Field</LabelText>
-      <input value={stateField} onChange={e => handleChange(e, "stateField")} />
+      <StateOptions
+        handleSelect={handleSelect}
+        key="stateField"
+        states={currentComponent.state}
+        fieldtype={"stateField"}
+        selected={stateField}
+      />
     </Label>
     <Label>
       <LabelText>State Change</LabelText>
@@ -46,7 +55,7 @@ const EditSetStates = ({
       <Button
         onClick={() => {
           handleClear("stateChange");
-          handleClear("setState");
+          handleClear("stateField");
         }}
         text="CLEAR"
       />
