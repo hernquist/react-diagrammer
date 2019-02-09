@@ -31,14 +31,14 @@ export const ShowState = props =>
     }
   </div>
 
-export const ShowProps = props => {
-  return <div style={getStyles(props)}>
+export const ShowProps = props => 
+  <div style={getStyles(props)}>
     props = {`{`}
       {props.props.map((obj, i) => 
         <Field key={obj._id || i}>{obj.name}: <i>{obj.proptype}</i></Field>)}
     {`}`}  
   </div>
-}
+
 
 const NoFunctionArgs = () => (
   <TwiceIndentedField>
@@ -46,8 +46,8 @@ const NoFunctionArgs = () => (
   </TwiceIndentedField>
 )
 
-const FunctionArgsList = ({ args }) => args.map(arg => 
-  <TwiceIndentedField key={arg.name + arg.typeName}>
+const FunctionArgsList = ({ args }) => args.map((arg, i) => 
+  <TwiceIndentedField key={arg.name + arg.typeName + i}>
     {arg.name}: <em>{arg.typeName}</em>
   </TwiceIndentedField>
 )
@@ -58,8 +58,8 @@ const NoStateChanges = () => (
   </TwiceIndentedField>
 )
 
-const SetStateList = ({ stateChanges }) => stateChanges.map(state => 
-  <TwiceIndentedField key={state.stateField}>
+const SetStateList = ({ stateChanges }) => stateChanges.map((state, i) => 
+  <TwiceIndentedField key={state.stateField + i}>
     {state.stateField} -- {state.stateChange}
   </TwiceIndentedField>
 )
