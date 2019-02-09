@@ -66,9 +66,6 @@ export default class ShowComponent extends Component {
       showProps = activeTab === "props",
       showCallbacks = activeTab === "callbacks";
 
-    console.log("updatedState", updatedState)
-    console.log("state", state)
-
     const displayState =
       Object.keys(updatedState || {}).length > 0
         ? [

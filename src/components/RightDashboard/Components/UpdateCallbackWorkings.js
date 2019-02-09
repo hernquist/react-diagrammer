@@ -149,15 +149,8 @@ export default class UpdateCallbackWorkings extends Component {
       name,
       description,
       functionArgs: [...functionArgs, argName && { name: argName, typeName }],
-      setState: [...setState, { stateField, stateChange }]
+      setState: [...setState, { stateField: stateField, stateChange }]
     };
-
-    console.log("updatedCallbacks:", updatedCallbacks);
-    console.log(
-      "functionArgs:",
-      updatedCallbacks.functionArgs[0].argName,
-      updatedCallbacks.functionArgs.length
-    );
 
     return (
       <Container>

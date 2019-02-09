@@ -1,7 +1,6 @@
 import React from "react";
 import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 import Display from "components/UI/Display";
-import StateOptions from "../StateAndProps/StateOptions";
 import {
   Buttons,
   Label,
@@ -13,11 +12,9 @@ import {
 
 const SetStates = ({
   container,
-  currentComponent,
   deleteElement,
   handleChange,
   handleClear,
-  handleSelect,
   setState,
   stateChange,
   stateField,
@@ -33,16 +30,10 @@ const SetStates = ({
         <Delete onClick={() => deleteElement(field, "setState")}>X</Delete>
       </CallbackDetail>
     ))}
+    {/* todo make a selector */}
     <Label>
       <LabelText>State Field</LabelText>
-      <StateOptions
-        handleSelect={handleSelect}
-        key="stateField"
-        states={currentComponent.state}
-        fieldtype={"stateField"}
-        selected={stateField}
-      />
-      {/* <input value={stateField} onChange={e => handleChange(e, "stateField")} /> */}
+      <input value={stateField} onChange={e => handleChange(e, "stateField")} />
     </Label>
     <Label>
       <LabelText>State Change</LabelText>
@@ -65,3 +56,4 @@ const SetStates = ({
 );
 
 export default SetStates;
+

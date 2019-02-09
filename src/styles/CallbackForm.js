@@ -6,6 +6,24 @@ export const CallbackFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: start;
+`;
+
+export const FunctionArgContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column;
+  padding-bottom: 10px;
+
+  &:first-child {
+    margin-top: 2px;
+  }
+
+  &:last-child {
+    margin-bottom: 10px;
+  }
 `;
 
 export const CallbackDetail = styled.div`
@@ -15,17 +33,20 @@ export const CallbackDetail = styled.div`
 
   font-size: 20px; 
   height: 28px;
-  width: 90%;
-  max-width: 90%;
+  width: 95%;
+  max-width: 95%;
   border: 1px solid ${ props => props.theme.madison };
   background-color: ${ props => props.theme.lightGrey };
-  color: ${ props => props.theme.teal };
+  color: ${ props => props.theme.black };
   padding: 4px 10px;
+  margin-left: 15px;
+  margin-right: 15px;
 
-  &:hover {
-    background-color: ${ props => props.theme.madison };
-    color: ${ props => props.theme.lightGrey };
-  }
+  // &:hover {
+  //   background-color: ${ props => props.theme.madison };
+  //   color: ${ props => props.theme.lightGrey };
+  // }
+
 `;
 
 export const CallbackDetailText = styled.div`

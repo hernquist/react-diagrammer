@@ -60,7 +60,6 @@ export default class CallbackForm extends Component {
           container={Container}
           validation={this.validation}
           handleSelect={handleSelect}
-          create={true}
           {...this.props}
         />
         <Title onClick={this.showSection("setStates")}>
@@ -71,7 +70,6 @@ export default class CallbackForm extends Component {
           visible={setStates}
           container={Container}
           validation={this.validation}
-          handleSelect={handleSelect}
           {...this.props}
         />
         {create && (
