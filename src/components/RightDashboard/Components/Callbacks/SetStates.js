@@ -8,13 +8,14 @@ import {
   LabelText,
   CallbackDetail,
   CallbackDetailText as Text,
-  Delete
+  FunctionArgContainer
+  // Delete
 } from "styles";
 
 const SetStates = ({
   container,
   currentComponent,
-  deleteElement,
+  // deleteElement,
   handleChange,
   handleClear,
   handleSelect,
@@ -25,14 +26,15 @@ const SetStates = ({
   visible
 }) => (
   <Display visible={visible} container={container}>
-    {setState.map((field, i) => (
-      <CallbackDetail key={i}>
-        <Text>
-          {field.stateField}: {field.stateChange}
-        </Text>
-        <Delete onClick={() => deleteElement(field, "setState")}>X</Delete>
-      </CallbackDetail>
-    ))}
+    {setState.length > 0 ? 
+      <FunctionArgContainer>
+        {setState.map((field, i) => (
+          <CallbackDetail key={i}>
+            <Text>{field.stateField}: {field.stateChange}</Text>
+          </CallbackDetail>
+        ))}
+      </FunctionArgContainer> : null
+    }
     <Label>
       <LabelText>State Field</LabelText>
       <StateOptions
