@@ -89,13 +89,6 @@ export default class UpdateCallbackWorkings extends Component {
 
   toggleForm = () => this.setState({ renderForm: !this.state.renderForm });
 
-  editCb = cb => {
-    if (this.state.onHover) this.setState({ highlighted: cb });
-  };
-
-  resetHighlight = () => {
-    if (this.state.onHover) this.setState({ highlighted: { _id: null } });
-  };
 
   setHighlight = cb => {
     const { highlighted, onHover } = this.state;
@@ -106,7 +99,6 @@ export default class UpdateCallbackWorkings extends Component {
 
   resetUpdateCallbacks = () => {
     this.setState({ onHover: true });
-    this.resetHighlight();
   };
 
   exitComponent = () => {
@@ -191,14 +183,12 @@ export default class UpdateCallbackWorkings extends Component {
             <DisplayCallbacks
               currentComponent={currentComponent}
               updateComponent={updateComponent}
-              editCb={this.editCb}
               resetUpdateCallbacks={this.resetUpdateCallbacks}
-              resetHighlight={this.resetHighlight}
               setHighlight={this.setHighlight}
               toggleForm={this.toggleForm}
               highlighted={highlighted}
               createNotification={createNotification}
-              />
+            />
           </Fragment>
         )}
         <Button onClick={this.exitComponent} text="MAIN MENU" />

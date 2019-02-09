@@ -36,13 +36,14 @@ export default class CallbackForm extends Component {
   };
 
   render() {
-    const { callback, create, currentComponent, mutation, handleSelect } = this.props;
+    const { callback, create, currentComponent, mutation, handleSelect, name } = this.props;
     const { section } = this.state;
 
     const expand = isExpanded => (isExpanded ? "-" : "+");
     const basics = section === "basics";
     const args = section === "arguments";
     const setStates = section === "setStates";
+    const disabled = !name;
 
     return (
       <Fragment>
@@ -76,6 +77,7 @@ export default class CallbackForm extends Component {
         />
         {create && (
           <Button
+            disabled={disabled}
             onClick={() => callback(currentComponent, mutation)}
             text="SAVE CALLBACK"
           />

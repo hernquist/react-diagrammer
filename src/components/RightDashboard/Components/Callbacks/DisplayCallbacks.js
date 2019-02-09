@@ -2,32 +2,30 @@ import React, { Component, Fragment } from "react";
 import { Mutation } from "react-apollo";
 import { DELETE_CALLBACK, EDIT_CALLBACK } from "../../../../graphql/mutations";
 import { DisplayCBsButtonContainer as Buttons } from "styles";
-import CallbackForm from "./CallbackForm";
+import EditCallbackForm from "./EditCallbackForm";
 import CallbackList from "./CallbackList";
 import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 
 export default class DisplayCallbacks extends Component {
-  state = {
-    argName: "",
-    typeName: "string",
-    stateField: "",
-    stateChange: "",
-    showCallbacksToEdit: false
-  };
+  constructor(props) {
+    super(props);
 
-  static getDerivedStateFromProps(props, prevState) {
-    let state;
-    if (prevState.name === undefined) {
-      state = {
-        name: props.highlighted.name,
-        description: props.highlighted.description,
-        functionArgs: props.highlighted.functionArgs,
-        setState: props.highlighted.setState,
-        renderEditForm: false
-      };
-    }
-    return { ...prevState, ...state };
+    this.state = {
+      name: "",
+      description: "",
+      functionArgs: [],
+      setState: [],
+      argName: "",
+      typeName: "string",
+      stateField: "",
+      stateChange: "",
+      showCallbacksToEdit: false,
+      renderEditForm: false,
+      callback: {}
+    };
   }
+
+  setCallback = callback => this.setState({ callback });
 
   handleShowCallbacksToEdit = () =>
     this.setState({ showCallbacksToEdit: true });
@@ -36,7 +34,7 @@ export default class DisplayCallbacks extends Component {
 
   handleClear = key => this.setState({ [key]: "" });
 
-  // handleSelect = (value, key) => this.setState({ [key]: value });
+  handleSelect = (value, key) => this.setState({ [key]: value });
 
   addElement = key => {
     const {
@@ -143,16 +141,17 @@ export default class DisplayCallbacks extends Component {
   render() {
     const { currentComponent, toggleForm, createNotification } = this.props;
     const {
-      name,
-      description,
-      functionArgs,
-      setState,
-      renderEditForm,
       argName,
-      typeName,
+      description,
+      functionArgs = [],
+      name,
+      renderEditForm,
+      setState = [],
+      showCallbacksToEdit,
       stateChange,
       stateField,
-      showCallbacksToEdit
+      typeName,
+      callback
     } = this.state;
     const { callbacks } = currentComponent;
 
@@ -163,10 +162,11 @@ export default class DisplayCallbacks extends Component {
             {DeleteCallback =>
               renderEditForm ? (
                 <Fragment>
-                  <CallbackForm
+                  <EditCallbackForm
                     addElement={this.addElement}
                     argName={argName}
                     callback={() => console.log("empty callback")}
+                    currentComponent={currentComponent}
                     createNotification={createNotification}
                     deleteElement={this.deleteElement}
                     description={description}
@@ -180,7 +180,7 @@ export default class DisplayCallbacks extends Component {
                     stateField={stateField}
                     typeName={typeName}
                   />
-                  <Buttons style={{ height: "120px"}}>
+                  <Buttons style={{ height: "120px" }}>
                     <Button
                       onClick={() => this.updateValidation(EditCallback)}
                       text="UPDATE CALLBACK"
@@ -196,8 +196,8 @@ export default class DisplayCallbacks extends Component {
                   {showCallbacksToEdit ? (
                     <CallbackList
                       callbacks={callbacks}
+                      setCallback={this.setCallback}
                       setRenderFormTrue={this.setRenderFormTrue}
-                      {...this.props}
                     />
                   ) : (
                     <Fragment>
