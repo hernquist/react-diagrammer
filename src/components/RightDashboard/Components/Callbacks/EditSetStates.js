@@ -1,19 +1,20 @@
 import React from "react";
+import StateOptions from "../StateAndProps/StateOptions";
 import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 import Display from "components/UI/Display";
-import StateOptions from "../StateAndProps/StateOptions";
 import {
   Buttons,
   Label,
   LabelText,
   CallbackDetail,
   CallbackDetailText as Text,
-  FunctionArgContainer
+  Delete
 } from "styles";
 
-const SetStates = ({
+const EditSetStates = ({
   container,
   currentComponent,
+  deleteElement,
   handleChange,
   handleClear,
   handleSelect,
@@ -24,15 +25,14 @@ const SetStates = ({
   visible
 }) => (
   <Display visible={visible} container={container}>
-    {setState.length > 0 ? 
-      <FunctionArgContainer>
-        {setState.map((field, i) => (
-          <CallbackDetail key={i}>
-            <Text>{field.stateField}: {field.stateChange}</Text>
-          </CallbackDetail>
-        ))}
-      </FunctionArgContainer> : null
-    }
+    {setState.map((field, i) => (
+      <CallbackDetail key={i}>
+        <Text>
+          {field.stateField}: {field.stateChange}
+        </Text>
+        <Delete onClick={() => deleteElement(field, "setState")}>X</Delete>
+      </CallbackDetail>
+    ))}
     <Label>
       <LabelText>State Field</LabelText>
       <StateOptions
@@ -55,7 +55,7 @@ const SetStates = ({
       <Button
         onClick={() => {
           handleClear("stateChange");
-          handleClear("setState");
+          handleClear("stateField");
         }}
         text="CLEAR"
       />
@@ -63,4 +63,5 @@ const SetStates = ({
   </Display>
 );
 
-export default SetStates;
+export default EditSetStates;
+

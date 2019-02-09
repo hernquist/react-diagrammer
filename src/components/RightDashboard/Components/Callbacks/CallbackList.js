@@ -7,9 +7,7 @@ import {
 
 const CallbackList = ({
   callbacks,
-  editCb,
-  resetHighlight,
-  setHighlight,
+  setCallback,
   setRenderFormTrue
 }) => {
   if (callbacks.length < 1 ) { 
@@ -22,10 +20,8 @@ const CallbackList = ({
       {callbacks.map(callback => (
         <Callback 
           key={callback._id}
-          onMouseEnter={() => editCb(callback)}
-          onMouseLeave={resetHighlight}
           onClick={() => {
-            setHighlight(callback);
+            setCallback(callback);
             setRenderFormTrue();
           }}
         >

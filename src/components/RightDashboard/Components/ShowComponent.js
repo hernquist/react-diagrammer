@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import helper from "helpers/helper";
+import { ShowState, ShowProps, ShowCallbacks } from "./ShowComponentContent";
 import {
   FormTitle as Title,
   ShowComponentText as Text,
@@ -8,9 +9,8 @@ import {
   ShowComponentTab as Tab,
   ShowComponentContent as Content
 } from "styles";
-import { ShowState, ShowProps, ShowCallbacks } from "./ShowComponentContent";
 
-export default class ShowComponent extends Component {
+class ShowComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -66,9 +66,6 @@ export default class ShowComponent extends Component {
       showProps = activeTab === "props",
       showCallbacks = activeTab === "callbacks";
 
-    console.log("updatedState", updatedState)
-    console.log("state", state)
-
     const displayState =
       Object.keys(updatedState || {}).length > 0
         ? [
@@ -85,18 +82,7 @@ export default class ShowComponent extends Component {
           ]
         : props;
 
-    const displayCallbacks =
-      (updatedCallbacks && updatedCallbacks.name && updatedCallbacks.name.length || 0) > 0
-        ? [
-            ...callbacks,
-            {
-              name: updatedCallbacks.name || null,
-              description: updatedCallbacks.description || null,
-              functionArgs: updatedCallbacks.functionArgs || [],
-              setState: updatedCallbacks.setState || []
-            }
-          ]
-        : callbacks;
+    const displayCallbacks = callbacks.map(cb => cb._id === updatedCallbacks._id ? updatedCallbacks : cb);
 
     return (
       <Fragment>
@@ -142,3 +128,5 @@ export default class ShowComponent extends Component {
     );
   }
 }
+
+export default ShowComponent;

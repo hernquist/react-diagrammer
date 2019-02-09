@@ -6,6 +6,24 @@ export const CallbackFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: start;
+`;
+
+export const FunctionArgContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column;
+  padding-bottom: 10px;
+
+  &:first-child {
+    margin-top: 2px;
+  }
+
+  &:last-child {
+    margin-bottom: 10px;
+  }
 `;
 
 export const CallbackDetail = styled.div`
@@ -15,17 +33,14 @@ export const CallbackDetail = styled.div`
 
   font-size: 20px; 
   height: 28px;
-  width: 90%;
-  max-width: 90%;
+  width: 95%;
+  max-width: 95%;
   border: 1px solid ${ props => props.theme.madison };
   background-color: ${ props => props.theme.lightGrey };
-  color: ${ props => props.theme.teal };
+  color: ${ props => props.theme.black };
   padding: 4px 10px;
-
-  &:hover {
-    background-color: ${ props => props.theme.madison };
-    color: ${ props => props.theme.lightGrey };
-  }
+  margin-left: 15px;
+  margin-right: 15px;
 `;
 
 export const CallbackDetailText = styled.div`
@@ -41,7 +56,10 @@ export const Delete = styled.div`
   background-color: ${props => props.theme.lightGrey};
   color: ${props => props.theme.madison};
   border-radius: 5px;
+
+  &:hover {
+    background-color: ${ props => props.theme.lightBlue}
+    color: ${ props => props.theme.madison };
+    border: 1px solid ${ props => props.theme.black};
+  }
 `;
-
-
-

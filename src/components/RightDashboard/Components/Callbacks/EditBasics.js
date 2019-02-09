@@ -2,7 +2,7 @@ import React from 'react';
 import Display from 'components/UI/Display';
 import { Label, LabelText } from 'styles';
 
-const Basics = ({ visible, name, description, handleChange, container }) => ( 
+const EditBasics = ({ visible, name, description, handleChange, container }) => ( 
   <Display visible={visible} container={container}>
     <Label>
       <LabelText>Callback name</LabelText>
@@ -21,4 +21,4 @@ const Basics = ({ visible, name, description, handleChange, container }) => (
   </Display>
 )
 
-export default Basics;
+export default EditBasics;

@@ -4,14 +4,14 @@ import CallbackForm from "./Callbacks/CallbackForm";
 import { Mutation } from "react-apollo";
 import { ADD_CALLBACK } from "../../../graphql/mutations";
 import helper from "helpers/helper";
+import ComponentHeader from "./ComponentHeader";
+import ShowComponent from "./ShowComponent";
+import PopUp from "../../UI/PopUp";
+import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 import {
   RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
 } from "styles";
-import ComponentHeader from "./ComponentHeader";
-import PopUp from "../../UI/PopUp";
-import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
-import ShowComponent from "./ShowComponent";
 
 export default class UpdateCallbackWorkings extends Component {
   initialState = {
@@ -89,14 +89,6 @@ export default class UpdateCallbackWorkings extends Component {
 
   toggleForm = () => this.setState({ renderForm: !this.state.renderForm });
 
-  editCb = cb => {
-    if (this.state.onHover) this.setState({ highlighted: cb });
-  };
-
-  resetHighlight = () => {
-    if (this.state.onHover) this.setState({ highlighted: { _id: null } });
-  };
-
   setHighlight = cb => {
     const { highlighted, onHover } = this.state;
     cb._id === highlighted._id && !onHover
@@ -106,7 +98,6 @@ export default class UpdateCallbackWorkings extends Component {
 
   resetUpdateCallbacks = () => {
     this.setState({ onHover: true });
-    this.resetHighlight();
   };
 
   exitComponent = () => {
@@ -144,74 +135,61 @@ export default class UpdateCallbackWorkings extends Component {
 
     const currentComponent = helper.getComponentFromURL(pathname, components);
 
-    // glitch showing in ShowComponent
     let updatedCallbacks = {
       name,
       description,
       functionArgs: [...functionArgs, argName && { name: argName, typeName }],
-      setState: [...setState, { stateField, stateChange }]
+      setState: [...setState, { stateField: stateField, stateChange }]
     };
-
-    console.log("updatedCallbacks:", updatedCallbacks);
-    console.log(
-      "functionArgs:",
-      updatedCallbacks.functionArgs[0].argName,
-      updatedCallbacks.functionArgs.length
-    );
 
     return (
       <Container>
         <ComponentHeader currentComponent={currentComponent} />
-        <PopUp visible={visible} toggle={this.closePopUp}>
-          <ShowComponent
-            {...this.props}
-            updatedCallbacks={updatedCallbacks}
-            type="callback"
-          />
-        </PopUp>
         {renderForm ? (
           <Mutation mutation={ADD_CALLBACK}>
             {AddCallback => (
-              <div>
-                from UpdateCallbackWorkings (CallbackForm)
-              <CallbackForm
-                addElement={this.addElement}
-                argName={argName}
-                callback={this.saveCallback}
-                create={true}
-                createNotification={createNotification}
-                currentComponent={currentComponent}
-                description={description}
-                functionArgs={functionArgs}
-                handleChange={this.handleChange}
-                handleClear={this.handleClear}
-                handleSelect={this.handleSelect}
-                mutation={AddCallback}
-                name={name}
-                setState={setState}
-                stateChange={stateChange}
-                stateField={stateField}
-                typeName={typeName}
+              <Fragment>
+                <PopUp visible={visible} toggle={this.closePopUp}>
+                  <ShowComponent
+                    updatedCallbacks={updatedCallbacks}
+                    type="callback"
+                    {...this.props}
+                  />
+                </PopUp>
+                <CallbackForm
+                  addElement={this.addElement}
+                  argName={argName}
+                  callback={this.saveCallback}
+                  create={true}
+                  createNotification={createNotification}
+                  currentComponent={currentComponent}
+                  description={description}
+                  functionArgs={functionArgs}
+                  handleChange={this.handleChange}
+                  handleClear={this.handleClear}
+                  handleSelect={this.handleSelect}
+                  mutation={AddCallback}
+                  name={name}
+                  setState={setState}
+                  stateChange={stateChange}
+                  stateField={stateField}
+                  typeName={typeName}
                 />
-            </div>
+              </Fragment>
             )}
           </Mutation>
         ) : (
           <Fragment>
-            <div>
-            from UpdateCallbackWorkings (DisplayCallbacks)
             <DisplayCallbacks
               currentComponent={currentComponent}
               updateComponent={updateComponent}
-              editCb={this.editCb}
               resetUpdateCallbacks={this.resetUpdateCallbacks}
-              resetHighlight={this.resetHighlight}
               setHighlight={this.setHighlight}
               toggleForm={this.toggleForm}
               highlighted={highlighted}
               createNotification={createNotification}
-              />
-              </div>
+              {...this.props}
+            />
           </Fragment>
         )}
         <Button onClick={this.exitComponent} text="MAIN MENU" />

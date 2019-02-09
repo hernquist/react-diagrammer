@@ -1,15 +1,14 @@
 import React, { Component, Fragment } from "react";
+import EditBasics from "./EditBasics";
+import EditArguments from "./EditArguments";
+import EditSetStates from "./EditSetStates";
 import {
   AccordionTitle as Title,
   AccordionText as Text,
   CallbackFormContainer as Container
 } from "styles";
-import Basics from "./Basics";
-import Arguments from "./Arguments";
-import SetStates from "./SetStates";
-import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
 
-export default class CallbackForm extends Component {
+class EditCallbackForm extends Component {
   state = { section: "basics" };
 
   showSection = section => () => this.setState({ section });
@@ -36,14 +35,27 @@ export default class CallbackForm extends Component {
   };
 
   render() {
-    const { callback, create, currentComponent, mutation, handleSelect, name } = this.props;
+    const { 
+      currentComponent, 
+      argName,
+      deleteElement,
+      description,
+      functionArgs,
+      handleSelect, 
+      handleChange,
+      handleClear, 
+      name,
+      setState,
+      stateChange,
+      stateField,
+      typeName
+    } = this.props;
     const { section } = this.state;
 
     const expand = isExpanded => (isExpanded ? "-" : "+");
     const basics = section === "basics";
     const args = section === "arguments";
     const setStates = section === "setStates";
-    const disabled = !name;
 
     return (
       <Fragment>
@@ -51,38 +63,49 @@ export default class CallbackForm extends Component {
           <Text>CALLBACK BASICS</Text>
           <Text>{expand(basics)}</Text>
         </Title>
-        <Basics visible={basics} container={Container} {...this.props} />
+        <EditBasics 
+          container={Container} 
+          description={description}
+          handleChange={handleChange} 
+          name={name}
+          visible={basics} 
+        />
         <Title onClick={this.showSection("arguments")}>
           <Text>CALLBACK ARGUMENTS</Text>
           <Text>{expand(args)}</Text>
         </Title>
-        <Arguments
-          visible={args}
+        <EditArguments
+          argName={argName}
           container={Container}
-          validation={this.validation}
+          deleteElement={deleteElement}
+          functionArgs={functionArgs}
+          handleChange={handleChange}
+          handleClear={handleClear}
           handleSelect={handleSelect}
-          create={true}
-          {...this.props}
-        />
+          typeName={typeName}
+          validation={this.validation}
+          visible={args}
+          />
         <Title onClick={this.showSection("setStates")}>
           <Text>CALLBACK SETSTATES</Text>
           <Text>{expand(setStates)}</Text>
         </Title>
-        <SetStates
-          visible={setStates}
+        <EditSetStates
           container={Container}
-          validation={this.validation}
+          currentComponent={currentComponent}
+          deleteElement={deleteElement}
+          handleChange={handleChange}
+          handleClear={handleClear}
           handleSelect={handleSelect}
-          {...this.props}
+          setState={setState}
+          stateChange={stateChange}
+          stateField={stateField}
+          validation={this.validation}
+          visible={setStates}
         />
-        {create && (
-          <Button
-            disabled={disabled}
-            onClick={() => callback(currentComponent, mutation)}
-            text="SAVE CALLBACK"
-          />
-        )}
       </Fragment>
     );
   }
 }
+
+export default EditCallbackForm;

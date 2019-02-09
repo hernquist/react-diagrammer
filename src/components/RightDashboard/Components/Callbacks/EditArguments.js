@@ -8,12 +8,14 @@ import {
   LabelText,
   CallbackDetail,
   CallbackDetailText as Text,
+  Delete,
   FunctionArgContainer 
 } from 'styles';
 
-const Arguments = ({ 
+const EditArguments = ({ 
   argName,
   container,
+  deleteElement,
   functionArgs,
   handleChange,
   handleClear,
@@ -28,6 +30,7 @@ const Arguments = ({
         {functionArgs.map((field, i) => 
           <CallbackDetail key={i}>
             <Text>{field.name}: {field.typeName}</Text>
+            <Delete onClick={() => deleteElement(field, "functionArgs")}>X</Delete>
           </CallbackDetail>
         )}
       </FunctionArgContainer> : null
@@ -58,4 +61,4 @@ const Arguments = ({
   </Display>
 );
 
-export default Arguments;
+export default EditArguments;
