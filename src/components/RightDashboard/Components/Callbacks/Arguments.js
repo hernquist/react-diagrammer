@@ -8,7 +8,7 @@ import {
   LabelText,
   CallbackDetail,
   CallbackDetailText as Text,
-  Delete,
+  // Delete,
   FunctionArgContainer 
 } from 'styles';
 
