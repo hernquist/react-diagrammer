@@ -41,12 +41,6 @@ export const CallbackDetail = styled.div`
   padding: 4px 10px;
   margin-left: 15px;
   margin-right: 15px;
-
-  // &:hover {
-  //   background-color: ${ props => props.theme.madison };
-  //   color: ${ props => props.theme.lightGrey };
-  // }
-
 `;
 
 export const CallbackDetailText = styled.div`
@@ -62,6 +56,12 @@ export const Delete = styled.div`
   background-color: ${props => props.theme.lightGrey};
   color: ${props => props.theme.madison};
   border-radius: 5px;
+
+  &:hover {
+    background-color: ${ props => props.theme.lightBlue}
+    color: ${ props => props.theme.madison };
+    border: 1px solid ${ props => props.theme.black};
+  }
 `;
 
 

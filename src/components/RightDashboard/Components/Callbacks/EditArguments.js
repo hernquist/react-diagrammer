@@ -8,10 +8,11 @@ import {
   LabelText,
   CallbackDetail,
   CallbackDetailText as Text,
-  Delete 
+  Delete,
+  FunctionArgContainer 
 } from 'styles';
 
-const Arguments = ({ 
+const EditArguments = ({ 
   argName,
   container,
   deleteElement,
@@ -21,20 +22,19 @@ const Arguments = ({
   handleSelect,
   typeName,
   validation,
-  visible,
-  create = false
+  visible
 }) => (
   <Display visible={visible} container={container}>
-    {functionArgs.map((field, i) => 
-      <CallbackDetail key={i}>
-        <Text>{field.name}: {field.typeName}</Text>
-        {!create && 
-          <Delete onClick={() => deleteElement(field, 'functionArgs')}>
-            X
-          </Delete>
-        }
-      </CallbackDetail>
-    )}
+    {functionArgs.length > 0 ?
+      <FunctionArgContainer>
+        {functionArgs.map((field, i) => 
+          <CallbackDetail key={i}>
+            <Text>{field.name}: {field.typeName}</Text>
+            <Delete onClick={() => deleteElement(field, "functionArgs")}>X</Delete>
+          </CallbackDetail>
+        )}
+      </FunctionArgContainer> : null
+    }
     <Label>
       <LabelText>Callback Argument</LabelText>
       <input value={argName} onChange={e => handleChange(e, 'argName') } />
@@ -61,4 +61,4 @@ const Arguments = ({
   </Display>
 );
 
-export default Arguments;
+export default EditArguments;

@@ -25,7 +25,13 @@ export default class DisplayCallbacks extends Component {
     };
   }
 
-  setCallback = callback => this.setState({ callback });
+  setCallback = callback => this.setState({ 
+    name: callback.name,
+    description:callback.description,
+    functionArgs: callback.functionArgs,
+    setState: callback.setState,
+    callback: callback
+  });
 
   handleShowCallbacksToEdit = () =>
     this.setState({ showCallbacksToEdit: true });
@@ -60,17 +66,19 @@ export default class DisplayCallbacks extends Component {
   };
 
   deleteCallback = async mutation => {
-    const { _id } = this.props.highlighted;
+    const { _id } = this.state.callback;
     const { data } = await mutation({ variables: { _id } });
-    console.log(data);
-    // TODO should be based on data variable
-    const updatedCallbacks = this.props.currentComponent.callbacks.filter(
-      callback => callback._id !== _id
-    );
-    const component = Object.assign({}, this.props.currentComponent, {
-      callbacks: updatedCallbacks
-    });
-    this.props.updateComponent(component);
+    
+    if (data.deleteCallback) {
+      const updatedCallbacks = this.props.currentComponent.callbacks.filter(
+        callback => callback._id !== _id
+      );
+      const component = Object.assign({}, this.props.currentComponent, {
+        callbacks: updatedCallbacks
+      });
+      this.props.updateComponent(component);
+    };
+
     this.setState({ renderEditForm: false });
   };
 
@@ -101,14 +109,14 @@ export default class DisplayCallbacks extends Component {
   setRenderFormTrue = () => this.setState({ renderEditForm: true });
 
   editCallback = async mutation => {
-    const { name, description } = this.state;
+    const { name, description, callback } = this.state;
     const {
-      highlighted,
       currentComponent,
       resetUpdateCallbacks,
       updateComponent
     } = this.props;
-    const { _id } = highlighted;
+    const { _id } = callback;
+
     const setState = this.state.setState.map(field => ({
       stateField: field.stateField,
       stateChange: field.stateChange
@@ -122,11 +130,12 @@ export default class DisplayCallbacks extends Component {
     const { data } = await mutation({
       variables: { _id, name, description, functionArgs, setState }
     });
+
     const callbacks = currentComponent.callbacks.map(cb =>
       _id === cb._id ? data.editCallback : cb
     );
-    const component = Object.assign({}, currentComponent, { callbacks });
 
+    const component = Object.assign({}, currentComponent, { callbacks });
     updateComponent(component);
     resetUpdateCallbacks();
     this.setState({ renderEditForm: false });
@@ -165,7 +174,7 @@ export default class DisplayCallbacks extends Component {
                   <EditCallbackForm
                     addElement={this.addElement}
                     argName={argName}
-                    callback={() => console.log("empty callback")}
+                    callback={callback}
                     currentComponent={currentComponent}
                     createNotification={createNotification}
                     deleteElement={this.deleteElement}

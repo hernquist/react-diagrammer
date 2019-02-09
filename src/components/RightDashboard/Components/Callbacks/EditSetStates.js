@@ -10,7 +10,7 @@ import {
   Delete
 } from "styles";
 
-const SetStates = ({
+const EditSetStates = ({
   container,
   deleteElement,
   handleChange,
@@ -30,7 +30,6 @@ const SetStates = ({
         <Delete onClick={() => deleteElement(field, "setState")}>X</Delete>
       </CallbackDetail>
     ))}
-    {/* todo make a selector */}
     <Label>
       <LabelText>State Field</LabelText>
       <input value={stateField} onChange={e => handleChange(e, "stateField")} />
@@ -55,5 +54,5 @@ const SetStates = ({
   </Display>
 );
 
-export default SetStates;
+export default EditSetStates;
 
