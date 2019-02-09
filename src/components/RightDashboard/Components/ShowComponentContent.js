@@ -39,7 +39,6 @@ export const ShowProps = props =>
     {`}`}  
   </div>
 
-
 const NoFunctionArgs = () => (
   <TwiceIndentedField>
     This callback has no function arguments
