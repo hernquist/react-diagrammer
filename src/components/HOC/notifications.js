@@ -3,8 +3,7 @@ import {
   NotificationContainer,
   NotificationManager
 } from "react-notifications";
-// import "react-notifications/lib/notifications.css";
-import "./dummy.css"
+import "./notifications.css"
 import messageBuilder from "../../helpers/messages";
 
 export default WrappedComponent => {
