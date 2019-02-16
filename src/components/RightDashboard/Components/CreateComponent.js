@@ -7,12 +7,14 @@ import {
   LabelText,
   Buttons,
   Input,
-  Selection,
   Selections,
   RightDashboardTitle as Title,
   CreateComponentContainer as Container
 } from "styles";
-import { SubmitButton } from "components/UI/SubmitButton";
+import { 
+  RightDashboardButton as SubmitButton,
+  NoBoxShadowButton as Button 
+} from "components/UI/RightDashboardButton";
 import helper from "../../../helpers/helper";
 
 export default class CreateComponent extends Component {
@@ -107,45 +109,45 @@ export default class CreateComponent extends Component {
                 <Label>
                   <LabelText>Component Type</LabelText>
                   <Selections>
-                    <Selection
+                    <Button
                       onClick={() => this.setState({ style: "container" })}
                       style={{
                         backgroundColor:
-                        style === "container" && "rgba(33, 194, 248, 0.7)"                   }}
-                        >
-                      CONTAINER
-                    </Selection>
-                    <Selection
+                        style === "container" && "rgba(33, 194, 248, 0.7)"
+                      }}
+                      text="CONTAINER"
+                    />
+                    <Button
                       onClick={() => this.setState({ style: "presentational" })}
                       style={{
                         backgroundColor:
-                        style === "presentational" && "rgba(33, 194, 248, 0.7)"                   }}
-                        >
-                      PRESENTATIONAL
-                    </Selection>
+                        style === "presentational" && "rgba(33, 194, 248, 0.7)"
+                      }}
+                      text="PRESENTATIONAL"
+                    />
                   </Selections>
                 </Label>
                 <Label>
                   <LabelText>Placement</LabelText>
                   <Selections>
-                    <Selection
+                    <Button
                       onClick={() => this.handlePlacement("unassigned")}
                       style={{
                         backgroundColor:
-                        placement === "unassigned" && "rgba(33, 194, 248, 0.7)"                    }}
-                        >
-                      UNASSIGNED
-                    </Selection>
+                        placement === "unassigned" && "rgba(33, 194, 248, 0.7)"
+                      }}
+                      text="UNASSIGNED"
+                        />
                     {doesRootExist && (
-                      <Selection
-                      onClick={() => this.handlePlacement("child")}
-                      style={{
-                        backgroundColor:
-                        placement === "child" && "rgba(33, 194, 248, 0.7)"                      }}
-                        >
-                        CHILD
-                      </Selection>
-                  )}
+                      <Button
+                        onClick={() => this.handlePlacement("child")}
+                        style={{
+                          backgroundColor:
+                          placement === "child" && "rgba(33, 194, 248, 0.7)"
+                        }}                      
+                        text="CHILD"
+                      />
+                    )}
                   </Selections>
                   <ComponentList
                     potentialParents={[...root, ...childs]}
@@ -155,28 +157,25 @@ export default class CreateComponent extends Component {
                     text="Choose a parent?"
                   />
                   {!doesRootExist && (
-                    <Selection
+                    <Button
                       onClick={() => this.handlePlacement("root")}
                       style={{
                         backgroundColor:
                           placement === "root" && "rgba(33, 194, 248, 0.7)"
                       }}
-                    >
-                      ROOT
-                    </Selection>
+                      text="ROOT"
+                    />
                   )}
                 </Label>
                 <Buttons>
                   <SubmitButton
                     onClick={() => this.validation(CreateComponent, AddChild)}
-                    >
-                    DONE
-                  </SubmitButton>
+                    text="DONE"
+                  />
                   <SubmitButton
                     onClick={() => history.push("/main")}
-                    >
-                    CANCEL
-                  </SubmitButton>
+                    text="CANCEL"
+                  />
                 </Buttons>
               </Container>
             )}
