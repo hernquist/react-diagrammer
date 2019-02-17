@@ -136,33 +136,35 @@ export default class AddExistingComponent extends Component {
                       <Fragment>
                          <Label>
                   <LabelText>Placement</LabelText>
-                  <Selections>
-                    <Button
-                      onClick={() => this.handleUnassigned("unassigned")}
-                      style={{
-                        backgroundColor:
-                        placement === "unassigned" && "rgba(33, 194, 248, 0.7)"
-                      }}
-                      text="UNASSIGNED"
-                        />
-                    {doesRootExist && (
+                  {!placement && (
+                    <Selections>
                       <Button
-                        onClick={() => this.handleChild("child")}
+                        onClick={() => this.handleUnassigned("unassigned")}
                         style={{
                           backgroundColor:
-                          placement === "child" && "rgba(33, 194, 248, 0.7)"
-                        }}                      
-                        text="CHILD"
-                      />
-                    )}
-                  </Selections>
-                  <ComponentList
-                            potentialParents={[...root, ...childs]}
-                            display={placement === "child"}
-                            chooseComponent={this.chooseComponent}
-                            highlighted={highlighted}
-                            text="Choose a parent:"
+                          placement === "unassigned" && "rgba(33, 194, 248, 0.7)"
+                        }}
+                        text="UNASSIGNED"
                           />
+                      {doesRootExist && (
+                        <Button
+                          onClick={() => this.handleChild("child")}
+                          style={{
+                            backgroundColor:
+                            placement === "child" && "rgba(33, 194, 248, 0.7)"
+                          }}                      
+                          text="CHILD"
+                        />
+                      )}
+                    </Selections>
+                  )}
+                  <ComponentList
+                    potentialParents={[...root, ...childs]}
+                    display={placement === "child" && !highlighted}
+                    chooseComponent={this.chooseComponent}
+                    highlighted={highlighted}
+                    text="Choose a parent:"
+                  />
                   {/* <ComponentList
                     potentialParents={[...root, ...childs]}
                     chooseComponent={this.handleParent}
@@ -213,12 +215,13 @@ export default class AddExistingComponent extends Component {
                         <hr /> */}
                         <KeepChildren
                           hasChildren={copiedComponent.children.length > 0}
-                          display={placement === "child"}
+                          display={placement === "child" && !!highlighted}
                           keepChildren={keepChildren}
                           setKeepChildren={this.handleKeepChildren}
                         />
                         <Button
                           className="dashboard-button"
+                          disabled={!placement}
                           onClick={() =>
                             this.saveComponent(
                               CopyComponent,
