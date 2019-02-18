@@ -1,9 +1,6 @@
 import React, { Fragment } from "react";
 import {
   Buttons,
-  Label,
-  LabelText,
-  Selections,
   RightDashboardTitle as Title
 } from "styles";
 import { RightDashboardButton as Button } from "../../../UI/RightDashboardButton";
@@ -11,7 +8,6 @@ import { RightDashboardButton as Button } from "../../../UI/RightDashboardButton
 const KeepChildren = ({
   hasChildren,
   display,
-  keepChildren,
   setKeepChildren
 }) => {
   if (!display) return null;
@@ -19,7 +15,7 @@ const KeepChildren = ({
     return (
       <Fragment>
         <Title>Keep the component</Title>
-        <Title>children? {/* {keepChildren ? `YES` : `NO`} */}</Title>
+        <Title>children?</Title>
         <Buttons>
           <Button
             className="dashboard-button"
@@ -34,8 +30,8 @@ const KeepChildren = ({
         </Buttons>
       </Fragment>
     );
-  // return <Title>No children</Title>;
-  return null;
+  
+    return null;
 };
 
 export default KeepChildren;

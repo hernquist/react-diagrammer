@@ -78,6 +78,7 @@ export default class AddExistingComponent extends Component {
 
     // TODO: why does copiedComponent sometimes not have a cloneId?
     // is it not being returned from the backend
+    // 2/18/19 seems to be working keep checking
     let cloneId = copiedComponent.cloneId || copiedComponent._id;
     const iteration = this.findIteration(cloneId);
 
@@ -123,7 +124,6 @@ export default class AddExistingComponent extends Component {
     const childs = helper.childs(components);
     const doesRootExist = root.length === 1;
 
-
     return (
       <Mutation mutation={COPY_CHILDREN}>
         {CopyChildren => (
@@ -134,85 +134,52 @@ export default class AddExistingComponent extends Component {
                   <div>
                     {Object.keys(copiedComponent).length > 0 ? (
                       <Fragment>
-                         <Label>
-                  <LabelText>Placement</LabelText>
-                  {!placement && (
-                    <Selections>
-                      <Button
-                        onClick={() => this.handleUnassigned("unassigned")}
-                        style={{
-                          backgroundColor:
-                          placement === "unassigned" && "rgba(33, 194, 248, 0.7)"
-                        }}
-                        text="UNASSIGNED"
-                          />
-                      {doesRootExist && (
-                        <Button
-                          onClick={() => this.handleChild("child")}
-                          style={{
-                            backgroundColor:
-                            placement === "child" && "rgba(33, 194, 248, 0.7)"
-                          }}                      
-                          text="CHILD"
-                        />
-                      )}
-                    </Selections>
-                  )}
-                  <ComponentList
-                    potentialParents={[...root, ...childs]}
-                    display={placement === "child" && !highlighted}
-                    chooseComponent={this.chooseComponent}
-                    highlighted={highlighted}
-                    text="Choose a parent:"
-                  />
-                  {/* <ComponentList
-                    potentialParents={[...root, ...childs]}
-                    chooseComponent={this.handleParent}
-                    highlighted={highlighted}
-                    display={placement === "child"}
-                    text="Choose a parent?"
-                  /> */}
-                  {!doesRootExist && (
-                    <Button
-                      onClick={() => this.handlePlacement("root")}
-                      style={{
-                        backgroundColor:
-                          placement === "root" && "rgba(33, 194, 248, 0.7)"
-                      }}
-                      text="ROOT"
-                    />
-                  )}
-                </Label>
-                        {/* <label>
-                          Placement
-                          <div
-                            onClick={() => this.handleUnassigned("unassigned")}
-                            style={{
-                              backgroundColor:
-                                placement === "unassigned" &&
-                                "rgba(0, 0, 0, 0.3)"
-                            }}
-                          >
-                            UNASSIGNED
-                          </div>
-                          <div
-                            onClick={() => this.handleChild("child")}
-                            style={{
-                              backgroundColor:
-                                placement === "child" && "rgba(0, 0, 0, 0.3)"
-                            }}
-                          >
-                            CHILD
-                          </div>
+                        <Label>
+                          {!placement && (
+                            <Selections>
+                              <Button
+                                onClick={() =>
+                                  this.handleUnassigned("unassigned")
+                                }
+                                style={{
+                                  backgroundColor:
+                                    placement === "unassigned" &&
+                                    "rgba(33, 194, 248, 0.7)"
+                                }}
+                                text="UNASSIGNED"
+                              />
+                              {doesRootExist && (
+                                <Button
+                                  onClick={() => this.handleChild("child")}
+                                  style={{
+                                    backgroundColor:
+                                      placement === "child" &&
+                                      "rgba(33, 194, 248, 0.7)"
+                                  }}
+                                  text="CHILD"
+                                />
+                              )}
+                            </Selections>
+                          )}
                           <ComponentList
                             potentialParents={[...root, ...childs]}
-                            display={placement === "child"}
+                            display={placement === "child" && !highlighted}
                             chooseComponent={this.chooseComponent}
                             highlighted={highlighted}
                             text="Choose a parent:"
                           />
-                        </label>
-                        <hr /> */}
+                          {!doesRootExist && (
+                            <Button
+                              onClick={() => this.handlePlacement("root")}
+                              style={{
+                                backgroundColor:
+                                  placement === "root" &&
+                                  "rgba(33, 194, 248, 0.7)"
+                              }}
+                              text="ROOT"
+                            />
+                          )}
+                        </Label>
                         <KeepChildren
                           hasChildren={copiedComponent.children.length > 0}
                           display={placement === "child" && !!highlighted}
@@ -227,7 +194,8 @@ export default class AddExistingComponent extends Component {
                               CopyComponent,
                               AddChild,
                               CopyChildren
-                            )}
+                            )
+                          }
                           text="DONE"
                         />
                         <Button
@@ -255,7 +223,7 @@ export default class AddExistingComponent extends Component {
                             text="CONTINUE"
                           />
                           <Button
-                            onClick={() => history.push('/main')}
+                            onClick={() => history.push("/main")}
                             text="CANCEL"
                           />
                         </Buttons>
