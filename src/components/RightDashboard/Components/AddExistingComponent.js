@@ -79,10 +79,6 @@ export default class AddExistingComponent extends Component {
     // TODO: why does copiedComponent sometimes not have a cloneId?
     // is it not being returned from the backend
     // 2/18/19 seems to be working keep checking
-<<<<<<< HEAD
-=======
-
->>>>>>> 5856007afdfd6e453a1053b65915e117e177b14d
     let cloneId = copiedComponent.cloneId || copiedComponent._id;
     const iteration = this.findIteration(cloneId);
 
