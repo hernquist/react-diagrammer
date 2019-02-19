@@ -1,27 +1,37 @@
-import React from 'react'
+import React, { Fragment } from "react";
+import {
+  Buttons,
+  RightDashboardTitle as Title
+} from "styles";
+import { RightDashboardButton as Button } from "../../../UI/RightDashboardButton";
 
-const KeepChildren = ({ hasChildren, display, keepChildren, setKeepChildren }) => {
-  if (!display) return null
-  if (hasChildren) return (
-    <div>
-      Keep the component children?
-      {keepChildren ? `YES` : `NO`}
-      <div
-        className="dashboard-button"
-        onClick={() => setKeepChildren(true)}
-      >
-        YES
-      </div>
-      <div
-        className="dashboard-button"
-        onClick={() => setKeepChildren(false)}
-      >
-        NO
-      </div>
-      <hr/>
-    </div> 
-  )
-  return <div>No children<hr/></div>
-}
+const KeepChildren = ({
+  hasChildren,
+  display,
+  setKeepChildren
+}) => {
+  if (!display) return null;
+  if (hasChildren)
+    return (
+      <Fragment>
+        <Title>Keep the component</Title>
+        <Title>children?</Title>
+        <Buttons>
+          <Button
+            className="dashboard-button"
+            onClick={() => setKeepChildren(true)}
+            text="YES"
+          />
+          <Button
+            className="dashboard-button"
+            onClick={() => setKeepChildren(false)}
+            text="NO"
+          />
+        </Buttons>
+      </Fragment>
+    );
+  
+    return null;
+};
 
-export default KeepChildren
+export default KeepChildren;
