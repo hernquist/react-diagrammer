@@ -21,28 +21,28 @@ const MenuIcon = styled.div`
 `;
 
 const Line = styled.span`
-  position: absolute; 
-  height: 3px; 
-  width: 80%; 
+  position: absolute;
+  height: 3px;
+  width: 80%;
   left: 4px;
   background: ${props => props.theme.teal};
   border-radius: 2px;
 `;
 
 const Line1 = styled(Line)`
-  top: 15%
+  top: 15%;
 `;
 const Line2 = styled(Line)`
-  top: 45%
+  top: 45%;
 `;
 const Line3 = styled(Line)`
-  top: 75%
+  top: 75%;
 `;
 
-export const Menu = ({ handleClick }) => 
+export const Menu = ({ handleClick }) => (
   <MenuIcon onClick={handleClick}>
     <Line1 />
     <Line2 />
     <Line3 />
   </MenuIcon>
-
+);
