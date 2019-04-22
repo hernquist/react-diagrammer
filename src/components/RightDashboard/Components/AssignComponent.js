@@ -3,7 +3,6 @@ import { Mutation } from "react-apollo";
 import { ASSIGN_COMPONENT } from "../../../graphql/mutations";
 import ComponentList from "./StateAndProps/ComponentList";
 import { Buttons } from "styles";
-import { SubmitButton } from "components/UI/SubmitButton";
 import { RightDashboardButton as Button } from "../../UI/RightDashboardButton";
 import helper from "helpers/helper";
 
@@ -60,10 +59,7 @@ export default class AssignComponent extends Component {
                 onClick={this.updateComponents(AssignComponent, highlighted)}
                 text="ASIGN"
               />
-              <Button 
-                onClick={this.close}
-                text="CANCEL"
-              />
+              <Button onClick={this.close} text="CANCEL" />
             </Buttons>
           </Fragment>
         )}

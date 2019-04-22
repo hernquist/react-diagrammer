@@ -19,7 +19,7 @@ const CreateOptions = ({ deactivateSelector, visible }) => {
       </ListItem>
       <ListItem>
         <Link
-          to="/main/component/new"
+          to="/main/new-component"
           className="list-item"
           onClick={deactivateSelector}
         >
@@ -28,7 +28,7 @@ const CreateOptions = ({ deactivateSelector, visible }) => {
       </ListItem>
       <ListItem>
         <Link
-          to="/main/component/add-existing"
+          to="/main/add-existing-component"
           className="list-item"
           onClick={deactivateSelector}
         >
