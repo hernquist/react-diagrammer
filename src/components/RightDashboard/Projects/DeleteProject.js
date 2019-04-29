@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Mutation } from 'react-apollo';
-import { DELETE_PROJECT } from '../../../graphql/mutations';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Mutation } from "react-apollo";
+import { DELETE_PROJECT } from "../../../graphql/mutations";
 import {
   CreateProjectContainer as Container,
   FormTitle as Title,
   Buttons,
   Message
-} from 'styles';
-import { SubmitButton } from 'components/UI/SubmitButton';
-import Errors from 'components/UI/Errors';
+} from "styles";
+import { RightDashboardButton as Button } from "../../UI/RightDashboardButton";
+import Errors from "components/UI/Errors";
 
 class DeleteProject extends Component {
   state = { errors: [] };
@@ -18,35 +18,32 @@ class DeleteProject extends Component {
     const { currentProject, history, refetchProject } = this.props;
     const { _id } = currentProject;
     const { data } = await mutation({ variables: { _id } });
-    if (data.deleteProject) {
-      console.log('Delete project working!');
-      await refetchProject();
-    } else {
-      console.log('Delete project not working!');
-    }
-    await history.push('/');
+
+    data.deleteProject
+      ? await refetchProject()
+      : console.error("Delete project not working!");
+
+    await history.push("/");
   };
+
+  navigateToMain = () => this.props.history.push("/main");
 
   render() {
     const { errors } = this.state;
+
     return (
       <Mutation mutation={DELETE_PROJECT}>
         {DeleteProject => (
           <Container>
             <Title>Delete Project</Title>
             <Message>
-              Are you sure you want to erase this projects and all its related
+              Are you sure you want to erase this project and all its related
               components?
             </Message>
-            <Errors errors={errors} from='DeleteProject' />
+            <Errors errors={errors} from="DeleteProject" />
             <Buttons>
-              <SubmitButton
-                onClick={this.removeProject(DeleteProject)}
-                > Yes
-              </SubmitButton>
-              <Link to='/main'>
-                <SubmitButton>No</SubmitButton>
-              </Link>
+              <Button onClick={this.removeProject(DeleteProject)} text="Yes" />
+              <Button text="No" onClick={this.navigateToMain} />
             </Buttons>
           </Container>
         )}

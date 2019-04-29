@@ -6,6 +6,6 @@ export const DiagramMainContainer = styled.div`
 `;
 
 export const Row = styled.div`
-  display: 'flex';
-  flexDirection: 'row';
+  display: "flex";
+  flex-direction: "row";
 `;

@@ -9,7 +9,8 @@ import {
   LabelText,
   Textarea
 } from 'styles';
-import { SubmitButton } from '../../UI/SubmitButton';
+// import { SubmitButton } from '../../UI/SubmitButton';
+import { RightDashboardButton as Button } from '../../UI/RightDashboardButton';
 import Errors from '../../UI/Errors';
 
 class CreateProject extends Component {
@@ -66,7 +67,7 @@ class CreateProject extends Component {
                   />
                 </InputField>
                 <Errors errors={errors} from='CreateProject' />
-                <SubmitButton>Submit</SubmitButton>
+                <Button text="Submit" /> 
               </Form>
             </Container>
           )}

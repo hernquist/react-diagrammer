@@ -8,7 +8,7 @@ import {
 import ComponentList from "./StateAndProps/ComponentList";
 import helper from "../../../helpers/helper";
 import KeepChildren from "./Children/KeepChildren";
-import { Buttons, Label, LabelText, Selections } from "styles";
+import { Buttons, Label, Selections } from "styles";
 import { RightDashboardButton as Button } from "../../UI/RightDashboardButton";
 
 export default class AddExistingComponent extends Component {
@@ -123,6 +123,8 @@ export default class AddExistingComponent extends Component {
     const root = helper.root(components);
     const childs = helper.childs(components);
     const doesRootExist = root.length === 1;
+    const isVisibleButton =
+      !(copiedComponent && !highlighted) || placement === "unassigned";
 
     return (
       <Mutation mutation={COPY_CHILDREN}>
@@ -131,7 +133,7 @@ export default class AddExistingComponent extends Component {
             {AddChild => (
               <Mutation mutation={COPY_COMPONENT}>
                 {CopyComponent => (
-                  <div>
+                  <Fragment>
                     {Object.keys(copiedComponent).length > 0 ? (
                       <Fragment>
                         <Label>
@@ -187,8 +189,8 @@ export default class AddExistingComponent extends Component {
                           setKeepChildren={this.handleKeepChildren}
                         />
                         <Button
+                          visible={isVisibleButton}
                           className="dashboard-button"
-                          disabled={!placement}
                           onClick={() =>
                             this.saveComponent(
                               CopyComponent,
@@ -196,7 +198,7 @@ export default class AddExistingComponent extends Component {
                               CopyChildren
                             )
                           }
-                          text="DONE"
+                          text="CREATE"
                         />
                         <Button
                           className="dashboard-button"
@@ -229,7 +231,7 @@ export default class AddExistingComponent extends Component {
                         </Buttons>
                       </Fragment>
                     )}
-                  </div>
+                  </Fragment>
                 )}
               </Mutation>
             )}
