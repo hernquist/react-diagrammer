@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import React from "react";
 
-export const CreateProjectContainer = styled.div`
+const Container = styled.div`
   display: flex;
   background: ${props => props.theme.lightBlue};
   flex-direction: column;
@@ -23,3 +24,10 @@ export const CreateProjectForm = styled.form`
 export const Textarea = styled.textarea`
   font-size: 20px;
 `;
+
+export const CreateProjectContainer = props => {
+  const { visible = true } = props;
+  if (!visible) return null;
+
+  return <Container {...props} />;
+};
