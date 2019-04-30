@@ -9,6 +9,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ThemeProvider } from "styled-components";
 import NotLoggedIn from "./components/Layout/NotLoggedIn";
 import LoggedIn from "./components/Layout/LoggedIn";
+import FourOFour from "./components/Static/FourOFour";
 import { Theme } from "./styles";
 import { API, LOCAL_API, BASENAME } from "./helpers/const";
 
@@ -42,6 +43,7 @@ const Index = () => (
         <Fragment>
           <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
           <Route path="/main" component={LoggedIn} />
+          <Route component={FourOFour} />
         </Fragment>
       </BrowserRouter>
     </ThemeProvider>
