@@ -12,6 +12,7 @@ import AddExistingComponent from "./Components/AddExistingComponent";
 import AssignComponent from "./Components/AssignComponent";
 import UnassignComponent from "./Components/UnassignComponent";
 import ShowComponent from "./Components/ShowComponent";
+import FourOFour from "../Static/FourOFour";
 
 const RightDashboard = ({
   user,
@@ -177,6 +178,7 @@ const RightDashboard = ({
         />
       )}
     />
+    {/* <Route path="/main" component={FourOFour} /> */}
   </div>
 );
 
