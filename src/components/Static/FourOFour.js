@@ -1,5 +1,11 @@
 import React from "react";
 
-export default function FourOFour() {
-  return <h3>404</h3>;
-}
+const FourOFour = ({ location }) => (
+  <div>
+    <h3>
+      No match for <code>{location.pathname}</code>
+    </h3>
+  </div>
+);
+
+export default FourOFour;
