@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withApollo } from "react-apollo";
 import { AuthWrapper } from "styles";
-import { SubmitButton } from "../UI/SubmitButton";
+// import { SubmitButton } from "../UI/SubmitButton";
 
 class LogoutForm extends Component {
   logout = async () => {
@@ -16,8 +16,8 @@ class LogoutForm extends Component {
       <AuthWrapper>
         <h2>Logout</h2>
         <h4> Are you sure you want to logout? </h4>
-        <SubmitButton onClick={this.logout}>YES</SubmitButton>
-        <SubmitButton onClick={() => history.goBack()}>NO</SubmitButton>
+        {/* <SubmitButton onClick={this.logout}>YES</SubmitButton> */}
+        {/* <SubmitButton onClick={() => history.goBack()}>NO</SubmitButton> */}
       </AuthWrapper>
     );
   }
