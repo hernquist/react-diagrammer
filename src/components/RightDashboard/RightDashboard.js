@@ -178,7 +178,7 @@ const RightDashboard = ({
         />
       )}
     />
-    {/* <Route path="/main" component={FourOFour} /> */}
+    <Route component={FourOFour} />
   </div>
 );
 
