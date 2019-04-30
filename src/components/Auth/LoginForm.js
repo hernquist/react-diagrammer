@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Mutation, Query } from "react-apollo";
 import { LOGIN } from "../../graphql/mutations";
 import { GET_AUTH_USER } from "../../graphql/queries";
-import { SubmitButton } from "../ui/SubmitButton";
-import Errors from "../UI/Errors";
+// import { SubmitButton } from "../UI/SubmitButton";
+// import Errors from "../UI/Errors";
 import {
   AuthWrapper,
   InputField,
@@ -74,12 +74,8 @@ class LoginForm extends Component {
                         onChange={e => this.handleInput(e, "password")}
                       />
                     </InputField>
-                    <Errors
-                      errors={errors}
-                      exception={"auth"}
-                      from={"LoginForm"}
-                    />
-                    <SubmitButton>Submit</SubmitButton>
+                    {/* <Errors errors={errors} exception={"auth"} from={"LoginForm"} /> */}
+                    {/* <SubmitButton>Submit</SubmitButton> */}
                   </Form>
                 )}
               </Mutation>
