@@ -7,7 +7,7 @@ import {
 import Basics from "./Basics";
 import Arguments from "./Arguments";
 import SetStates from "./SetStates";
-import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
+import { RightDashboardButton as Button } from "components/Ui/RightDashboardButton";
 
 export default class CallbackForm extends Component {
   state = { section: "basics" };

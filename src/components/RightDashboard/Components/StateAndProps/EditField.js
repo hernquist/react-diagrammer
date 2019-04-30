@@ -8,7 +8,7 @@ import {
   EDIT_STATE
 } from "graphql/mutations";
 import TypeOptions from "./TypeOptions";
-import { RightDashboardButton } from "components/UI/RightDashboardButton";
+import { RightDashboardButton } from "components/Ui/RightDashboardButton";
 import {
   Label,
   LabelText,

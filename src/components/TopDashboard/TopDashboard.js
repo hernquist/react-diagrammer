@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import ProjectList from './Features/ProjectList';
 import CreateOptions from './Features/CreateOptions';
 import DeleteOptions from './Features/DeleteOptions';
-import { SmallFlatButton as FlatButton } from '../UI/FlatButton';
-import { Menu } from '../UI/Menu';
+import { SmallFlatButton as FlatButton } from '../Ui/FlatButton';
+import { Menu } from '../Ui/Menu';
 import {
   TopDashboardContainer as Container,
   CurrentProjectTitle as Title,

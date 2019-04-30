@@ -4,8 +4,8 @@ import { DELETE_CALLBACK, EDIT_CALLBACK } from "../../../../graphql/mutations";
 import EditCallbackForm from "./EditCallbackForm";
 import CallbackList from "./CallbackList";
 import ShowComponent from "../ShowComponent";
-import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
-import PopUp from "../../../UI/PopUp";
+import { RightDashboardButton as Button } from "components/Ui/RightDashboardButton";
+import PopUp from "../../../Ui/PopUp";
 import { DisplayCBsButtonContainer as Buttons } from "styles";
 
 export default class DisplayCallbacks extends Component {

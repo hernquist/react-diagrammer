@@ -9,9 +9,9 @@ import {
   LabelText,
   Textarea
 } from 'styles';
-// import { SubmitButton } from '../../UI/SubmitButton';
-import { RightDashboardButton as Button } from '../../UI/RightDashboardButton';
-import Errors from '../../UI/Errors';
+// import { SubmitButton } from '../../Ui/SubmitButton';
+import { RightDashboardButton as Button } from '../../Ui/RightDashboardButton';
+import Errors from '../../Ui/Errors';
 
 class CreateProject extends Component {
   constructor(props) {

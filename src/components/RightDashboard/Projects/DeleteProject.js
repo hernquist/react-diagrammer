@@ -8,8 +8,8 @@ import {
   Buttons,
   Message
 } from "styles";
-import { RightDashboardButton as Button } from "../../UI/RightDashboardButton";
-import Errors from "components/UI/Errors";
+import { RightDashboardButton as Button } from "../../Ui/RightDashboardButton";
+import Errors from "components/Ui/Errors";
 
 class DeleteProject extends Component {
   state = { errors: [] };

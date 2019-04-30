@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import { SIGNUP } from "../../graphql/mutations";
 import { validateEmail } from "../../helpers/validations";
-// import { SubmitButton } from '../UI/SubmitButton';
-// import Errors from '../UI/Errors';
+// import { SubmitButton } from '../Ui/SubmitButton';
+// import Errors from '../Ui/Errors';
 import { AuthWrapper, InputField, FormTitle as Title, LabelText } from "styles";
 
 class SignupForm extends Component {

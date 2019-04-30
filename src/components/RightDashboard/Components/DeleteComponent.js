@@ -11,9 +11,9 @@ import {
   Buttons,
   Message
 } from "styles";
-import { ComponentList as List } from "components/UI/ComponentList";
-import { RightDashboardButton as Button } from "../../UI/RightDashboardButton";
-import Errors from "components/UI/Errors";
+import { ComponentList as List } from "components/Ui/ComponentList";
+import { RightDashboardButton as Button } from "../../Ui/RightDashboardButton";
+import Errors from "components/Ui/Errors";
 
 class DeleteComponent extends Component {
   state = {

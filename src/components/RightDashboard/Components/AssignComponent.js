@@ -3,7 +3,7 @@ import { Mutation } from "react-apollo";
 import { ASSIGN_COMPONENT } from "../../../graphql/mutations";
 import ComponentList from "./StateAndProps/ComponentList";
 import { Buttons } from "styles";
-import { RightDashboardButton as Button } from "../../UI/RightDashboardButton";
+import { RightDashboardButton as Button } from "../../Ui/RightDashboardButton";
 import helper from "helpers/helper";
 
 export default class AssignComponent extends Component {

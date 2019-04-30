@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Mutation, Query } from "react-apollo";
 import { LOGIN } from "../../graphql/mutations";
 import { GET_AUTH_USER } from "../../graphql/queries";
-// import { SubmitButton } from "../UI/SubmitButton";
-// import Errors from "../UI/Errors";
+// import { SubmitButton } from "../Ui/SubmitButton";
+// import Errors from "../Ui/Errors";
 import {
   AuthWrapper,
   InputField,

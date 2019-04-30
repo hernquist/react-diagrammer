@@ -3,7 +3,7 @@ import {
   Buttons,
   RightDashboardTitle as Title
 } from "styles";
-import { RightDashboardButton as Button } from "../../../UI/RightDashboardButton";
+import { RightDashboardButton as Button } from "../../../Ui/RightDashboardButton";
 
 const KeepChildren = ({
   hasChildren,

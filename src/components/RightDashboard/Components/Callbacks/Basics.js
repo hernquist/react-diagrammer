@@ -1,5 +1,5 @@
 import React from 'react';
-import Display from 'components/UI/Display';
+import Display from 'components/Ui/Display';
 import { Label, LabelText } from 'styles';
 
 const Basics = ({ visible, name, description, handleChange, container }) => ( 

@@ -6,8 +6,8 @@ import { ADD_CALLBACK } from "../../../graphql/mutations";
 import helper from "helpers/helper";
 import ComponentHeader from "./ComponentHeader";
 import ShowComponent from "./ShowComponent";
-import PopUp from "../../UI/PopUp";
-import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
+import PopUp from "../../Ui/PopUp";
+import { RightDashboardButton as Button } from "components/Ui/RightDashboardButton";
 import {
   RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container

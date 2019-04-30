@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
 import { UNASSIGN_COMPONENT } from 'graphql/mutations';
 import helper from 'helpers/helper';
-import { RightDashboardButton as Button} from '../../UI/RightDashboardButton';
-import ModalContainer from '../../UI/ModalContainer';
+import { RightDashboardButton as Button} from '../../Ui/RightDashboardButton';
+import ModalContainer from '../../Ui/ModalContainer';
 import { 
   UnassignedPrompt as Prompt, 
   Buttons, 

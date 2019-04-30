@@ -9,8 +9,8 @@ import {
   RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
 } from "styles";
-import PopUp from "../../UI/PopUp";
-import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
+import PopUp from "../../Ui/PopUp";
+import { RightDashboardButton as Button } from "components/Ui/RightDashboardButton";
 import ShowComponent from "./ShowComponent";
 
 class UpdateComponentWorkings extends Component {

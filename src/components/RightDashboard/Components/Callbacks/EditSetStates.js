@@ -1,7 +1,7 @@
 import React from "react";
 import StateOptions from "../StateAndProps/StateOptions";
-import { RightDashboardButton as Button } from "components/UI/RightDashboardButton";
-import Display from "components/UI/Display";
+import { RightDashboardButton as Button } from "components/Ui/RightDashboardButton";
+import Display from "components/Ui/Display";
 import {
   Buttons,
   Label,

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
 import { EDIT_COMPONENT_NAME } from '../../../graphql/mutations';
 import helper from 'helpers/helper';
-import { NoBoxShadowButton as Button } from 'components/UI/RightDashboardButton';
+import { NoBoxShadowButton as Button } from 'components/Ui/RightDashboardButton';
 import { InputField, Buttons, ShowUnassignedText as Text } from 'styles';
 
 const isFileName = /^[a-zA-Z]+$/

@@ -14,7 +14,7 @@ import {
 import { 
   RightDashboardButton as SubmitButton,
   NoBoxShadowButton as Button 
-} from "components/UI/RightDashboardButton";
+} from "components/Ui/RightDashboardButton";
 import helper from "../../../helpers/helper";
 
 export default class CreateComponent extends Component {
