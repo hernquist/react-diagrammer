@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { Mutation, Query } from "react-apollo";
 import { LOGIN } from "../../graphql/mutations";
 import { GET_AUTH_USER } from "../../graphql/queries";
-import { SubmitButton } from "../UI/SubmitButton";
+import { SubmitButton } from "../ui/SubmitButton";
 import Errors from "../UI/Errors";
-import { 
-  AuthWrapper, 
-  InputField, 
+import {
+  AuthWrapper,
+  InputField,
   FormTitle as Title,
   LabelText,
-  CreateProjectForm as Form,
+  CreateProjectForm as Form
 } from "styles";
 
 class LoginForm extends Component {
@@ -64,17 +64,21 @@ class LoginForm extends Component {
                       <LabelText>Email</LabelText>
                       <input
                         value={email}
-                        onChange={e => this.handleInput(e, 'email')}
+                        onChange={e => this.handleInput(e, "email")}
                       />
                     </InputField>
                     <InputField>
                       <LabelText>Password</LabelText>
                       <input
                         value={password}
-                        onChange={e => this.handleInput(e, 'password')}
+                        onChange={e => this.handleInput(e, "password")}
                       />
                     </InputField>
-                    <Errors errors={errors} exception={"auth"} from={"LoginForm"} />
+                    <Errors
+                      errors={errors}
+                      exception={"auth"}
+                      from={"LoginForm"}
+                    />
                     <SubmitButton>Submit</SubmitButton>
                   </Form>
                 )}
