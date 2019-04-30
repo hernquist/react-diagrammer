@@ -178,7 +178,6 @@ const RightDashboard = ({
         />
       )}
     />
-    <Route component={FourOFour} />
   </div>
 );
 

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ApolloClient } from "apollo-client";
 import { ApolloProvider } from "react-apollo";
 import { ApolloLink, concat } from "apollo-link";
@@ -40,11 +40,11 @@ const Index = () => (
   <ApolloProvider client={client}>
     <ThemeProvider theme={Theme}>
       <BrowserRouter basename={basename}>
-        <Fragment>
+        <Switch>
           <Route path="/(login|signup|logout|)" component={NotLoggedIn} />
           <Route path="/main" component={LoggedIn} />
           <Route component={FourOFour} />
-        </Fragment>
+        </Switch>
       </BrowserRouter>
     </ThemeProvider>
   </ApolloProvider>
