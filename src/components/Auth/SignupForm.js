@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import { SIGNUP } from "../../graphql/mutations";
 import { validateEmail } from "../../helpers/validations";
-// import { SubmitButton } from '../Ui/SubmitButton';
-// import Errors from '../Ui/Errors';
+import { SubmitButton } from "../Ui/SubmitButton";
+import Errors from "../Ui/Errors";
 import { AuthWrapper, InputField, FormTitle as Title, LabelText } from "styles";
 
 class SignupForm extends Component {
@@ -129,8 +129,8 @@ class SignupForm extends Component {
                   onChange={e => this.handleInput(e, "password")}
                 />
               </InputField>
-              {/* <Errors errors={errors} from='SignupForm' /> */}
-              {/* <SubmitButton>Submit</SubmitButton> */}
+              <Errors errors={errors} from="SignupForm" /> */}
+              <SubmitButton>Submit</SubmitButton>
             </form>
           )}
         </Mutation>
