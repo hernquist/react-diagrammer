@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import CreateProject from "./Projects/CreateProject";
 import DeleteProject from "./Projects/DeleteProject";
 import CurrentComponent from "./Components/CurrentComponent";
@@ -25,7 +25,7 @@ const RightDashboard = ({
   setParent,
   createNotification
 }) => (
-  <div>
+  <Switch>
     <Route
       path="/main/new-project"
       render={renderProps => (
@@ -178,7 +178,8 @@ const RightDashboard = ({
         />
       )}
     />
-  </div>
+    <Route compoenent={FourOFour} />
+  </Switch>
 );
 
 export default RightDashboard;
