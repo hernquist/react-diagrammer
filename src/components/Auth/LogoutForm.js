@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withApollo } from "react-apollo";
 import { AuthWrapper } from "styles";
-import { SubmitButton } from "../Ui/SubmitButton";
+import { SubmitButton } from "../UserInterface/SubmitButton";
 
 class LogoutForm extends Component {
   logout = async () => {

@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 import TypeOptions from "../StateAndProps/TypeOptions";
-import { RightDashboardButton as Button } from "components/Ui/RightDashboardButton";
-import Display from 'components/Ui/Display';
-import { 
-  Buttons, 
-  Label, 
+import { RightDashboardButton as Button } from "components/UserInterface/RightDashboardButton";
+import Display from "components/UserInterface/Display";
+import {
+  Buttons,
+  Label,
   LabelText,
   CallbackDetail,
   CallbackDetailText as Text,
-  FunctionArgContainer 
-} from 'styles';
+  FunctionArgContainer
+} from "styles";
 
-const Arguments = ({ 
+const Arguments = ({
   argName,
   container,
   functionArgs,
@@ -23,18 +23,20 @@ const Arguments = ({
   visible
 }) => (
   <Display visible={visible} container={container}>
-    {functionArgs.length > 0 ?
+    {functionArgs.length > 0 ? (
       <FunctionArgContainer>
-        {functionArgs.map((field, i) => 
+        {functionArgs.map((field, i) => (
           <CallbackDetail key={i}>
-            <Text>{field.name}: {field.typeName}</Text>
+            <Text>
+              {field.name}: {field.typeName}
+            </Text>
           </CallbackDetail>
-        )}
-      </FunctionArgContainer> : null
-    }
+        ))}
+      </FunctionArgContainer>
+    ) : null}
     <Label>
       <LabelText>Callback Argument</LabelText>
-      <input value={argName} onChange={e => handleChange(e, 'argName') } />
+      <input value={argName} onChange={e => handleChange(e, "argName")} />
     </Label>
     <Label>
       <LabelText>Argument Type</LabelText>
@@ -46,14 +48,14 @@ const Arguments = ({
       />
     </Label>
     <Buttons style={{ width: "200px" }}>
-      <Button onClick={() => validation('functionArgs')}
-        text="SUBMIT"
-        />
-      <Button onClick={() => {
-        handleClear('argName');
-        handleClear('typeName');
-      }}
-        text="CLEAR"/>
+      <Button onClick={() => validation("functionArgs")} text="SUBMIT" />
+      <Button
+        onClick={() => {
+          handleClear("argName");
+          handleClear("typeName");
+        }}
+        text="CLEAR"
+      />
     </Buttons>
   </Display>
 );

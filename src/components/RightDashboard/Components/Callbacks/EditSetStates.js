@@ -1,7 +1,7 @@
 import React from "react";
 import StateOptions from "../StateAndProps/StateOptions";
-import { RightDashboardButton as Button } from "components/Ui/RightDashboardButton";
-import Display from "components/Ui/Display";
+import { RightDashboardButton as Button } from "components/UserInterface/RightDashboardButton";
+import Display from "components/UserInterface/Display";
 import {
   Buttons,
   Label,
@@ -64,4 +64,3 @@ const EditSetStates = ({
 );
 
 export default EditSetStates;
-

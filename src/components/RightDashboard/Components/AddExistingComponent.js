@@ -9,7 +9,7 @@ import ComponentList from "./StateAndProps/ComponentList";
 import helper from "../../../helpers/helper";
 import KeepChildren from "./Children/KeepChildren";
 import { Buttons, Label, Selections } from "styles";
-import { RightDashboardButton as Button } from "../../Ui/RightDashboardButton";
+import { RightDashboardButton as Button } from "../../UserInterface/RightDashboardButton";
 
 export default class AddExistingComponent extends Component {
   state = {

@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import ModalContainer from "../Ui/ModalContainer";
+import ModalContainer from "../UserInterface/ModalContainer";
 import About from "../Static/About";
-import { FlatButton } from "../Ui/FlatButton";
+import { FlatButton } from "../UserInterface/FlatButton";
 import {
   HeaderContainer,
   AppName,

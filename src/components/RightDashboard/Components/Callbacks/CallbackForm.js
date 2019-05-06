@@ -7,7 +7,7 @@ import {
 import Basics from "./Basics";
 import Arguments from "./Arguments";
 import SetStates from "./SetStates";
-import { RightDashboardButton as Button } from "components/Ui/RightDashboardButton";
+import { RightDashboardButton as Button } from "components/UserInterface/RightDashboardButton";
 
 export default class CallbackForm extends Component {
   state = { section: "basics" };
@@ -36,7 +36,14 @@ export default class CallbackForm extends Component {
   };
 
   render() {
-    const { callback, create, currentComponent, mutation, handleSelect, name } = this.props;
+    const {
+      callback,
+      create,
+      currentComponent,
+      mutation,
+      handleSelect,
+      name
+    } = this.props;
     const { section } = this.state;
 
     const expand = isExpanded => (isExpanded ? "-" : "+");
