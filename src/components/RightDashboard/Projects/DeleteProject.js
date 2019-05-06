@@ -7,8 +7,8 @@ import {
   Buttons,
   Message
 } from "styles";
-import { RightDashboardButton as Button } from "../../Ui/RightDashboardButton";
-import Errors from "components/Ui/Errors";
+import { RightDashboardButton as Button } from "../../UserInterface/RightDashboardButton";
+import Errors from "components/UserInterface/Errors";
 
 class DeleteProject extends Component {
   state = { errors: [] };

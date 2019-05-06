@@ -9,7 +9,7 @@ import {
   ComponentWorkingsContainer as Container
 } from "styles";
 import styled from "styled-components";
-import { RightDashboardButton as Button } from "../../../Ui/RightDashboardButton";
+import { RightDashboardButton as Button } from "../../../UserInterface/RightDashboardButton";
 
 const ButtonsContainer = styled(Buttons)`
   margin: 10px 0;

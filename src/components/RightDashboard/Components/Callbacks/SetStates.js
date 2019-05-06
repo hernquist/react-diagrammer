@@ -1,6 +1,6 @@
 import React from "react";
-import { RightDashboardButton as Button } from "components/Ui/RightDashboardButton";
-import Display from "components/Ui/Display";
+import { RightDashboardButton as Button } from "components/UserInterface/RightDashboardButton";
+import Display from "components/UserInterface/Display";
 import StateOptions from "../StateAndProps/StateOptions";
 import {
   Buttons,
@@ -24,15 +24,17 @@ const SetStates = ({
   visible
 }) => (
   <Display visible={visible} container={container}>
-    {setState.length > 0 ? 
+    {setState.length > 0 ? (
       <FunctionArgContainer>
         {setState.map((field, i) => (
           <CallbackDetail key={i}>
-            <Text>{field.stateField}: {field.stateChange}</Text>
+            <Text>
+              {field.stateField}: {field.stateChange}
+            </Text>
           </CallbackDetail>
         ))}
-      </FunctionArgContainer> : null
-    }
+      </FunctionArgContainer>
+    ) : null}
     <Label>
       <LabelText>State Field</LabelText>
       <StateOptions

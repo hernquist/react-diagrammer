@@ -1,15 +1,8 @@
 import React, { Fragment } from "react";
-import {
-  Buttons,
-  RightDashboardTitle as Title
-} from "styles";
-import { RightDashboardButton as Button } from "../../../Ui/RightDashboardButton";
+import { Buttons, RightDashboardTitle as Title } from "styles";
+import { RightDashboardButton as Button } from "../../../UserInterface/RightDashboardButton";
 
-const KeepChildren = ({
-  hasChildren,
-  display,
-  setKeepChildren
-}) => {
+const KeepChildren = ({ hasChildren, display, setKeepChildren }) => {
   if (!display) return null;
   if (hasChildren)
     return (
@@ -30,8 +23,8 @@ const KeepChildren = ({
         </Buttons>
       </Fragment>
     );
-  
-    return null;
+
+  return null;
 };
 
 export default KeepChildren;

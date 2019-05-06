@@ -11,10 +11,10 @@ import {
   RightDashboardTitle as Title,
   CreateComponentContainer as Container
 } from "styles";
-import { 
+import {
   RightDashboardButton as SubmitButton,
-  NoBoxShadowButton as Button 
-} from "components/Ui/RightDashboardButton";
+  NoBoxShadowButton as Button
+} from "components/UserInterface/RightDashboardButton";
 import helper from "../../../helpers/helper";
 
 export default class CreateComponent extends Component {
@@ -58,9 +58,9 @@ export default class CreateComponent extends Component {
     const projectId = this.props.currentProject._id;
     const { name, placement, style } = this.state;
     const component = { projectId, name, placement, style };
-    
+
     const { data } = await mutation({ variables: component });
-    
+
     this.props.addComponent(data.createComponent);
 
     if (data.createComponent.placement === "child")
@@ -75,8 +75,8 @@ export default class CreateComponent extends Component {
       name.length < 3
         ? "minimumLength"
         : placement === "child" && !highlighted
-          ? "parentNotSelected"
-          : null;
+        ? "parentNotSelected"
+        : null;
     const details = message === "minimumLength" ? "component name" : "";
     message
       ? this.props.createNotification("warning", message, message, details)()
@@ -113,7 +113,7 @@ export default class CreateComponent extends Component {
                       onClick={() => this.setState({ style: "container" })}
                       style={{
                         backgroundColor:
-                        style === "container" && "rgba(33, 194, 248, 0.7)"
+                          style === "container" && "rgba(33, 194, 248, 0.7)"
                       }}
                       text="CONTAINER"
                     />
@@ -121,7 +121,8 @@ export default class CreateComponent extends Component {
                       onClick={() => this.setState({ style: "presentational" })}
                       style={{
                         backgroundColor:
-                        style === "presentational" && "rgba(33, 194, 248, 0.7)"
+                          style === "presentational" &&
+                          "rgba(33, 194, 248, 0.7)"
                       }}
                       text="PRESENTATIONAL"
                     />
@@ -134,17 +135,18 @@ export default class CreateComponent extends Component {
                       onClick={() => this.handlePlacement("unassigned")}
                       style={{
                         backgroundColor:
-                        placement === "unassigned" && "rgba(33, 194, 248, 0.7)"
+                          placement === "unassigned" &&
+                          "rgba(33, 194, 248, 0.7)"
                       }}
                       text="UNASSIGNED"
-                        />
+                    />
                     {doesRootExist && (
                       <Button
                         onClick={() => this.handlePlacement("child")}
                         style={{
                           backgroundColor:
-                          placement === "child" && "rgba(33, 194, 248, 0.7)"
-                        }}                      
+                            placement === "child" && "rgba(33, 194, 248, 0.7)"
+                        }}
                         text="CHILD"
                       />
                     )}

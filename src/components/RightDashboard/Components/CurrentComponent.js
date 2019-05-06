@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import { TOGGLE_COMPONENT_STYLE } from "../../../graphql/mutations";
 import helper from "../../../helpers/helper";
-import ModalContainer from "../../Ui/ModalContainer";
 import ComponentHeader from "./ComponentHeader";
 import EditComponentName from "./EditComponentName";
 import { RightDashboardContainer as Container } from "styles";
-import { RightDashboardButton as Button } from "../../Ui/RightDashboardButton";
+import ModalContainer from "../../UserInterface/ModalContainer";
+import { RightDashboardButton as Button } from "../../UserInterface/RightDashboardButton";
 import ShowComponent from "./ShowComponent";
 
 class CurrentComponent extends Component {

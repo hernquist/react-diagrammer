@@ -9,8 +9,8 @@ import {
   RightDashboardTitle as Title,
   ComponentWorkingsContainer as Container
 } from "styles";
-import PopUp from "../../Ui/PopUp";
-import { RightDashboardButton as Button } from "components/Ui/RightDashboardButton";
+import PopUp from "../../UserInterface/PopUp";
+import { RightDashboardButton as Button } from "components/UserInterface/RightDashboardButton";
 import ShowComponent from "./ShowComponent";
 
 class UpdateComponentWorkings extends Component {
@@ -21,16 +21,16 @@ class UpdateComponentWorkings extends Component {
     showEditFields: false,
     highlighted: null,
     onHover: true,
-    editField: null,
+    editField: null
   };
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
       ...this.initialState,
       popUp: props.type
-    }
+    };
   }
 
   showEdit = id => this.setState({ editField: id });
@@ -101,37 +101,38 @@ class UpdateComponentWorkings extends Component {
 
     if (currentComponent.style === "presentational" && type === "state")
       return <NoStateAllowed exit={this.exitComponent} />;
-    
-    let updatedState = null; 
+
+    let updatedState = null;
     let updatedProps = null;
 
     if (popUp === "state") {
-       updatedState = showAddField
-      ? {
-          name: value1,
-          statetype: value2
-        }
-      : null;
-      } else if (popUp === "prop") {
-        updatedProps = showAddField 
+      updatedState = showAddField
         ? {
-          name: value1,
-          proptype: value2
-        } : null;
-      }
+            name: value1,
+            statetype: value2
+          }
+        : null;
+    } else if (popUp === "prop") {
+      updatedProps = showAddField
+        ? {
+            name: value1,
+            proptype: value2
+          }
+        : null;
+    }
 
     const visible = popUp === "state" || popUp === "prop";
 
-    const typeCheck = type === "prop" ? "props" : type; 
+    const typeCheck = type === "prop" ? "props" : type;
     const showEditButton = currentComponent[typeCheck].length > 0;
 
     return (
       <Container>
         <ComponentHeader currentComponent={currentComponent} />
         <PopUp visible={visible} toggle={this.closePopUp}>
-          <ShowComponent 
-            {...this.props} 
-            updatedState={updatedState} 
+          <ShowComponent
+            {...this.props}
+            updatedState={updatedState}
             updatedProps={updatedProps}
           />
         </PopUp>

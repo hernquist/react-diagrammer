@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
-import { CREATE_PROJECT } from '../../../graphql/mutations';
+import React, { Component } from "react";
+import { Mutation } from "react-apollo";
+import { CREATE_PROJECT } from "../../../graphql/mutations";
 import {
   CreateProjectContainer as Container,
   CreateProjectForm as Form,
@@ -8,18 +8,18 @@ import {
   InputField,
   LabelText,
   Textarea
-} from 'styles';
+} from "styles";
 // import { SubmitButton } from '../../Ui/SubmitButton';
-import { RightDashboardButton as Button } from '../../Ui/RightDashboardButton';
-import Errors from '../../Ui/Errors';
+import { RightDashboardButton as Button } from "../../UserInterface/RightDashboardButton";
+import Errors from "../../UserInterface/Errors";
 
 class CreateProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
       errors: [],
-      name: '',
-      description: ''
+      name: "",
+      description: ""
     };
   }
 
@@ -33,7 +33,7 @@ class CreateProject extends Component {
     });
     this.props.setCurrentProject(data.createProject)();
 
-    this.props.history.push('/main/component/new');
+    this.props.history.push("/main/component/new");
   };
 
   render() {
@@ -48,7 +48,7 @@ class CreateProject extends Component {
                 <InputField>
                   <LabelText>Name</LabelText>
                   <input
-                    className='input'
+                    className="input"
                     value={name}
                     onChange={e => this.setState({ name: e.target.value })}
                   />
@@ -58,7 +58,7 @@ class CreateProject extends Component {
                   <Textarea
                     value={description}
                     rows={3}
-                    placeholder='Add an optional description...'
+                    placeholder="Add an optional description..."
                     onChange={e =>
                       this.setState({
                         description: e.target.value
@@ -66,8 +66,8 @@ class CreateProject extends Component {
                     }
                   />
                 </InputField>
-                <Errors errors={errors} from='CreateProject' />
-                <Button text="Submit" /> 
+                <Errors errors={errors} from="CreateProject" />
+                <Button text="Submit" />
               </Form>
             </Container>
           )}

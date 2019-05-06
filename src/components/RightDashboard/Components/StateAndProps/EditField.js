@@ -8,7 +8,7 @@ import {
   EDIT_STATE
 } from "graphql/mutations";
 import TypeOptions from "./TypeOptions";
-import { RightDashboardButton } from "components/Ui/RightDashboardButton";
+import { RightDashboardButton } from "components/UserInterface/RightDashboardButton";
 import {
   Label,
   LabelText,
@@ -29,7 +29,7 @@ class EditField extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      field: props.field,
+      field: props.field
     };
   }
 
@@ -113,9 +113,7 @@ class EditField extends Component {
                     placeholder={field.name}
                   />
                 </Label>
-                <Label
-                  onClick={this.activateSelector}
-                >
+                <Label onClick={this.activateSelector}>
                   <LabelText>{typeText}</LabelText>
                   <TypeOptions
                     handleSelect={this.handleSelect}
