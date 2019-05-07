@@ -129,7 +129,7 @@ class SignupForm extends Component {
                   onChange={e => this.handleInput(e, "password")}
                 />
               </InputField>
-              <Errors errors={errors} from="SignupForm" /> */}
+              <Errors errors={errors} from="SignupForm" />
               <SubmitButton>Submit</SubmitButton>
             </form>
           )}

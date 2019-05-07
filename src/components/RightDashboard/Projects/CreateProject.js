@@ -9,7 +9,6 @@ import {
   LabelText,
   Textarea
 } from "styles";
-// import { SubmitButton } from '../../Ui/SubmitButton';
 import { RightDashboardButton as Button } from "../../UserInterface/RightDashboardButton";
 import Errors from "../../UserInterface/Errors";
 
