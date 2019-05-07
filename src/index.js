@@ -14,7 +14,9 @@ import { Theme } from "./styles";
 import { API, LOCAL_API, BASENAME } from "./helpers/const";
 
 const prod = process.env.NODE_ENV === "production";
+console.log("process.env", process.env);
 const uri = prod ? API : LOCAL_API;
+console.log("uri:", uri);
 const basename = prod ? BASENAME : "";
 const httpLink = createHttpLink({ uri });
 
