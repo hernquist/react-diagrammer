@@ -13,11 +13,11 @@ import FourOFour from "./components/Static/FourOFour";
 import { Theme } from "./styles";
 import { API, LOCAL_API, BASENAME } from "./helpers/const";
 
-const prod = process.env.NODE_ENV === "production";
+const dev = process.env.NODE_ENV === "development";
 console.log("process.env", process.env);
-const uri = prod ? API : LOCAL_API;
+const uri = dev ? LOCAL_API : API;
 console.log("uri:", uri);
-const basename = prod ? BASENAME : "";
+const basename = dev ? "" : BASENAME;
 const httpLink = createHttpLink({ uri });
 
 const middlewareLink = new ApolloLink((operation, forward) => {
