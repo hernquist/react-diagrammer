@@ -9,8 +9,11 @@
   "dependencies": {
     "apollo-boost": "^0.1.7",
     "apollo-cache-inmemory": "^1.2.2",
+    "express": "^4.16.4",
+    "express-favicon": "^2.0.1",
     "gh-pages": "^2.0.1",
     "graphql": "^0.13.2",
+    "path": "^0.12.7",
     "react": "^16.8.0",
     "react-apollo": "^2.1.4",
     "react-dom": "^16.4.0",
@@ -21,7 +24,8 @@
     "styled-components": "^3.4.10"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "NODE_ENV=production node server.js",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

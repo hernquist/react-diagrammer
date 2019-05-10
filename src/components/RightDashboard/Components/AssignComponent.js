@@ -57,7 +57,7 @@ export default class AssignComponent extends Component {
             <Buttons>
               <Button
                 onClick={this.updateComponents(AssignComponent, highlighted)}
-                text="ASIGN"
+                text="ASSIGN"
               />
               <Button onClick={this.close} text="CANCEL" />
             </Buttons>
