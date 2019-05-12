@@ -12,7 +12,7 @@ import LoggedIn from "./components/Layout/LoggedIn";
 import FourOFour from "./components/Static/FourOFour";
 import { Theme } from "./styles";
 import { API, LOCAL_API, BASENAME } from "./helpers/const";
-import registerServiceWorker from "./registerServiceWorker";
+import * as serviceWorker from "./registerServiceWorker";
 
 const dev = process.env.NODE_ENV === "development";
 console.log("process.env", process.env);
@@ -55,4 +55,4 @@ const Index = () => (
 
 ReactDOM.render(<Index />, document.querySelector("#root"));
 
-registerServiceWorker();
+serviceWorker.unregister();
