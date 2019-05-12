@@ -1,6 +1,6 @@
 {
   "name": "react-tree-maker",
-  "homepage": "https://hernquist.github.io/react-diagrammer",
+  "homepage": "https://react-tree-maker.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -24,7 +24,7 @@
     "styled-components": "^3.4.10"
   },
   "scripts": {
-    "heroku:build": "yarn build && heroku build && heroku create react-tree-maker",
+    "heroku:build": "yarn build && heroku login && heroku create react-tree-maker",
     "heroku:remote": "heroku git:remote -a react-tree-maker",
     "heroku:push": "git push heroku master",
     "start": "node server.js",
