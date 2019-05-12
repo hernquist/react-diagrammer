@@ -1,5 +1,3 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 
@@ -15,13 +13,15 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#.gitignore for heroku deployment test
-# src/*
-public/*
+#.gitignore for heroku deployment
+
+# src/*   --> taking this out fixed an error
+# public/*   --> 
 build/static/css/*.map
 build/static/js/*.map
