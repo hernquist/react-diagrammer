@@ -55,4 +55,4 @@ const Index = () => (
 
 ReactDOM.render(<Index />, document.querySelector("#root"));
 
-serviceWorker.unregister();
+serviceWorker.register();
