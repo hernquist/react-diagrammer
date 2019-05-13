@@ -32,7 +32,7 @@ class CreateProject extends Component {
     });
     this.props.setCurrentProject(data.createProject)();
 
-    this.props.history.push("/main/component/new");
+    this.props.history.push("/main/new-component");
   };
 
   render() {
