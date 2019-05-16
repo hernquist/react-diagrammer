@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Mutation, Query } from "react-apollo";
 import { LOGIN } from "../../graphql/mutations";
 import { GET_AUTH_USER } from "../../graphql/queries";
-import { SubmitButton } from "../UserInterface/SubmitButton";
 import Errors from "../UserInterface/Errors";
+import { RightDashboardButton as SubmitButton } from "components/UserInterface/RightDashboardButton";
 import {
   AuthWrapper,
   InputField,
@@ -11,6 +11,8 @@ import {
   LabelText,
   CreateProjectForm as Form
 } from "styles";
+
+// import { AuthWrapper, InputField, FormTitle as Title, LabelText } from "styles";
 
 class LoginForm extends Component {
   initialState = {
@@ -79,7 +81,7 @@ class LoginForm extends Component {
                       exception={"auth"}
                       from={"LoginForm"}
                     />
-                    <SubmitButton>Submit</SubmitButton>
+                    <SubmitButton text="Submit" />
                   </Form>
                 )}
               </Mutation>
