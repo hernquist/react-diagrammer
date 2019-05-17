@@ -14,15 +14,29 @@ import Icons from "utils/Icons";
 
 class DisplayComponent extends Component {
   handleClick = () => {
-    const { component } = this.props;
+    const { component, showProject = false } = this.props;
     const { name, iteration } = component;
-    this.props.history.push(`/main/component/${name}/${iteration}`);
+    !showProject &&
+      this.props.history.push(`/main/component/${name}/${iteration}`);
   };
 
   render() {
-    const { component, parent, history, x, y } = this.props;
+    const {
+      component,
+      parent,
+      history = {
+        location: {
+          pathname: "a/b/c/d/e"
+        }
+      },
+      x,
+      y
+    } = this.props;
     const stateOutput = component.style === "container";
-    const [name, iteration] = history.location.pathname.split("/").slice(3);
+
+    const [name = "", iteration = 0] = history.location.pathname
+      .split("/")
+      .slice(3);
     const isSelected =
       name === component.name && Number(iteration) === component.iteration;
     const isParent = parent === component._id;
@@ -31,19 +45,17 @@ class DisplayComponent extends Component {
 
     const Card = isSelected ? SelectedCard : isParent ? ParentCard : BaseCard;
     const Name = isSelected ? SelectedName : isParent ? ParentName : BaseName;
-    const isUnassigned = component.placement === 'unassigned';
-    const cardStyles = isUnassigned ? null : 
-      { 
-        position: 'absolute',
-        left: x,
-        top: y
-      };
+    const isUnassigned = component.placement === "unassigned";
+    const cardStyles = isUnassigned
+      ? null
+      : {
+          position: "absolute",
+          left: x,
+          top: y
+        };
 
     return (
-      <Card 
-        onClick={this.handleClick} 
-        style={cardStyles}
-      >
+      <Card onClick={this.handleClick} style={cardStyles}>
         <Name style={{ fontSize }}>{component.name}</Name>
         <Content>
           <Icons icon={component.style} />

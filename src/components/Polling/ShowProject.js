@@ -1,32 +1,20 @@
 import React, { Component, Fragment } from "react";
-import auth from "../HOC/auth";
-import ShowUnassigned from "./ShowUnassigned";
-import DisplayComponent from "./DisplayComponent";
+import ShowUnassigned from "../Diagram/ShowUnassigned";
+import DisplayComponent from "../Diagram/DisplayComponent";
 import helper from "../../helpers/helper";
-import LinesMaker from "./LinesMaker";
+import LinesMaker from "../Diagram/LinesMaker";
 import { DiagramMainContainer as Container, Row } from "styles";
 
-class DiagramMain extends Component {
+class ShowProject extends Component {
   state = { selected: "" };
-
-  shouldComponentUpdate(nextProps) {
-    this.updated = nextProps.layout !== this.props.layout;
-    return nextProps !== this.props;
-  }
-
-  componentDidUpdate() {
-    if (this.updated) {
-      this.forceUpdate();
-      this.updated = false;
-    }
-  }
 
   render() {
     const { currentProject, history, setParent } = this.props;
+    console.log(currentProject);
     if (!currentProject || !currentProject.components) return null;
 
     const { components } = currentProject;
-    const unassigned = helper.unassigned(components);
+    // const unassigned = helper.unassigned(components);
     const branches = helper.childs(components);
     const root = helper.root(components);
 
@@ -76,23 +64,24 @@ class DiagramMain extends Component {
 
     return (
       <Fragment>
-        {unassigned.length > 0 && (
+        {/* {unassigned.length > 0 && (
           <ShowUnassigned
             setParent={setParent}
             unassigned={unassigned}
             history={history}
           />
-        )}
+        )} */}
         <Container>
           {spaceAround.map((row, i) => (
             <Row key={i}>
               {row.map(card =>
                 card ? (
                   <DisplayComponent
-                    y={card.top}
-                    x={card.left}
+                    y={card.top - 5}
+                    x={card.left + 340}
                     key={card._id}
                     component={card}
+                    showProject={true}
                     {...this.props}
                   />
                 ) : null
@@ -106,4 +95,4 @@ class DiagramMain extends Component {
   }
 }
 
-export default auth(DiagramMain);
+export default ShowProject;

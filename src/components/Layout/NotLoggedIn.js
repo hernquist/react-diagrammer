@@ -29,7 +29,7 @@ class NotLoggedIn extends Component {
           </div>
           <div className="left-dashboard">{renderAuth}</div>
           <div className="diagram">
-            <Polling />
+            <Polling history={props.history} />
           </div>
           <div className="right-dashboard">
             <RightDashoard />
