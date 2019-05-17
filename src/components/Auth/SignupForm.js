@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import { SIGNUP } from "../../graphql/mutations";
 import { validateEmail } from "../../helpers/validations";
-import { SubmitButton } from "../UserInterface/SubmitButton";
+import { RightDashboardButton as SubmitButton } from "../UserInterface/RightDashboardButton";
 import Errors from "../UserInterface/Errors";
 import { AuthWrapper, InputField, FormTitle as Title, LabelText } from "styles";
 
@@ -93,7 +93,6 @@ class SignupForm extends Component {
         signup && localStorage.setItem("token", signup);
         this.props.history.push("/main/new-project");
     }
-    // TODO is the right ux?
     this.setState(this.initialState);
   };
 
@@ -130,7 +129,7 @@ class SignupForm extends Component {
                 />
               </InputField>
               <Errors errors={errors} from="SignupForm" />
-              <SubmitButton>Submit</SubmitButton>
+              <SubmitButton text="Submit" />
             </form>
           )}
         </Mutation>

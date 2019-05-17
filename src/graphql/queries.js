@@ -6,70 +6,116 @@ const GET_AUTH_USER = gql`
       _id
       name
       email
-      password 
+      password
     }
   }
 `;
 
 const PROJECTS_BY_USER_ID = gql`
-query ProjectsByUserId($userId: String!) {
-  projectsByUserId(userId: $userId) {
-    _id
-    name
-    description
-    dateCreated
-    dateVisited
-    components {
+  query ProjectsByUserId($userId: String!) {
+    projectsByUserId(userId: $userId) {
       _id
       name
-      iteration
-      projectId
-      style
-      placement
-      children
-      state {
+      description
+      dateCreated
+      dateVisited
+      components {
         _id
         name
-        statetype
-        componentId
-      }
-      props {
-        _id
-        name
-        proptype
-        componentId
-      }
-      callbacks {
-        _id
-        name
-        functionArgs {
+        iteration
+        projectId
+        style
+        placement
+        children
+        state {
+          _id
           name
-          typeName
+          statetype
+          componentId
         }
-        setState {
-          stateField
-          stateChange
+        props {
+          _id
+          name
+          proptype
+          componentId
         }
-        description
+        callbacks {
+          _id
+          name
+          functionArgs {
+            name
+            typeName
+          }
+          setState {
+            stateField
+            stateChange
+          }
+          description
+        }
       }
     }
   }
-}
+`;
+
+const GET_PROJECTS = gql`
+  query {
+    getProjects {
+      _id
+      name
+      description
+      dateCreated
+      dateVisited
+      components {
+        _id
+        name
+        iteration
+        projectId
+        style
+        placement
+        children
+        state {
+          _id
+          name
+          statetype
+          componentId
+        }
+        props {
+          _id
+          name
+          proptype
+          componentId
+        }
+        callbacks {
+          _id
+          name
+          functionArgs {
+            name
+            typeName
+          }
+          setState {
+            stateField
+            stateChange
+          }
+          description
+        }
+      }
+    }
+  }
 `;
 
 const FETCH_STATE = gql`
   query StateByComponentId($id: String!) {
-    stateByComponentId(componentId: $id){
+    stateByComponentId(componentId: $id) {
       _id
       name
       statetype
     }
   }
-`
+`;
 
 const FETCH_PROPS = gql`
   query PropsByComponentId($id: String!) {
-    propsByComponentId(componentId: $id){
+    propsByComponentId(componentId: $id) {
       _id
       name
       proptype
@@ -79,14 +125,14 @@ const FETCH_PROPS = gql`
 
 const FETCH_CALLBACKS = gql`
   query CallbacksByComponentId($id: String!) {
-    callbacksByComponentId(componentId: $id){
+    callbacksByComponentId(componentId: $id) {
       _id
       name
-      setState{
+      setState {
         stateField
         stateChange
       }
-      functionArgs{
+      functionArgs {
         name
         typeName
       }
@@ -95,10 +141,11 @@ const FETCH_CALLBACKS = gql`
   }
 `;
 
-export { 
+export {
   GET_AUTH_USER,
   PROJECTS_BY_USER_ID,
   FETCH_STATE,
   FETCH_PROPS,
-  FETCH_CALLBACKS
+  FETCH_CALLBACKS,
+  GET_PROJECTS
 };

@@ -8,7 +8,7 @@ export const Layout = styled.div`
     grid-template-rows: 75px 1fr;
     grid-template-areas:
       "nb nb nb nb nb nb nb nb nb nb"
-      "ld ld ld td td td td td rd rd";
+      "td td td td td td td td rd rd";
   }
 
   .logged-in {
