@@ -40,6 +40,20 @@ export const Layout = styled.div`
     border-radius: 1px;
   }
 
+  .logged-in .left-dashboard {
+    display: grid;
+    grid-area: ld;
+    background: ${props => props.theme.madison};
+    border-radius: 1px;
+  }
+
+  .full-screen .left-dashboard {
+    display: grid;
+    grid-area: ld;
+    background: ${props => props.theme.madison};
+    border-radius: 1px;
+  }
+
   .header {
     display: grid;
     grid-area: nb;
