@@ -4,7 +4,6 @@ import LoginForm from "../Auth/LoginForm";
 import SignupForm from "../Auth/SignupForm";
 import LogoutForm from "../Auth/LogoutForm";
 import Polling from "../Polling/Polling";
-import RightDashoard from "../RightDashboard/RightDashboard";
 import notifications from "../HOC/notifications";
 import { Layout } from "styles";
 
@@ -27,13 +26,10 @@ class NotLoggedIn extends Component {
           <div className="header">
             <HeaderContainer {...props} />
           </div>
-          <div className="left-dashboard">{renderAuth}</div>
           <div className="diagram">
-            <Polling history={props.history} />
+            <Polling visible={url !== "/logout"} history={props.history} />
           </div>
-          <div className="right-dashboard">
-            <RightDashoard />
-          </div>
+          <div className="right-dashboard">{renderAuth}</div>
         </div>
       </Layout>
     );

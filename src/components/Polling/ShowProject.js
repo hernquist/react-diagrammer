@@ -6,8 +6,6 @@ import LinesMaker from "../Diagram/LinesMaker";
 import { DiagramMainContainer as Container, Row } from "styles";
 
 class ShowProject extends Component {
-  state = { selected: "" };
-
   render() {
     const { currentProject, history, setParent } = this.props;
     console.log(currentProject);
@@ -78,7 +76,7 @@ class ShowProject extends Component {
                 card ? (
                   <DisplayComponent
                     y={card.top - 5}
-                    x={card.left + 340}
+                    x={card.left}
                     key={card._id}
                     component={card}
                     showProject={true}
