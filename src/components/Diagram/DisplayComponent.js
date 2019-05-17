@@ -12,6 +12,12 @@ import {
 } from "styles";
 import Icons from "utils/Icons";
 
+const showProjectHistoryDefault = {
+  location: {
+    pathname: "a/b/c/d/e"
+  }
+};
+
 class DisplayComponent extends Component {
   handleClick = () => {
     const { component, showProject = false } = this.props;
@@ -24,11 +30,7 @@ class DisplayComponent extends Component {
     const {
       component,
       parent,
-      history = {
-        location: {
-          pathname: "a/b/c/d/e"
-        }
-      },
+      history = showProjectHistoryDefault,
       x,
       y
     } = this.props;

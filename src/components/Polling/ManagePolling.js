@@ -2,14 +2,10 @@ import React, { Component } from "react";
 import ShowProject from "./ShowProject";
 
 class ManagePolling extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentCount: 0,
-      intervalId: null
-    };
-  }
+  state = {
+    currentCount: 0,
+    intervalId: null
+  };
 
   componentDidMount() {
     const intervalId = setInterval(this.timer, 2000);

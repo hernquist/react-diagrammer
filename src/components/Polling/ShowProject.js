@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import ShowUnassigned from "../Diagram/ShowUnassigned";
 import DisplayComponent from "../Diagram/DisplayComponent";
 import helper from "../../helpers/helper";
 import LinesMaker from "../Diagram/LinesMaker";
@@ -12,7 +11,6 @@ class ShowProject extends Component {
     if (!currentProject || !currentProject.components) return null;
 
     const { components } = currentProject;
-    // const unassigned = helper.unassigned(components);
     const branches = helper.childs(components);
     const root = helper.root(components);
 
@@ -62,13 +60,6 @@ class ShowProject extends Component {
 
     return (
       <Fragment>
-        {/* {unassigned.length > 0 && (
-          <ShowUnassigned
-            setParent={setParent}
-            unassigned={unassigned}
-            history={history}
-          />
-        )} */}
         <Container>
           {spaceAround.map((row, i) => (
             <Row key={i}>

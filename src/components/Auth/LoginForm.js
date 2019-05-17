@@ -12,8 +12,6 @@ import {
   CreateProjectForm as Form
 } from "styles";
 
-// import { AuthWrapper, InputField, FormTitle as Title, LabelText } from "styles";
-
 class LoginForm extends Component {
   initialState = {
     errors: [],
