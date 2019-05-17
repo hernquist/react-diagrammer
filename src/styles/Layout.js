@@ -8,7 +8,7 @@ export const Layout = styled.div`
     grid-template-rows: 75px 1fr;
     grid-template-areas:
       "nb nb nb nb nb nb nb nb nb nb"
-      "td td td td td td td td rd rd";
+      "td td td td td td td rd rd rd";
   }
 
   .logged-in {
@@ -37,20 +37,6 @@ export const Layout = styled.div`
     display: grid;
     grid-area: ld;
     background: ${props => props.theme.grey};
-    border-radius: 1px;
-  }
-
-  .logged-in .left-dashboard {
-    display: grid;
-    grid-area: ld;
-    background: ${props => props.theme.madison};
-    border-radius: 1px;
-  }
-
-  .full-screen .left-dashboard {
-    display: grid;
-    grid-area: ld;
-    background: ${props => props.theme.madison};
     border-radius: 1px;
   }
 
