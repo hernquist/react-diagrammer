@@ -15,9 +15,7 @@ import { API, LOCAL_API, BASENAME } from "./helpers/const";
 import * as serviceWorker from "./registerServiceWorker";
 
 const dev = process.env.NODE_ENV === "development";
-console.log("process.env", process.env);
 const uri = dev ? LOCAL_API : API;
-console.log("uri:", uri);
 const basename = dev ? "" : BASENAME;
 const httpLink = createHttpLink({ uri });
 

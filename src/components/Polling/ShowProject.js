@@ -2,12 +2,12 @@ import React, { Component, Fragment } from "react";
 import DisplayComponent from "../Diagram/DisplayComponent";
 import helper from "../../helpers/helper";
 import LinesMaker from "../Diagram/LinesMaker";
+import ProjectTitle from "./ProjectTitle";
 import { DiagramMainContainer as Container, Row } from "styles";
 
 class ShowProject extends Component {
   render() {
-    const { currentProject, history, setParent } = this.props;
-    console.log(currentProject);
+    const { currentProject } = this.props;
     if (!currentProject || !currentProject.components) return null;
 
     const { components } = currentProject;
@@ -61,12 +61,13 @@ class ShowProject extends Component {
     return (
       <Fragment>
         <Container>
+          <ProjectTitle title={currentProject.name} />
           {spaceAround.map((row, i) => (
             <Row key={i}>
               {row.map(card =>
                 card ? (
                   <DisplayComponent
-                    y={card.top - 5}
+                    y={card.top + 45}
                     x={card.left}
                     key={card._id}
                     component={card}

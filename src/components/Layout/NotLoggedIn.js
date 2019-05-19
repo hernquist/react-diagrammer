@@ -26,7 +26,7 @@ const NotLoggedIn = props => {
           <HeaderContainer {...props} />
         </div>
         <div className="diagram">
-          <Polling visible={visible} history={props.history} />
+          <Polling visible={visible} />
         </div>
         <div className="right-dashboard">{renderAuth}</div>
       </div>

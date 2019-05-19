@@ -8,7 +8,7 @@ class ManagePolling extends Component {
   };
 
   componentDidMount() {
-    const intervalId = setInterval(this.timer, 2000);
+    const intervalId = setInterval(this.timer, 3000);
     this.setState({ intervalId });
   }
 
