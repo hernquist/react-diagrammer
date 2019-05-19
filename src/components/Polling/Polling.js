@@ -3,7 +3,7 @@ import { Query } from "react-apollo";
 import { GET_PROJECTS_FOR_POLLING } from "../../graphql/queries";
 import ManagePolling from "./ManagePolling";
 
-const Polling = ({ history, visible }) => {
+const Polling = ({ visible }) => {
   if (!visible) return null;
 
   return (
@@ -12,12 +12,7 @@ const Polling = ({ history, visible }) => {
         if (loading) return null;
         if (error) return `Error! ${error}`;
 
-        return (
-          <ManagePolling
-            projects={data.getProjectsForPolling}
-            history={history}
-          />
-        );
+        return <ManagePolling projects={data.getProjectsForPolling} />;
       }}
     </Query>
   );
