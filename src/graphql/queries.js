@@ -57,9 +57,9 @@ const PROJECTS_BY_USER_ID = gql`
   }
 `;
 
-const GET_PROJECTS = gql`
+const GET_PROJECTS_FOR_POLLING = gql`
   query {
-    getProjects {
+    getProjectsForPolling {
       _id
       name
       description
@@ -147,5 +147,5 @@ export {
   FETCH_STATE,
   FETCH_PROPS,
   FETCH_CALLBACKS,
-  GET_PROJECTS
+  GET_PROJECTS_FOR_POLLING
 };
